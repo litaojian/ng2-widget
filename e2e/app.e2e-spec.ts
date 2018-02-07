@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('ng2-widget App', () => {
+describe('ngx-tinymce App', () => {
   let page: AppPage;
 
   beforeEach(() => {

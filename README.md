@@ -1,27 +1,67 @@
-# Angular BizApp Widget
+# yg-widget [![NPM version](https://img.shields.io/npm/v/yg-widget.svg)](https://www.npmjs.com/package/yg-widget)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.5.
+## Installation instructions
 
-## Development server
+Install `yg-widget` from `npm`
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+```bash
+npm install yg-widget --save
+```
 
-## Code scaffolding
+**Recommend:** You will need `tinymce.min.js` file via [Build Customizer](https://www.tinymce.com/download/custom-builds/) generate.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Import the `yg-widget` in to your root `AppModule`.
 
-## Build
+```typescript
+import { NgxTinymceModule } from 'yg-widget';
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+@NgModule({
+    imports: [
+        NgxTinymceModule.forRoot({
+            baseURL: './assets/tinymce/',
+            // or cdn
+            baseURL: '//cdn.bootcss.com/tinymce/4.7.4/'
+        })
+    ]
+})
+export class AppModule { }
+```
 
-## Running unit tests
+### Usage
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```ts
+import { Component } from '@angular/core';
 
-## Running end-to-end tests
+@Component({
+  selector: 'my-app',
+  template: `<tinymce [(ngModel)]="html"></tinymce>`
+})
+export class AppComponent  {
+    html = ``;
+}
+```
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+### How to use it with:
 
-## Further help
++ `angular-cli` please refer to **Installation instructions**.
++ `stackblitz` sample available [here](https://stackblitz.com/edit/yg-widget?file=app%2Fapp.component.ts).
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## API
+
+| Name    | Type           | Default  | Summary |
+| ------- | ------------- | ----- | ----- |
+| config | `any` |  | see [configure](https://www.tinymce.com/docs/configure/integration-and-setup/) |
+| loading | `string,TemplateRef` | - | Loading status of tinymce |
+
+## Troubleshooting
+
+Please follow this guidelines when reporting bugs and feature requests:
+
+1. Use [GitHub Issues](https://github.com/cipchk/yg-widget/issues) board to report bugs and feature requests (not our email address)
+2. Please **always** write steps to reproduce the error. That way we can focus on fixing the bug, not scratching our heads trying to reproduce it.
+
+Thanks for understanding!
+
+### License
+
+The MIT License (see the [LICENSE](https://github.com/cipchk/yg-widget/blob/master/LICENSE) file for the full text)
