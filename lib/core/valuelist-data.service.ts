@@ -1,5 +1,4 @@
 import { Injectable,Injector } from '@angular/core';
-import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { ArrayObservable } from 'rxjs/observable/ArrayObservable';
 import { BaseService } from './base-all.service';
@@ -13,8 +12,6 @@ export class ValueListDataService extends BaseService {
 
 	private headers = new Headers({ 'Content-Type': 'application/json' });
 	protected apiUrl = '/api/data/valuelist';  // URL to web API
-
-	protected http: Http;
 
 	protected static CachedDataMap:Map<string, any> = new Map();
 
@@ -43,8 +40,9 @@ export class ValueListDataService extends BaseService {
 		if (typeName.startsWith("/assets")){
 			url = typeName;
 		}
-		let headers = new Headers({ 'Content-Type': 'application/json','Authorization': this.getAccessToken()});
-		let options = new RequestOptions({ "headers": headers });
+		//let headers = new Headers({ 'Content-Type': 'application/json','Authorization': this.getAccessToken()});
+		//let options = new RequestOptions({ "headers": headers });
+		let options = {};
 		let customUrl:string;
 		let tableColumns:string;
 
@@ -97,8 +95,10 @@ export class ValueListDataService extends BaseService {
 		if (typeName.startsWith("/assets")){
 			url = typeName;
 		}
-		let headers = new Headers({ 'Content-Type': 'application/json','Authorization': this.getAccessToken()});
-		let options = new RequestOptions({ "headers": headers });
+		//let headers = new Headers({ 'Content-Type': 'application/json','Authorization': this.getAccessToken()});
+		//let options = new RequestOptions({ "headers": headers });
+		let options = {};
+
 		let customUrl:string;
 		let tableColumns:string;
 
@@ -145,8 +145,10 @@ export class ValueListDataService extends BaseService {
 	getTreeData(dataUrl: string): Promise<Object[]> {
 		//debugger;
 		let url = `${dataUrl}`;
-		let headers = new Headers({ 'Content-Type': 'application/json','Authorization': this.getAccessToken()});
-		let options = new RequestOptions({ "headers": headers });
+		//let headers = new Headers({ 'Content-Type': 'application/json','Authorization': this.getAccessToken()});
+		//let options = new RequestOptions({ "headers": headers });
+		let options = {};
+
 		let customUrl:string;
 		let tableColumns:string;
 

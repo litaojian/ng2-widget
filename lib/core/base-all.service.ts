@@ -1,5 +1,4 @@
 import { Injector, Optional, SkipSelf } from '@angular/core';
-import { Http, Jsonp, Headers, Response, RequestOptions, URLSearchParams } from '@angular/http';
 import { HttpClient, HttpHeaders, HttpResponse, HttpRequest, HttpParams } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
@@ -15,9 +14,7 @@ import 'rxjs/add/operator/delay';
 
 export class BaseService {
 
-	protected http: Http;
-
-	protected httpClient: HttpClient;
+	protected http: HttpClient;
 	
 	protected injector: Injector;
 
@@ -30,8 +27,8 @@ export class BaseService {
 	protected apiContextPath;
 
 	constructor(injector: Injector) {
-		this.http = injector.get(Http);
-		this.httpClient = injector.get(HttpClient);
+
+		this.http = injector.get(HttpClient);
 
 		//this.jsonp = injector.get(Jsonp);
 		//this.isTest  = !environment.production;
@@ -142,74 +139,40 @@ export class BaseService {
 		return headers;
 	}
 
-	getHeader(isDebug?):Headers{
-		let headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': this.getAccessToken() });
-		if (isDebug != null && isDebug == true) {
-			headers = new Headers({ 'debug': 'ltj', 'Content-Type': 'application/json', 'Authorization': this.getAccessToken() });
-		}
-		return headers;
-	}
-
-	ajaxPost(ajaxUrl: string, params: any): Promise<Object> {
-		let options = new RequestOptions({
-			headers: this.getHeader(params["debug"])
-		});
-
-		let url = this.formatUrl(ajaxUrl);
-		//调用后台数据接口的时候使用的发送请求的方式
-		return this.http.post(url, params, options)
-			.toPromise()
-			.then(response => response.json() as Object)
-			.catch(error => this.handleError(url,error));
-	}
-
-	ajaxPost2(ajaxUrl: string, params: any): Observable<Object> {
-		let options = new RequestOptions({
-			headers: this.getHeader(params["debug"])
-		});
-
-		let url = this.formatUrl(ajaxUrl);
-		//调用后台数据接口的时候使用的发送请求的方式
-		return this.http.post(url, params, options)
-			.do(response => response.json() as Object)
-			.catch(error => this.handleError(url,error));
-	}
-
-	ajaxGet(ajaxUrl: string, params: any): Promise<Object> {		
+	ajaxPost(ajaxUrl: string, params: any): Observable<Object> {
 		let options = {
-			headers: this.getHeader(params["debug"]),
+			headers: this.getHttpHeader(params["debug"])
+		};
+		
+		let url = this.formatUrl(ajaxUrl);
+		//调用后台数据接口的时候使用的发送请求的方式
+		return this.http.post(url, params, options)
+			.do(response => response as Object)
+			.catch(error => this.handleError(url,error));
+	}
+
+	ajaxGet(ajaxUrl: string, params: any): Observable<Object> {		
+		let options = {
+			headers: this.getHttpHeader(params["debug"]),
 			search: this.bulidSearchString("", params)
 		};
+
+		const httpParams = new HttpParams();
 
 		let url = this.formatUrl(ajaxUrl);
 		//调用后台数据接口的时候使用的发送请求的方式
 		return this.http.get(url, options)
-			.toPromise()
-			.then(response => response.json() as Object)
-			.catch(error => this.handleError(url,error));
-	}
-
-	ajaxGet2(ajaxUrl: string, params: any): Observable<Object> {		
-		let options = {
-			headers: this.getHeader(params["debug"]),
-			search: this.bulidSearchString("", params)
-		};
-
-		let url = this.formatUrl(ajaxUrl);
-		//调用后台数据接口的时候使用的发送请求的方式
-		return this.http.get(url, options)
-			.do(response => response.json() as Object)
+			.do(response => response)
 			.catch(error => this.handleError(url,error));
 	}
 	
 	ajaxLoad(ajaxUrl: string): Promise<Object> {
 		let options = {
-			headers: this.getHeader()
+			headers: this.getHttpHeader()
 		};		
 		let url = this.formatUrl(ajaxUrl);
 		//获取Html文本
 		return this.http.get(url, options)
-			.toPromise()
 			.catch(error => this.handleError(url,error));
 	}
 
@@ -220,21 +183,6 @@ export class BaseService {
 			.toPromise()
 			.then(response => response.json() as Object)
 			.catch(error => this.handleError(dataUrl,error));
-
-		// var params = new URLSearchParams();
-		// params.set('format', 'json');
-		// //params.set("callback", "__ng_jsonp__.__req0.finished");
-		// params.set("callback", "JSONP_CALLBACK");
-		// params.set("callback", "JSON_CALLBACK");
-
-		// return this.jsonp.get(dataUrl, { search: params })
-		//  	.toPromise()
-		//  	.then(response => {
-		// 		debugger;
-		// 		console.log(response.text());
-		// 		return response.text();
-		// 	 })
-		//  	.catch(error => this.handleError(error));
 	}
 
 	getDataByProxy(dataUrl: string): Promise<Object> {
