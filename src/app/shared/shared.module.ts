@@ -5,8 +5,9 @@ import { RouterModule } from '@angular/router';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 
 import { MyAppModule } from '../../../lib/my-app/my-app.module';
+import { YgIconModule } from '../../../lib/index';
 
-const THIRDMODULES = [ NgZorroAntdModule, MyAppModule];
+const THIRDMODULES = [ NgZorroAntdModule, MyAppModule, YgIconModule];
 // endregion
 
 

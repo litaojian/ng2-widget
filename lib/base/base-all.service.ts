@@ -5,6 +5,7 @@ import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { enc } from 'crypto-js';
 import { ExtCookieService } from './ext-cookies.service';
 import { ExtHttpClientService } from './ext-http.service';
+import { AppConfigService } from '../bizapp.config';
 
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
@@ -17,6 +18,8 @@ import 'rxjs/add/operator/delay';
 export class BaseService {
 
 	protected httpClient: ExtHttpClientService;
+
+	protected appConfigService:AppConfigService;
 	
 	protected injector: Injector;
 
@@ -31,6 +34,7 @@ export class BaseService {
 	constructor(injector: Injector) {
 
 		this.httpClient = injector.get(ExtHttpClientService);
+		this.appConfigService = injector.get(AppConfigService);
 
 		//this.jsonp = injector.get(Jsonp);
 		//this.isTest  = !environment.production;
@@ -223,9 +227,14 @@ export class BaseService {
 	}
 
 	formatUrl(ajaxUrl: string): string {
+		//debugger;
 		let url = ajaxUrl;
-		if (!ajaxUrl.startsWith("http://") && !ajaxUrl.startsWith("/remote/api/")) {
-			url = ajaxUrl.replace("/api/", "remote/api/");			
+		let apiServerUrl = "remote/api/";
+		if (this.appConfigService.SERVER_URL){
+			apiServerUrl = this.appConfigService.SERVER_URL;			
+		}
+		if (!ajaxUrl.startsWith("http://") && ajaxUrl.startsWith("/api/")) {
+			url = ajaxUrl.replace("/api/", apiServerUrl);			
 			if (this.isTest){
 				//url = ajaxUrl.replace("remote/api/", "remote/mock/api/");				
 			}

@@ -1,0 +1,9 @@
+{
+    "SERVER_URL": "demo/api",
+    "app": {
+        "server_root": "/demo/api",
+        "name": "SaaS门户",
+        "description": "新版应用框架"
+    }
+
+}

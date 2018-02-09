@@ -1,16 +1,21 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID, APP_INITIALIZER } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HighlightJsModule } from 'ngx-highlight-js';
-import { NgxTinymceModule } from '../../lib/index';
-import { YgIconModule } from '../../lib/index';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { OtherComponent } from './other/other.component';
+
+import { AppConfigService } from '../../lib/bizapp.config';
+import { StartupService } from './startup.service';
+
+export function StartupServiceFactory(startupService: StartupService): Function {
+  return () => startupService.load();
+}
 
 @NgModule({
   declarations: [
@@ -28,13 +33,21 @@ import { OtherComponent } from './other/other.component';
         { path: 'testRec', loadChildren: './demo/test-rec/testRec.module#TestRecModule'},
         { path: 'home', component: HomeComponent },
         { path: 'other', component: OtherComponent },
-        { path: '', redirectTo: 'testRec/index', pathMatch: 'full'}
-    ], { useHash: true }),
-    YgIconModule,
-    NgxTinymceModule.forRoot({
-    })
+        { path: '', redirectTo: 'home', pathMatch: 'full'}
+    ], { useHash: true })
+    
   ],
-  providers: [],
+  providers: [
+    AppConfigService,
+    StartupService,
+    //{ provide: LOCALE_ID, useValue: 'zh-Hans' },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: StartupServiceFactory,
+      deps: [StartupService],
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

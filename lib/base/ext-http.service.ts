@@ -3,7 +3,8 @@ import { HttpClient, HttpHeaders, HttpParams, HttpResponse, HttpEvent, HttpReque
 import { Observable } from 'rxjs/Observable';
 import { tap, catchError } from 'rxjs/operators';
 import * as moment from 'moment';
-import { BizAppConfig } from '../bizapp.config';
+import { AppConfigService } from '../bizapp.config';
+
 
 /**
  * 封装HttpClient，主要解决：
@@ -14,9 +15,9 @@ import { BizAppConfig } from '../bizapp.config';
 @Injectable()
 export class ExtHttpClientService {
     
-    protected bizAppConfig:BizAppConfig;
+    //protected bizAppConfig:BizAppConfig;
 
-    constructor( private http: HttpClient) {
+    constructor(private http: HttpClient, private appConfigService:AppConfigService) {
 
     }
 
@@ -65,7 +66,7 @@ export class ExtHttpClientService {
 
     /** 服务端URL地址 */
     get SERVER_URL(): string {
-        return this.bizAppConfig.SERVER_URL || '/';
+        return this.appConfigService.SERVER_URL || '/';
     }
 
     // region: get
@@ -134,6 +135,7 @@ export class ExtHttpClientService {
         responseType?: 'arraybuffer' | 'blob' | 'json' | 'text',
         withCredentials?: boolean,
     }): Observable<any> {
+        //debugger;
         return this.request('GET', url, Object.assign({
             params
         }, options));
@@ -196,6 +198,7 @@ export class ExtHttpClientService {
         responseType?: 'arraybuffer' | 'blob' | 'json' | 'text',
         withCredentials?: boolean,
     }): Observable<any> {
+        //debugger;
         return this.request('POST', url, Object.assign({
             body,
             params

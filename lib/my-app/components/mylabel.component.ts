@@ -39,9 +39,9 @@ export class MyLabelComponent  implements OnInit, AfterViewInit {
         this.fieldText = this.fieldValue;
 
         if (this.dataSource != null) {
-			this.getLabelData(this.dataSource).then(
-				resultData => this.processResult(resultData, this.fieldValue)
-			);
+			// this.getLabelData(this.dataSource).then(
+			// 	resultData => this.processResult(resultData, this.fieldValue)
+			// );
 		}
 		if (this.dataOptions != null){
 			this.processResult(this.dataOptions, this.fieldValue)

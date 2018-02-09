@@ -19,6 +19,7 @@ import { ZxFormInputDirective }  from './directives/zx.forminput.directive';
 
 import { MenuTreeService } from '../base/menutree.service';
 import { ExtHttpClientService } from '../base/ext-http.service';
+import { AppConfigService } from '../bizapp.config';
 
 
 const COMPONENTS = [
@@ -63,8 +64,9 @@ const DIRECTIVES = [
 
   ],
   providers: [
-	ExtHttpClientService,
-	MenuTreeService
+	  AppConfigService,
+	  ExtHttpClientService,
+	  MenuTreeService
   ]
 })
 export class MyAppModule {
