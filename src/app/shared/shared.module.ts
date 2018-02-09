@@ -6,7 +6,7 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 
 import { MyAppModule } from '../../../lib/my-app/my-app.module';
 
-const THIRDMODULES = [ NgZorroAntdModule ];
+const THIRDMODULES = [ NgZorroAntdModule, MyAppModule];
 // endregion
 
 

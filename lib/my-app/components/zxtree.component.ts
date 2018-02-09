@@ -9,7 +9,8 @@ import { ZxTreeService } from './zxtree.service';
             </ul>
 			`,
 	inputs: [],
-	outputs: []
+	outputs: [],
+	providers:[ZxTreeService]
 })
 
 export class ZxTreeComponent implements OnInit, AfterViewInit, AfterViewChecked {

@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams, HttpResponse, HttpEvent, HttpReque
 import { Observable } from 'rxjs/Observable';
 import { tap, catchError } from 'rxjs/operators';
 import * as moment from 'moment';
-import { BizAppOptions } from '../bizapp.option';
+import { BizAppConfig } from '../bizapp.config';
 
 /**
  * 封装HttpClient，主要解决：
@@ -12,8 +12,11 @@ import { BizAppOptions } from '../bizapp.option';
  * + 统一处理时间格式问题
  */
 @Injectable()
-export class BaseHttpClient {
-    constructor( private http: HttpClient, protected bizAppOptions:BizAppOptions) {
+export class ExtHttpClientService {
+    
+    protected bizAppConfig:BizAppConfig;
+
+    constructor( private http: HttpClient) {
 
     }
 
@@ -62,7 +65,7 @@ export class BaseHttpClient {
 
     /** 服务端URL地址 */
     get SERVER_URL(): string {
-        return this.bizAppOptions.SERVER_URL || '/';
+        return this.bizAppConfig.SERVER_URL || '/';
     }
 
     // region: get

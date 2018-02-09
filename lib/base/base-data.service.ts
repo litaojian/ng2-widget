@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { ArrayObservable } from 'rxjs/observable/ArrayObservable';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 
-import { CookieService } from './base-cookies.service';
+import { ExtCookieService } from './ext-cookies.service';
 import { BaseService } from './base-all.service';
 
 
@@ -132,7 +132,7 @@ export class BaseDataService extends BaseService {
 		}
 
 		//
-		CookieService.save("last_menu_url", this.base64Encode(url));
+		ExtCookieService.save("last_menu_url", this.base64Encode(url));
 		//
 
 	}
@@ -153,7 +153,7 @@ export class BaseDataService extends BaseService {
 	}
 
 	getAccessToken():string{
-		let accessToken = CookieService.load(this.clientId + "-userToken");
+		let accessToken = ExtCookieService.load(this.clientId + "-userToken");
 		return "Bearer " + accessToken;
 	}
 

@@ -1,5 +1,5 @@
 import { Component, Directive, Optional, EventEmitter, Input, Output, OnInit, AfterViewInit, HostListener, ElementRef, Renderer } from '@angular/core';
-import { ValueListDataService } from '../../base/base-valuelist.service';
+import { ValueListDataService } from '../../base/valuelist.service';
 
 
 @Component({

@@ -1,4 +1,4 @@
-export interface BizAppOptions {
+export interface BizAppConfig {
     [key: string]: any;
 
     /**

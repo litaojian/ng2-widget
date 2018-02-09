@@ -1,0 +1,65 @@
+{
+    "/remote/api": {
+        "target": "http://192.168.2.176:8082/demo",
+        "pathRewrite": { "": "" },
+        "secure": false
+    },
+
+    "/demo/api": {
+        "target": "http://139.159.235.146/demo",
+        "pathRewrite": { "": "" },
+        "secure": false
+    },
+
+
+    "/sso/api": {
+        "target": "http://139.159.235.146/ssov6",
+        "pathRewrite": { "^/sso": "" },
+        "secure": false
+    },
+
+    "/remote/assets": {
+        "target": "http://192.168.2.176:8082/demo/assets",
+        "pathRewrite": { "^/remote/assets": "" },
+        "secure": false
+    },
+    "/vehicle/api": {
+        "target": "http://192.168.110.126:8080",
+        "pathRewrite": { "": "" },
+        "secure": false
+    },
+    "/analysis/api": {
+        "target": "http://10.2.20.13:9080",
+        "pathRewrite": { "": "" },
+        "secure": false
+    },
+    "/remote/api/service/vehicle": {
+        "target": "http://192.168.2.176:8081/work",
+        "pathRewrite": { "": "" },
+        "secure": false
+    },
+    "/elastic/api": {
+        "target": "http://192.168.2.176:8080/lucene/api",
+        "pathRewrite": { "^/elastic/api": "" },
+        "secure": false
+    },
+    "/elastic/image": {
+        "target": "http://192.168.2.176:8082/demo/image",
+        "pathRewrite": { "^/elastic/image": "" },
+        "secure": false
+    },
+
+    "/cms/WebResourceManager/upload": {
+        "target": "http://localhost:8080/ZxFiles/cms/WebResourceManager/upload",
+        "secure": false
+    },
+
+    "/ZxFiles": {
+        "target": "http://localhost:8080/ZxFiles",
+        "secure": false,
+        "pathRewrite": { "^/ZxFiles": "" },
+        "changeOrigin": true
+    }
+
+
+}

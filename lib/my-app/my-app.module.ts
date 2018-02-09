@@ -17,9 +17,26 @@ import { MyLabelComponent }  from './components/mylabel.component';
 import { ValuelistDirective }  from './directives/valuelist.directive';
 import { ZxFormInputDirective }  from './directives/zx.forminput.directive';
 
+import { MenuTreeService } from '../base/menutree.service';
+import { ExtHttpClientService } from '../base/ext-http.service';
 
-import { ZxTreeService } from './components/zxtree.service';
-import { MenuTreeService } from '../base/base-menu-tree.service';
+
+const COMPONENTS = [
+	MyUploaderComponent,
+	MySelectComponent,
+	MyLabelComponent,
+	MyLookupComponent,
+	MyUploaderComponent,
+	MyInputComponent,
+	MyTreeComponent,
+	ZxTreeComponent,
+	MyTreeSelectComponent
+];
+const DIRECTIVES = [		
+	ZxFormInputDirective,
+	ValuelistDirective
+];
+
 
 @NgModule({
   imports: [
@@ -35,37 +52,19 @@ import { MenuTreeService } from '../base/base-menu-tree.service';
 		FormsModule,
 		ReactiveFormsModule,
 		HttpModule,
-		MyUploaderComponent,
-		MySelectComponent,
-		MyLabelComponent,
-		MyLookupComponent,
-		MyUploaderComponent,
-		MyInputComponent,
-		MyTreeComponent,
-		ZxTreeComponent,
-		MyTreeSelectComponent,
-		ValuelistDirective,
-		ZxFormInputDirective
+		...COMPONENTS,
+		...DIRECTIVES		
   ],
   declarations: [
-		MyUploaderComponent,
-		MySelectComponent,
-		MyLabelComponent,
-		MyLookupComponent,
-		MyUploaderComponent,
-		MyInputComponent,
-		MyTreeComponent,
-		ZxTreeComponent,
-		MyTreeSelectComponent,
-		ValuelistDirective,
-		ZxFormInputDirective
+		...COMPONENTS,
+		...DIRECTIVES	
 	],
   entryComponents:[
 
   ],
   providers: [
-	MenuTreeService,
-	ZxTreeService
+	ExtHttpClientService,
+	MenuTreeService
   ]
 })
 export class MyAppModule {

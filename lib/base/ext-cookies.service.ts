@@ -1,6 +1,6 @@
 import { enc } from 'crypto-js';
 
-export class CookieService {
+export class ExtCookieService {
 
   public static load(name: string): string {
     let myWindow: any = window;
@@ -31,9 +31,9 @@ export class CookieService {
 
 
   public static remove(name: string, path?: string, domain?: string) {
-    if (CookieService.load(name)) {
-      CookieService.save(name, '', -1, path, domain);
-      CookieService.save(name, '', -1, '/', domain);
+    if (this.load(name)) {
+      this.save(name, '', -1, path, domain);
+      this.save(name, '', -1, '/', domain);
     }
   }
 

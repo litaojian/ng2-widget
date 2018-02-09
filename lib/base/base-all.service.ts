@@ -3,8 +3,8 @@ import { HttpHeaders, HttpResponse, HttpRequest, HttpParams } from '@angular/com
 import { Observable } from 'rxjs/Observable';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { enc } from 'crypto-js';
-import { CookieService } from './base-cookies.service';
-import { BaseHttpClient } from './base-http.service';
+import { ExtCookieService } from './ext-cookies.service';
+import { ExtHttpClientService } from './ext-http.service';
 
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
@@ -16,7 +16,7 @@ import 'rxjs/add/operator/delay';
 
 export class BaseService {
 
-	protected httpClient: BaseHttpClient;
+	protected httpClient: ExtHttpClientService;
 	
 	protected injector: Injector;
 
@@ -30,7 +30,7 @@ export class BaseService {
 
 	constructor(injector: Injector) {
 
-		this.httpClient = injector.get(BaseHttpClient);
+		this.httpClient = injector.get(ExtHttpClientService);
 
 		//this.jsonp = injector.get(Jsonp);
 		//this.isTest  = !environment.production;
@@ -39,16 +39,16 @@ export class BaseService {
 
 	
 	public getLoginId():Object {
-		let loginId = CookieService.load(this.clientId + "-loginId");		
+		let loginId = ExtCookieService.load(this.clientId + "-loginId");		
 		return loginId;
 	}
 
 	public getLoginUser():Object {
 		let userInfo = {};
-		userInfo["username"] = CookieService.load(this.clientId + "-username");
-		userInfo["avatar"] = CookieService.load(this.clientId + "-avatar");
-		userInfo["userToken"] = CookieService.load(this.clientId + "-userToken");
-		userInfo["loginId"] = CookieService.load(this.clientId + "-loginId");		
+		userInfo["username"] = ExtCookieService.load(this.clientId + "-username");
+		userInfo["avatar"] = ExtCookieService.load(this.clientId + "-avatar");
+		userInfo["userToken"] = ExtCookieService.load(this.clientId + "-userToken");
+		userInfo["loginId"] = ExtCookieService.load(this.clientId + "-loginId");		
 		return userInfo;
 	}
 
@@ -129,7 +129,7 @@ export class BaseService {
 	}
 
 	getAccessToken(): string {
-		let accessToken = CookieService.load(this.clientId + "-userToken");
+		let accessToken = ExtCookieService.load(this.clientId + "-userToken");
 		return "Bearer " + accessToken;
 	}
 	

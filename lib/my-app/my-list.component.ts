@@ -1,7 +1,7 @@
 import { Component, ViewChild, ContentChildren, OnInit, AfterViewInit, Injector } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { BaseDataService } from '../base/base-data.service';
-import { CookieService } from '../base/base-cookies.service';
+import { ExtCookieService } from '../base/ext-cookies.service';
 
 export class QueryForm {
   command: string = "search";
@@ -443,7 +443,7 @@ export class BaseListComponent implements OnInit, AfterViewInit {
     if (pos > 0) {
       path = path.substring(0, pos);
     }
-    CookieService.save(path, JSON.stringify(currentStateParams));
+    ExtCookieService.save(path, JSON.stringify(currentStateParams));
 
   }
 
@@ -455,7 +455,7 @@ export class BaseListComponent implements OnInit, AfterViewInit {
     if (pos > 0) {
       path = path.substring(0, pos);
     }
-    let value = CookieService.load(path);
+    let value = ExtCookieService.load(path);
     if (value != null) {
       let currentStateParams = JSON.parse(value);
       this.activatedRoute.snapshot.data['parentId'] = currentStateParams["parentId"];

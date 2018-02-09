@@ -1,6 +1,7 @@
 import { Injectable, Injector, EventEmitter} from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
+import { ArrayObservable } from 'rxjs/observable/ArrayObservable';
 import { BaseDataService } from '../../base/base-data.service';
 
 
@@ -51,7 +52,7 @@ export class ZxTreeService extends BaseDataService {
 
 	getTreeData(treeDataSource):Observable<Object[]>{
 		if (this.treeDataCache != null){
-			return Observable.of(this.treeDataCache);
+			return ArrayObservable.of(this.treeDataCache);
 		}		
 		return this.getTreeData(treeDataSource).do(treeData => {
 			this.treeDataCache = treeData;
