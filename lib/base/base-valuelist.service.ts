@@ -60,7 +60,7 @@ export class ValueListDataService extends BaseService {
 		}
 	
 		// invoke http request
-		return this.ajaxGet2(url, options)
+		return this.ajaxGet(url, options)
 			.map(result => { 
 				debugger;
 				if (tableColumns != null && result != null){
@@ -116,7 +116,7 @@ export class ValueListDataService extends BaseService {
 		}
 	
 		// invoke http request
-		return this.ajaxGet(url, options)
+		return this.httpClient.get(url, options).toPromise()
 			.then(result => { 
 				//debugger;
 				if (tableColumns != null && result != null){
@@ -142,7 +142,7 @@ export class ValueListDataService extends BaseService {
 	}
 
 
-	getTreeData(dataUrl: string): Promise<Object[]> {
+	getTreeData(dataUrl: string): Observable<Object[]> {
 		//debugger;
 		let url = `${dataUrl}`;
 		//let headers = new Headers({ 'Content-Type': 'application/json','Authorization': this.getAccessToken()});
@@ -166,7 +166,7 @@ export class ValueListDataService extends BaseService {
 	
 		// invoke http request
 		return this.ajaxGet(url, options)
-			.then(result => { 
+			.do(result => { 
 				//debugger;
 				if (tableColumns != null && result != null){
 					let columns = tableColumns.split(",");

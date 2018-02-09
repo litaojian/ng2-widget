@@ -15,7 +15,8 @@ import { OtherComponent } from './other/other.component';
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent, OtherComponent
+    HomeComponent,
+    OtherComponent
   ],
   imports: [
     BrowserModule,
@@ -24,8 +25,10 @@ import { OtherComponent } from './other/other.component';
     HttpClientModule,
     HighlightJsModule,
     RouterModule.forRoot([
-        { path: '', component: HomeComponent },
-        { path: 'other', component: OtherComponent }
+        { path: 'testRec', loadChildren: './demo/test-rec/testRec.module#TestRecModule'},
+        { path: 'home', component: HomeComponent },
+        { path: 'other', component: OtherComponent },
+        { path: '', redirectTo: 'testRec/index', pathMatch: 'full'}
     ], { useHash: true }),
     YgIconModule,
     NgxTinymceModule.forRoot({

@@ -1,9 +1,10 @@
 import { Injector, Optional, SkipSelf } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpResponse, HttpRequest, HttpParams } from '@angular/common/http';
-
+import { HttpHeaders, HttpResponse, HttpRequest, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { enc } from 'crypto-js';
-import { CookieService } from './cookies.service';
+import { CookieService } from './base-cookies.service';
+import { BaseHttpClient } from './base-http.service';
 
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
@@ -12,9 +13,10 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/delay';
 
 
+
 export class BaseService {
 
-	protected http: HttpClient;
+	protected httpClient: BaseHttpClient;
 	
 	protected injector: Injector;
 
@@ -28,7 +30,7 @@ export class BaseService {
 
 	constructor(injector: Injector) {
 
-		this.http = injector.get(HttpClient);
+		this.httpClient = injector.get(BaseHttpClient);
 
 		//this.jsonp = injector.get(Jsonp);
 		//this.isTest  = !environment.production;
@@ -146,7 +148,7 @@ export class BaseService {
 		
 		let url = this.formatUrl(ajaxUrl);
 		//调用后台数据接口的时候使用的发送请求的方式
-		return this.http.post(url, params, options)
+		return this.httpClient.post(url, params, options)
 			.do(response => response as Object)
 			.catch(error => this.handleError(url,error));
 	}
@@ -161,31 +163,30 @@ export class BaseService {
 
 		let url = this.formatUrl(ajaxUrl);
 		//调用后台数据接口的时候使用的发送请求的方式
-		return this.http.get(url, options)
+		return this.httpClient.get(url, options)
 			.do(response => response)
 			.catch(error => this.handleError(url,error));
 	}
 	
-	ajaxLoad(ajaxUrl: string): Promise<Object> {
+	ajaxLoad(ajaxUrl: string): Observable<Object> {
 		let options = {
 			headers: this.getHttpHeader()
 		};		
 		let url = this.formatUrl(ajaxUrl);
 		//获取Html文本
-		return this.http.get(url, options)
+		return this.httpClient.get(url, options)
 			.catch(error => this.handleError(url,error));
 	}
 
-	getJSON(dataUrl: string, options?: Object): Promise<Object> {
+	getJSON(dataUrl: string, options?: Object): Observable<Object> {
 		//debugger;
 
-		return this.http.get(dataUrl, options)
-			.toPromise()
-			.then(response => response.json() as Object)
+		return this.httpClient.get(dataUrl, options)
+			.do(response => response as Object)
 			.catch(error => this.handleError(dataUrl,error));
 	}
 
-	getDataByProxy(dataUrl: string): Promise<Object> {
+	getDataByProxy(dataUrl: string): Observable<Object> {
 		//debugger;
 		//获取JSON数据
 		let requestUrl = "/api/data/http_proxy"
@@ -196,9 +197,8 @@ export class BaseService {
 			}
 		};
 
-		return this.http.post(url, options)
-			.toPromise()
-			.then(response => response.json() as Object)
+		return this.httpClient.post(url, options)
+			.do(response => response as Object)
 			.catch(error => this.handleError(url,error));
 	}
 
@@ -235,6 +235,12 @@ export class BaseService {
 			}
 		}
 		return url;
+	}
+
+	handleErrorForObservable(error: any): Observable<any> {
+		//console.error('An error occurred', error); // for demo purposes only
+		//return Observable.of(error.message || error);
+		return ErrorObservable.create(error.message || error);
 	}
 
 	handleErrorForPromise(error: any): Promise<any> {

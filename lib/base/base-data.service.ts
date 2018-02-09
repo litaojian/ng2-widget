@@ -1,18 +1,12 @@
 import { Injectable, Injector} from '@angular/core';
-import { Http, Headers, Response, RequestOptions, URLSearchParams } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import { ArrayObservable } from 'rxjs/observable/ArrayObservable';
+import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 
-import { CookieService } from './cookies.service';
+import { CookieService } from './base-cookies.service';
 import { BaseService } from './base-all.service';
 
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/toPromise';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/delay';
-import 'rxjs/add/operator/of';
 
 
 
@@ -163,50 +157,45 @@ export class BaseDataService extends BaseService {
 		return "Bearer " + accessToken;
 	}
 
-	create(newRow: Object): Promise<Object> {
+	create(newRow: Object): Observable<Object> {
 		//debugger;
-		const headers = new Headers({ 'Content-Type': 'application/json','Authorization': this.getAccessToken() });
 		const url = `${this.apiUrl}`;
-		let options = new RequestOptions({ 'headers': headers });
-		return this.http.post(url, newRow, options).toPromise()
-			.then(response => response.json() as Object)
+		const headers = this.getHttpHeader();
+		return this.httpClient.post(url, newRow, { "headers": headers })
+			.do(response => response as Object)
 			.catch(error => this.handleError(url,error));
 	}
 
-	update(updatedRow: Object): Promise<Object> {
-		const headers = new Headers({ 'Content-Type': 'application/json','Authorization': this.getAccessToken() });
+	update(updatedRow: Object): Observable<Object> {
+		const headers = this.getHttpHeader();
 		let rowId = this.getValue(updatedRow, this.idField);
 		const url = `${this.apiUrl}/${rowId}`;
 		//debugger;
-		return this.http
+		return this.httpClient
 			.put(url, JSON.stringify(updatedRow), { "headers": headers })
-			.toPromise()
-			.then(response => response.json() as Object)
+			.do(response => response as Object)
 			.catch(error => this.handleError(url,error));
 	}
 
-	delete(id: number): Promise<Object> {
-		const headers = new Headers({ 'Content-Type': 'application/json','Authorization': this.getAccessToken()});
+	delete(id: number): Observable<Object> {
+		const headers = this.getHttpHeader();
 		const url = `${this.apiUrl}/${id}`;
-		return this.http.delete(url, { "headers": headers })
-			.toPromise()
-			.then(response => response.json() as Object)
+		return this.httpClient.delete(url, { "headers": headers })
+			.do(response => response as Object)
 			.catch(error => this.handleError(url,error));
 	}
 
-	getDetail(id: number | string): Promise<Object> {
+	getDetail(id: number | string): Observable<Object> {
 		//debugger;
 		if (id >= 0) {
-			let headers = new Headers({ 'Content-Type': 'application/json','Authorization': this.getAccessToken()});
-			let options = new RequestOptions({ "headers": headers });
+			let headers = this.getHttpHeader();			
 			let url = `${this.apiUrl}/${id}`;
 			// if (this.getIdField() != "id"){
 			// 	url = `${this.apiUrl}?${this.getIdField().toLowerCase()}=${id}`;
 			// }
-			return this.http.get(url, options)
-				.toPromise()
-				.then(response => {
-					let result = response.json();
+			return this.httpClient.get(url, { "headers": headers })
+				.do(response => {
+					let result = response;
 					//debugger;
 					if (result["rows"] != null && result["rows"]  instanceof Array){
 			           result["rows"] = result["rows"][0];
@@ -215,24 +204,23 @@ export class BaseDataService extends BaseService {
 				})
 				.catch(error => this.handleError(url,error));
 		} else {
-			return Promise.resolve(new Object());
+			return Observable.create(new Object());
 		}
 		//
 	}
 
-	executeCmd(command:string, params:Object): Promise<Object> {
-		const headers = new Headers({ 'Content-Type': 'application/json','Authorization': this.getAccessToken() });
+	executeCmd(command:string, params:Object): Observable<Object> {
+		let headers = this.getHttpHeader();		
 		const url = `${this.apiUrl}/${command}`;
 		//debugger;
-		return this.http
+		return this.httpClient
 			.post(url, JSON.stringify(params), { "headers": headers })
-			.toPromise()
-			.then(response => response.json() as Object)
+			.map(response => response as Object)
 			.catch(error => this.handleError(url,error));
 	}
 
 
-	getList(action: string, params: any, pageIndex: number, pageSize: number, customUrl?:string): Promise<Object> {
+	getList(action: string, params: any, pageIndex: number, pageSize: number, customUrl?:string): Observable<Object> {
 		// debugger;
 		let url = this.apiUrl;
 		if (customUrl != null){
@@ -253,12 +241,7 @@ export class BaseDataService extends BaseService {
 			}
 		}
 
-		let headers = new Headers({ 'Content-Type': 'application/json','Authorization': this.getAccessToken()});
-		let options = new RequestOptions({
-			headers: headers,
-	  		search: this.bulidSearchString(action, params)
-		});
-
+					
 		if (url.startsWith("http://") || url.endsWith(".json")){
 			return this.getJSON(url);
 		}
@@ -275,76 +258,24 @@ export class BaseDataService extends BaseService {
 			params["command"]  = "search";
 		}
 		// debugger;
+		let headers = this.getHttpHeader();	
 		//调用后台数据接口的时候使用的发送请求的方式
-		return this.http.post(url, params, options)
-			.toPromise()
-			.then(response => response.json() as Object)
+		return this.httpClient.post(url, params, { "headers": headers })
+			.do(response => response as Object)
 			.catch(error => this.handleError(url,error));
 	}
 
-	callServiceAPI(apiUrl: string, params: any): Promise<Object> {
+	callServiceAPI(apiUrl: string, params: any): Observable<Object> {
 		let tmp = params;
 		if (params instanceof Array){
 			tmp = {'data':params};
 		}
-		return this.ajaxPost(apiUrl, tmp).then(jsonData => {
+		return this.ajaxPost(apiUrl, tmp).do(jsonData => {
             return jsonData;
         }).catch(error => {
 			console.log("callServiceAPI " + apiUrl + ", error:" + JSON.stringify(error));
             return error;
         });
-	}
-
-
-	getValueListV1(typeName: string): Promise<Object[]> {
-		//debugger;
-		let data = BaseDataService.CachedDataMap.get(typeName);
-		if (data && data instanceof Array && data.length > 0 ){
-			// get data from data cache
-			//console.log(typeName + " data found in cached, " + data.length);
-			return Promise.resolve(data);
-		}
-
-		let url = `/api/data/valuelist/${typeName}`;
-		if (typeName.startsWith("/assets")){
-			url = typeName;
-		}
-		let headers = new Headers({ 'Content-Type': 'application/json','Authorization': this.getAccessToken()});
-		let options = new RequestOptions({ "headers": headers });
-		let customUrl:string;
-		let tableColumns:string;
-
-		if (typeName.startsWith("/api")){
-			let splitPos = typeName.indexOf("?");
-			customUrl = typeName.substring(0, splitPos);
-			if (splitPos  > 0){
-				tableColumns = typeName.substring(splitPos);
-				tableColumns = tableColumns.replace("?cols=","");
-				//console.log("getValueList: tableColumns=" + tableColumns);
-			}else {
-				customUrl = typeName;
-			}
-			url = customUrl;
-		}
-
-		// invoke http request
-		return this.ajaxGet(url, options)
-			.then(result => {
-				//debugger;
-				if (tableColumns != null && result != null){
-					let columns = tableColumns.split(",");
-					let data = result["data"];
-					for(let i = 0;i < data.length;i++){
-						data[i]["keyname"] = data[i][columns[0]];
-						data[i]["valuetext"] = data[i][columns[1]];
-					}
-				}
-				// cache the valuelist
-				BaseDataService.CachedDataMap.set(typeName, result);
-				return result;
-			})
-			.catch(this.handleErrorForPromise);
-
 	}
 
 	getValueList(typeName: string): Observable<Object[]> {
@@ -364,8 +295,9 @@ export class BaseDataService extends BaseService {
 		if (typeName.startsWith("/assets")){
 			url = typeName;
 		}
-		let headers = new Headers({ 'Content-Type': 'application/json','Authorization': this.getAccessToken()});
-		let options = new RequestOptions({ "headers": headers });
+		
+		let headers = this.getHttpHeader();
+		let options = { "headers": headers };
 		let customUrl:string;
 		let tableColumns:string;
 
@@ -383,7 +315,7 @@ export class BaseDataService extends BaseService {
 		}
 
 		// invoke http request
-		return this.ajaxGet2(url, options)
+		return this.ajaxGet(url, options)
 			.map(respObject => {
 				// debugger;
 				let result = JSON.parse(respObject["_body"]);
@@ -431,11 +363,11 @@ export class BaseDataService extends BaseService {
 	}
 
 
-	getTreeData(dataUrl: string): Promise<Object[]> {
+	getTreeData(dataUrl: string): Observable<Object> {
 		//debugger;
 		let url = `${dataUrl}`;
-		let headers = new Headers({ 'Content-Type': 'application/json','Authorization': this.getAccessToken()});
-		let options = new RequestOptions({ "headers": headers });
+		let headers = this.getHttpHeader();
+		let options = { "headers": headers };
 		let customUrl:string;
 		let tableColumns:string;
 
@@ -452,9 +384,10 @@ export class BaseDataService extends BaseService {
 		}
 
 		// invoke http request
-		return this.ajaxGet(url, options)
-			.then(result => {
+		return this.httpClient.get(url, options)
+			.do((result:Object[]) => {
 				//debugger;
+				let treeData :Object[] = [];
 				if (tableColumns != null && result != null){
 					let columns = tableColumns.split(",");
 					let idColumn = columns[0];
@@ -466,9 +399,9 @@ export class BaseDataService extends BaseService {
 					result = result["rows"];
 				}
 				//debugger;
-				return result;
+				return treeData;
 			})
-			.catch(this.handleErrorForPromise);
+			.catch(this.handleErrorForObservable);
 
 	}
 
