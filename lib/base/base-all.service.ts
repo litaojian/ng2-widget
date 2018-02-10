@@ -3,8 +3,8 @@ import { HttpHeaders, HttpResponse, HttpRequest, HttpParams } from '@angular/com
 import { Observable } from 'rxjs/Observable';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { enc } from 'crypto-js';
-import { ExtCookieService } from './ext-cookies.service';
-import { ExtHttpClientService } from './ext-http.service';
+import { ExtCookieService } from './cookies.service';
+import { HttpClientService } from './httpclient.service';
 import { AppConfigService } from '../bizapp.config';
 
 import 'rxjs/add/operator/catch';
@@ -17,7 +17,7 @@ import 'rxjs/add/operator/delay';
 
 export class BaseService {
 
-	protected httpClient: ExtHttpClientService;
+	protected httpClient: HttpClientService;
 
 	protected appConfigService:AppConfigService;
 	
@@ -33,7 +33,7 @@ export class BaseService {
 
 	constructor(injector: Injector) {
 
-		this.httpClient = injector.get(ExtHttpClientService);
+		this.httpClient = injector.get(HttpClientService);
 		this.appConfigService = injector.get(AppConfigService);
 
 		//this.jsonp = injector.get(Jsonp);
@@ -304,6 +304,14 @@ export class BaseService {
 
 	getKeys(item){
 		return Object.keys(item).sort();
+	}
+
+	storeCookie(path, value){
+		ExtCookieService.save(path, value);
+	}
+
+	loadCookie(path){
+		return ExtCookieService.load(path);
 	}
 }
 

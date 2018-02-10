@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { ArrayObservable } from 'rxjs/observable/ArrayObservable';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 
-import { ExtCookieService } from './ext-cookies.service';
+import { ExtCookieService } from './cookies.service';
 import { BaseService } from './base-all.service';
 
 

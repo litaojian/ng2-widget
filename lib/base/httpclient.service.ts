@@ -13,7 +13,7 @@ import { AppConfigService } from '../bizapp.config';
  * + 统一处理时间格式问题
  */
 @Injectable()
-export class ExtHttpClientService {
+export class HttpClientService {
     
     //protected bizAppConfig:BizAppConfig;
 

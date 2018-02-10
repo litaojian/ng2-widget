@@ -18,7 +18,7 @@ import { ValuelistDirective }  from './directives/valuelist.directive';
 import { ZxFormInputDirective }  from './directives/zx.forminput.directive';
 
 import { MenuTreeService } from '../base/menutree.service';
-import { ExtHttpClientService } from '../base/ext-http.service';
+import { HttpClientService } from '../base/httpclient.service';
 import { AppConfigService } from '../bizapp.config';
 
 
@@ -65,7 +65,7 @@ const DIRECTIVES = [
   ],
   providers: [
 	  AppConfigService,
-	  ExtHttpClientService,
+	  HttpClientService,
 	  MenuTreeService
   ]
 })
