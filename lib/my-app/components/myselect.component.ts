@@ -4,7 +4,6 @@ import { BaseDataService } from '../../base/base-data.service';
 
 @Component({
 	selector: 'my-select',
-	//moduleId: module.id,
 	template: `
 		<select #theSelect [name]="name" [disabled]="disabled" [class]="styleClass">
 			<option *ngFor="let option of options" [selected]="model.value==option.value" [value]='option.value'>{{option.label}}</option>

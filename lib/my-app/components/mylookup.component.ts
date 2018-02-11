@@ -6,7 +6,6 @@ declare const $: any;
 
 @Component({
 	selector: 'my-lookup',
-	//moduleId: module.id,
 	template: `
 		<div class="input-group" style="width:380px">
             <input type="text" [name]=this.id [value]="model.value==undefined?'':model.value" class="form-control" >

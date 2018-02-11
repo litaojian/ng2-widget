@@ -1,5 +1,6 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule }   from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule,ReactiveFormsModule}    from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
@@ -44,6 +45,7 @@ const DIRECTIVES = [
 		FormsModule,
 		ReactiveFormsModule,
 		RouterModule,
+		HttpClientModule,
 		NgZorroAntdModule
   ],
   exports:[
