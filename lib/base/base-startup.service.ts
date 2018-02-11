@@ -3,6 +3,7 @@ import { Injectable, Injector } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { zip } from 'rxjs/observable/zip';
 import { AppConfigService } from '../bizapp.config';
+import { HttpBackend } from '../../node_modules/.@angular_common@5.2.3@@angular/common/http/src/backend';
 
 /**
  * 用于应用启动时
@@ -10,10 +11,14 @@ import { AppConfigService } from '../bizapp.config';
  */
 @Injectable()
 export class BaseStartupService {
+    
+    protected httpClient: HttpClient;
+
     constructor(
         protected appConfigService: AppConfigService,
-        protected httpClient: HttpClient,
-        protected injector: Injector) { }
+        protected injector: Injector) { 
+            this.httpClient = injector.get(HttpClient);
+        }
 
     load(): Promise<any> {
         // only works with promises

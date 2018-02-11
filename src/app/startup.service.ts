@@ -12,9 +12,8 @@ import { AppConfigService } from '../../lib/bizapp.config';
 @Injectable()
 export class StartupService extends BaseStartupService {
     constructor(protected appConfigService: AppConfigService,
-        protected httpClient: HttpClient,
         protected injector: Injector) { 
-        super(appConfigService,  httpClient, injector);
+        super(appConfigService,  injector);
     }
 
     load(): Promise<any> {
