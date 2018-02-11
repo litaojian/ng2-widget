@@ -3,7 +3,7 @@ import { Injectable, Injector, EventEmitter} from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { ArrayObservable } from 'rxjs/observable/ArrayObservable';
 import { BaseDataService } from '../../base/base-data.service';
-
+declare const $: any;
 
 export interface TreeNodeClickEventCallback {
 	onNodeEvent(event:any, treeId:string, treeNode:any);

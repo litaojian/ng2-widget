@@ -1,6 +1,6 @@
 import { Component, Directive, Optional, EventEmitter, Input, Output, OnInit, AfterViewInit, HostListener, ElementRef, Renderer2 } from '@angular/core';
 import { DefaultValueAccessor, ControlValueAccessor, NgControl, NgModel, FormControl } from '@angular/forms';
-
+declare const $: any;
 
 
 @Component({

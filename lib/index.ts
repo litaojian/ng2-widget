@@ -1,15 +1,21 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 
 import { YgIconModule } from './yg-icon/yg-icon.module';
-import { NgxTinymceModule } from './yg-tinymce/tinymce.module';
+import { YgTinymceModule } from './yg-tinymce/tinymce.module';
+import { MyAppModule } from './my-app/my-app.module';
+
 
 
 export * from './yg-icon';
 export * from './yg-tinymce';
+export * from './base';
+export * from './my-app';
+
 
 const MODULES = [
+    MyAppModule,
     YgIconModule,
-    NgxTinymceModule
+    YgTinymceModule
 ];
 
 @NgModule({

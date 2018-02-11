@@ -17,10 +17,10 @@ export { TinymceComponent } from './tinymce.component';
     declarations: [TinymceComponent],
     exports: [TinymceComponent]
 })
-export class NgxTinymceModule {
+export class YgTinymceModule {
     public static forRoot(options: TinymceOptions): ModuleWithProviders {
         return {
-            ngModule: NgxTinymceModule,
+            ngModule: YgTinymceModule,
             providers: [
                 ScriptService,
                 { provide: TinymceOptions, useValue: options }

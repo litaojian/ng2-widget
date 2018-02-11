@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output, OnInit, AfterViewInit, ViewChild, ElementRef, Renderer } from '@angular/core';
 import { BaseDataService } from '../../base/base-data.service';
-
+declare const $: any;
 
 @Component({
   selector: 'my-tree',
@@ -33,7 +33,7 @@ export class MyTreeComponent implements OnInit, AfterViewInit {
 
 		if (this.optionDataSource != null) {
 			this.dataService.getTreeData(this.optionDataSource).subscribe(
-				treeData => {
+				(treeData:any) => {
 					treeData["open"]=true;
 					//console.log($('#' + this.treeId));	
 					$('#' + this.treeId).tree({'data':treeData});

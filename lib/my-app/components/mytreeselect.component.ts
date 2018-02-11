@@ -3,6 +3,8 @@ import { Router, NavigationExtras, ActivatedRoute, Params } from '@angular/route
 import { ControlValueAccessor, DefaultValueAccessor, NgControl, NgModel} from '@angular/forms';
 import { ZxTreeService, TreeNodeClickEventCallback } from './zxtree.service';
 
+declare const $: any;
+
 @Component({
   selector: 'my-tree-select',
   template: `

@@ -1,7 +1,8 @@
 import { Component, Optional, EventEmitter, Input, Output, OnInit, ViewChild, ElementRef, Renderer, Renderer2 } from '@angular/core';
 import { DefaultValueAccessor, ControlValueAccessor, NgModel, NgControl } from '@angular/forms';
-import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { ValueListDataService } from '../../base/valuelist.service';
+declare const $: any;
 
 @Component({
 	selector: 'my-lookup',
@@ -55,7 +56,7 @@ export class MyLookupComponent extends DefaultValueAccessor implements OnInit {
 	@Input('class')
 	public styleClass: string;
 
-	constructor(_renderer2: Renderer2, _elementRef: ElementRef, private http: Http, public model: NgModel, @Optional() ngControl: NgControl) {
+	constructor(_renderer2: Renderer2, _elementRef: ElementRef, private dataService: ValueListDataService, public model: NgModel, @Optional() ngControl: NgControl) {
 		super(_renderer2, _elementRef, false);
 		if (ngControl) {
 			ngControl.valueAccessor = this;
@@ -84,13 +85,11 @@ export class MyLookupComponent extends DefaultValueAccessor implements OnInit {
 		return this.mc;
 	}
 
-	getJsonDataFromService(dataUrl: string) {
+	getJsonDataFromService(dataUrl: string):Observable<Object>  {
 		//debugger;
 		console.log("---------------------" + dataUrl)
-		let headers = new Headers({ 'Content-Type': 'application/json' });
-		let options = new RequestOptions({ headers: headers });
 
-		return this.http.get(dataUrl, options)
+		return this.dataService.ajaxGet(dataUrl, {})
 			.map((res: Response) => res.json())
 			.do(result => {
 				//debugger;
@@ -111,7 +110,7 @@ export class MyLookupComponent extends DefaultValueAccessor implements OnInit {
 			let url = this.optionDataSource;
 			url = url.replace("/api/", "/remote/api/rest/");
 			url = url + '/list';
-			this.getJsonDataFromService(url).subscribe(result => {
+			this.getJsonDataFromService(url).subscribe((result:any) => {
 				debugger;
 				var setting = {
 					check: {},
@@ -141,7 +140,7 @@ export class MyLookupComponent extends DefaultValueAccessor implements OnInit {
 					setting.view.showIcon = false;
 				}
 
-				var zNodes = result.rows;
+				var zNodes = result["rows"];
 
 				function onClick(e, treeId, treeNode) {
 					var zTree = $.fn.zTree.getZTreeObj("treeDemo" + yy.model.name);

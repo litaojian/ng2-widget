@@ -1,11 +1,9 @@
 import { Injectable, Injector, Optional } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { Http, Headers, Response, RequestOptions } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import { BaseService } from './base-all.service';
 
-import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/delay';
 import 'rxjs/add/operator/map';
@@ -44,7 +42,7 @@ export class MenuTreeService extends BaseService {
     nodeUrl:string;
     children:Object[] = [];
 
-    constructor(injector: Injector, private sanitizer: DomSanitizer, protected http: Http) {
+    constructor(injector: Injector, private sanitizer: DomSanitizer) {
         super(injector);
         //console.log("PortalService init.......");
     }
@@ -63,7 +61,7 @@ export class MenuTreeService extends BaseService {
         return null;
     }
 
-    findParentNode(rootNode:Object, childNode:Object):Object{
+    findParentNode(rootNode:Object, childNode:any):Object{
         //debugger;
         if (childNode == null){
             return null;
@@ -72,7 +70,7 @@ export class MenuTreeService extends BaseService {
         return this.findParentNodeByUrl(rootNode, url);
     }    
 
-    findParentNodeByUrl(node:Object, url:string):Object{
+    findParentNodeByUrl(node:any, url:string):Object{
         //debugger;
         let children = node["children"];
         if (children!= null){
@@ -100,7 +98,7 @@ export class MenuTreeService extends BaseService {
         return null;
     }
 
-    findNodeByUrl(node:Object, url:string, moduleId:string):Object{
+    findNodeByUrl(node:any, url:string, moduleId:string):Object{
         let children = node["children"];
         //debugger;
         if (children!= null){
@@ -125,7 +123,7 @@ export class MenuTreeService extends BaseService {
         return null;
     }
 
-    buildLevel(node:Object, level:number){
+    buildLevel(node:any, level:number){
         //debugger;
         let _children = node["children"];
         if (_children!= null){
@@ -154,7 +152,7 @@ export class MenuTreeService extends BaseService {
     /**
       * 
       */
-    findMenuListByPath(menuUrl: string, level: number, moduleId?:string) {
+    findMenuListByPath(menuUrl: string, level: number, moduleId?:string) : Observable<Object>{
 
         //debugger;
         //console.log("getMenuListByPath() ---" + menuUrl + "|" + level);
@@ -167,7 +165,7 @@ export class MenuTreeService extends BaseService {
         }
 
         return this.ajaxGet(url, {})
-            .subscribe(result => {
+            .do((result:any) => {
                 //debugger;
                 //console.log("debug1:" + JSON.stringify(result));
                 let menuItem = new MenuInfo();
@@ -179,7 +177,7 @@ export class MenuTreeService extends BaseService {
                 if(level == 2){
                     //debugger;
                 }
-                let node = this.findNodeByUrl(menuItem, menuUrl, moduleId);
+                let node:any = this.findNodeByUrl(menuItem, menuUrl, moduleId);
                 if (node != null) {
                     //console.log("debug first:" + JSON.stringify(node) + ", input level:" + level);
                     let nodeLevel = node["level"];
