@@ -51,6 +51,7 @@ const DIRECTIVES = [
   exports:[
 		FormsModule,
 		ReactiveFormsModule,
+		RouterModule,
 		...COMPONENTS,
 		...DIRECTIVES		
   ],
