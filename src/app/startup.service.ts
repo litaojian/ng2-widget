@@ -11,9 +11,8 @@ import { AppConfigService } from '../../lib/bizapp.config';
  */
 @Injectable()
 export class StartupService extends BaseStartupService {
-    constructor(protected appConfigService: AppConfigService,
-        protected injector: Injector) { 
-        super(appConfigService,  injector);
+    constructor(protected injector: Injector) { 
+        super(injector);
     }
 
     load(): Promise<any> {
@@ -22,8 +21,8 @@ export class StartupService extends BaseStartupService {
         return new Promise((resolve, reject) => {
             zip(
                 this.httpClient.get('assets/app-config.json')
-            ).subscribe(appConfig => {
-                const res = this.processConfigData([appConfig]);
+            ).subscribe(([appConfig])  => {                
+                const res = this.processConfigData(appConfig);
                 resolve(res);
             }, (err: HttpErrorResponse) => {
                 resolve(null);
@@ -32,10 +31,11 @@ export class StartupService extends BaseStartupService {
     }
 
     processConfigData(configData:any){
+        //debugger;
         // application data
         const res: any = configData;
         // 应用信息：包括站点名、描述、年份
-        this.appConfigService.setApp(res.app);
-
+        this.appConfig.setApp(res.app);
+        this.appConfig.SERVER_URL = res.SERVER_URL;
     }
 }

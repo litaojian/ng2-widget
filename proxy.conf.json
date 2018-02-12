@@ -4,7 +4,11 @@
         "pathRewrite": { "": "" },
         "secure": false
     },
-
+    "/remote2/api": {
+        "target": "http://192.168.2.176:8082/demo",
+        "pathRewrite": { "^/remote2": "/remote" },
+        "secure": false
+    },
     "/demo/api": {
         "target": "http://139.159.235.146/demo",
         "pathRewrite": { "": "" },

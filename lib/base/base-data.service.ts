@@ -318,7 +318,12 @@ export class BaseDataService extends BaseService {
 		return this.ajaxGet(url, options)
 			.map(respObject => {
 				// debugger;
-				let result = JSON.parse(respObject["_body"]);
+				let result:any;
+				if (respObject && typeof respObject == 'string' ){
+					result = JSON.parse(respObject["_body"]);				
+				}else{
+					result = respObject;
+				}
 				if (tableColumns != null && result != null){
 					let columns = tableColumns.split(",");
 					let data = result["data"];

@@ -38,6 +38,11 @@ const DIRECTIVES = [
 	ValuelistDirective
 ];
 
+const SERVICES = [		
+	HttpClientService,
+	MenuTreeService
+];
+
 
 @NgModule({
   imports: [
@@ -49,6 +54,7 @@ const DIRECTIVES = [
 		NgZorroAntdModule
   ],
   exports:[
+		CommonModule,
 		FormsModule,
 		ReactiveFormsModule,
 		RouterModule,
@@ -63,13 +69,19 @@ const DIRECTIVES = [
 
   ],
   providers: [
-	  AppConfigService,
-	  HttpClientService,
-	  MenuTreeService
+	  ...SERVICES
   ]
 })
 export class MyAppModule {
   constructor() {
 
   }
+  static forRoot(options?: Object): ModuleWithProviders {
+	return {
+		ngModule: MyAppModule,
+		providers: [
+			...SERVICES
+		]
+	};
+}  
 }

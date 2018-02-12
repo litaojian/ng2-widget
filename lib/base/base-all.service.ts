@@ -19,7 +19,7 @@ export class BaseService {
 
 	protected httpClient: HttpClientService;
 
-	protected appConfigService:AppConfigService;
+	protected appConfig:AppConfigService;
 	
 	protected injector: Injector;
 
@@ -34,7 +34,7 @@ export class BaseService {
 	constructor(injector: Injector) {
 
 		this.httpClient = injector.get(HttpClientService);
-		this.appConfigService = injector.get(AppConfigService);
+		this.appConfig = injector.get(AppConfigService);
 
 		//this.jsonp = injector.get(Jsonp);
 		//this.isTest  = !environment.production;
@@ -230,8 +230,8 @@ export class BaseService {
 		//debugger;
 		let url = ajaxUrl;
 		let apiServerUrl = "remote/api/";
-		if (this.appConfigService.SERVER_URL){
-			apiServerUrl = this.appConfigService.SERVER_URL;			
+		if (this.appConfig.SERVER_URL){
+			apiServerUrl = this.appConfig.SERVER_URL;			
 		}
 		if (!ajaxUrl.startsWith("http://") && ajaxUrl.startsWith("/api/")) {
 			url = ajaxUrl.replace("/api/", apiServerUrl);			

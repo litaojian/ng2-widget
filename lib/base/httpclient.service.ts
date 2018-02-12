@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders, HttpParams, HttpResponse, HttpEvent, HttpReque
 import { Observable } from 'rxjs/Observable';
 import { tap, catchError } from 'rxjs/operators';
 import * as moment from 'moment';
-import { AppConfigService } from '../bizapp.config';
 
 
 /**
@@ -14,10 +13,8 @@ import { AppConfigService } from '../bizapp.config';
  */
 @Injectable()
 export class HttpClientService {
-    
-    //protected bizAppConfig:BizAppConfig;
 
-    constructor(private http: HttpClient, private appConfigService:AppConfigService) {
+    constructor(private http: HttpClient) {
 
     }
 
@@ -62,11 +59,6 @@ export class HttpClientService {
     end() {
         // console.timeEnd('http');
         setTimeout(() => this._loading = false);
-    }
-
-    /** 服务端URL地址 */
-    get SERVER_URL(): string {
-        return this.appConfigService.SERVER_URL || '/';
     }
 
     // region: get

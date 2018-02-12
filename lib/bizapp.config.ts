@@ -19,6 +19,9 @@ export interface App {
 @Injectable()
 export class AppConfigService {
 
+    constructor() {
+        console.log("AppConfigService init ................................")
+    }    
     // 服务器地址
     SERVER_URL:string;
     // 上下文路径    
@@ -41,6 +44,8 @@ export class AppConfigService {
         this.app = Object.assign(this.app, val);
     }
 
-
+    setServerURL(url:string){
+        this.SERVER_URL = url;
+    }
 
 }
