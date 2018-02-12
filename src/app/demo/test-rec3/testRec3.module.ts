@@ -21,7 +21,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
-    SharedModule.forRoot()
+    SharedModule
   ],
   declarations: [
     TestRec3ListComponent

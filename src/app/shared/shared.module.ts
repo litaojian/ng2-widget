@@ -4,13 +4,14 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgZorroAntdModule, NzNotificationService, NzMessageService } from 'ng-zorro-antd';
 
+
 import { MyAppModule } from '../../../lib/my-app/my-app.module';
 import { YgIconModule } from '../../../lib/index';
-import { NzSchemaFormModule } from '../../../lib/biz-widget';
+
+import { NzSchemaFormModule, WidgetRegistry, NzWidgetRegistry  } from '../../../lib/biz-widget';
 
 const THIRDMODULES = [ 
     NgZorroAntdModule, 
-    MyAppModule, 
     YgIconModule
 ];
 // endregion
@@ -27,7 +28,8 @@ const DIRECTIVES = [];
         FormsModule,
         RouterModule,
         ReactiveFormsModule,
-        NzSchemaFormModule.forRoot({}),
+        NzSchemaFormModule.forRoot(),
+        MyAppModule,
         ...THIRDMODULES        
     ],
     declarations: [
@@ -42,9 +44,14 @@ const DIRECTIVES = [];
         RouterModule,
         ...THIRDMODULES,
         NzSchemaFormModule,
+        MyAppModule,
         // your components
         ...COMPONENTS,
         ...DIRECTIVES
+    ],
+    providers:[
+        NzNotificationService,
+        NzMessageService
     ]
 })
 export class SharedModule {
@@ -55,7 +62,7 @@ export class SharedModule {
                 // ng-zorro-antd Services
                 NzNotificationService,
                 NzMessageService,
-                
+                { provide: WidgetRegistry, useClass: NzWidgetRegistry },
             ]
         };
     }

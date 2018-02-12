@@ -19,7 +19,7 @@ import { ZxFormInputDirective }  from './directives/zx.forminput.directive';
 
 import { MenuTreeService } from '../base/menutree.service';
 import { HttpClientService } from '../base/httpclient.service';
-import { AppConfigService } from '../bizapp.config';
+//import { AppConfigService } from '../bizapp.config';
 
 
 const COMPONENTS = [
@@ -80,7 +80,6 @@ export class MyAppModule {
 	return {
 		ngModule: MyAppModule,
 		providers: [
-			AppConfigService,
 			...SERVICES
 		]
 	};
