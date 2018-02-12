@@ -80,6 +80,7 @@ export class MyAppModule {
 	return {
 		ngModule: MyAppModule,
 		providers: [
+			AppConfigService,
 			...SERVICES
 		]
 	};

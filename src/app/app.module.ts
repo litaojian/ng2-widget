@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { OtherComponent } from './other/other.component';
 
-//import { MyAppModule } from '../../lib/my-app/my-app.module';
+import { MyAppModule } from '../../lib/my-app/my-app.module';
 import { AppConfigService } from '../../lib/bizapp.config';
 import { StartupService } from './startup.service';
 
@@ -30,6 +30,7 @@ export function StartupServiceFactory(startupService: StartupService): Function 
     CommonModule,
     FormsModule,
     HttpClientModule,
+    MyAppModule.forRoot(),
     RouterModule.forRoot([
         { path: 'testRec', loadChildren: './demo/test-rec/testRec.module#TestRecModule'},
         { path: 'testRec2', loadChildren: './demo/test-rec2/testRec2.module#TestRec2Module'},
@@ -40,7 +41,7 @@ export function StartupServiceFactory(startupService: StartupService): Function 
     
   ],
   providers: [
-    AppConfigService,
+    //AppConfigService,
     StartupService,
     //{ provide: LOCALE_ID, useValue: 'zh-Hans' },
     {
