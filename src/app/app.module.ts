@@ -16,7 +16,6 @@ import { StartupService } from './startup.service';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { OtherComponent } from './other/other.component';
-import { TestRec3ListComponent } from './demo/test-rec3/testRec3.component';
 
 
 export function StartupServiceFactory(startupService: StartupService): Function {
@@ -27,8 +26,7 @@ export function StartupServiceFactory(startupService: StartupService): Function 
   declarations: [
     AppComponent,
     HomeComponent,
-    OtherComponent,
-    TestRec3ListComponent
+    OtherComponent
   ],
   imports: [
     BrowserModule,
@@ -37,12 +35,10 @@ export function StartupServiceFactory(startupService: StartupService): Function 
     FormsModule,
     HttpClientModule,
     MyAppModule.forRoot(),
-    NzSchemaFormModule.forRoot({
-    }),
     RouterModule.forRoot([
         { path: 'testRec', loadChildren: './demo/test-rec/testRec.module#TestRecModule'},
         { path: 'testRec2', loadChildren: './demo/test-rec2/testRec2.module#TestRec2Module'},
-        { path: 'testRec3', component: TestRec3ListComponent },
+        { path: 'testRec3', loadChildren: './demo/test-rec3/testRec3.module#TestRec3Module'},
         { path: 'home', component: HomeComponent },
         { path: 'other', component: OtherComponent },
         { path: '', redirectTo: 'home', pathMatch: 'full'}
