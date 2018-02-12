@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, LOCALE_ID, APP_INITIALIZER } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -25,11 +26,13 @@ export function StartupServiceFactory(startupService: StartupService): Function 
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     CommonModule,
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot([
         { path: 'testRec', loadChildren: './demo/test-rec/testRec.module#TestRecModule'},
+        { path: 'testRec2', loadChildren: './demo/test-rec2/testRec2.module#TestRec2Module'},
         { path: 'home', component: HomeComponent },
         { path: 'other', component: OtherComponent },
         { path: '', redirectTo: 'home', pathMatch: 'full'}

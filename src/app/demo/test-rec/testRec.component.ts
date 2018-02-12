@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs/Observable';
-import { Component, ViewChild, OnInit, HostBinding, AfterViewInit, Injector, OnDestroy } from '@angular/core';
+import { Component, ViewChild, OnInit, HostBinding, AfterViewInit, Injector, OnDestroy, OnChanges } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { Location } from '@angular/common';
@@ -11,8 +11,6 @@ import { BaseDataService } from '../../../../lib/base/base-data.service';
 
 import { TestRecService } from './testRec.service';
 
-import 'rxjs/add/operator/switchMap';
-
 export class MyQueryForm extends QueryForm {
 	testname: string;
 	teststatus:string;
@@ -23,12 +21,11 @@ export class MyQueryForm extends QueryForm {
 
 
 @Component({
-	//moduleId: module.id,
 	templateUrl: './testRec-list.html',
 	inputs: [],
 	outputs: []
 })
-export class TestRecListComponent extends BaseListComponent implements OnInit, OnDestroy {
+export class TestRecListComponent extends BaseListComponent implements OnInit, OnDestroy , OnChanges {
 
 	queryForm: MyQueryForm = new MyQueryForm();
 
@@ -62,6 +59,9 @@ export class TestRecListComponent extends BaseListComponent implements OnInit, O
 		console.log(" testRec ngOnDestory......");				
 	}
 
+	ngOnChanges(){
+		console.log(" testRec ngOnChanges......");
+	}
 }
 
 
