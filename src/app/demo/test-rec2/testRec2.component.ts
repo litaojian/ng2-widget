@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs/Observable';
-import { Component, ViewChild, OnInit, HostBinding, AfterViewInit, Injector, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Component, ViewContainerRef, ChangeDetectorRef, ComponentRef, SimpleChanges, ViewChild, OnInit, HostBinding, AfterViewInit, Injector, OnDestroy } from '@angular/core';
+import { Router, ActivatedRoute,  Params } from '@angular/router';
 import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { Location } from '@angular/common';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
@@ -13,13 +13,11 @@ import { TestRecService } from './testRec2.service';
 
 
 @Component({
-	//moduleId: module.id,
 	templateUrl: './testRec-list.html',
 	inputs: [],
 	outputs: []
 })
 export class TestRecListComponent extends BaseListComponent implements OnInit, OnDestroy {
-
 
 	options_docstatus:Object[] = [];
 
@@ -102,5 +100,8 @@ export class TestRecDetailComponent extends BaseDetailComponent implements OnIni
 
 	}
 
+
+
+	
 }
 

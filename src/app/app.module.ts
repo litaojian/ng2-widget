@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { OtherComponent } from './other/other.component';
+import { TestRec3ListComponent } from './demo/test-rec3/testRec3.component';
 
 import { MyAppModule } from '../../lib/my-app/my-app.module';
 import { AppConfigService } from '../../lib/bizapp.config';
@@ -22,7 +23,8 @@ export function StartupServiceFactory(startupService: StartupService): Function 
   declarations: [
     AppComponent,
     HomeComponent,
-    OtherComponent
+    OtherComponent,
+    TestRec3ListComponent
   ],
   imports: [
     BrowserModule,
@@ -34,6 +36,7 @@ export function StartupServiceFactory(startupService: StartupService): Function 
     RouterModule.forRoot([
         { path: 'testRec', loadChildren: './demo/test-rec/testRec.module#TestRecModule'},
         { path: 'testRec2', loadChildren: './demo/test-rec2/testRec2.module#TestRec2Module'},
+        { path: 'testRec3', component: TestRec3ListComponent },
         { path: 'home', component: HomeComponent },
         { path: 'other', component: OtherComponent },
         { path: '', redirectTo: 'home', pathMatch: 'full'}
