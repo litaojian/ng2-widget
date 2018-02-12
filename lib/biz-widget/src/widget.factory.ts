@@ -1,12 +1,12 @@
 import { ViewContainerRef, ComponentRef, ComponentFactoryResolver, Injectable } from '@angular/core';
-import { BizWidgetRegistry } from './biz-widget.registry';
+import { WidgetRegistry } from './widget.registry';
 
 @Injectable()
-export class BizWidgetFactory {
+export class WidgetFactory {
     private resolver: ComponentFactoryResolver;
-    private registry: BizWidgetRegistry;
+    private registry: WidgetRegistry;
 
-    constructor(registry: BizWidgetRegistry, resolver: ComponentFactoryResolver) {
+    constructor(registry: WidgetRegistry, resolver: ComponentFactoryResolver) {
         this.registry = registry;
         this.resolver = resolver;
     }

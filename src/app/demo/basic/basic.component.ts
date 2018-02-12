@@ -3,10 +3,10 @@ import { NzMessageService } from 'ng-zorro-antd';
 import { SFSchema } from '../../../../lib/biz-widget';
 
 @Component({
-    selector: 'app-example-testrec',
-    templateUrl: './testRec3.component.html'
+    selector: 'app-example-basic',
+    templateUrl: './basic.component.html'
 })
-export class TestRec3ListComponent {
+export class ExampleBasicComponent {
     actions = {
         send: (form: any) => {
             this.msg.success(JSON.stringify(form.value));
@@ -21,17 +21,17 @@ export class TestRec3ListComponent {
         horizontal: {
             code: '' + require('!!raw-loader!../../schema/login-schema.json'),
             value: {},
-            model: { email: 'litaojian@qq.com' }
+            model: { email: 'cipchk@qq.com' }
         },
         vertical: {
             code: '' + require('!!raw-loader!../../schema/login-schema.json'),
             value: {},
-            model: { email: 'litaojian@qq.com' }
+            model: { email: 'cipchk@qq.com' }
         },
         inline: {
             code: '' + require('!!raw-loader!../../schema/login-schema.json'),
             value: {},
-            model: { email: 'litaojian@qq.com' }
+            model: { email: 'cipchk@qq.com' }
         }
     };
 

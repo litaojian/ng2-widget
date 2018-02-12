@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-//import { ControlWidget } from '../widget';
-//import { WidgetData } from './../schema/types';
+import { ControlWidget } from '../../widget';
+import { WidgetData } from './../../schema/types';
 
 @Component({
     selector: 'nz-sf-string-widget',
@@ -35,11 +35,11 @@ import { Component, OnInit } from '@angular/core';
     </div>
   </ng-template>`
 })
-export class StringWidget implements OnInit {
+export class StringWidget extends ControlWidget implements OnInit {
     type: string;
 
     ngOnInit(): void {
-        const w:any = {"type":"text"}; //this.widgetData;
+        const w = this.widgetData;
         if (w.type) return w.type;
         this.type = !w || w.id === 'string' ? 'text' : w.id;
     }
