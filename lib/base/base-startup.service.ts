@@ -3,7 +3,6 @@ import { Injectable, Injector } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { zip } from 'rxjs/observable/zip';
 import { AppConfigService } from '../bizapp.config';
-import { HttpBackend } from '../../node_modules/.@angular_common@5.2.3@@angular/common/http/src/backend';
 import { BaseService } from './base-all.service';
 
 /**

@@ -11,10 +11,9 @@
     },
     "/demo/api": {
         "target": "http://139.159.235.146/demo",
-        "pathRewrite": { "": "" },
+        "pathRewrite": { "^/demo": "/mock" },
         "secure": false
     },
-
 
     "/sso/api": {
         "target": "http://139.159.235.146/ssov6",

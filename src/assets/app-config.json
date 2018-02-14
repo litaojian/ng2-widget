@@ -1,5 +1,5 @@
 {
-    "SERVER_URL": "remote2/api/",
+    "SERVER_URL": "demo/api/",
     "app": {
         "name": "SaaS门户",
         "description": "新版应用框架"
