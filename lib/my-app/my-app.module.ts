@@ -13,6 +13,7 @@ import { MyTreeComponent }  from './components/mytree.component';
 import { ZxTreeComponent }  from './components/zxtree.component';
 import { MyTreeSelectComponent }  from './components/mytreeselect.component';
 import { MyLabelComponent }  from './components/mylabel.component';
+import { MyTableComponent }  from './components/mytable.component';
 
 import { ValuelistDirective }  from './directives/valuelist.directive';
 import { ZxFormInputDirective }  from './directives/zx.forminput.directive';
@@ -23,6 +24,7 @@ import { HttpClientService } from '../base/httpclient.service';
 
 
 const COMPONENTS = [
+	MyTableComponent,
 	MyUploaderComponent,
 	MySelectComponent,
 	MyLabelComponent,

@@ -5,8 +5,9 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { SharedModule } from '../../shared/shared.module';
 
-import { TestRec3Service } from './testRec3.service';
 import { TestRec3ListComponent } from './testRec3.component';
+import { TestRecService } from '../test-rec/testRec.service';
+
 
 
 const routes: Routes = [
@@ -26,7 +27,7 @@ const routes: Routes = [
   declarations: [
     TestRec3ListComponent
   ],
-  providers: [TestRec3Service]
+  providers: [TestRecService]
 })
 
 export class TestRec3Module { }

@@ -3,7 +3,6 @@ import { Component, ViewContainerRef, ChangeDetectorRef, ComponentRef, SimpleCha
 import { Router, ActivatedRoute,  Params } from '@angular/router';
 import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { Location } from '@angular/common';
-import { Http, Headers, Response, RequestOptions } from '@angular/http';
 
 import { BaseListComponent, QueryForm } from '../../../../lib/my-app/my-list.component';
 import { BaseDetailComponent } from '../../../../lib/my-app/my-detail.component';

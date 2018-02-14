@@ -39,7 +39,7 @@ export function StartupServiceFactory(startupService: StartupService): Function 
         { path: 'testRec3', loadChildren: './demo/test-rec3/testRec3.module#TestRec3Module'},
         { path: 'home', component: HomeComponent },
         { path: 'other', component: OtherComponent },
-        { path: '', redirectTo: 'home', pathMatch: 'full'}
+        { path: '', redirectTo: 'testRec3', pathMatch: 'full'}
     ], { useHash: true })
     
   ],
