@@ -4,18 +4,7 @@
             <th nz-th [nzCheckbox]="true">
                 <label nz-checkbox></label>
             </th>
-            <th nz-th><span>编号</span></th>
-            <th nz-th><span>名称</span></th>
-            <th nz-th><span>年龄</span></th>
-            <th nz-th>
-                <span>描述</span>
-            </th>
-            <th nz-th>
-                <span>类型</span>
-            </th>
-            <th nz-th>
-                <span>输入时间</span>
-            </th>
+            <th nz-th *ngFor="let column of schema.dataTable.columns"><span>{{column.title}}</span></th>
             <th nz-th><span>操作</span></th>
         </tr>
     </thead>

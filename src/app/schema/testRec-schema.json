@@ -22,9 +22,13 @@
     },    
     "dataTable": {
         "columns":[
-            {"name":"name","title":"用户名","datatype":"string"},
-            {"name":"test","title":"部门","datatype":"string"},
-            {"name":"testStatus","title":"状态","datatype":"string"}
+            {"name":"testrecid","title":"编号","datatype":"string"},
+            {"name":"testname","title":"名称","datatype":"string"},
+            {"name":"testage","title":"年龄","datatype":"string"},
+            {"name":"description","title":"描述","datatype":"string"},
+            {"name":"teststatus","title":"类型","datatype":"string"},
+            {"name":"created","title":"输入时间","datatype":"datetime"},
+            {"name":"actions","title":"操作","datatype":"string"}
         ]
     },    
     

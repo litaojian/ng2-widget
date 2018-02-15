@@ -27,7 +27,7 @@ export class TestRec3ListComponent extends BaseListComponent implements OnInit, 
     // login
     DATA: any = {
         simple: {
-            code: '' + require('!!raw-loader!../../schema/login-schema.json'),
+            code: '' + require('!!raw-loader!../../schema/testRec-schema.json'),
             value: {},
             model: { email: 'litaojian@qq.com' }
         }
