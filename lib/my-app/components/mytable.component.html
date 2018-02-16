@@ -13,14 +13,9 @@
             <td nz-td [nzCheckbox]="true">
                 
             </td>
-            <td nz-td>{{row.testrecid}}</td>
-            <td nz-td>{{row.testname}}</td>
-            <td nz-td>{{row.testage}}</td>
-            <td nz-td class="text-center">{{row.description}}</td>
-            <td nz-td>
-                
+            <td nz-td *ngFor="let column of schema.dataTable.columns">
+                    <span [innerHTML]="row[column.name]"></span>
             </td>
-            <td nz-td>{{row.created | date }}</td>
             <td nz-td>
                 <a *ngIf="row.testrecid" (click)="onEditRow(row)">编辑</a>
                 <span nz-table-divider></span>

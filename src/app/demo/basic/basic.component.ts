@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd';
-import { SFSchema } from '../../../../lib/biz-widget';
+import { SFSchema } from '../../../../lib/biz-form';
 
 @Component({
     selector: 'app-example-basic',

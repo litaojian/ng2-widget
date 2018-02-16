@@ -32,7 +32,7 @@ export class MyTableComponent {
 	totalCount: number = 0;
 
 	@Input()
-	tableData:Object[]= [];
+	tableData: Object[] = [];
 
 	constructor() {
 		//console.log("MyTableComponent init:" + this.tableData);
@@ -65,4 +65,39 @@ export class MyTableComponent {
 		this.totalCount = total;
 		// this.pageCount = Math.ceil(this.total / this.pageSize);
 	}
+
+	_get(item: any, col: any) {
+		if (col.format) return col.format(item, col);
+
+		const ret = this.deepGet(item, col.index as string[], '');
+		if (typeof ret === 'undefined') return '';
+
+		// switch (col.type) {
+		//     case 'img':
+		//         return `<img src="${ret}" class="img">`;
+		//     case 'currency':
+		//         return this.currenty.transform(ret);
+		//     case 'date':
+		//         return this.date.transform(ret, col.dateFormat);
+		//     case 'yn':
+		//         return this.yn.transform(ret === col.ynTruth, col.ynYes, col.ynNo);
+		// }
+		return ret;
+	}
+
+
+
+	/**
+	 * 类似 `_.get`，根据 `path` 获取安全值
+	 * jsperf: https://jsperf.com/es-deep-get
+	 */
+	deepGet(obj: any, path: string[], defaultValue: any) {
+		if (!obj) return defaultValue;
+		if (path.length <= 1) {
+			const checkObj = path.length ? obj[path[0]] : obj;
+			return typeof checkObj === 'undefined' ? defaultValue : checkObj;
+		}
+		return path.reduce((o, k) => (o || {})[k], obj) || defaultValue;
+	}
+
 }

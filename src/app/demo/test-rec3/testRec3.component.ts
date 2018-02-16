@@ -1,7 +1,7 @@
 import { Component, ViewContainerRef, ChangeDetectorRef, ComponentRef, SimpleChanges, ViewChild, OnInit, HostBinding, AfterViewInit, Injector, OnDestroy } from '@angular/core';
 
 import { NzMessageService } from 'ng-zorro-antd';
-import { SFSchema } from '../../../../lib/biz-widget';
+import { SFSchema } from '../../../../lib/biz-form';
 import { BaseListComponent, QueryForm } from '../../../../lib/my-app/my-list.component';
 import { BaseDetailComponent } from '../../../../lib/my-app/my-detail.component';
 import { TestRecService } from '../test-rec/testRec.service';
