@@ -8,6 +8,7 @@ import { NgZorroAntdModule, NzNotificationService, NzMessageService } from 'ng-z
 import { MyAppModule } from '../../../lib/my-app/my-app.module';
 import { YgIconModule } from '../../../lib/index';
 
+import { AdSimpleTableModule } from '../../../lib/biz-table';
 import { NzSchemaFormModule, WidgetRegistry, NzWidgetRegistry  } from '../../../lib/biz-form';
 
 const THIRDMODULES = [ 

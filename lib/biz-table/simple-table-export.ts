@@ -1,6 +1,6 @@
 import { Injectable, Optional } from '@angular/core';
 import * as XLSX from 'xlsx';
-import { XlsxService } from '../xlsx/xlsx.service';
+import { XlsxService } from '../my-xlsx/xlsx.service';
 import { SimpleTableColumn, STExportOptions } from './interface';
 import { deepGet } from '../utils/utils';
 
