@@ -3,9 +3,9 @@ import { HttpHeaders, HttpResponse, HttpRequest, HttpParams } from '@angular/com
 import { Observable } from 'rxjs/Observable';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { enc } from 'crypto-js';
-import { ExtCookieService } from './cookies.service';
-import { HttpClientService } from './httpclient.service';
-import { AppConfigService } from '../bizapp.config';
+import { ExtCookieService } from '../services/cookies.service';
+import { HttpClientService } from '../services/httpclient.service';
+import { AppConfigService } from '../../bizapp.config';
 
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';

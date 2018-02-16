@@ -1,6 +1,6 @@
 import { Component, ViewChild, ContentChildren, OnInit, AfterViewInit, Injector } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { BaseDataService } from '../base/base-data.service';
+import { BaseDataService } from './base/base-data.service';
 
 export class QueryForm {
   command: string = "search";

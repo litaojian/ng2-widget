@@ -7,7 +7,6 @@ import { Http, Headers, Response, RequestOptions } from '@angular/http';
 
 import { BaseListComponent, QueryForm } from '../../../../lib/my-app/my-list.component';
 import { BaseDetailComponent } from '../../../../lib/my-app/my-detail.component';
-import { BaseDataService } from '../../../../lib/base/base-data.service';
 
 import { TestRecService } from './testRec.service';
 

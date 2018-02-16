@@ -2,7 +2,7 @@ import { Injectable, Injector, Optional } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 import { Observable } from 'rxjs/Observable';
-import { BaseService } from './base-all.service';
+import { BaseService } from '../base/base-all.service';
 
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/delay';

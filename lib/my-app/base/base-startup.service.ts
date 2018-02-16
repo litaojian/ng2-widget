@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 import { Injectable, Injector } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { zip } from 'rxjs/observable/zip';
-import { AppConfigService } from '../bizapp.config';
+import { AppConfigService } from '../../bizapp.config';
 import { BaseService } from './base-all.service';
 
 /**

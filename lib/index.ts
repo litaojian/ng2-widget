@@ -8,7 +8,6 @@ import { MyAppModule } from './my-app/my-app.module';
 
 export * from './yg-icon';
 export * from './yg-tinymce';
-export * from './base';
 export * from './my-app';
 
 

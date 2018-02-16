@@ -18,8 +18,8 @@ import { MyTableComponent }  from './components/mytable.component';
 import { ValuelistDirective }  from './directives/valuelist.directive';
 import { ZxFormInputDirective }  from './directives/zx.forminput.directive';
 
-import { MenuTreeService } from '../base/menutree.service';
-import { HttpClientService } from '../base/httpclient.service';
+import { MenuTreeService } from './services/menutree.service';
+import { HttpClientService } from './services/httpclient.service';
 //import { AppConfigService } from '../bizapp.config';
 
 

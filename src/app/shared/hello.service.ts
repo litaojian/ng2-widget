@@ -1,7 +1,7 @@
 import { Injectable,Injector } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { BaseDataService }  from '../../../lib/base/base-data.service';
+import { BaseDataService }  from '../../../lib/my-app';
 
 @Injectable()
 export class HelloService extends BaseDataService {

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output, OnInit, ViewChild, ElementRef, Renderer2, Optional} from '@angular/core';
 import { DefaultValueAccessor, ControlValueAccessor, SelectControlValueAccessor, NgControl, NgModel } from '@angular/forms';
-import { BaseDataService } from '../../base/base-data.service';
+import { BaseDataService } from '../base/base-data.service';
 
 @Component({
 	selector: 'my-select',
