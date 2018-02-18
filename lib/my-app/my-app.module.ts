@@ -22,6 +22,12 @@ import { MenuTreeService } from './services/menutree.service';
 import { HttpClientService } from './services/httpclient.service';
 //import { AppConfigService } from '../bizapp.config';
 
+import { _HttpClient } from '@delon/theme';
+import { ModalHelper } from '@delon/theme';
+
+import { AlainThemeOptions, ALAIN_THEME_OPTIONS } from '@delon/theme';
+
+
 
 const COMPONENTS = [
 	MyTableComponent,
@@ -41,8 +47,10 @@ const DIRECTIVES = [
 ];
 
 const SERVICES = [		
+	_HttpClient,
 	HttpClientService,
-	MenuTreeService
+	MenuTreeService,
+	ModalHelper
 ];
 
 
@@ -69,9 +77,6 @@ const SERVICES = [
 	],
   entryComponents:[
 
-  ],
-  providers: [
-	  ...SERVICES
   ]
 })
 export class MyAppModule {
@@ -82,7 +87,8 @@ export class MyAppModule {
 	return {
 		ngModule: MyAppModule,
 		providers: [
-			...SERVICES
+			...SERVICES,
+			{ provide: ALAIN_THEME_OPTIONS, useValue: {} }
 		]
 	};
 }  

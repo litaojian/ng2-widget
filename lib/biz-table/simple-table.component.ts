@@ -201,6 +201,7 @@ export class SimpleTableComponent implements OnInit, OnChanges, AfterViewInit, O
     // region: data
 
     private getAjaxData(url?: string): Observable<any> {
+        //console.log("simpletable getAjaxData 1............ " + url)
         const params: any = {};
         params[this.reqReName && this.reqReName['pi'] || 'pi'] = this.pi;
         params[this.reqReName && this.reqReName['ps'] || 'ps'] = this.ps;
@@ -209,6 +210,7 @@ export class SimpleTableComponent implements OnInit, OnChanges, AfterViewInit, O
             body: this.reqBody,
             headers: this.reqHeaders
         }).pipe(map((res: any) => {
+            console.log("simpletable getAjaxData 2.....");
             const ret = deepGet(res, this._resRN.list as string[], null);
             if (typeof ret === 'undefined') {
                 console.warn(`results muse contain '${(this._resRN.list as string[]).join('.')}' attribute.`);
@@ -306,7 +308,7 @@ export class SimpleTableComponent implements OnInit, OnChanges, AfterViewInit, O
 
     _get(item: any, col: SimpleTableColumn) {
         if (col.format) return col.format(item, col);
-
+        //console.log("simple.table debug: " + col);
         const ret = deepGet(item, col.index as string[], '');
         if (typeof ret === 'undefined') return '';
 

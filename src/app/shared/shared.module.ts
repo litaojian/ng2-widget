@@ -7,13 +7,12 @@ import { NgZorroAntdModule, NzNotificationService, NzMessageService } from 'ng-z
 
 import { MyAppModule } from '../../../lib/my-app/my-app.module';
 import { YgIconModule } from '../../../lib/index';
-
 import { AdSimpleTableModule } from '../../../lib/biz-table';
 import { NzSchemaFormModule, WidgetRegistry, NzWidgetRegistry  } from '../../../lib/biz-form';
 
 const THIRDMODULES = [ 
     NgZorroAntdModule, 
-    YgIconModule
+    YgIconModule    
 ];
 // endregion
 
@@ -30,7 +29,8 @@ const DIRECTIVES = [];
         RouterModule,
         ReactiveFormsModule,
         NzSchemaFormModule.forRoot(),
-        MyAppModule,
+        AdSimpleTableModule.forRoot(),
+        MyAppModule.forRoot(),
         ...THIRDMODULES        
     ],
     declarations: [
@@ -45,6 +45,7 @@ const DIRECTIVES = [];
         RouterModule,
         ...THIRDMODULES,
         NzSchemaFormModule,
+        AdSimpleTableModule,
         MyAppModule,
         // your components
         ...COMPONENTS,

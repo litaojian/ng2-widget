@@ -53,6 +53,7 @@ export function StartupServiceFactory(startupService: StartupService): Function 
       deps: [StartupService],
       multi: true
     }
+
   ],
   bootstrap: [AppComponent]
 })
