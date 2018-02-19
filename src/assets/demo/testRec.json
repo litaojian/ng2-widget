@@ -22,8 +22,21 @@
 
             },
             {"index":"description","title":"描述","type":"string"},
-            {"index":"teststatus","title":"类型","type":"string"},
-            {"index":"created","title":"输入时间","type":"date"},
+            {
+                "index":"teststatus","title":"类型","type":"string",
+                "filters": [ { "text": "male", "value": "male" }, { "text": "female", "value": "female" } ],
+                "filterMultiple": false,
+                "filter": "() => true",
+                "sorter": "(a, b) => true"
+            },
+            {
+                "index":"created","title":"输入时间","type":"date",
+                "filters": [{ "text": "昨天", "value": "male" },{ "text": "本周", "value": "2" },{ "text": "当月", "value": "3" } ],
+                "filterMultiple": true,
+                "filter": "() => true",
+                "sorter": "(a, b) => true"
+            
+            },
             {"title": "操作区",
                 "buttons": [
                     {

@@ -20,10 +20,11 @@ import { ZxFormInputDirective }  from './directives/zx.forminput.directive';
 
 import { MenuTreeService } from './services/menutree.service';
 import { HttpClientService } from './services/httpclient.service';
+import { BizDataService } from './biz-data.service';
+
 //import { AppConfigService } from '../bizapp.config';
 
-import { _HttpClient } from '@delon/theme';
-import { ModalHelper } from '@delon/theme';
+import { _HttpClient, ModalHelper } from '@delon/theme';
 
 import { AlainThemeOptions, ALAIN_THEME_OPTIONS } from '@delon/theme';
 
@@ -50,6 +51,7 @@ const SERVICES = [
 	_HttpClient,
 	HttpClientService,
 	MenuTreeService,
+	BizDataService,
 	ModalHelper
 ];
 

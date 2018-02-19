@@ -4,7 +4,7 @@ import { NzMessageService } from 'ng-zorro-antd';
 import { SFSchema } from '../../../../lib/biz-form';
 import { BaseListComponent, QueryForm } from '../../../../lib/my-app/my-list.component';
 import { TestRecService } from '../test-rec/testRec.service';
-import { SimpleTableColumn } from '../../../../lib/biz-table';
+import { SimpleTableColumn, SimpleTableButton, SimpleTableFilter } from '../../../../lib/biz-table';
 
 
 @Component({
@@ -70,6 +70,10 @@ export class TestRec31ListComponent implements OnInit, OnDestroy {
 
 	ngOnDestroy(){	
 		console.log(" testRec ngOnDestory......");				
-	}
+    }
+    
+    format(input:any){
+        return input;
+    }
 
 }

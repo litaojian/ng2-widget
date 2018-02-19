@@ -2,6 +2,9 @@
     <nz-input [(ngModel)]="params.testname" name="name" nzPlaceHolder="请输入姓名" style="width: 100px"></nz-input>
     <button nz-button (click)="st.load(1)" [nzType]="'primary'">搜索</button>
     <button nz-button (click)="params = {}; st.reset()">重置</button>
+    <!--  -->
+    <button nz-button (click)="st.export()">Export</button>
 </div>
 <simple-table #st [data]="tableConfig.dataUrl" [extraParams]="params" [total]="10" [columns]="tableConfig.columns"
-            [resReName]="tableConfig.resReName" showTotal="tableConfig.showTotal"></simple-table>
+            [resReName]="tableConfig.resReName" showTotal="tableConfig.showTotal">
+</simple-table>
