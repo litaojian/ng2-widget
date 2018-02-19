@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { BaseDataService }  from './base/base-data.service';
 
 @Injectable()
-export class BizDataService extends BaseDataService {
+export class BizFormService extends BaseDataService {
 
     constructor(injector: Injector) {
         super(injector);

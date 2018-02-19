@@ -20,7 +20,8 @@ import { ZxFormInputDirective }  from './directives/zx.forminput.directive';
 
 import { MenuTreeService } from './services/menutree.service';
 import { HttpClientService } from './services/httpclient.service';
-import { BizDataService } from './biz-data.service';
+import { BizFormService } from './biz-form.service';
+import { BizQueryService } from './biz-query.service';
 
 //import { AppConfigService } from '../bizapp.config';
 
@@ -51,7 +52,8 @@ const SERVICES = [
 	_HttpClient,
 	HttpClientService,
 	MenuTreeService,
-	BizDataService,
+	BizQueryService,
+	BizFormService,
 	ModalHelper
 ];
 

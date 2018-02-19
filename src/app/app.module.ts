@@ -34,9 +34,10 @@ export function StartupServiceFactory(startupService: StartupService): Function 
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot([
-        { path: 'testRec', loadChildren: './demo/test-rec/testRec.module#TestRecModule'},
+        { path: 'testRec',  loadChildren: './demo/test-rec/testRec.module#TestRecModule'},
         { path: 'testRec2', loadChildren: './demo/test-rec2/testRec2.module#TestRec2Module'},
         { path: 'testRec3', loadChildren: './demo/test-rec3/testRec3.module#TestRec3Module'},
+        { path: 'page',     loadChildren: './my-bizpage.module#MyBizPageModule'},        
         { path: 'home', component: HomeComponent },
         { path: 'other', component: OtherComponent },
         { path: '', redirectTo: 'testRec3', pathMatch: 'full'}

@@ -3,11 +3,10 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { NzMessageService } from 'ng-zorro-antd';
 import { SFSchema } from '..//biz-form';
-import { SimpleTableColumn, SimpleTableButton, SimpleTableFilter } from '../biz-table';
-import { BizQueryService } from './biz-query.service';
+import { BizFormService } from './biz-form.service';
 
 @Component({
-    selector: 'app-biz-query',
+    selector: 'app-biz-form',
     template: `
     <div class="mb-md">
         <nz-input [(ngModel)]="params.testname" name="name" nzPlaceHolder="请输入姓名" style="width: 100px"></nz-input>
@@ -20,32 +19,21 @@ import { BizQueryService } from './biz-query.service';
                 [resReName]="tableConfig.resReName" showTotal="tableConfig.showTotal">
     </simple-table>
     `,
-    providers:[BizQueryService]
+    providers:[BizFormService]
 })
-export class BizQueryComponent implements OnInit, OnDestroy {
+export class BizFormComponent implements OnInit, OnDestroy {
 
     activatedRoute: ActivatedRoute;
     router: Router;
-    bizService:BizQueryService;
+    bizService:BizFormService;
     msgService: NzMessageService;
 
     pagePath:string;
     params: any = {};
 
-    tableConfig : any = {
-        dataUrl:'',
-        reqMehtod:"GET",
-        showTotal:true,
-        resReName : {list: 'rows', total:'total'},
-        columns : [
-            {title:"ID"}
-        ]    
-    }
-
-
     constructor(injector: Injector) {
         this.msgService = injector.get(NzMessageService);
-        this.bizService = injector.get(BizQueryService);
+        this.bizService = injector.get(BizFormService);
 
         this.activatedRoute = injector.get(ActivatedRoute);
         this.router = injector.get(Router);
@@ -54,45 +42,33 @@ export class BizQueryComponent implements OnInit, OnDestroy {
 
     ngOnInit() {           
         //     
-        this.pagePath = "#" + this.router.url;
-		
-        let len = this.activatedRoute.snapshot.url.length;
-        let dir, pageName="nosetting", cmd;
-
-        dir = this.activatedRoute.snapshot.url[0].path;		
-		if (len > 1){
-            pageName = this.activatedRoute.snapshot.url[1].path;
-        }
-        if (len > 2){
-            cmd = this.activatedRoute.snapshot.url[2].path;		
-        }
-		
-        this.loadPageDef(dir, pageName, cmd);
+        this.loadPageDef();
     }
     
-	loadPageDef(dir:string, pageName:string, cmd:string) {
+	loadPageDef() {
 		//
 		console.log("load page def..............");
+        //let dir = 'demo';
+        //let pageName = 'testRec'
+
+        this.pagePath = "#" + this.router.url;
 		
 		let len = this.activatedRoute.snapshot.url.length;
+		let dir = this.activatedRoute.snapshot.url[0].path;		
+		let pageName = this.activatedRoute.snapshot.url[1].path;
+		let cmd = this.activatedRoute.snapshot.url[2].path;		
 		if (len >= 4){
 			//this.parentId = +this.activatedRoute.snapshot.url[3].path;			
 		}		
-        if (dir){
-            dir = "demo";
-        }        
-        if (pageName){
-            pageName = "testRec";
-        }
+        
+        
         this.bizService.ajaxGet(`assets/${dir}/${pageName}.json`, {}).subscribe(
             resultData => this.processLoadPageDef(resultData)        
         );		
 	}
 
     processLoadPageDef(resultData:Object){
-        this.tableConfig.columns = resultData["table"]['columns'];
-        this.tableConfig.dataUrl = resultData["table"]["dataUrl"];
-
+        
         
     }
 	onQuery(): void {
