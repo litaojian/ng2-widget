@@ -12,7 +12,6 @@ import { TestRecService } from '../test-rec/testRec.service';
 import { SimpleTableDemoComponent } from '../basic/simple.table.component';
 
 
-
 const routes: Routes = [
   { path: 'index', component: TestRec3ListComponent},
   { path: '31', component: TestRec31ListComponent},  
@@ -38,5 +37,6 @@ const routes: Routes = [
   ],
   providers: [TestRecService]
 })
+
 
 export class TestRec3Module { }

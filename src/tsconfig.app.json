@@ -2,17 +2,8 @@
     "extends": "../tsconfig.json",
     "compilerOptions": {
         "outDir": "../out-tsc/app",
-        "baseUrl": "./",
         "module": "es2015",
-        "types": [],
-        "paths": {
-            "@lib": ["../lib/base"],
-            "@lib/*": ["../lib/base/*"],
-            "@bizapp/base": ["../../lib/base"],
-            "@bizapp/base/*": ["../../lib/base/*"],
-            "@shared": ["app/shared"],
-            "@shared/*": ["app/shared/*"]
-        }
+        "types": []
     },
     "exclude": [
         "test.ts",

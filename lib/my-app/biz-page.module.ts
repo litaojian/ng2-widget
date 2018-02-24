@@ -44,5 +44,4 @@ const routes: Routes = [{
   ],
   providers: [BizQueryService, BizFormService, BizDialogService]
 })
-
 export class BizPageModule { }

@@ -1,37 +1,40 @@
 {
     "debug": true,
     "queryForm": {
-        "fields":[
-            {"name": {
-                "type": "string",
-                "title": "用户名",
-                "widget": {
-                    "placeholder": "请输入用户名，且3位以上"
-                },
-                "minLength": 3
-            }},
-            {"name2": {
-                "type": "string",
-                "title": "用户名",
-                "widget": {
-                    "placeholder": "请输入用户名，且3位以上"
-                },
-                "minLength": 3
-            }}
+        "fields": [{
+                "name": {
+                    "type": "string",
+                    "title": "用户名",
+                    "widget": {
+                        "placeholder": "请输入用户名，且3位以上"
+                    },
+                    "minLength": 3
+                }
+            },
+            {
+                "teststatus": {
+                    "type": "string",
+                    "title": "状态",
+                    "widget": {
+                        "placeholder": "请选择用户状态"
+                    },
+                    "minLength": 3
+                }
+            }
         ]
-    },    
+    },
     "dataTable": {
-        "columns":[
-            {"name":"testrecid","title":"编号","datatype":"string"},
-            {"name":"testname","title":"名称","datatype":"string"},
-            {"name":"testage","title":"年龄","datatype":"string"},
-            {"name":"description","title":"描述","datatype":"string"},
-            {"name":"teststatus","title":"类型","datatype":"string"},
-            {"name":"created","title":"输入时间","datatype":"datetime"},
-            {"name":"actions","title":"操作","datatype":"string"}
+        "columns": [
+            { "name": "testrecid", "title": "编号", "datatype": "string" },
+            { "name": "testname", "title": "名称", "datatype": "string" },
+            { "name": "testage", "title": "年龄", "datatype": "string" },
+            { "name": "description", "title": "描述", "datatype": "string" },
+            { "name": "teststatus", "title": "类型", "datatype": "string" },
+            { "name": "created", "title": "输入时间", "datatype": "datetime" },
+            { "name": "actions", "title": "操作", "datatype": "string" }
         ]
-    },    
-    
+    },
+
     "properties": {
         "name": {
             "type": "string",
@@ -53,8 +56,7 @@
     },
     "required": ["name", "password"],
     "button": {
-        "items": [
-            {
+        "items": [{
                 "label": "登录",
                 "id": "send",
                 "submit": true

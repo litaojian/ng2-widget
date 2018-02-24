@@ -8,3 +8,5 @@ export { BizQueryService } from './biz-query.service';
 export { BizQueryComponent } from './biz-query.component';
 export { BizFormService } from './biz-form.service';
 export { BizFormComponent } from './biz-form.component';
+
+export { BizPageModule } from './biz-page.module';
