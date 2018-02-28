@@ -24,14 +24,14 @@
                         <ng-container *ngSwitchCase="'checkbox'">
                             <label nz-checkbox [(ngModel)]="_allChecked" [nzIndeterminate]="_indeterminate"
                                 (ngModelChange)="_checkAll()"></label>
-                            <nz-dropdown *ngIf="c.selections.length">
+                            <!--<nz-dropdown *ngIf="c.selections.length">
                                 <span nz-dropdown><i class="anticon anticon-down"></i></span>
                                 <ul nz-menu>
                                     <li nz-menu-item *ngFor="let rw of c.selections"
                                         (click)="_rowSelection(rw)" [innerHTML]="rw.text">
                                     </li>
                                 </ul>
-                            </nz-dropdown>
+                            </nz-dropdown>-->
                         </ng-container>
                         <ng-container *ngSwitchDefault>
                             <span [innerHTML]="c.title"></span>
@@ -39,8 +39,9 @@
                     </ng-container>
                     <nz-table-sort *ngIf="_sortMap[index]"
                         [(nzValue)]="_sortMap[index].v" (nzValueChange)="sort(index, $event)"></nz-table-sort>
+                    <i class="{{c.filterIcon}}" [ngClass]="{'ant-table-filter-selected': c.filtered}" *ngIf="c.ifFifter==true" (click)="showModalForComponent(c,index)"></i>
                     <nz-dropdown *ngIf="c.filters.length" [nzTrigger]="'click'">
-                        <i class="{{c.filterIcon}}" [ngClass]="{'ant-table-filter-selected': c.filtered}" nz-dropdown></i>
+                        <i class="{{c.filterIcon}}" [ngClass]="{'ant-table-filter-selected': c.filtered}"  *ngIf="c.filters.length && c.filterMultiple!=null" nz-dropdown></i>
                         <ul nz-menu *ngIf="c.filterMultiple">
                             <li nz-menu-item *ngFor="let filter of c.filters">
                                 <label nz-checkbox [(ngModel)]="filter.checked">

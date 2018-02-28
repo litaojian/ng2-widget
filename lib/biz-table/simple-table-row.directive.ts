@@ -11,6 +11,6 @@ export class SimpleTableRowDirective implements OnInit {
     constructor(public templateRef: TemplateRef<any>, private table: SimpleTableComponent) {}
 
     ngOnInit(): void {
-        this.table.addRow(this);
+        // this.table.addRow(this);
     }
 }

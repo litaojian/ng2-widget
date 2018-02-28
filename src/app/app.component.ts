@@ -22,8 +22,12 @@ import { Component, ViewEncapsulation } from '@angular/core';
                     <a class="nav-link" routerLink="/testRec3">TestRec3</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" routerLink="/testRec4">TestRec4</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" routerLink="/other">Other</a>
                 </li>
+                
             </ul>
         </div>
     </nav>

@@ -1,0 +1,19 @@
+ <div>
+      <div style="width:500px;margin:0 auto" *ngIf="name=='time'">
+          <nz-rangepicker [nzPlaceholder]="['开始时间', '结束时间']" [(ngModel)]="_dateRange" style="margin-left:20px"></nz-rangepicker>
+      </div>
+      <div style="width:300px;margin:0 auto" *ngIf="name=='input'">
+          <nz-input [(ngModel)]="search.input" [nzPlaceHolder]="placeHolder" name="no"></nz-input>
+      </div> 
+      <div style="width:300px;margin:0 auto" *ngIf="name=='select'">
+          <nz-select2 [url]="selectUrl" [(ngModel)]="search.select" [fieldKey]="{text:'dmsm1',value:'dmz'}" [myPlaceHolder]="placeHolder"></nz-select2>
+      </div>   
+      <div class="customize-footer">
+            <button nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="emitDataOutside($event)">
+            确定
+            </button>
+            <button nz-button [nzType]="'default'" [nzSize]="'large'" (click)="handleCancel($event)">
+            返 回
+            </button>
+      </div>
+</div>

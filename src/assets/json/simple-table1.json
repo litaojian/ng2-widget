@@ -1,0 +1,56 @@
+{
+        "rows":[
+            { 
+            "title": "号牌号码1", 
+            "index": "hphm",
+            "ifFifter":true,
+            "ifInput":true,
+                "searchData":{
+                    "hphm":""
+                }
+            },
+            { "title": "头像", "type": "img", "width": "50px", "index": "cs" },
+            {
+                "title": "号牌种类2", 
+                "index": "hpzlmc",
+                "ifFifter":true,
+                "ifSelect":true,
+                "sorter": "(a, b) => true",
+                "searchData":{
+                "hpzl":""
+                },
+                "selectUrl":"analysis/api/data/code/list/030107"
+            },
+            {
+                "title": "号牌颜色3",
+                "index": "hpysmc",
+                "ifFifter":true,
+                "ifSelect":true,
+                "sorter": "(a, b) => true",
+                "searchData":{
+                "hphm":"hpys"
+                },
+                "selectUrl":""
+            },
+            {  
+            "title": "过车时间", 
+            "type": "date",
+            "index": "ts",
+            "ifFifter":true,
+            "ifTime":true,
+            "sorter": "(a, b) => true",
+            "searchData":{
+                "ksfxsj": "",
+                "jsfxsj": ""
+                }
+        }
+            
+    ],
+    "params":{ 
+               "ksfxsj": "2016-08-01 14:42:30",
+               "jsfxsj": "2016-08-10 14:42:24",
+               "fxfw":   "430100000001,430100000002",
+               "hssj":12
+             },
+    "url":"analysis/api/analysis/first/appear/list"
+}

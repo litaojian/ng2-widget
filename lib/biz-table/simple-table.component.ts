@@ -12,12 +12,14 @@ import { SimpleTableConfig } from './simple-table.config';
 import { deepGet, deepCopy } from '../utils/utils';
 import { SimpleTableRowDirective } from './simple-table-row.directive';
 import { SimpleTableExport } from './simple-table-export';
-
+import { NzModalCustomizeComponent } from './model/model.component';
+import { NzModalService } from 'ng-zorro-antd';
+declare var $: any;
 @Component({
     selector: 'simple-table',
     templateUrl: './simple-table.component.html',
     styleUrls: [ './simple-table.less' ],
-    providers: [ SimpleTableExport, CNCurrencyPipe, MomentDatePipe, YNPipe, DecimalPipe ]
+    providers: [ SimpleTableExport, CNCurrencyPipe, MomentDatePipe, YNPipe, DecimalPipe,SimpleTableConfig ]
 })
 export class SimpleTableComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
 
@@ -36,7 +38,7 @@ export class SimpleTableComponent implements OnInit, OnChanges, AfterViewInit, O
     // region: fields
 
     /** 数据源 */
-    @Input() data: string | any[] | Observable<any[]>;
+    @Input() data: any;
     /**
      * 后端URL地址
      * @deprecated 已过期，请使用 `data` 属性，`0.6.0` 后将移除
@@ -192,7 +194,8 @@ export class SimpleTableComponent implements OnInit, OnChanges, AfterViewInit, O
         private currenty: CNCurrencyPipe,
         private date: MomentDatePipe,
         private yn: YNPipe,
-        private number: DecimalPipe
+        private number: DecimalPipe,
+        private modalService: NzModalService
     ) {
         Object.assign(this, deepCopy(defConfig));
         this.updateResName();
@@ -201,7 +204,7 @@ export class SimpleTableComponent implements OnInit, OnChanges, AfterViewInit, O
     // region: data
 
     private getAjaxData(url?: string): Observable<any> {
-        //console.log("simpletable getAjaxData 1............ " + url)
+        // debugger;
         const params: any = {};
         params[this.reqReName && this.reqReName['pi'] || 'pi'] = this.pi;
         params[this.reqReName && this.reqReName['ps'] || 'ps'] = this.ps;
@@ -210,7 +213,6 @@ export class SimpleTableComponent implements OnInit, OnChanges, AfterViewInit, O
             body: this.reqBody,
             headers: this.reqHeaders
         }).pipe(map((res: any) => {
-            console.log("simpletable getAjaxData 2.....");
             const ret = deepGet(res, this._resRN.list as string[], null);
             if (typeof ret === 'undefined') {
                 console.warn(`results muse contain '${(this._resRN.list as string[]).join('.')}' attribute.`);
@@ -254,7 +256,9 @@ export class SimpleTableComponent implements OnInit, OnChanges, AfterViewInit, O
     }
 
     _genAjax(forceRefresh: boolean = false) {
-        if (!this._isAjax) return;
+        // alert(forceRefresh);
+        // alert(!this._isAjax);
+        // if (!this._isAjax) return;
         this.loading = true;
         if (forceRefresh === true) this.pi = 1;
         this.getAjaxData().subscribe((res: any) => this._subscribeData(res), err => {
@@ -308,7 +312,7 @@ export class SimpleTableComponent implements OnInit, OnChanges, AfterViewInit, O
 
     _get(item: any, col: SimpleTableColumn) {
         if (col.format) return col.format(item, col);
-        //console.log("simple.table debug: " + col);
+
         const ret = deepGet(item, col.index as string[], '');
         if (typeof ret === 'undefined') return '';
 
@@ -332,12 +336,13 @@ export class SimpleTableComponent implements OnInit, OnChanges, AfterViewInit, O
     }
 
     private processData() {
+        // debugger;
         if (!this.data && !this.url) {
             this._isAjax = false;
             this.data = [];
             return;
         }
-
+         
         this._isAjax = false;
         if (typeof this.data === 'string' || this.url) {
             this._url = this.url || this.data as string;
@@ -447,14 +452,77 @@ export class SimpleTableComponent implements OnInit, OnChanges, AfterViewInit, O
         });
         return ret;
     }
-
-    private handleFilter(col: SimpleTableColumn) {
+    inputFiltered:any;
+    timeFiltered=[];//时间数据存放
+    title:any;
+    num:any;//判断点击哪个
+    showModalForComponent(c,index) {
+        this.num=index;
+        if(c.ifInput==true){
+           this.title='input';
+        }else if(c.ifSelect==true){
+           this.title='select';
+        }else if(c.ifTime==true){
+           this.title='time';
+        }
+        const subscription = this.modalService.open({
+        title          : '条件查询',
+        content        : NzModalCustomizeComponent,
+        onOk() {
+        },
+        onCancel() {
+            console.log('Click cancel');
+        },
+        footer         : false,
+        componentParams: {
+            name: this.title,
+            placeHolder:c.title,
+            selectUrl:c.selectUrl
+        }
+        });
+        subscription.subscribe(result => {
+           if(typeof result=='object'){
+             console.log(result);
+             if(result.input!=undefined){
+                this.inputFiltered=result;
+             }else{
+                this.timeFiltered=result;
+             }
+             
+             this.myHandleFilter(this._columns);
+           }
+           
+        })
+   }
+    myHandleFilter(col){
+        console.log(col);
+        if(this.timeFiltered.length>0){
+            for(let i in col[this.num].searchData){
+                for(let j=0;j<this.timeFiltered.length;j++){
+                    col[this.num].searchData[i]=this.timeFiltered[j];
+                    console.log(col[this.num].searchData[i]);
+                }
+            } 
+        }else{
+            for(let i in col[this.num].searchData){
+                for(let j in this.inputFiltered){
+                    if(this.inputFiltered[j]!=''){
+                        col[this.num].searchData[i]=this.inputFiltered[j];
+                    }     
+                }     
+            } 
+        }
+        this.extraParams=$.extend({},this.extraParams,col[this.num].searchData);
+        this._genAjax(true);
+        this._genData(true);
+        this.filterChange.emit(col);
+    }
+    private  handleFilter(col: SimpleTableColumn) {
         col.filtered = col.filters.findIndex(w => w.checked) !== -1;
         this._genAjax(true);
         this._genData(true);
         this.filterChange.emit(col);
     }
-
     filterConfirm(col: SimpleTableColumn) {
         this.handleFilter(col);
     }
@@ -594,6 +662,7 @@ export class SimpleTableComponent implements OnInit, OnChanges, AfterViewInit, O
     }
 
     private updateColumns() {
+        // debugger
         this._columns = [];
         if (!this.columns || this.columns.length === 0) throw new Error(`the columns property muse be define!`);
         if (this._columns.length === 0) {
@@ -649,7 +718,7 @@ export class SimpleTableComponent implements OnInit, OnChanges, AfterViewInit, O
                 // filter
                 if (!item.filter || !item.filters) item.filters = [];
                 if (typeof item.filterMultiple === 'undefined') item.filterMultiple = true;
-                if (!item.filterConfirmText) item.filterConfirmText = `确认`;
+                if (!item.filterConfirmText) item.filterConfirmText = `确认吧 `;
                 if (!item.filterClearText) item.filterClearText = `重置`;
                 if (!item.filterIcon) item.filterIcon = `anticon anticon-filter`;
                 item.filtered = item.filters.findIndex(w => w.checked) !== -1;
