@@ -17,8 +17,8 @@
     ],
     "baseUrl": "./",
     "paths":{
-      "@yg-widget": ["lib/my-app"],
-      "@yg-widget/*": ["lib/my-app/*"],
+      "@yg-widget": ["lib"],
+      "@yg-widget/*": ["lib/*"],
       "@shared": ["src/app/shared"],
       "@shared/*": ["src/app/shared/*"]
     }
