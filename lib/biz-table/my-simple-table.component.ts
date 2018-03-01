@@ -17,8 +17,8 @@ import { SimpleTableComponent } from './simple-table.component';
 import { NzModalService } from 'ng-zorro-antd';
 declare var $: any;
 @Component({
-    selector: 'simple-table',
-    templateUrl: './simple-table.component.html',
+    selector: 'my-simple-table',
+    templateUrl: './my-simple-table.component.html',
     styleUrls: [ './simple-table.less' ],
     providers: [ SimpleTableExport, CNCurrencyPipe, MomentDatePipe, YNPipe, DecimalPipe,SimpleTableConfig ]
 })
