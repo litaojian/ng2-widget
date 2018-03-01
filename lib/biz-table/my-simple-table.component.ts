@@ -49,10 +49,10 @@ export class MySimpleTableComponent extends SimpleTableComponent  implements OnI
 
     }
     inputFiltered:any;
-    timeFiltered=[];//时间数据存放
+    timeFiltered:any[]=[];//时间数据存放
     title:any;
     num:any;//判断点击哪个
-    showModalForComponent(c,index) {
+    showModalForComponent(c:any,index:any) {
         this.num=index;
         if(c.ifInput==true){
            this.title='input';
@@ -90,7 +90,7 @@ export class MySimpleTableComponent extends SimpleTableComponent  implements OnI
            
         })
    }
-    myHandleFilter(col){
+    myHandleFilter(col:any){
         console.log(col);
         if(this.timeFiltered.length>0){
             for(let i in col[this.num].searchData){
