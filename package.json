@@ -1,6 +1,6 @@
 {
     "name": "yg-widget",
-    "version": "0.0.10",
+    "version": "0.0.11",
     "license": "MIT",
     "description": "Angular widget for ygnet",
     "main": "./bundles/yg-widget.umd.js",
@@ -49,6 +49,7 @@
         "@angular/platform-browser-dynamic": "^5.0.0",
         "@angular/router": "^5.0.0",
         "@delon/acl": "^0.6.6",
+        "@delon/abc": "^0.6.6",
         "@delon/theme": "^0.6.6",
         "core-js": "^2.4.1",
         "crypto-js": "^3.1.9-1",

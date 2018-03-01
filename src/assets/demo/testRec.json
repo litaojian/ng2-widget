@@ -1,45 +1,50 @@
 {
-    "queryParams":{"filter":"all"},
-    "rest":"/demo/api/rest/testRec",
-    "table":{
-        "dataUrl":"/demo/api/rest/testRec",   
-        "extraParams":{},
-        "showTotal":true,
-        "resReName":{"list": "rows" },
-        "columns":[
-            {"index":"testrecid","title":"编号","type":"string"},
-            {"index":"testname","title":"名称","type":"string"},
-            {   "index":"testage",
-                "title":"年龄",
-                "sorter":"(a, b) => a.testage - b.testage",
-                "filters": [ 
-                    { "text": "20岁以下", "value": [0, 20] }, 
-                    { "text": "20-25岁", "value": [ 20, 25] }, 
-                    { "text": "25岁以上", "value": [ 25, 100] } 
+    "title": "TestRec",
+    "queryParams": { "filter": "all" },
+    "table": {
+        "dataUrl": "demo/api/rest/testRec",
+        "extraParams": {},
+        "showTotal": true,
+        "resReName": { "list": "rows" },
+        "columns": [
+            { "index": "testrecid", "title": "编号", "type": "string" },
+            { "index": "testname", "title": "名称", "type": "string" },
+            {
+                "index": "testage",
+                "title": "年龄",
+                "sorter": "(a, b) => a.testage - b.testage",
+                "filters": [
+                    { "text": "20岁以下", "value": [0, 20] },
+                    { "text": "20-25岁", "value": [20, 25] },
+                    { "text": "25岁以上", "value": [25, 100] }
                 ],
                 "filterMultiple": false,
                 "filter": "(filter: SimpleTableFilter, record: any) => record.testage >= filter.value[0] && record.testage <= filter.value[1]"
 
             },
-            {"index":"description","title":"描述","type":"string"},
+            { "index": "description", "title": "描述", "type": "string" },
             {
-                "index":"teststatus","title":"类型","type":"string",
-                "filters": [ { "text": "male", "value": "male" }, { "text": "female", "value": "female" } ],
+                "index": "teststatus",
+                "title": "类型",
+                "type": "string",
+                "filters": [{ "text": "male", "value": "male" }, { "text": "female", "value": "female" }],
                 "filterMultiple": false,
                 "filter": "() => true",
                 "sorter": "(a, b) => true"
             },
             {
-                "index":"created","title":"输入时间","type":"date",
-                "filters": [{ "text": "昨天", "value": "male" },{ "text": "本周", "value": "2" },{ "text": "当月", "value": "3" } ],
+                "index": "created",
+                "title": "输入时间",
+                "type": "date",
+                "filters": [{ "text": "昨天", "value": "male" }, { "text": "本周", "value": "2" }, { "text": "当月", "value": "3" }],
                 "filterMultiple": true,
                 "filter": "() => true",
                 "sorter": "(a, b) => true"
-            
+
             },
-            {"title": "操作区",
-                "buttons": [
-                    {
+            {
+                "title": "操作区",
+                "buttons": [{
                         "text": "删除",
                         "type": "del",
                         "click": "(record: any) => this.message.success(`成功删除【${record.name}】`)"
@@ -52,8 +57,7 @@
                     },
                     {
                         "text": "更多",
-                        "children": [
-                            {
+                        "children": [{
                                 "text": "过期",
                                 "click": "(record: any) => this.message.error(`过期【${record.name}】`)"
                             },
@@ -64,7 +68,7 @@
                         ]
                     }
                 ]
-        }
+            }
 
         ]
     }

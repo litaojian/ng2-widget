@@ -2,9 +2,11 @@ import { Component, ViewContainerRef, ChangeDetectorRef, ComponentRef, SimpleCha
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { NzMessageService } from 'ng-zorro-antd';
-import { SFSchema } from '..//biz-form';
+import { SFSchema } from '../biz-form';
 import { SimpleTableColumn, SimpleTableButton, SimpleTableFilter } from '../biz-table';
 import { BizQueryService } from './biz-query.service';
+import { ReuseTabService } from '@delon/abc';
+
 
 @Component({
     selector: 'app-biz-query',
@@ -17,7 +19,7 @@ import { BizQueryService } from './biz-query.service';
         <button nz-button (click)="st.export()">Export</button>
     </div>
     <simple-table #st [data]="tableConfig.dataUrl" [extraParams]="params" [total]="10" [columns]="tableConfig.columns"
-                [resReName]="tableConfig.resReName" showTotal="tableConfig.showTotal">
+        [resReName]="tableConfig.resReName" showTotal="tableConfig.showTotal">
     </simple-table>
     `,
     providers:[BizQueryService]
@@ -28,7 +30,7 @@ export class BizQueryComponent implements OnInit, OnDestroy {
     router: Router;
     bizService:BizQueryService;
     msgService: NzMessageService;
-
+    reuseTabService:ReuseTabService;
     pagePath:string;
     params: any = {};
 
@@ -46,10 +48,9 @@ export class BizQueryComponent implements OnInit, OnDestroy {
     constructor(injector: Injector) {
         this.msgService = injector.get(NzMessageService);
         this.bizService = injector.get(BizQueryService);
-
+        this.reuseTabService = injector.get(ReuseTabService);
         this.activatedRoute = injector.get(ActivatedRoute);
         this.router = injector.get(Router);
-    
     }
 
     ngOnInit() {           
@@ -89,11 +90,11 @@ export class BizQueryComponent implements OnInit, OnDestroy {
         );		
 	}
 
-    processLoadPageDef(resultData:Object){
+    processLoadPageDef(resultData:any){
         this.tableConfig.columns = resultData["table"]['columns'];
         this.tableConfig.dataUrl = resultData["table"]["dataUrl"];
 
-        
+        this.reuseTabService.title = resultData["title"];
     }
 	onQuery(): void {
 		//super.onQuery(this.queryForm);
