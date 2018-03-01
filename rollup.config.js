@@ -8,7 +8,9 @@ const globals = {
     '@angular/router': 'ng.router',
     '@angular/common/http': 'ng.common.http',
     '@angular/forms': 'ng.forms',
-
+    '@angular/cdk/esm5': 'ng.cdk.esm5',
+    '@angular/cdk/coercion': 'ng.cdk.coercion',
+  
     'rxjs/BehaviorSubject': 'Rx',
     'rxjs/Observable': 'Rx',
     'rxjs/Subject': 'Rx',
@@ -27,8 +29,12 @@ const globals = {
     'rxjs/add/operator/delay': 'Rx.add',
     'rxjs/add/operator/toPromise': 'Rx.add',
     'ng-zorro-antd': 'ngZorro.antd',
-    'crypto-js': 'crypto-js',
+    'crypto-js': 'crypto-js',    
     'moment': 'moment',
+    'file-saver': 'file-saver',
+    
+    '@delon/theme': '@delon/theme',
+    '@delon/acl': '@delon/acl'
 };
 
 module.exports = {

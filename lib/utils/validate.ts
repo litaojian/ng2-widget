@@ -2,7 +2,8 @@
 export class Validate {
     /** 是否为数字 */
     static isNum(value: string | number): boolean {
-        return /^((-?\d+\.\d+)|(-?\d+)|(-?\.\d+))$/.test(value.toString());
+        return false;
+        //return /^((-?\d+\.\d+)|(-?\d+)|(-?\.\d+))$/.test(value.toString());
     }
 
     /** 是否为整数 */

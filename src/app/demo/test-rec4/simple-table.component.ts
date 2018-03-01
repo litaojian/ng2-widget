@@ -1,5 +1,5 @@
 import { Component,OnInit } from '@angular/core';
-import { SimpleTableColumn } from '@delon/abc';
+import { SimpleTableColumn } from '@yg-widget/biz-table';
 import { NzMessageService } from 'ng-zorro-antd';
 import { SimpleTableService } from './simple-table.service';
 import {ActivatedRoute} from "@angular/router";
