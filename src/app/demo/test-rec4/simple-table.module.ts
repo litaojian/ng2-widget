@@ -4,7 +4,7 @@ import { SharedModule } from '@shared/shared.module';
 import { SimpleTableComponent } from './simple-table.component';
 import { SimpleTableService } from './simple-table.service';
 const routes: Routes = [
-    { path: '', component: SimpleTableComponent, pathMatch: 'full'}
+    { path: 'index', component: SimpleTableComponent, pathMatch: 'full'}
 ];
 
 @NgModule({

@@ -43,10 +43,11 @@ export class SimpleTableComponent{
     ngOnInit() {   
           this._activeRouter.queryParams.subscribe(params=> {
                this.queryParams = params.jsonName;
+               alert(this.queryParams);
                if(this.queryParams==undefined){
                    this.myUrl='./assets/json/simple-table1.json';
                }else{
-                   this.myUrl='./assets/json/'+this.queryParams;
+                   this.myUrl='./assets/json/'+this.queryParams+'.json';
                }
                this.getJson(this.myUrl);
                console.log(this.queryParams);
