@@ -16,7 +16,7 @@ import { SimpleTableComponent } from './simple-table.component';
 
 
 @Component({
-    selector: 'simple-table',
+    selector: 'zx-simple-table',
     templateUrl: './simple-table.component.html',
     styleUrls: [ './simple-table.less' ],
     providers: [ SimpleTableExport, CNCurrencyPipe, MomentDatePipe, YNPipe, DecimalPipe,SimpleTableConfig ]

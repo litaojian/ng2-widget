@@ -1,9 +1,10 @@
 /** 一套日常验证类 */
 export class Validate {
     /** 是否为数字 */
-    static isNum(value: string | number): boolean {
-        return false;
-        //return /^((-?\d+\.\d+)|(-?\d+)|(-?\.\d+))$/.test(value.toString());
+    static isNum(value: string | number): boolean {        
+        let result =  /^((-?\d+\.\d+)|(-?\d+)|(-?\.\d+))$/.test(value.toString());
+        return result;
+        //return false;
     }
 
     /** 是否为整数 */
