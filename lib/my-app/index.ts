@@ -10,5 +10,5 @@ export { BizQueryComponent } from './biz-query.component';
 export { BizFormService } from './biz-form.service';
 export { BizFormComponent } from './biz-form.component';
 
-export { BizPageModule } from './biz-page.module';
+//export { BizPageModule } from './biz-page.module';
 export { HttpClientService } from './services/httpclient.service';
