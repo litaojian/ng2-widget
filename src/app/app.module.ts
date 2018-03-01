@@ -8,7 +8,6 @@ import { FormsModule } from '@angular/forms';
 
 
 //import { SharedModule } from './shared/shared.module';
-//import { MyAppModule } from '../../lib/my-app/my-app.module';
 import { AppConfigService } from '../../lib/bizapp.config';
 import { StartupService } from './startup.service';
 
