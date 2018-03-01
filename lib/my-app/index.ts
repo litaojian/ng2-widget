@@ -1,5 +1,6 @@
 export { MyAppModule } from './my-app.module';
 export { BaseListComponent } from './my-list.component';
+export { QueryForm } from './my-list.component';
 export { BaseDetailComponent } from './my-detail.component';
 export { BaseService } from './base/base-all.service';
 export { BaseDataService } from './base/base-data.service';
@@ -10,3 +11,4 @@ export { BizFormService } from './biz-form.service';
 export { BizFormComponent } from './biz-form.component';
 
 export { BizPageModule } from './biz-page.module';
+export { HttpClientService } from './services/httpclient.service';
