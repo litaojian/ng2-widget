@@ -6,8 +6,8 @@ import { AreaComponent }  from './areachoose.component';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 // import { NzTreeModule } from 'ng-tree-antd';
 import { TreeModule } from 'angular-tree-component';
-import { MySelectModule } from '../myselect/myselect.module';
-import { MyLoadingModule } from '../myloading/myloading.module';
+import { MySelectModule } from '../yg-select/myselect.module';
+import { MyLoadingModule } from '../yg-loading/myloading.module';
 import { ChooseAreaService } from './areachoose.service';
 @NgModule({
     imports: [
