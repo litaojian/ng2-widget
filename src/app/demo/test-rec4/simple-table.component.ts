@@ -48,9 +48,18 @@ export class SimpleTableComponent{
                }else{
                    this.myUrl='./assets/json/'+this.queryParams;
                }
+               this.getJson(this.myUrl);
                console.log(this.queryParams);
           })
-          this.headSearvice.getTabelHead(this.myUrl).subscribe(data => { 
+        //   this.headSearvice.getTabelHead(this.myUrl).subscribe(data => { 
+        //         this.columns=data.rows;
+        //         this.params=data.params;
+        //         this.url=data.url;
+        //         console.log(this.columns);
+        //   });
+    }
+    getJson(url){
+         this.headSearvice.getTabelHead(url).subscribe(data => { 
                 this.columns=data.rows;
                 this.params=data.params;
                 this.url=data.url;

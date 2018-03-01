@@ -1,4 +1,4 @@
-import { Component, Inject, Input, Output, OnDestroy, OnInit, OnChanges, SimpleChanges, EventEmitter, Renderer2, ElementRef, TemplateRef, SimpleChange, QueryList, ViewChildren, AfterViewInit, ContentChildren, ContentChild, Optional } from '@angular/core';
+import { Component, Injector,Inject, Input, Output, OnDestroy, OnInit, OnChanges, SimpleChanges, EventEmitter, Renderer2, ElementRef, TemplateRef, SimpleChange, QueryList, ViewChildren, AfterViewInit, ContentChildren, ContentChild, Optional } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { _HttpClient, CNCurrencyPipe, MomentDatePipe, YNPipe, ModalHelper, ALAIN_I18N_TOKEN, AlainI18NService } from '@delon/theme';
 import { ACLService } from '@delon/acl';
@@ -181,23 +181,34 @@ export class SimpleTableComponent implements OnInit, OnChanges, AfterViewInit, O
     @Output() filterChange: EventEmitter<any> = new EventEmitter<any>();
 
     // endregion
-
+    _http: _HttpClient;
+    defConfig: SimpleTableConfig;
+    el: ElementRef;
+    renderer: Renderer2;
+    exportSrv: SimpleTableExport;
+    modal: ModalHelper;
+    currenty: CNCurrencyPipe;
+    date: MomentDatePipe;
+    yn: YNPipe;
+    number: DecimalPipe;
+    modalService: NzModalService;
     constructor(
-        private defConfig: SimpleTableConfig,
-        private _http: _HttpClient,
-        private el: ElementRef,
-        private renderer: Renderer2,
-        private exportSrv: SimpleTableExport,
+        injector: Injector,
         @Optional() private acl: ACLService,
-        @Optional() @Inject(ALAIN_I18N_TOKEN) private i18nSrv: AlainI18NService,
-        private modal: ModalHelper,
-        private currenty: CNCurrencyPipe,
-        private date: MomentDatePipe,
-        private yn: YNPipe,
-        private number: DecimalPipe,
-        private modalService: NzModalService
+        @Optional() @Inject(ALAIN_I18N_TOKEN) private i18nSrv: AlainI18NService
     ) {
-        Object.assign(this, deepCopy(defConfig));
+        this._http = injector.get(_HttpClient);
+        this.defConfig = injector.get(SimpleTableConfig);
+        this.el = injector.get(ElementRef);
+        this.renderer = injector.get(Renderer2);
+        this.exportSrv = injector.get(SimpleTableExport);
+        this.modal = injector.get(ModalHelper);
+        this.currenty = injector.get(CNCurrencyPipe);
+        this.date = injector.get(MomentDatePipe);
+        this.yn = injector.get(YNPipe);
+        this.number = injector.get(DecimalPipe);
+        this.modalService = injector.get(NzModalService);
+        Object.assign(this, deepCopy(this.defConfig));
         this.updateResName();
     }
 
@@ -452,72 +463,72 @@ export class SimpleTableComponent implements OnInit, OnChanges, AfterViewInit, O
         });
         return ret;
     }
-    inputFiltered:any;
-    timeFiltered=[];//时间数据存放
-    title:any;
-    num:any;//判断点击哪个
-    showModalForComponent(c,index) {
-        this.num=index;
-        if(c.ifInput==true){
-           this.title='input';
-        }else if(c.ifSelect==true){
-           this.title='select';
-        }else if(c.ifTime==true){
-           this.title='time';
-        }
-        const subscription = this.modalService.open({
-        title          : '条件查询',
-        content        : NzModalCustomizeComponent,
-        onOk() {
-        },
-        onCancel() {
-            console.log('Click cancel');
-        },
-        footer         : false,
-        componentParams: {
-            name: this.title,
-            placeHolder:c.title,
-            selectUrl:c.selectUrl
-        }
-        });
-        subscription.subscribe(result => {
-           if(typeof result=='object'){
-             console.log(result);
-             if(result.input!=undefined){
-                this.inputFiltered=result;
-             }else{
-                this.timeFiltered=result;
-             }
+//     inputFiltered:any;
+//     timeFiltered=[];//时间数据存放
+//     title:any;
+//     num:any;//判断点击哪个
+//     showModalForComponent(c,index) {
+//         this.num=index;
+//         if(c.ifInput==true){
+//            this.title='input';
+//         }else if(c.ifSelect==true){
+//            this.title='select';
+//         }else if(c.ifTime==true){
+//            this.title='time';
+//         }
+//         const subscription = this.modalService.open({
+//         title          : '条件查询',
+//         content        : NzModalCustomizeComponent,
+//         onOk() {
+//         },
+//         onCancel() {
+//             console.log('Click cancel');
+//         },
+//         footer         : false,
+//         componentParams: {
+//             name: this.title,
+//             placeHolder:c.title,
+//             selectUrl:c.selectUrl
+//         }
+//         });
+//         subscription.subscribe(result => {
+//            if(typeof result=='object'){
+//              console.log(result);
+//              if(result.input!=undefined){
+//                 this.inputFiltered=result;
+//              }else{
+//                 this.timeFiltered=result;
+//              }
              
-             this.myHandleFilter(this._columns);
-           }
+//              this.myHandleFilter(this._columns);
+//            }
            
-        })
-   }
-    myHandleFilter(col){
-        console.log(col);
-        if(this.timeFiltered.length>0){
-            for(let i in col[this.num].searchData){
-                for(let j=0;j<this.timeFiltered.length;j++){
-                    col[this.num].searchData[i]=this.timeFiltered[j];
-                    console.log(col[this.num].searchData[i]);
-                }
-            } 
-        }else{
-            for(let i in col[this.num].searchData){
-                for(let j in this.inputFiltered){
-                    if(this.inputFiltered[j]!=''){
-                        col[this.num].searchData[i]=this.inputFiltered[j];
-                    }     
-                }     
-            } 
-        }
-        this.extraParams=$.extend({},this.extraParams,col[this.num].searchData);
-        this._genAjax(true);
-        this._genData(true);
-        this.filterChange.emit(col);
-    }
-    private  handleFilter(col: SimpleTableColumn) {
+//         })
+//    }
+//     myHandleFilter(col){
+//         console.log(col);
+//         if(this.timeFiltered.length>0){
+//             for(let i in col[this.num].searchData){
+//                 for(let j=0;j<this.timeFiltered.length;j++){
+//                     col[this.num].searchData[i]=this.timeFiltered[j];
+//                     console.log(col[this.num].searchData[i]);
+//                 }
+//             } 
+//         }else{
+//             for(let i in col[this.num].searchData){
+//                 for(let j in this.inputFiltered){
+//                     if(this.inputFiltered[j]!=''){
+//                         col[this.num].searchData[i]=this.inputFiltered[j];
+//                     }     
+//                 }     
+//             } 
+//         }
+//         this.extraParams=$.extend({},this.extraParams,col[this.num].searchData);
+//         this._genAjax(true);
+//         this._genData(true);
+//         this.filterChange.emit(col);
+//     }
+  private  handleFilter(col: SimpleTableColumn) {
         col.filtered = col.filters.findIndex(w => w.checked) !== -1;
         this._genAjax(true);
         this._genData(true);
