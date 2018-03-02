@@ -21,7 +21,7 @@ import { ReuseTabService } from '@delon/abc';
         [resReName]="tableConfig.resReName" showTotal="tableConfig.showTotal">
     </simple-table>
     `,
-    providers:[ReuseTabService]
+    providers:[]
 })
 export class BizQueryComponent implements OnInit, OnDestroy {
 
@@ -94,6 +94,7 @@ export class BizQueryComponent implements OnInit, OnDestroy {
         this.tableConfig.dataUrl = resultData["table"]["dataUrl"];
 
         this.reuseTabService.title = resultData["title"];
+        console.log("page def:" + this.reuseTabService.title);
     }
 	onQuery(): void {
 		//super.onQuery(this.queryForm);
