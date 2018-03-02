@@ -3,7 +3,7 @@ import { NzModalSubject } from 'ng-zorro-antd';
 
 @Component({
   selector: 'nz-demo-component',
-  templateUrl: './model.component.html',
+  templateUrl: './simple-table-fifter.component.html',
   styles  : [
       `
       :host ::ng-deep .customize-footer {
@@ -17,7 +17,7 @@ import { NzModalSubject } from 'ng-zorro-antd';
   ]
 })
 // <i class="{{c.filterIcon}}" [ngClass]="{'ant-table-filter-selected': c.filtered}" *ngIf="c.filters.length" (click)="showModalForComponent()"></i>
-export class NzModalCustomizeComponent implements OnInit {
+export class SimpleTableFifterComponent implements OnInit {
  @Input()
  name:any;
  @Input()
