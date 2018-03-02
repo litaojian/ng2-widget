@@ -3,7 +3,7 @@ import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl } from
 import { Location } from '@angular/common';
 
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { DataObject, BaseDataService } from './base/base-data.service';
+import { DataObject, BaseDataService } from '../base/base-data.service';
 
 
 export class BaseDetailComponent implements OnInit {

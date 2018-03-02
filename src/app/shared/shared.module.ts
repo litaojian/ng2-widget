@@ -8,14 +8,15 @@ import { NgZorroAntdModule, NzNotificationService, NzMessageService } from 'ng-z
 import { MyAppModule } from '@yg-widget/my-app/my-app.module';
 import { YgIconModule } from '@yg-widget/index';
 import { AdSimpleTableModule } from '@yg-widget/biz-table';
+import { BizAppModule } from '@yg-widget/biz-app';
 import { NzSchemaFormModule, WidgetRegistry, NzWidgetRegistry  } from '@yg-widget/biz-form';
 
 const THIRDMODULES = [ 
     NgZorroAntdModule, 
-    YgIconModule    
+    YgIconModule,
+    BizAppModule   
 ];
 // endregion
-
 
 // region: your componets & directives
 const COMPONENTS = [];

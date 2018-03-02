@@ -19,11 +19,7 @@ import { ValuelistDirective }  from './directives/valuelist.directive';
 import { ZxFormInputDirective }  from './directives/zx.forminput.directive';
 
 import { MenuTreeService } from './services/menutree.service';
-import { HttpClientService } from './services/httpclient.service';
-import { BizFormService } from './biz-form.service';
-import { BizQueryService } from './biz-query.service';
-import { BizQueryComponent } from './biz-query.component';
-import { BizFormComponent } from './biz-form.component';
+import { HttpClientService } from '../base/services/httpclient.service';
 
 import { ReuseTabService } from '@delon/abc';
 //import { AppConfigService } from '../bizapp.config';
@@ -41,9 +37,7 @@ const COMPONENTS = [
 	MyInputComponent,
 	MyTreeComponent,
 	ZxTreeComponent,
-	MyTreeSelectComponent,
-	BizFormComponent,
-	BizFormComponent
+	MyTreeSelectComponent
 ];
 const DIRECTIVES = [		
 	ZxFormInputDirective,
@@ -54,8 +48,6 @@ const SERVICES = [
 	_HttpClient,
 	HttpClientService,
 	MenuTreeService,
-	BizQueryService,
-	BizFormService,
 	ModalHelper,
 	ReuseTabService
 ];
@@ -75,6 +67,8 @@ const SERVICES = [
 		FormsModule,
 		ReactiveFormsModule,
 		RouterModule,
+		HttpClientModule,
+		NgZorroAntdModule,
 		...COMPONENTS,
 		...DIRECTIVES		
   ],

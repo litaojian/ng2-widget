@@ -1,7 +1,7 @@
 import { Injectable,Injector } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { ArrayObservable } from 'rxjs/observable/ArrayObservable';
-import { BaseService } from '../base/base-all.service';
+import { BaseService } from '../../base/base-all.service';
 
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output, OnInit, AfterViewInit, ViewChild, ElementRef, Renderer } from '@angular/core';
-import { BaseDataService } from '../base/base-data.service';
+import { BaseDataService } from '../../base/base-data.service';
 declare const $: any;
 
 @Component({

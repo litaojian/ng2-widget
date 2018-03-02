@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 import { Injectable, Injector } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { zip } from 'rxjs/observable/zip';
-import { BaseStartupService } from '../../lib/my-app/base/base-startup.service';
+import { BaseStartupService } from '@yg-widget/my-app/services/base-startup.service';
 import { AppConfigService } from '../../lib/bizapp.config';
 
 /**
