@@ -23,8 +23,8 @@ const ZORROMODULES = [ NzDatePickerModule,NzButtonModule,NzPopoverModule,NzInput
     exports:        [...COMPONENTS],
     entryComponents:[SimpleTableFifterComponent]
 })
-export class AdSimpleTableModule {
+export class BizSimpleTableModule {
     static forRoot(): ModuleWithProviders {
-        return { ngModule: AdSimpleTableModule, providers: [ SimpleTableConfig ] };
+        return { ngModule: BizSimpleTableModule, providers: [ SimpleTableConfig ] };
     }
 }

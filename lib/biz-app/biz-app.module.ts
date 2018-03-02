@@ -3,8 +3,8 @@ import { CommonModule }   from '@angular/common';
 import { FormsModule,ReactiveFormsModule}    from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
-import { AdSimpleTableModule } from '@yg-widget/biz-table';
-import { NzSchemaFormModule } from '@yg-widget/biz-form';
+import { BizSimpleTableModule } from '../biz-table';
+import { BizSchemaFormModule } from '../biz-form';
 
 import { BizFormService } from './biz-form.service';
 import { BizQueryService } from './biz-query.service';
@@ -31,8 +31,8 @@ const SERVICES = [
 		ReactiveFormsModule,
 		RouterModule,
 		NgZorroAntdModule,
-		NzSchemaFormModule.forRoot(),
-		AdSimpleTableModule.forRoot(),
+		BizSimpleTableModule.forRoot(),
+		BizSchemaFormModule.forRoot(),
   ],
   exports:[
 		...COMPONENTS,

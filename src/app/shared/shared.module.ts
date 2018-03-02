@@ -7,9 +7,9 @@ import { NgZorroAntdModule, NzNotificationService, NzMessageService } from 'ng-z
 
 import { MyAppModule } from '@yg-widget/my-app/my-app.module';
 import { YgIconModule } from '@yg-widget/index';
-import { AdSimpleTableModule } from '@yg-widget/biz-table';
+import { BizSimpleTableModule } from '@yg-widget/biz-table';
 import { BizAppModule } from '@yg-widget/biz-app';
-import { NzSchemaFormModule, WidgetRegistry, NzWidgetRegistry  } from '@yg-widget/biz-form';
+import { BizSchemaFormModule, WidgetRegistry, NzWidgetRegistry  } from '@yg-widget/biz-form';
 
 const THIRDMODULES = [ 
     NgZorroAntdModule, 
@@ -29,8 +29,8 @@ const DIRECTIVES = [];
         FormsModule,
         RouterModule,
         ReactiveFormsModule,
-        NzSchemaFormModule.forRoot(),
-        AdSimpleTableModule.forRoot(),
+        BizSchemaFormModule.forRoot(),
+        BizSimpleTableModule.forRoot(),
         MyAppModule.forRoot(),
         ...THIRDMODULES        
     ],
@@ -45,8 +45,8 @@ const DIRECTIVES = [];
         ReactiveFormsModule,
         RouterModule,
         ...THIRDMODULES,
-        NzSchemaFormModule,
-        AdSimpleTableModule,
+        BizSchemaFormModule,
+        BizSimpleTableModule,
         MyAppModule,
         // your components
         ...COMPONENTS,

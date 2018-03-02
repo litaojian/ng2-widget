@@ -148,10 +148,10 @@ export function optionsFactory(options: SchemaFormOptions) {
     entryComponents: WIDGETS,
     exports: [ ...COMPONENTS, ...WIDGETS ]
 })
-export class NzSchemaFormModule {
+export class BizSchemaFormModule {
     public static forRoot(options?: SchemaFormOptions): ModuleWithProviders {
         return {
-            ngModule: NzSchemaFormModule,
+            ngModule: BizSchemaFormModule,
             providers: [
                 { provide: NZ_SF_USER_OPTIONS_TOKEN, useValue: options },
                 { provide: NZ_SF_OPTIONS_TOKEN, useFactory: optionsFactory, deps: [NZ_SF_USER_OPTIONS_TOKEN] },
@@ -161,3 +161,4 @@ export class NzSchemaFormModule {
         };
     }
 }
+
