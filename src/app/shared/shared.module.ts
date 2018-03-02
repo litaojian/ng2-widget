@@ -5,10 +5,10 @@ import { RouterModule } from '@angular/router';
 import { NgZorroAntdModule, NzNotificationService, NzMessageService } from 'ng-zorro-antd';
 
 
-import { MyAppModule } from '../../../lib/my-app/my-app.module';
-import { YgIconModule } from '../../../lib/index';
-import { AdSimpleTableModule } from '../../../lib/biz-table';
-import { NzSchemaFormModule, WidgetRegistry, NzWidgetRegistry  } from '../../../lib/biz-form';
+import { MyAppModule } from '@yg-widget/my-app/my-app.module';
+import { YgIconModule } from '@yg-widget/index';
+import { AdSimpleTableModule } from '@yg-widget/biz-table';
+import { NzSchemaFormModule, WidgetRegistry, NzWidgetRegistry  } from '@yg-widget/biz-form';
 
 const THIRDMODULES = [ 
     NgZorroAntdModule, 

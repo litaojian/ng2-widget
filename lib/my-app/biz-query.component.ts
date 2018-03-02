@@ -85,7 +85,7 @@ export class BizQueryComponent implements OnInit, OnDestroy {
         if (pageName){
             pageName = "testRec";
         }
-        this.bizService.ajaxGet(`assets/${dir}/${pageName}.json`, {}).subscribe(
+        this.bizService.ajaxGet(`assets/pages/${dir}/${pageName}.json`, {}).subscribe(
             resultData => this.processLoadPageDef(resultData)        
         );		
 	}

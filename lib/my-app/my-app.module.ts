@@ -22,6 +22,8 @@ import { MenuTreeService } from './services/menutree.service';
 import { HttpClientService } from './services/httpclient.service';
 import { BizFormService } from './biz-form.service';
 import { BizQueryService } from './biz-query.service';
+import { BizQueryComponent } from './biz-query.component';
+import { BizFormComponent } from './biz-form.component';
 
 //import { AppConfigService } from '../bizapp.config';
 
@@ -38,7 +40,9 @@ const COMPONENTS = [
 	MyInputComponent,
 	MyTreeComponent,
 	ZxTreeComponent,
-	MyTreeSelectComponent
+	MyTreeSelectComponent,
+	BizFormComponent,
+	BizFormComponent
 ];
 const DIRECTIVES = [		
 	ZxFormInputDirective,
