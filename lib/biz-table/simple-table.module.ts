@@ -6,7 +6,7 @@ import { SimpleTableComponent } from './simple-table.component';
 import { MySimpleTableComponent } from './my-simple-table.component';
 import { SimpleTableRowDirective } from './simple-table-row.directive';
 import { SimpleTableConfig } from './simple-table.config';
-import { NzModalCustomizeComponent } from './model/model.component';
+import { SimpleTableFifterComponent } from './simple-table-fifter.component';
 const COMPONENTS = [SimpleTableComponent,MySimpleTableComponent,SimpleTableRowDirective];
 
 // region: zorro modules
@@ -19,9 +19,9 @@ const ZORROMODULES = [ NzDatePickerModule,NzButtonModule,NzPopoverModule,NzInput
 
 @NgModule({
     imports:        [CommonModule, FormsModule, ...ZORROMODULES],
-    declarations:   [...COMPONENTS,NzModalCustomizeComponent],
+    declarations:   [...COMPONENTS,SimpleTableFifterComponent],
     exports:        [...COMPONENTS],
-    entryComponents:[NzModalCustomizeComponent]
+    entryComponents:[SimpleTableFifterComponent]
 })
 export class AdSimpleTableModule {
     static forRoot(): ModuleWithProviders {

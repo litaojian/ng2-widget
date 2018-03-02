@@ -12,7 +12,7 @@ import { SimpleTableConfig } from './simple-table.config';
 import { deepGet, deepCopy } from '../utils/utils';
 import { SimpleTableRowDirective } from './simple-table-row.directive';
 import { SimpleTableExport } from './simple-table-export';
-import { NzModalCustomizeComponent } from './model/model.component';
+import { SimpleTableFifterComponent } from './simple-table-fifter.component';
 import { SimpleTableComponent } from './simple-table.component';
 import { NzModalService } from 'ng-zorro-antd';
 declare var $: any;
@@ -63,7 +63,7 @@ export class MySimpleTableComponent extends SimpleTableComponent  implements OnI
         }
         const subscription = this.modalService.open({
         title          : '条件查询',
-        content        : NzModalCustomizeComponent,
+        content        : SimpleTableFifterComponent,
         onOk() {
         },
         onCancel() {
