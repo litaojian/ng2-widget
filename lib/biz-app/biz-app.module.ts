@@ -11,6 +11,8 @@ import { BizQueryService } from './biz-query.service';
 import { BizQueryComponent } from './biz-query.component';
 import { BizFormComponent } from './biz-form.component';
 
+import { HttpClientService } from '../base/services/httpclient.service';
+
 const COMPONENTS = [
 	BizQueryComponent,
 	BizFormComponent
@@ -20,7 +22,8 @@ const DIRECTIVES = [
 
 const SERVICES = [	
 	BizFormService,
-	BizQueryService
+	BizQueryService,
+	HttpClientService
 ];
 
 

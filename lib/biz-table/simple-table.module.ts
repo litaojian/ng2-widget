@@ -1,9 +1,11 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MySelectModule } from '../yg-select/myselect.module';
+
 import { SimpleTableComponent } from './simple-table.component';
 import { MySimpleTableComponent } from './my-simple-table.component';
+import { MySelectModule } from '../yg-select/myselect.module';
+
 import { SimpleTableRowDirective } from './simple-table-row.directive';
 import { SimpleTableConfig } from './simple-table.config';
 import { SimpleTableFifterComponent } from './simple-table-fifter.component';

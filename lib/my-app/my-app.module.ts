@@ -68,7 +68,6 @@ const SERVICES = [
 		ReactiveFormsModule,
 		RouterModule,
 		HttpClientModule,
-		NgZorroAntdModule,
 		...COMPONENTS,
 		...DIRECTIVES		
   ],
