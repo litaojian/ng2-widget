@@ -80,10 +80,13 @@ const SERVICES = [
 
   ]
 })
-export class MyAppModule {
+export class MyAppModule1 {
+  constructor() {
+
+  }
   static forRoot(options?: Object): ModuleWithProviders {
 	return {
-		ngModule: MyAppModule,
+		ngModule: MyAppModule1,
 		providers: [
 			...SERVICES,
 			{ provide: ALAIN_THEME_OPTIONS, useValue: {} }

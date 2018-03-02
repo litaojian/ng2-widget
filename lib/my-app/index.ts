@@ -1,4 +1,4 @@
-export { MyAppModule } from './my-app.module';
+//export { MyAppModule } from './my-app.module';
 export { BaseListComponent } from './my-list.component';
 export { QueryForm } from './my-list.component';
 export { BaseDetailComponent } from './my-detail.component';
@@ -10,5 +10,5 @@ export { BizQueryComponent } from './biz-query.component';
 export { BizFormService } from './biz-form.service';
 export { BizFormComponent } from './biz-form.component';
 
-export { BizPageModule } from './biz-page.module';
+//export { BizPageModule } from './biz-page.module';
 export { HttpClientService } from './services/httpclient.service';

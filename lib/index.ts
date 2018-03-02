@@ -2,7 +2,7 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 
 import { YgIconModule } from './yg-icon/yg-icon.module';
 import { YgTinymceModule } from './yg-tinymce/tinymce.module';
-import { MyAppModule } from './my-app/my-app.module';
+//import { MyAppModule } from './my-app/my-app.module';
 import { AdSimpleTableModule } from './biz-table/simple-table.module';
 import { MySelectModule } from './yg-select/myselect.module';
 import { MyLoadingModule } from './yg-loading/myloading.module';
@@ -18,7 +18,7 @@ export * from './yg-loading';
 
 
 const MODULES = [
-    MyAppModule,
+    //MyAppModule,
     YgIconModule,
     YgTinymceModule,
     AdSimpleTableModule,

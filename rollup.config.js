@@ -29,6 +29,8 @@ const globals = {
     'rxjs/add/operator/delay': 'Rx.add',
     'rxjs/add/operator/toPromise': 'Rx.add',
     'ng-zorro-antd': 'ngZorro.antd',
+    'ng-zorro-antd-extra': 'ngZorro.antd_extra',
+    'ngx-countdown': 'ngxCountDown',
     'crypto-js': 'crypto-js',
     'moment': 'moment',
     'file-saver': 'file-saver',

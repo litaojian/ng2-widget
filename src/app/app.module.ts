@@ -8,7 +8,6 @@ import { FormsModule } from '@angular/forms';
 
 
 //import { SharedModule } from './shared/shared.module';
-//import { MyAppModule } from '../../lib/my-app/my-app.module';
 import { AppConfigService } from '../../lib/bizapp.config';
 import { StartupService } from './startup.service';
 
@@ -38,7 +37,7 @@ export function StartupServiceFactory(startupService: StartupService): Function 
         { path: 'testRec2', loadChildren: './demo/test-rec2/testRec2.module#TestRec2Module'},
         { path: 'testRec3', loadChildren: './demo/test-rec3/testRec3.module#TestRec3Module'},
         { path: 'testRec4', loadChildren: './demo/test-rec4/simple-table.module#SimpleTableModule'},
-        { path: 'page',     loadChildren: './my-bizpage.module#MyBizPageModule'},        
+        { path: 'page',     loadChildren: '../../lib/my-app/biz-page.module#BizPageModule'},        
         { path: 'home', component: HomeComponent },
         { path: 'other', component: OtherComponent },
         { path: '', redirectTo: 'testRec3', pathMatch: 'full'}
