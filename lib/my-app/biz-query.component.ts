@@ -7,7 +7,6 @@ import { SimpleTableColumn, SimpleTableButton, SimpleTableFilter } from '../biz-
 import { BizQueryService } from './biz-query.service';
 import { ReuseTabService } from '@delon/abc';
 
-
 @Component({
     selector: 'app-biz-query',
     template: `
@@ -22,7 +21,7 @@ import { ReuseTabService } from '@delon/abc';
         [resReName]="tableConfig.resReName" showTotal="tableConfig.showTotal">
     </simple-table>
     `,
-    providers:[BizQueryService]
+    providers:[ReuseTabService]
 })
 export class BizQueryComponent implements OnInit, OnDestroy {
 

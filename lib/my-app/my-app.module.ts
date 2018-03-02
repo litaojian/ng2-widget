@@ -22,7 +22,7 @@ import { MenuTreeService } from './services/menutree.service';
 import { HttpClientService } from './services/httpclient.service';
 import { BizFormService } from './biz-form.service';
 import { BizQueryService } from './biz-query.service';
-
+import { ReuseTabService } from '@delon/abc';
 //import { AppConfigService } from '../bizapp.config';
 
 import { _HttpClient, ModalHelper } from '@delon/theme';
@@ -51,7 +51,8 @@ const SERVICES = [
 	MenuTreeService,
 	BizQueryService,
 	BizFormService,
-	ModalHelper
+	ModalHelper,
+	ReuseTabService
 ];
 
 
