@@ -25,6 +25,7 @@ import { BizQueryService } from './biz-query.service';
 import { BizQueryComponent } from './biz-query.component';
 import { BizFormComponent } from './biz-form.component';
 
+import { ReuseTabService } from '@delon/abc';
 //import { AppConfigService } from '../bizapp.config';
 
 import { _HttpClient, ModalHelper } from '@delon/theme';
@@ -55,7 +56,8 @@ const SERVICES = [
 	MenuTreeService,
 	BizQueryService,
 	BizFormService,
-	ModalHelper
+	ModalHelper,
+	ReuseTabService
 ];
 
 

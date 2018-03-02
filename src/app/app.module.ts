@@ -38,6 +38,7 @@ export function StartupServiceFactory(startupService: StartupService): Function 
         { path: 'testRec3', loadChildren: './demo/test-rec3/testRec3.module#TestRec3Module'},
         { path: 'testRec4', loadChildren: './demo/test-rec4/simple-table.module#SimpleTableModule'},
         { path: 'page',     loadChildren: './my-bizpage.module#MyBizPageModule'},        
+        // { path: 'page',     loadChildren: '../../lib/my-app/biz-page.module#BizPageModule'},        
         { path: 'home', component: HomeComponent },
         { path: 'other', component: OtherComponent },
         { path: '', redirectTo: 'testRec3', pathMatch: 'full'}
