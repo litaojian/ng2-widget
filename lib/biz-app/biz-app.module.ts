@@ -13,6 +13,7 @@ import { BizFormComponent } from './biz-form.component';
 
 import { HttpClientService } from '../base/services/httpclient.service';
 
+
 const COMPONENTS = [
 	BizQueryComponent,
 	BizFormComponent

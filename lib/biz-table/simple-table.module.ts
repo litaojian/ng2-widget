@@ -9,6 +9,8 @@ import { MySelectModule } from '../yg-select/myselect.module';
 import { SimpleTableRowDirective } from './simple-table-row.directive';
 import { SimpleTableConfig } from './simple-table.config';
 import { SimpleTableFifterComponent } from './simple-table-fifter.component';
+import { SimpleTableExport } from './simple-table-export';
+
 const COMPONENTS = [SimpleTableComponent,MySimpleTableComponent,SimpleTableRowDirective];
 
 // region: zorro modules
