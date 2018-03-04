@@ -9,7 +9,6 @@ import { BizQueryComponent, BizQueryService,BizFormComponent, BizFormService } f
 
 //import { BizQueryComponent, BizQueryService } from '@yg-widget/my-app';
 //import { BizFormComponent, BizFormService } from '@yg-widget/my-app';
-
 //import { HelloService } from './shared/hello.service';
 
 

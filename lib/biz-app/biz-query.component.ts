@@ -2,24 +2,52 @@ import { Component, ViewContainerRef, ChangeDetectorRef, ComponentRef, SimpleCha
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { NzMessageService } from 'ng-zorro-antd';
-import { SFSchema } from '../biz-form';
+import { SFSchema, FormProperty } from '../biz-form';
 import { SimpleTableColumn, SimpleTableButton, SimpleTableFilter } from '../biz-table';
 import { BizQueryService } from './biz-query.service';
 import { ReuseTabService } from '@delon/abc';
+
+export class BizQueryForm {
+    actions = {
+        send: (form: any) => {
+            console.log(JSON.stringify(form.value));
+            //this.msg.success(JSON.stringify(form.value));
+        },
+        reset: (form: any) => {
+            form.reset({});
+        }
+    };
+
+    schema:Object = {};
+    
+    model: any = {email: 'litaojian88@qq.com'};
+    
+    constructor() {
+        let jsonForm:string = ''  + require('!!raw-loader!./example/login-schema.json');
+        this.schema = JSON.parse(jsonForm);        
+    }
+}
 
 @Component({
     selector: 'app-biz-query',
     template: `
     <div class="mb-md">
-        <nz-input [(ngModel)]="params.testname" name="name" nzPlaceHolder="请输入姓名" style="width: 100px"></nz-input>
+        <nz-input [(ngModel)]="params.testname" name="name" nzPlaceHolder="请输入姓名1" style="width: 100px"></nz-input>
         <button nz-button (click)="st.load(1)" [nzType]="'primary'">搜索</button>
         <button nz-button (click)="params = {}; st.reset()">重置</button>
         <!--  -->
         <button nz-button (click)="st.export()">Export</button>
     </div>
-    <simple-table #st [data]="tableConfig.dataUrl" [extraParams]="params" [total]="10" [columns]="tableConfig.columns"
+    <div class="mb-md">
+        <my-simple-form layout="inline"
+                [schema]="queryForm.schema"
+                [model]="queryForm.model"
+                [actions]="actions">
+        </my-simple-form>
+    </div>
+    <my-simple-table #st [data]="tableConfig.dataUrl" [extraParams]="params" [total]="10" [columns]="tableConfig.columns"
         [resReName]="tableConfig.resReName" showTotal="tableConfig.showTotal">
-    </simple-table>
+    </my-simple-table>
     `,
     providers:[]
 })
@@ -32,6 +60,8 @@ export class BizQueryComponent implements OnInit, OnDestroy {
     reuseTabService:ReuseTabService;
     pagePath:string;
     params: any = {};
+
+    queryForm:BizQueryForm = new BizQueryForm();
 
     tableConfig : any = {
         dataUrl:'',

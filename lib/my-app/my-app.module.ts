@@ -62,11 +62,7 @@ const SERVICES = [
 		HttpClientModule,
 		NgZorroAntdModule
   ],
-  exports:[
-		CommonModule,
-		FormsModule,
-		ReactiveFormsModule,
-		RouterModule,
+  exports:[		
 		HttpClientModule,
 		...COMPONENTS,
 		...DIRECTIVES		

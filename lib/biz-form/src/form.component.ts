@@ -11,7 +11,7 @@ export function useFactory(schemaValidatorFactory: any, validatorRegistry: any, 
 }
 
 @Component({
-    selector: 'nz-sf',
+    selector: 'my-simple-form',
     template: `
     <form nz-form [nzLayout]="layout" *ngIf="rootProperty && rootProperty.visible">
         <nz-sf-item [formProperty]="rootProperty"></nz-sf-item>
