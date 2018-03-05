@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SimpleTableColumn } from '../../../../lib/biz-table';
+import { SimpleTableColumn } from '@yg-widget/biz-table';
 
 @Component({
     selector: 'app-demo',

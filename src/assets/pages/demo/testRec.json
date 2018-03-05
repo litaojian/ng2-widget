@@ -1,7 +1,45 @@
 {
     "title": "TestRec",
+    "actions": {},
     "queryParams": { "filter": "all" },
-    "table": {
+    "queryForm": {
+        "debug": true,
+        "properties": {
+            "name": {
+                "type": "string",
+                "title": "名称",
+                "widget": {
+                    "placeholder": "请输入名称，且3位以上"
+                },
+                "minLength": 3
+            },
+            "testtype": {
+                "type": "string",
+                "title": "分类",
+                "widget": {
+                    "placeholder": "请选择分类"
+                }
+            }
+        },
+        "required": ["name"],
+        "button": {
+            "items": [{
+                    "label": "查询",
+                    "id": "query",
+                    "submit": true
+                },
+                {
+                    "label": "重置",
+                    "id": "reset"
+                },
+                {
+                    "label": "新增",
+                    "id": "add"
+                }
+            ]
+        }
+    },
+    "dataTable": {
         "dataUrl": "demo/api/rest/testRec",
         "extraParams": {},
         "showTotal": true,

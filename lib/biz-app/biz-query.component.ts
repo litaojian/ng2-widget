@@ -7,37 +7,9 @@ import { SimpleTableColumn, SimpleTableButton, SimpleTableFilter } from '../biz-
 import { BizQueryService } from './biz-query.service';
 import { ReuseTabService } from '@delon/abc';
 
-export class BizQueryForm {
-    actions = {
-        send: (form: any) => {
-            console.log(JSON.stringify(form.value));
-            //this.msg.success(JSON.stringify(form.value));
-        },
-        reset: (form: any) => {
-            form.reset({});
-        }
-    };
-
-    schema:Object = {};
-    
-    model: any = {email: 'litaojian88@qq.com'};
-    
-    constructor() {
-        let jsonForm:string = ''  + require('!!raw-loader!./example/login-schema.json');
-        this.schema = JSON.parse(jsonForm);        
-    }
-}
-
 @Component({
     selector: 'app-biz-query',
     template: `
-    <div class="mb-md">
-        <nz-input [(ngModel)]="params.testname" name="name" nzPlaceHolder="请输入姓名1" style="width: 100px"></nz-input>
-        <button nz-button (click)="st.load(1)" [nzType]="'primary'">搜索</button>
-        <button nz-button (click)="params = {}; st.reset()">重置</button>
-        <!--  -->
-        <button nz-button (click)="st.export()">Export</button>
-    </div>
     <div class="mb-md">
         <my-simple-form layout="inline"
                 [schema]="queryForm.schema"
@@ -45,8 +17,8 @@ export class BizQueryForm {
                 [actions]="actions">
         </my-simple-form>
     </div>
-    <my-simple-table #st [data]="tableConfig.dataUrl" [extraParams]="params" [total]="10" [columns]="tableConfig.columns"
-        [resReName]="tableConfig.resReName" showTotal="tableConfig.showTotal">
+    <my-simple-table #st [data]="dataTable.dataUrl" [extraParams]="params" [total]="10" [columns]="dataTable.columns"
+        [resReName]="dataTable.resReName" showTotal="dataTable.showTotal">
     </my-simple-table>
     `,
     providers:[]
@@ -60,10 +32,27 @@ export class BizQueryComponent implements OnInit, OnDestroy {
     reuseTabService:ReuseTabService;
     pagePath:string;
     params: any = {};
+    
+    actions:any = {
+        query: (form: any) => {
+            console.log(JSON.stringify(form.value));
+            //this.msg.success(JSON.stringify(form.value));
+        },        
+        reset: (form: any) => {
+            form.reset({});
+        }
+        ,        
+        add: (form: any) => {
+            console.log("add:" + JSON.stringify(form.value));
+        }
+    };
 
-    queryForm:BizQueryForm = new BizQueryForm();
+    queryForm:any = {
+        schema: null,
+        model: {}
+    };
 
-    tableConfig : any = {
+    dataTable : any = {
         dataUrl:'',
         reqMehtod:"GET",
         showTotal:true,
@@ -72,7 +61,7 @@ export class BizQueryComponent implements OnInit, OnDestroy {
             {title:"ID"}
         ]    
     }
-
+ 
 
     constructor(injector: Injector) {
         this.msgService = injector.get(NzMessageService);
@@ -80,6 +69,8 @@ export class BizQueryComponent implements OnInit, OnDestroy {
         this.reuseTabService = injector.get(ReuseTabService);
         this.activatedRoute = injector.get(ActivatedRoute);
         this.router = injector.get(Router);
+
+        console.log("BizQueryComponent init ..............");		
     }
 
     ngOnInit() {           
@@ -96,15 +87,7 @@ export class BizQueryComponent implements OnInit, OnDestroy {
         if (len > 2){
             cmd = this.activatedRoute.snapshot.url[2].path;		
         }
-		
-        this.loadPageDef(dir, pageName, cmd);
-    }
-    
-	loadPageDef(dir:string, pageName:string, cmd:string) {
-		//
-		console.log("load page def..............");
-		
-		let len = this.activatedRoute.snapshot.url.length;
+			
 		if (len >= 4){
 			//this.parentId = +this.activatedRoute.snapshot.url[3].path;			
 		}		
@@ -116,20 +99,31 @@ export class BizQueryComponent implements OnInit, OnDestroy {
         }
         this.bizService.ajaxGet(`assets/pages/${dir}/${pageName}.json`, {}).subscribe(
             resultData => this.processLoadPageDef(resultData)        
-        );		
-	}
-
-    processLoadPageDef(resultData:any){
-        this.tableConfig.columns = resultData["table"]['columns'];
-        this.tableConfig.dataUrl = resultData["table"]["dataUrl"];
-
-        this.reuseTabService.title = resultData["title"];
-        console.log("page def:" + this.reuseTabService.title);
+        );	
     }
+    //     
+    processLoadPageDef(resultData:any){
+        //this.dataTable.columns = resultData["dataTable"]['columns'];
+        //this.dataTable.dataUrl = resultData["dataTable"]["dataUrl"];
+        this.queryForm.schema = resultData["queryForm"];
+  
+        Object.keys(resultData["dataTable"]).forEach((propKey:string) => {
+             this.dataTable[propKey] = resultData["dataTable"][propKey];
+        });
+        
+        Object.keys(resultData["actions"]).forEach((propKey:string) => {
+            this.actions[propKey] = resultData["actions"][propKey];
+        });
+
+        if (this.reuseTabService){
+            this.reuseTabService.title = resultData["title"];
+        }
+        //console.log("page def:" , this.queryForm);
+    }
+    //
 	onQuery(): void {
 		//super.onQuery(this.queryForm);
 	}
-
 
 	ngOnDestroy(){	
 		//console.log(" bizQuery ngOnDestory......");				

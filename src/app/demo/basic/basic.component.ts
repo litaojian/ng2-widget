@@ -19,17 +19,17 @@ export class ExampleBasicComponent {
     // login
     DATA: any = {
         horizontal: {
-            code: '' + require('!!raw-loader!../../schema/login-schema.json'),
+            code: '' + require('!!raw-loader!../../../assets/json/login-schema.json'),
             value: {},
             model: { email: 'cipchk@qq.com' }
         },
         vertical: {
-            code: '' + require('!!raw-loader!../../schema/login-schema.json'),
+            code: '' + require('!!raw-loader!../../../assets/json/login-schema.json'),
             value: {},
             model: { email: 'cipchk@qq.com' }
         },
         inline: {
-            code: '' + require('!!raw-loader!../../schema/login-schema.json'),
+            code: '' + require('!!raw-loader!../../../assets/json/login-schema.json'),
             value: {},
             model: { email: 'cipchk@qq.com' }
         }
