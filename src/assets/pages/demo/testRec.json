@@ -1,17 +1,17 @@
 {
     "title": "TestRec",
     "actions": {},
-    "queryParams": { "filter": "all" },
+    "queryParams": { "filter": "all", "testname": "abc412" },
     "queryForm": {
         "debug": true,
         "properties": {
-            "name": {
+            "testname": {
                 "type": "string",
                 "title": "名称",
                 "widget": {
-                    "placeholder": "请输入名称，且3位以上"
+                    "placeholder": "请输入名称，且2位以上"
                 },
-                "minLength": 3
+                "minLength": 2
             },
             "testtype": {
                 "type": "string",

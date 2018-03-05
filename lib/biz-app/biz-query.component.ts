@@ -3,7 +3,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { NzMessageService } from 'ng-zorro-antd';
 import { SFSchema, FormProperty } from '../biz-form';
-import { SimpleTableColumn, SimpleTableButton, SimpleTableFilter } from '../biz-table';
+import { SimpleTableColumn, SimpleTableButton, SimpleTableFilter, SimpleTableComponent } from '../biz-table';
 import { BizQueryService } from './biz-query.service';
 import { ReuseTabService } from '@delon/abc';
 
@@ -11,13 +11,13 @@ import { ReuseTabService } from '@delon/abc';
     selector: 'app-biz-query',
     template: `
     <div class="mb-md">
-        <my-simple-form layout="inline"
+        <my-simple-form #myQueryForm layout="inline"
                 [schema]="queryForm.schema"
                 [model]="queryForm.model"
                 [actions]="actions">
         </my-simple-form>
     </div>
-    <my-simple-table #st [data]="dataTable.dataUrl" [extraParams]="params" [total]="10" [columns]="dataTable.columns"
+    <my-simple-table #myDataTable [data]="dataTable.dataUrl" [extraParams]="queryParams" [total]="10" [columns]="dataTable.columns"
         [resReName]="dataTable.resReName" showTotal="dataTable.showTotal">
     </my-simple-table>
     `,
@@ -25,17 +25,21 @@ import { ReuseTabService } from '@delon/abc';
 })
 export class BizQueryComponent implements OnInit, OnDestroy {
 
+    @ViewChild('myDataTable')
+    myDataTable:SimpleTableComponent;
+
     activatedRoute: ActivatedRoute;
     router: Router;
     bizService:BizQueryService;
     msgService: NzMessageService;
     reuseTabService:ReuseTabService;
     pagePath:string;
-    params: any = {};
+   
     
     actions:any = {
         query: (form: any) => {
-            console.log(JSON.stringify(form.value));
+            //console.log(JSON.stringify(form.value));
+            this.onQuery(form.value);
             //this.msg.success(JSON.stringify(form.value));
         },        
         reset: (form: any) => {
@@ -46,6 +50,8 @@ export class BizQueryComponent implements OnInit, OnDestroy {
             console.log("add:" + JSON.stringify(form.value));
         }
     };
+
+    queryParams: any = {};
 
     queryForm:any = {
         schema: null,
@@ -103,26 +109,41 @@ export class BizQueryComponent implements OnInit, OnDestroy {
     }
     //     
     processLoadPageDef(resultData:any){
-        //this.dataTable.columns = resultData["dataTable"]['columns'];
-        //this.dataTable.dataUrl = resultData["dataTable"]["dataUrl"];
-        this.queryForm.schema = resultData["queryForm"];
-  
+        
+        if (this.reuseTabService){
+            this.reuseTabService.title = resultData["title"];
+        }
+
         Object.keys(resultData["dataTable"]).forEach((propKey:string) => {
              this.dataTable[propKey] = resultData["dataTable"][propKey];
         });
         
+        if (resultData["queryForm"]){
+            this.queryForm.schema = {};
+            Object.keys(resultData["queryForm"]).forEach((propKey:string) => {
+                this.queryForm.schema[propKey] = resultData["queryForm"][propKey];
+            });    
+        }
+
         Object.keys(resultData["actions"]).forEach((propKey:string) => {
             this.actions[propKey] = resultData["actions"][propKey];
         });
 
-        if (this.reuseTabService){
-            this.reuseTabService.title = resultData["title"];
-        }
+        Object.keys(resultData["queryParams"]).forEach((propKey:string) => {
+            this.queryParams[propKey] = resultData["queryParams"][propKey];
+        });
+        
+        this.queryForm.modal = this.queryParams;
+       
         //console.log("page def:" , this.queryForm);
     }
     //
-	onQuery(): void {
-		//super.onQuery(this.queryForm);
+	onQuery(form: any): void {
+        Object.keys(form).forEach((formField:string) => {
+            this.queryParams[formField] = form[formField];
+        });
+        // 表格依据查询参数重新载入数据
+		this.myDataTable.load(1);
 	}
 
 	ngOnDestroy(){	
@@ -132,5 +153,6 @@ export class BizQueryComponent implements OnInit, OnDestroy {
     format(input:any){
         return input;
     }
+
 
 }
