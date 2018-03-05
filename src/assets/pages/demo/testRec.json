@@ -5,7 +5,7 @@
     "actions": {},
     "queryParams": { "filter": "all" },
     "queryForm": {
-        "debug": true,
+        "debug": false,
         "properties": {
             "testdate": {
                 "type": "string",
@@ -132,7 +132,38 @@
         ]
     },
     "mainForm": {
-        "properties": {},
+        "properties": {
+            "testname": {
+                "type": "string",
+                "title": "名称",
+                "widget": {
+                    "placeholder": "请输入名称"
+                }
+            },
+            "testdesc": {
+                "type": "string",
+                "title": "描述",
+                "widget": {
+                    "placeholder": "请输入描述"
+                }
+            },
+            "testdate": {
+                "type": "string",
+                "title": "日期",
+                "widget": {
+                    "id": "date",
+                    "placeholder": "请输入日期"
+                }
+            },
+            "testype": {
+                "type": "string",
+                "title": "类型",
+                "widget": {
+                    "id": "select",
+                    "placeholder": "请选择类型"
+                }
+            }            
+        },
         "required": ["name"],
         "button": {
             "items": [{

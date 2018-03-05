@@ -11,7 +11,7 @@ import { ReuseTabService } from '@delon/abc';
     selector: 'app-biz-query',
     template: `
     <div class="mb-md">
-        <my-simple-form #myQueryForm layout="inline"
+        <my-simple-form #myQueryForm [layout]="queryForm.layout"
                 [schema]="queryForm.schema"
                 [model]="queryForm.model"
                 [actions]="actions">
@@ -56,6 +56,7 @@ export class BizQueryComponent implements OnInit, OnDestroy {
     queryParams: any = {};
 
     queryForm:any = {
+        layout:"inline",
         schema: null,
         model: {}
     };
@@ -122,6 +123,7 @@ export class BizQueryComponent implements OnInit, OnDestroy {
         
         if (resultData["queryForm"]){
             this.queryForm.schema = {};
+            this.queryForm.layout = resultData["queryForm"].layout || "inline";
             Object.keys(resultData["queryForm"]).forEach((propKey:string) => {
                 this.queryForm.schema[propKey] = resultData["queryForm"][propKey];
             });    
@@ -133,9 +135,9 @@ export class BizQueryComponent implements OnInit, OnDestroy {
 
         Object.keys(resultData["queryParams"]).forEach((propKey:string) => {
             this.queryParams[propKey] = resultData["queryParams"][propKey];
-        });
-        
+        });        
         this.queryForm.modal = this.queryParams;
+        
         this.bizService.setApiUrl(resultData.restAPI);
         this.bizService.setIdField(resultData.idField);
         //set the view url

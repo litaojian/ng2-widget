@@ -60,7 +60,7 @@ export class BaseDetailComponent implements OnInit {
       rowId = queryParams['id'];
     }
 
-    this.service.getDetail(rowId).subscribe( resultData =>{
+    this.service.getDetail(rowId).subscribe( (resultData:any) =>{
 
         let tmpData = resultData["data"];
         if (tmpData == null) {
@@ -125,7 +125,7 @@ export class BaseDetailComponent implements OnInit {
     if (this.isNew) {
       //console.log(this.formData)
       this.service.create(this.formData)
-        .subscribe(result => {
+        .subscribe((result:any)  => {
           //debugger;
           if (result == null && this.service.getIsTest()) {
             this.goBack();
@@ -145,7 +145,7 @@ export class BaseDetailComponent implements OnInit {
 
     } else {
       this.service.update(this.formData)
-        .subscribe(result => {
+        .subscribe((result:any) => {
           console.log(JSON.stringify(result));
           //debugger;
           if (result == null && this.service.getIsTest()) {
@@ -177,7 +177,7 @@ export class BaseDetailComponent implements OnInit {
         url = url;
       }
     }
-    let _queryParams = {};
+    let _queryParams:any = {};
     let splitIndex =  url.indexOf("?");
     if (splitIndex > 0){
       let queryString = url.substring(splitIndex+1);      
@@ -194,7 +194,7 @@ export class BaseDetailComponent implements OnInit {
     this.router.navigate([url],{queryParams:_queryParams});
   }
 
-  goPage(url): void {
+  goPage(url:string): void {
     this.router.navigate([url]);
   }
 
@@ -212,7 +212,7 @@ export class BaseDetailComponent implements OnInit {
     //     });
 	}
 
-  getKeys(item){
+  getKeys(item:Object){
     return Object.keys(item).sort();
   }
 

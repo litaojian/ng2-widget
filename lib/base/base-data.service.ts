@@ -506,6 +506,8 @@ export class BaseDataService extends BaseService {
         }
         if (url.endsWith("/create")){
             url = url.substring(0, url.length -7);
+        }else if ( url.endsWith("/list")){
+            url = url.substring(0, url.length - 5);
         }else if ( url.endsWith("/edit")){
             url = url.substring(0, url.length - 5);
         }else if ( url.endsWith("/view")){
