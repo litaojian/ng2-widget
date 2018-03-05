@@ -49,7 +49,7 @@ export class BizQueryComponent implements OnInit, OnDestroy {
         },      
         add: (form: any) => {
             //console.log("add:" + JSON.stringify(form.value));
-            this.onAddNew(form);
+            this.onAddNew(form.value);
         }
     };
 
@@ -136,7 +136,11 @@ export class BizQueryComponent implements OnInit, OnDestroy {
         });
         
         this.queryForm.modal = this.queryParams;
-       
+        this.bizService.setApiUrl(resultData.restAPI);
+        this.bizService.setIdField(resultData.idField);
+        //set the view url
+        this.bizService.setPageViewUrl(this.router.url, "list");
+
         //console.log("page def:" , this.queryForm);
     }
     //
@@ -184,7 +188,7 @@ export class BizQueryComponent implements OnInit, OnDestroy {
         for (let i = 0; i < keys.length; i++) {
           let paramVal: string = params[keys[i]];
           //console.log("debug:" + keys[i] + "=" + params[keys[i]]);
-          if (paramVal.startsWith("${") && paramVal.endsWith("}")) {
+          if ( typeof(paramVal) === 'string' && paramVal.startsWith("${") && paramVal.endsWith("}")) {
             let varName = paramVal.replace("${", "").replace("}", "");
             params[keys[i]] = this.activatedRoute.snapshot.data[varName];
           }

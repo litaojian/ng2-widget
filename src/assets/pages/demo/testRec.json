@@ -1,5 +1,7 @@
 {
     "title": "TestRec",
+    "restAPI": "/api/rest/testRec",
+    "idField": "testrecid",
     "actions": {},
     "queryParams": { "filter": "all" },
     "queryForm": {
