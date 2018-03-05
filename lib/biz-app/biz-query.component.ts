@@ -142,6 +142,7 @@ export class BizQueryComponent implements OnInit, OnDestroy {
         Object.keys(form).forEach((formField:string) => {
             this.queryParams[formField] = form[formField];
         });
+        console.log("queryParams", this.queryParams);
         // 表格依据查询参数重新载入数据
 		this.myDataTable.load(1);
 	}

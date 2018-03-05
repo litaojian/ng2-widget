@@ -1,23 +1,39 @@
 {
     "title": "TestRec",
     "actions": {},
-    "queryParams": { "filter": "all", "testname": "abc412" },
+    "queryParams": { "filter": "all" },
     "queryForm": {
         "debug": true,
         "properties": {
+            "testdate": {
+                "type": "string",
+                "title": "日期",
+                "placeholder": "请选择日期范围",
+                "widget": {
+                    "id": "date-range",
+                    "format": "yyyy-mm-dd"
+                }
+            },
             "testname": {
                 "type": "string",
                 "title": "名称",
-                "widget": {
-                    "placeholder": "请输入名称，且2位以上"
-                },
-                "minLength": 2
+                "placeholder": "请输入名称",
+                "widget": {}
             },
             "testtype": {
                 "type": "string",
                 "title": "分类",
+                "placeholder": "请选择分类",
                 "widget": {
-                    "placeholder": "请选择分类"
+                    "id": "select",
+                    "data": [
+                        { "value": "DRAFT", "label": "DRAFT" },
+                        { "value": "2", "label": "分类2" },
+                        { "value": "3", "label": "分类3" }
+                    ],
+                    "style": {
+                        "width": "180px"
+                    }
                 }
             }
         },
@@ -61,6 +77,7 @@
 
             },
             { "index": "description", "title": "描述", "type": "string" },
+            { "index": "testdate", "title": "日期", "type": "string" },
             {
                 "index": "teststatus",
                 "title": "类型",
