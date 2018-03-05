@@ -195,7 +195,7 @@ export class BaseDataService extends BaseService {
 			// }
 			return this.httpClient.get(url, { "headers": headers })
 				.do(response => {
-					let result = response;
+					let result:any = response;
 					//debugger;
 					if (result["rows"] != null && result["rows"]  instanceof Array){
 			           result["rows"] = result["rows"][0];
@@ -316,7 +316,7 @@ export class BaseDataService extends BaseService {
 
 		// invoke http request
 		return this.ajaxGet(url, options)
-			.map(respObject => {
+			.map((respObject:any) => {
 				// debugger;
 				let result:any;
 				if (respObject && typeof respObject == 'string' ){
@@ -335,7 +335,7 @@ export class BaseDataService extends BaseService {
 					}
 				}
 
-				let rows:Object[];
+				let rows:any;
 
 				if (result["data"] != null){
 					rows = result["data"]["options"];
@@ -390,7 +390,7 @@ export class BaseDataService extends BaseService {
 
 		// invoke http request
 		return this.httpClient.get(url, options)
-			.do((result:Object[]) => {
+			.do((result:any) => {
 				//debugger;
 				let treeData :Object[] = [];
 				if (tableColumns != null && result != null){
@@ -411,7 +411,7 @@ export class BaseDataService extends BaseService {
 	}
 
 	//构造树的方法
-    buildTree(input: Object, idColumn:string, parentColumn:string, textColumn:string): any {
+    buildTree(input: any, idColumn:string, parentColumn:string, textColumn:string): any {
         //console.error('An error occurred', error);
         let inputData = input["data"];
 
@@ -419,7 +419,7 @@ export class BaseDataService extends BaseService {
         let tmpNodes: Object[] = [];
         for (let i = 0; i < inputData.length; i++) {
             // debugger;
-            let tmpNode = new Object();
+            let tmpNode:any = new Object();
             tmpNode["html"] = "<a href='javascript:void(0);'>" + inputData[i][textColumn] + "</a>";
 			tmpNode["title"] = inputData[i][textColumn];
             tmpNode["nid"] = inputData[i][idColumn];
@@ -462,11 +462,11 @@ export class BaseDataService extends BaseService {
 
 	loadValueListData():Object {
 		let typenames:string[] = this.getValuelistTypes();
-		let valuelist = {};
+		let valuelist:any = {};
 		//console.log("loadValueListData "+ this.service.getValuelistTypes().toString() +" ..........");
 		if (typenames != null){
 			typenames.forEach(_typename =>{
-			  this.getValueList(_typename).subscribe(data =>{
+			  this.getValueList(_typename).subscribe((data:any) =>{
 			  let label , value;
 			  for(let item in data){
 				if (valuelist[_typename] == null){
@@ -487,4 +487,30 @@ export class BaseDataService extends BaseService {
 		}
 		return valuelist;
 	}
+
+	getValue(item: any, field: string) {
+        //debugger;
+        let elements = Object.keys(item).sort();
+        for (let i = 0; i < elements.length; i++) {
+          if (field.toLowerCase() == elements[i].toLowerCase()) {
+            return item[elements[i]];
+          }
+        }
+        return item[field];
+	}
+	
+	getUrl(url:string){
+        let pos = url.lastIndexOf("?");
+        if (pos > 0){
+            url = url.substring(0, pos);
+        }
+        if (url.endsWith("/create")){
+            url = url.substring(0, url.length -7);
+        }else if ( url.endsWith("/edit")){
+            url = url.substring(0, url.length - 5);
+        }else if ( url.endsWith("/view")){
+            url = url.substring(0, url.length -5);
+        }
+        return url;
+    }
 }

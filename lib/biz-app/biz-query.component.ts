@@ -34,20 +34,22 @@ export class BizQueryComponent implements OnInit, OnDestroy {
     msgService: NzMessageService;
     reuseTabService:ReuseTabService;
     pagePath:string;
-   
+    selectedRow: Object;
+    pageIndex: number = 1;
+    pageSize: number = 10;
     
     actions:any = {
-        query: (form: any) => {
-            //console.log(JSON.stringify(form.value));
-            this.onQuery(form.value);
-            //this.msg.success(JSON.stringify(form.value));
-        },        
         reset: (form: any) => {
             form.reset({});
-        }
-        ,        
+        },
+        query: (form: any) => {
+            //console.log(JSON.stringify(form.value));
+            //this.msg.success(JSON.stringify(form.value));
+            this.onQuery(form.value);            
+        },      
         add: (form: any) => {
-            console.log("add:" + JSON.stringify(form.value));
+            //console.log("add:" + JSON.stringify(form.value));
+            this.onAddNew(form);
         }
     };
 
@@ -154,6 +156,97 @@ export class BizQueryComponent implements OnInit, OnDestroy {
     format(input:any){
         return input;
     }
+
+    onDeleteRow(row: any): void {
+        if (confirm("是否要删除此条数据?")) {
+          //debugger;
+        //   this.bizService.delete(row[this.idField])
+        //     .then(result => {
+        //       console.log("debug:" + JSON.stringify(result));
+        //       if (result == null || result["resultCode"] == 0) {
+        //         this.tableData = this.tableData.filter(r => r !== row);
+        //       } else {
+        //         alert(result["resultMsg"]);
+        //       }
+        //     });
+        }
+      }
+    
+      onAddNew(params?: any): void {
+        // 保存返回状态参数
+        this.saveCurrentState();
+    
+        if (params == null) {
+          params = {};
+        }
+    
+        let keys = Object.keys(params);
+        for (let i = 0; i < keys.length; i++) {
+          let paramVal: string = params[keys[i]];
+          //console.log("debug:" + keys[i] + "=" + params[keys[i]]);
+          if (paramVal.startsWith("${") && paramVal.endsWith("}")) {
+            let varName = paramVal.replace("${", "").replace("}", "");
+            params[keys[i]] = this.activatedRoute.snapshot.data[varName];
+          }
+        }
+    
+        params["backtoUrl"] = this.bizService.base64Encode(this.router.url);
+        let url = this.bizService.getUrl(this.bizService.getContextPath(this.router.url) + this.bizService.getFormViewUrl());
+        this.router.navigate([url, 'create'], { queryParams: params });
+      }
+    
+      onEditRow(row: Object): void {
+        // debugger;
+        this.selectedRow = row;
+        let url = this.bizService.getUrl(this.bizService.getContextPath(this.router.url) + this.bizService.getFormViewUrl());
+        let rowId = this.bizService.getValue(row, this.bizService.getIdField());
+        this.router.navigate([url, 'edit'], { queryParams: {'id':rowId} });
+        //console.log("edit the row:" + row);
+      }
+    
+      onViewRow(row: Object): void {
+        //debugger;
+        this.selectedRow = row;
+        let url = this.bizService.getUrl(this.bizService.getContextPath(this.router.url) + this.bizService.getFormViewUrl());
+        let rowId = this.bizService.getValue(row, this.bizService.getIdField());
+        this.router.navigate([url, 'view'], { queryParams: {'id':rowId} });
+        //console.log(" show the row:" + row);
+      }
+    
+      saveCurrentState() {
+        let currentStateParams:any = {};
+        currentStateParams["parentId"] = this.activatedRoute.snapshot.data['parentId'];
+        currentStateParams["pageIndex"] = this.pageIndex;
+        currentStateParams["queryForm"] = this.queryForm;
+    
+        let path = this.router.url.replace(/\//gi, "_");
+        let pos = path.indexOf("?");
+        if (pos > 0) {
+          path = path.substring(0, pos);
+        }
+        this.bizService.storeCookie(path, JSON.stringify(currentStateParams));
+    
+      }
+    
+      restoreCurrentState() {
+        //debugger;
+        console.log(this.router.url + " restoreCurrentState start.....")
+        let path = this.router.url.replace(/\//gi, "_");
+        let pos = path.indexOf("?");
+        if (pos > 0) {
+          path = path.substring(0, pos);
+        }
+        let value = this.bizService.loadCookie(path);
+        if (value != null) {
+          let currentStateParams = JSON.parse(value);
+          this.activatedRoute.snapshot.data['parentId'] = currentStateParams["parentId"];
+          this.pageSize = currentStateParams["pageSize"];
+          this.queryForm = currentStateParams["queryForm"];
+        }
+      }
+
+      
+
 
 
 }

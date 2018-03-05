@@ -12,4 +12,5 @@ export class BizQueryService extends BaseDataService {
 		//this.setIdField(idField);
 	}
 
+	
 }

@@ -146,7 +146,7 @@ export class BaseListComponent implements OnInit, AfterViewInit {
   }
 
 
-  processResult(resultData: Object) {
+  processResult(resultData: any) {
     //debugger;
     let rows = [];
     let total = 0;
@@ -217,7 +217,7 @@ export class BaseListComponent implements OnInit, AfterViewInit {
   }
 
 
-  onDeleteRow(row: Object): void {
+  onDeleteRow(row: any): void {
     if (confirm("是否要删除此条数据?")) {
       //debugger;
       this.service.delete(row[this.idField])
@@ -424,7 +424,7 @@ export class BaseListComponent implements OnInit, AfterViewInit {
   }
 
 
-  onTreeNodeClick(nodeId) {
+  onTreeNodeClick(nodeId:string) {
     //console.log("selected node :" + nodeId);
     this.activatedRoute.snapshot.data['parentId'] = nodeId;
     this.setPageIndex(1);
