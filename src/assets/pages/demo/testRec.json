@@ -11,19 +11,24 @@
                 "placeholder": "请选择日期范围",
                 "widget": {
                     "id": "date-range",
-                    "format": "yyyy-mm-dd"
+                    "format": "yyyy-mm-dd",
+                    "start": "开始日期",
+                    "end": "结束日期",
+                    "style": {
+                        "width": "180px"
+                    }
                 }
             },
             "testname": {
                 "type": "string",
                 "title": "名称",
-                "placeholder": "请输入名称",
-                "widget": {}
+                "widget": {
+                    "placeholder": "请输入名称"
+                }
             },
             "testtype": {
                 "type": "string",
                 "title": "分类",
-                "placeholder": "请选择分类",
                 "widget": {
                     "id": "select",
                     "data": [
@@ -31,8 +36,9 @@
                         { "value": "2", "label": "分类2" },
                         { "value": "3", "label": "分类3" }
                     ],
+                    "placeholder": "请选择分类",
                     "style": {
-                        "width": "180px"
+                        "width": "120px"
                     }
                 }
             }
@@ -43,10 +49,6 @@
                     "label": "查询",
                     "id": "query",
                     "submit": true
-                },
-                {
-                    "label": "重置",
-                    "id": "reset"
                 },
                 {
                     "label": "新增",
@@ -126,5 +128,21 @@
             }
 
         ]
+    },
+    "mainForm": {
+        "properties": {},
+        "required": ["name"],
+        "button": {
+            "items": [{
+                    "label": "保存",
+                    "id": "save",
+                    "submit": true
+                },
+                {
+                    "label": "返回",
+                    "id": "backto"
+                }
+            ]
+        }
     }
 }

@@ -40,7 +40,7 @@ export function StartupServiceFactory(startupService: StartupService): Function 
         { path: 'page',     loadChildren: './my-bizpage.module#MyBizPageModule'},        
         { path: 'home', component: HomeComponent },
         { path: 'other', component: OtherComponent },
-        { path: '', redirectTo: 'testRec3', pathMatch: 'full'}
+        { path: '', redirectTo: 'page/demo/testRec', pathMatch: 'full'}
     ], { useHash: true })
     
   ],

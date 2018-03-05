@@ -13,12 +13,14 @@ import { FixedLabelDirective } from './src/widgets/fixed-label.directive';
 
 import {
     FormComponent,
+    MyFormComponent,
     FormItemComponent,
     FormActionComponent
 } from './src';
 
 const COMPONENTS = [
     FormComponent,
+    MyFormComponent,
     FormItemComponent,
     FormActionComponent,
     CustomTemplateDirective,
@@ -79,14 +81,8 @@ const WIDGETS: any[] = [
 
 // region: export
 
-export { FormComponent } from './src/form.component';
-export { FormItemComponent } from './src/form-item.component';
-export { FormActionComponent } from './src/form-item-action.component';
-export * from './src/widgets';
-export * from './src/widgets/nz-widget.registry';
-export * from './src/schema';
-export * from './src/model';
-export * from './src/widget.registry';
+export * from './src/index';
+export * from './schema-form.options';
 
 // endregion
 
@@ -110,7 +106,8 @@ import {
     NzRadioModule,
     NzTagModule,
     NzRateModule,
-    NzSelectModule
+    NzSelectModule,
+    NzPopconfirmModule
 } from 'ng-zorro-antd';
 const ZORROMODULES = [
     NzGridModule,
@@ -131,7 +128,8 @@ const ZORROMODULES = [
     NzRadioModule,
     NzTagModule,
     NzRateModule,
-    NzSelectModule
+    NzSelectModule,
+    NzPopconfirmModule
 ];
 // endregion
 
@@ -149,7 +147,7 @@ export function optionsFactory(options: SchemaFormOptions) {
     exports: [ ...COMPONENTS, ...WIDGETS ]
 })
 export class BizSchemaFormModule {
-    public static forRoot(options?: SchemaFormOptions): ModuleWithProviders {
+    static forRoot(options?: SchemaFormOptions): ModuleWithProviders {
         return {
             ngModule: BizSchemaFormModule,
             providers: [
@@ -161,4 +159,3 @@ export class BizSchemaFormModule {
         };
     }
 }
-

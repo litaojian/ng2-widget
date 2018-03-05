@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnChanges, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
+import { ChangeDetectorRef, Component, OnChanges, EventEmitter, Input, Output, TemplateRef, ChangeDetectionStrategy } from '@angular/core';
 import { Action, ActionRegistry, FormPropertyFactory, FormProperty, SchemaPreprocessor, ValidatorRegistry, Validator } from './model';
 import { SFSchema } from './schema';
 import { WidgetFactory } from './widget.factory';
@@ -28,7 +28,8 @@ export function useFactory(schemaValidatorFactory: any, validatorRegistry: any, 
             deps: [SchemaValidatorFactory, ValidatorRegistry, NZ_SF_OPTIONS_TOKEN]
         },
         TerminatorService
-    ]
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormComponent implements OnChanges {
 
@@ -38,21 +39,33 @@ export class FormComponent implements OnChanges {
 
     @Input() model: any;
 
+    @Output() modelChange = new EventEmitter<any>();
+
     @Input() actions: { [actionId: string]: Action } = {};
 
     @Input() validators: { [path: string]: Validator } = {};
 
     @Output() onChange = new EventEmitter<{ value: any }>();
 
-    @Output() modelChanged = new EventEmitter<any>();
-
     @Output() isValid = new EventEmitter<boolean>();
 
     @Output() onErrorChange = new EventEmitter<{ value: any[] }>();
 
+    _valid = true;
+
+    get valid(): boolean {
+        return this._valid;
+    }
+
     rootProperty: FormProperty = null;
 
-    constructor(private formPropertyFactory: FormPropertyFactory, private actionRegistry: ActionRegistry, private validatorRegistry: ValidatorRegistry, private cdr: ChangeDetectorRef, private terminator: TerminatorService) {}
+    constructor(
+        private formPropertyFactory: FormPropertyFactory,
+        private actionRegistry: ActionRegistry,
+        private validatorRegistry: ValidatorRegistry,
+        private cdr: ChangeDetectorRef,
+        private terminator: TerminatorService
+    ) {}
 
     private coverProperty(schema: SFSchema) {
         const isHorizontal = this.layout === 'horizontal';
@@ -100,6 +113,18 @@ export class FormComponent implements OnChanges {
             this.setActions();
         }
 
+        this._refreshSchema(changes);
+    }
+
+    private _refreshSchema(changes?: any) {
+        if (!changes) {
+            changes = {
+                schema: {
+                    firstChange: false
+                }
+            };
+        }
+
         if (this.schema && !this.schema.type) {
             this.schema.type = 'object';
         }
@@ -119,20 +144,21 @@ export class FormComponent implements OnChanges {
             this.rootProperty = this.formPropertyFactory.createProperty(this.schema);
 
             this.rootProperty.valueChanges.subscribe(value => {
-                if (this.modelChanged.observers.length > 0) {
+                if (this.modelChange.observers.length > 0) {
                     // two way binding is used
                     if (this.model) {
-                        Object.assign(this.model, value);
+                        this.model = Object.assign(this.model, value);
                     } else {
                         this.model = value;
                     }
-                    this.modelChanged.emit(value);
+                    this.modelChange.emit(this.model);
                 }
                 this.onChange.emit({ value: value });
             });
             this.rootProperty.errorsChanges.subscribe(value => {
                 this.onErrorChange.emit({ value: value });
-                this.isValid.emit(!(value && value.length));
+                this._valid = !(value && value.length);
+                this.isValid.emit(this._valid);
             });
         }
 
@@ -164,6 +190,7 @@ export class FormComponent implements OnChanges {
         }
     }
 
+    /** @private */
     _addTpl(path: string, templateRef: TemplateRef<any>) {
         const property = this.rootProperty.searchProperty(path);
         if (!property) {
@@ -173,6 +200,18 @@ export class FormComponent implements OnChanges {
         property.schema.__render = templateRef;
     }
 
+    /**
+     * 刷新 Schema，一般需要动态修改 Schema 某个值时可以方便调用
+     */
+    refreshSchema() {
+        this._refreshSchema({
+            schema: {
+                firstChange: false
+            }
+        });
+    }
+
+    /** 重置表单 */
     reset() {
         this.rootProperty._reset(null, true);
     }
