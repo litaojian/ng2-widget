@@ -17,5 +17,6 @@ export { RangeWidget } from './range/range.widget';
 export { TagWidget } from './tag/tag.widget';
 export { RateWidget } from './rate/rate.widget';
 export { SelectWidget } from './select/select.widget';
+export { Select2Widget } from './select/select2.widget';
 export { DateRangeWidget } from './date-range/date-range.widget';
 export { FixedLabelDirective } from './fixed-label.directive';

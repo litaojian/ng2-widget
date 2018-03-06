@@ -4,6 +4,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { SFSchema } from '..//biz-form';
 import { BizFormService } from './biz-form.service';
+import { FormComponent } from '../biz-form';
 import { ReuseTabService } from '@delon/abc';
 
 @Component({
@@ -18,6 +19,9 @@ import { ReuseTabService } from '@delon/abc';
     providers:[BizFormService]
 })
 export class BizFormComponent implements OnInit {
+
+    @ViewChild('myMainForm')
+    myMainForm:FormComponent;
 
     activatedRoute: ActivatedRoute;
     router: Router;
@@ -86,7 +90,6 @@ export class BizFormComponent implements OnInit {
             resultData => {
                 this.processLoadPageDef(resultData);
                 this.processLoadFormData();
-            
             } 
             
         );	

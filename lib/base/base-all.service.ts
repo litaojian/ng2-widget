@@ -27,9 +27,9 @@ export class BaseService {
 
 	protected isHashMode = true;
 
-	protected clientId;
+	protected clientId:string;
 
-	protected apiContextPath;
+	protected apiContextPath:string;
 
 	constructor(injector: Injector) {
 
@@ -48,7 +48,7 @@ export class BaseService {
 	}
 
 	public getLoginUser():Object {
-		let userInfo = {};
+		let userInfo:any = {};
 		userInfo["username"] = ExtCookieService.load(this.clientId + "-username");
 		userInfo["avatar"] = ExtCookieService.load(this.clientId + "-avatar");
 		userInfo["userToken"] = ExtCookieService.load(this.clientId + "-userToken");
@@ -73,7 +73,7 @@ export class BaseService {
 	parseUrlParams(queryString: string) {
 		//debugger;
 		let segments = queryString.split("&");
-		let resultObj = {};
+		let resultObj:any = {};
 		if (segments != null) {
 			for (let i = 0; i < segments.length; i++) {
 				let values = segments[i].split("=");
@@ -137,7 +137,7 @@ export class BaseService {
 		return "Bearer " + accessToken;
 	}
 	
-	getHttpHeader(isDebug?):HttpHeaders{
+	getHttpHeader(isDebug?:boolean):HttpHeaders{
 		let headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': this.getAccessToken() });
 		if (isDebug != null && isDebug == true) {
 			headers = new HttpHeaders({ 'debug': 'ltj', 'Content-Type': 'application/json', 'Authorization': this.getAccessToken() });
@@ -259,7 +259,7 @@ export class BaseService {
 
 
 	handleError(url:string, error: any): Promise<any> {
-		let result = {};
+		let result:any = {};
 		let _body = error["_body"];
 		if (_body){
 			console.log(error["status"] + ":" + _body);		
@@ -291,7 +291,7 @@ export class BaseService {
 	 * @param dataObject 
 	 * @param field 
 	 */
-	getValue(dataObject: Object, field: string) {
+	getValue(dataObject: any, field: string) {
 		//debugger;
 		let elements = Object.keys(dataObject).sort();
 		for (let i = 0; i < elements.length; i++) {
@@ -302,15 +302,15 @@ export class BaseService {
 		return dataObject[field];
 	}
 
-	getKeys(item){
+	getKeys(item:any){
 		return Object.keys(item).sort();
 	}
 
-	storeCookie(path, value){
+	storeCookie(path:string, value:any){
 		ExtCookieService.save(path, value);
 	}
 
-	loadCookie(path){
+	loadCookie(path:string){
 		return ExtCookieService.load(path);
 	}
 }

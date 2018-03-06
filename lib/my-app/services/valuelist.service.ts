@@ -24,7 +24,6 @@ export class ValueListDataService extends BaseService {
 	getValueList2(typeName: string): Observable<Object[]> {
 		//this.http.get('https://jsonplaceholder.typicode.com/posts/1')
 		//.map(res => res.json()).share()
-
 		//return Observable.of([{"label":"123", "value":"123"}, {"label":"456", "value":"456"}]);
 
 		//debugger;
@@ -61,7 +60,7 @@ export class ValueListDataService extends BaseService {
 	
 		// invoke http request
 		return this.ajaxGet(url, options)
-			.map(result => { 
+			.map((result:any) => { 
 				debugger;
 				if (tableColumns != null && result != null){
 					let columns = tableColumns.split(",");
@@ -117,7 +116,7 @@ export class ValueListDataService extends BaseService {
 	
 		// invoke http request
 		return this.httpClient.get(url, options).toPromise()
-			.then(result => { 
+			.then((result:any) => { 
 				//debugger;
 				if (tableColumns != null && result != null){
 					let columns = tableColumns.split(",");
@@ -166,7 +165,7 @@ export class ValueListDataService extends BaseService {
 	
 		// invoke http request
 		return this.ajaxGet(url, options)
-			.do(result => { 
+			.do((result:any) => { 
 				//debugger;
 				if (tableColumns != null && result != null){
 					let columns = tableColumns.split(",");
@@ -186,7 +185,7 @@ export class ValueListDataService extends BaseService {
 	}
 
 	//构造树的方法
-    buildTree(input: Object, idColumn:string, parentColumn:string, textColumn:string): any {
+    buildTree(input: any, idColumn:string, parentColumn:string, textColumn:string): any {
         //console.error('An error occurred', error);
         let inputData = input["data"];
 
@@ -194,7 +193,7 @@ export class ValueListDataService extends BaseService {
         let tmpNodes: Object[] = [];
         for (let i = 0; i < inputData.length; i++) {
             // debugger;
-            let tmpNode = new Object();
+            let tmpNode:any = new Object();
             tmpNode["html"] = "<a href='javascript:void(0);'>" + inputData[i][textColumn] + "</a>";
 			tmpNode["title"] = inputData[i][textColumn];            
             tmpNode["nid"] = inputData[i][idColumn];

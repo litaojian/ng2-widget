@@ -17,8 +17,8 @@ import { ReuseTabService } from '@delon/abc';
                 [actions]="actions">
         </my-simple-form>
     </div>
-    <my-simple-table #myDataTable [data]="dataTable.dataUrl" [extraParams]="queryParams" [total]="10" [columns]="dataTable.columns"
-        [resReName]="dataTable.resReName" showTotal="dataTable.showTotal">
+    <my-simple-table #myDataTable [data]="dataTable.dataUrl" [extraParams]="queryParams" [columns]="dataTable.columns"
+        [resReName]="dataTable.resReName" showTotal="dataTable.showTotal" [ps]="dataTable.pageSize" >
     </my-simple-table>
     `,
     providers:[]
@@ -36,7 +36,7 @@ export class BizQueryComponent implements OnInit, OnDestroy {
     pagePath:string;
     selectedRow: Object;
     pageIndex: number = 1;
-    pageSize: number = 10;
+    //pageSize: number = 10;
     
     actions:any = {
         reset: (form: any) => {
@@ -246,7 +246,7 @@ export class BizQueryComponent implements OnInit, OnDestroy {
         if (value != null) {
           let currentStateParams = JSON.parse(value);
           this.activatedRoute.snapshot.data['parentId'] = currentStateParams["parentId"];
-          this.pageSize = currentStateParams["pageSize"];
+          this.dataTable.pageSize = currentStateParams["pageSize"];
           this.queryForm = currentStateParams["queryForm"];
         }
       }

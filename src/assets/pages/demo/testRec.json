@@ -63,7 +63,8 @@
         "dataUrl": "demo/api/rest/testRec",
         "extraParams": {},
         "showTotal": true,
-        "resReName": { "list": "rows" },
+        "pageSize":15,
+        "resReName": { "list": "rows", "total":"total" },
         "columns": [
             { "index": "testrecid", "title": "编号", "type": "string" },
             { "index": "testname", "title": "名称", "type": "string" },
@@ -81,7 +82,7 @@
 
             },
             { "index": "description", "title": "描述", "type": "string" },
-            { "index": "testdate", "title": "日期", "type": "string" },
+            { "index": "testdate", "title": "日期", "type": "date", "dateFormat":"YYYY-MM-DD" },
             {
                 "index": "teststatus",
                 "title": "类型",
@@ -147,11 +148,17 @@
                     "placeholder": "请输入描述"
                 }
             },
+            "testage": {
+                "type": "number",
+                "title": "年龄",
+                "default":10
+            },
             "testdate": {
-                "type": "string",
+                "type": "number",
                 "title": "日期",
                 "widget": {
                     "id": "date",
+                    "format":"YYYY-MM-DD",
                     "placeholder": "请输入日期"
                 }
             },
@@ -159,7 +166,8 @@
                 "type": "string",
                 "title": "类型",
                 "widget": {
-                    "id": "select",
+                    "id": "select2",
+                    "url":"demo/api/data/valuelist/dataType",
                     "placeholder": "请选择类型"
                 }
             }            
