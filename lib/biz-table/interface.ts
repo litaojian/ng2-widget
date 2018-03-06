@@ -241,7 +241,7 @@ export interface SimpleTableButton {
      *  - `type=modal` 只会在 `确认` 时触发且 `modal` 参数有效
      * - reload：重新加载表格数据
      */
-    click?: 'reload' | ((record: any, modal?: any, instance?: SimpleTableComponent) => void);
+    click?: 'reload' | 'link' | ((record: any, modal?: any, instance?: SimpleTableComponent) => void);
     /**
      * 是否需要气泡确认框
      */

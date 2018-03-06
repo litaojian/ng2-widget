@@ -106,14 +106,11 @@
                 "title": "操作区",
                 "buttons": [{
                         "text": "删除",
-                        "type": "del",
-                        "click": "(record: any) => this.message.success(`成功删除【${record.name}】`)"
+                        "click": "delete"
                     },
                     {
                         "text": "编辑",
-                        "type": "modal",
-                        "component": "DemoModalComponent",
-                        "click": "(record: any, modal: any) => this.message.success(`重新加载页面，回传值：${JSON.stringify(modal)}`)"
+                        "click":"edit"
                     },
                     {
                         "text": "更多",

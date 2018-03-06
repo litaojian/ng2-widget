@@ -20,8 +20,8 @@ const routes: Routes = [{
     { path: ':dir/:pageName/list', component: BizQueryComponent },    
     { path: ':dir/:pageName/list/:pid', component: BizQueryComponent },        
     { path: ':dir/:pageName/create', component: BizFormComponent },     
-    { path: ':dir/:pageName/edit/:id', component: BizFormComponent },     
-    { path: ':dir/:pageName/view/:id', component: BizFormComponent }, 
+    { path: ':dir/:pageName/edit', component: BizFormComponent },     
+    { path: ':dir/:pageName/view', component: BizFormComponent }, 
     { path: ':dir/:pageName', redirectTo: ':dir/:pageName/list', pathMatch: 'full' },  
     { path: '', redirectTo: 'bizquery/index', pathMatch: 'full' }
   ]

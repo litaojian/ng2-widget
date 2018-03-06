@@ -43,13 +43,20 @@ export class BizQueryComponent implements OnInit, OnDestroy {
             form.reset({});
         },
         query: (form: any) => {
-            //console.log(JSON.stringify(form.value));
             //this.msg.success(JSON.stringify(form.value));
             this.onQuery(form.value);            
         },      
         add: (form: any) => {
-            //console.log("add:" + JSON.stringify(form.value));
             this.onAddNew(form.value);
+        },
+        delte: (row: any) => {
+            this.onDeleteRow(row);
+        },
+        edit: (row: any) => {
+            this.onEditRow(row);
+        },
+        view: (row: any) => {
+            this.onViewRow(row);
         }
     };
 
@@ -120,6 +127,14 @@ export class BizQueryComponent implements OnInit, OnDestroy {
         Object.keys(resultData["dataTable"]).forEach((propKey:string) => {
              this.dataTable[propKey] = resultData["dataTable"][propKey];
         });
+        this.dataTable.columns.forEach((column:any) =>{
+            if (column["buttons"]){
+                column["buttons"].forEach((button:any) => {
+                    button["click"] = this.actions[button["click"]];
+                });
+            }
+        });
+
         
         if (resultData["queryForm"]){
             this.queryForm.schema = {};

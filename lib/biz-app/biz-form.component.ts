@@ -219,7 +219,7 @@ export class BizFormComponent implements OnInit {
       url = this.bizService.getContextPath(this.router.url) + this.bizService.getListViewUrl();
       //console.log("current path=" + url);
       let len = url.split("/").length;
-      if (len >3 && !url.endsWith("/list")){
+      if (len > 4 && !url.endsWith("/list")){
         url = url.substring(0, url.lastIndexOf("/"));
       }else {
         url = url;

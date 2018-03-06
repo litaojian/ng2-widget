@@ -244,6 +244,10 @@ export class SimpleTableComponent implements OnInit, OnChanges, AfterViewInit, O
         }));
     }
 
+    openLink(path:string) {
+        
+    }
+
     load(pi = 1) {
         this.pi = pi;
         this._change('pi');
@@ -592,7 +596,7 @@ export class SimpleTableComponent implements OnInit, OnChanges, AfterViewInit, O
 
     btnClick(record: any, btn: SimpleTableButton) {
         if (btn.type === 'modal' || btn.type === 'static') {
-            const obj = {};
+            const obj:any = {};
             obj[btn.paramName || this.defConfig.modalParamsName || 'record'] = record;
             this.modal[btn.type === 'modal' ? 'open' : 'static'](
                 btn.component,
@@ -613,7 +617,7 @@ export class SimpleTableComponent implements OnInit, OnChanges, AfterViewInit, O
             switch (btn.click) {
                 case 'reload':
                     this.load();
-                    break;
+                    break;    
             }
         } else {
             btn.click(record, modal, this);
