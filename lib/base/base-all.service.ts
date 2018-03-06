@@ -1,9 +1,10 @@
 import { Injector, Optional, SkipSelf } from '@angular/core';
-import { HttpHeaders, HttpResponse, HttpRequest, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse, HttpRequest, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { enc } from 'crypto-js';
 import { ExtCookieService } from './services/cookies.service';
+import { HttpService } from './services/http.service';
 import { HttpClientService } from './services/httpclient.service';
 import { AppConfigService } from '../bizapp.config';
 
@@ -13,11 +14,9 @@ import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/delay';
 
-
-
 export class BaseService {
 
-	protected httpClient: HttpClientService;
+	protected httpService: HttpService;
 
 	protected appConfig:AppConfigService;
 	
@@ -31,11 +30,13 @@ export class BaseService {
 
 	protected apiContextPath:string;
 
+	
 	constructor(injector: Injector) {
-
-		this.httpClient = injector.get(HttpClientService);
 		this.appConfig = injector.get(AppConfigService);
+		let http = injector.get(HttpClient);
+		this.httpService = new HttpService(http);
 
+		//this.httpClientService.setClientId(this.appConfig.app.clientId);
 		//this.jsonp = injector.get(Jsonp);
 		//this.isTest  = !environment.production;
 		//this.clientId = environment['clientId'];
@@ -152,7 +153,7 @@ export class BaseService {
 		
 		let url = this.formatUrl(ajaxUrl);
 		//调用后台数据接口的时候使用的发送请求的方式
-		return this.httpClient.post(url, params, options)
+		return this.httpService.post(url, params, options)
 			.do(response => response as Object)
 			.catch(error => this.handleError(url,error));
 	}
@@ -167,7 +168,7 @@ export class BaseService {
 
 		let url = this.formatUrl(ajaxUrl);
 		//调用后台数据接口的时候使用的发送请求的方式
-		return this.httpClient.get(url, options)
+		return this.httpService.get(url, options)
 			.do(response => response)
 			.catch(error => this.handleError(url,error));
 	}
@@ -178,14 +179,14 @@ export class BaseService {
 		};		
 		let url = this.formatUrl(ajaxUrl);
 		//获取Html文本
-		return this.httpClient.get(url, options)
+		return this.httpService.get(url, options)
 			.catch(error => this.handleError(url,error));
 	}
 
 	getJSON(dataUrl: string, options?: Object): Observable<Object> {
 		//debugger;
 
-		return this.httpClient.get(dataUrl, options)
+		return this.httpService.get(dataUrl, options)
 			.do(response => response as Object)
 			.catch(error => this.handleError(dataUrl,error));
 	}
@@ -201,7 +202,7 @@ export class BaseService {
 			}
 		};
 
-		return this.httpClient.post(url, options)
+		return this.httpService.post(url, options)
 			.do(response => response as Object)
 			.catch(error => this.handleError(url,error));
 	}

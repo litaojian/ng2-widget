@@ -19,7 +19,6 @@ import { ValuelistDirective }  from './directives/valuelist.directive';
 import { ZxFormInputDirective }  from './directives/zx.forminput.directive';
 
 import { MenuTreeService } from './services/menutree.service';
-import { HttpClientService } from '../base/services/httpclient.service';
 
 import { ReuseTabService } from '@delon/abc';
 //import { AppConfigService } from '../bizapp.config';
@@ -46,7 +45,6 @@ const DIRECTIVES = [
 
 const SERVICES = [		
 	_HttpClient,
-	HttpClientService,
 	MenuTreeService,
 	ModalHelper,
 	ReuseTabService

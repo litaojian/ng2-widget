@@ -115,7 +115,7 @@ export class ValueListDataService extends BaseService {
 		}
 	
 		// invoke http request
-		return this.httpClient.get(url, options).toPromise()
+		return this.httpService.get(url, options).toPromise()
 			.then((result:any) => { 
 				//debugger;
 				if (tableColumns != null && result != null){

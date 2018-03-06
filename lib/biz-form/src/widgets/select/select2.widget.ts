@@ -4,6 +4,7 @@ import { ControlWidget } from '../../widget';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { SchemaFormOptions, NZ_SF_OPTIONS_TOKEN } from '../../../schema-form.options';
+import { HttpClientService } from '../../../../base/services/httpclient.service';
 
 @Component({
     selector: 'nz-sf-select2-widget',
@@ -94,12 +95,14 @@ export class Select2Widget extends ControlWidget implements OnInit, OnDestroy {
     data: any[] = [];
     private sc$: Subscription;
     private needSearch = false;
+    private httpClient:HttpClientService;
 
     constructor(injector: Injector,private http: HttpClient, @Inject(NZ_SF_OPTIONS_TOKEN) protected options: SchemaFormOptions) {
         super(options);
+        this.httpClient = new HttpClientService(http);
+        //
         console.log("Select2Widget init ..............");		
     }
-
 
     ngOnInit(): void {
         this.i = {

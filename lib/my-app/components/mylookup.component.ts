@@ -1,7 +1,7 @@
 import { Component, Optional, EventEmitter, Input, Output, OnInit, ViewChild, ElementRef, Renderer, Renderer2 } from '@angular/core';
 import { DefaultValueAccessor, ControlValueAccessor, NgModel, NgControl } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
-import { ValueListDataService } from '../services/valuelist.service';
+import { ValueListDataService } from '../../base/services/valuelist.service';
 declare const $: any;
 
 @Component({

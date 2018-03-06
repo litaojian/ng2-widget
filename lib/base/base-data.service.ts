@@ -161,7 +161,7 @@ export class BaseDataService extends BaseService {
 		//debugger;
 		const url = `${this.apiUrl}`;
 		const headers = this.getHttpHeader();
-		return this.httpClient.post(url, newRow, { "headers": headers })
+		return this.httpService.post(url, newRow, { "headers": headers })
 			.do(response => response as Object)
 			.catch(error => this.handleError(url,error));
 	}
@@ -171,7 +171,7 @@ export class BaseDataService extends BaseService {
 		let rowId = this.getValue(updatedRow, this.idField);
 		const url = `${this.apiUrl}/${rowId}`;
 		//debugger;
-		return this.httpClient
+		return this.httpService
 			.put(url, JSON.stringify(updatedRow), { "headers": headers })
 			.do(response => response as Object)
 			.catch(error => this.handleError(url,error));
@@ -180,7 +180,7 @@ export class BaseDataService extends BaseService {
 	delete(id: number): Observable<Object> {
 		const headers = this.getHttpHeader();
 		const url = `${this.apiUrl}/${id}`;
-		return this.httpClient.delete(url, { "headers": headers })
+		return this.httpService.delete(url, { "headers": headers })
 			.do(response => response as Object)
 			.catch(error => this.handleError(url,error));
 	}
@@ -193,7 +193,7 @@ export class BaseDataService extends BaseService {
 			// if (this.getIdField() != "id"){
 			// 	url = `${this.apiUrl}?${this.getIdField().toLowerCase()}=${id}`;
 			// }
-			return this.httpClient.get(url, { "headers": headers })
+			return this.httpService.get(url, { "headers": headers })
 				.do(response => {
 					let result:any = response;
 					//debugger;
@@ -213,7 +213,7 @@ export class BaseDataService extends BaseService {
 		let headers = this.getHttpHeader();		
 		const url = `${this.apiUrl}/${command}`;
 		//debugger;
-		return this.httpClient
+		return this.httpService
 			.post(url, JSON.stringify(params), { "headers": headers })
 			.map(response => response as Object)
 			.catch(error => this.handleError(url,error));
@@ -260,7 +260,7 @@ export class BaseDataService extends BaseService {
 		// debugger;
 		let headers = this.getHttpHeader();	
 		//调用后台数据接口的时候使用的发送请求的方式
-		return this.httpClient.post(url, params, { "headers": headers })
+		return this.httpService.post(url, params, { "headers": headers })
 			.do(response => response as Object)
 			.catch(error => this.handleError(url,error));
 	}
@@ -347,7 +347,7 @@ export class BaseDataService extends BaseService {
 				}
 				let options: Object[] = [];
 				if (rows != null) {
-					for (var item in rows) { // for acts as a foreach
+					for (let item in rows) { // for acts as a foreach
 						//console.log(rows[item]["keyname"]);
 						if (rows[item]["keyname"]){
 							options.push({ value: rows[item]["keyname"], label: rows[item]["valuetext"] });
@@ -389,7 +389,7 @@ export class BaseDataService extends BaseService {
 		}
 
 		// invoke http request
-		return this.httpClient.get(url, options)
+		return this.httpService.get(url, options)
 			.do((result:any) => {
 				//debugger;
 				let treeData :Object[] = [];

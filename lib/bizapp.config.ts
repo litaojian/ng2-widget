@@ -27,6 +27,8 @@ export class AppConfigService {
     // 上下文路径    
     apiContextPath:string;
 
+    clientId:string;
+
     // 应用配置参数
     app: App = {
         year: (new Date()).getFullYear()
