@@ -22,12 +22,14 @@ export class NzSelect2Component implements OnInit{
   //监听绑定的值，与外岑的ngModel相互绑定
   set selectedOption(val:any){
       if (val !== this.innerValue) {
+            // console.log(val);
             this.innerValue = val;
             this.onChangeCallback(val.value);
             this.dataBack.emit(val.value);  // 事件
         }
   }
   get selectedOption():any{
+      //  alert(this.innerValue);
        return this.innerValue;
   }
   options = [];//接收select的数组
@@ -42,12 +44,27 @@ export class NzSelect2Component implements OnInit{
 	  	text: 'text',
 		  value: 'value'
 	};
+  _init:any;
+  @Input()
+  set myMode(init:any){
+     this._init=init;
+  }
+  get myMode():any{
+    return this._init;
+  }
   @Input()
 	set dataSource(val: any) {
 		this._dataSource = val;
 		if ($.isArray(this._dataSource)) {      
         this.options=this._dataTransform(this._dataSource);//如果是本地数组或直接请求的数组直接复制
-	 	}
+	 	    if(this.myMode){
+                  for(let i=0;i<this.options.length;i++){
+                      if(this.options[i].value==this.myMode){
+                          this.selectedOption=this.options[i];
+                      }
+                  }
+         }
+    }
 	}
 	get dataSource(): any {
 		return this._dataSource;
@@ -70,6 +87,14 @@ export class NzSelect2Component implements OnInit{
             this.selectService.getValue(this.url).subscribe(data => { 
                data = data.rows || data.data;        
                this.options=this._dataTransform(data);
+              //  console.log(this.myMode);
+              if(this.myMode){
+                  for(let i=0;i<this.options.length;i++){
+                      if(this.options[i].value==this.myMode){
+                          this.selectedOption=this.options[i];
+                      }
+                  }
+              }
             });
         }     
   }
