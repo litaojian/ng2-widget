@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams, HttpResponse, HttpEvent, HttpRequest } from '@angular/common/http';
 import { ExtCookieService } from './cookies.service';
-import { HttpService } from './http.service';
+import { BaseHttpService } from '../base-http.service';
 
 import { Observable } from 'rxjs/Observable';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
@@ -13,7 +13,7 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/delay';
 
 
-export class HttpClientService extends HttpService {
+export class HttpClientService extends BaseHttpService {
 
 	private clientId:string;
 	private apiContextPath:string;
@@ -47,7 +47,19 @@ export class HttpClientService extends HttpService {
 		}
 		return headers;
     }
-    
+	
+	ajaxPost(ajaxUrl: string, params: any): Observable<Object> {
+		let options = {
+			headers: this.getHttpHeader(params["debug"])
+		};
+		
+		let url = this.formatUrl(ajaxUrl);
+		//调用后台数据接口的时候使用的发送请求的方式
+		return this._httpClient.post(url, params, options)
+			.do(response => response as Object)
+			.catch(error => this.handleErrorForObservable(url,error));
+	}
+
     ajaxGet(ajaxUrl: string, params: any): Observable<Object> {		
 		let options = {
 			headers: this.getHttpHeader(params["debug"]),
@@ -63,6 +75,16 @@ export class HttpClientService extends HttpService {
 			.catch(error => this.handleErrorForObservable(url,error));
     }
 	
+	ajaxLoad(ajaxUrl: string): Observable<Object> {
+		let options = {
+			headers: this.getHttpHeader()
+		};		
+		let url = this.formatUrl(ajaxUrl);
+		//获取Html文本
+		return this._httpClient.get(url, options)
+			.catch(error => this.handleErrorForObservable(url,error));
+	}
+
 
 	handleErrorForObservable(url:string, error: any): Observable<any> {
 		//console.error('An error occurred', error); // for demo purposes only

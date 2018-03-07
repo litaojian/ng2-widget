@@ -1,5 +1,5 @@
 import { Component, Inject, Injector, OnInit, OnDestroy } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams, HttpResponse, HttpEvent, HttpRequest } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { ControlWidget } from '../../widget';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';

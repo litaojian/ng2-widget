@@ -1,4 +1,5 @@
 import { Component, Directive, Optional, EventEmitter, Input, Output, OnInit, AfterViewInit, HostListener, ElementRef, Renderer } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { ValueListDataService } from '../../base/services/valuelist.service';
 
 
@@ -8,7 +9,7 @@ import { ValueListDataService } from '../../base/services/valuelist.service';
 		 <div [class]='styleClass'>{{fieldText}}<div>
 	`,
 	inputs:[],
-	providers: [ValueListDataService]
+	providers: []
 })
 
 
@@ -29,9 +30,11 @@ export class MyLabelComponent  implements OnInit, AfterViewInit {
 	fieldText:string;
 	
 	labelDataCache:Object[];
-      
-	constructor(private dataService: ValueListDataService) {
 
+	dataService: ValueListDataService
+      
+	constructor(private http: HttpClient) {
+		this.dataService = new ValueListDataService(http);
 	}
 
 	ngOnInit() {

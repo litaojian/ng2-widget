@@ -11,4 +11,6 @@ export { BizFormService } from '../biz-app/biz-form.service';
 export { BizFormComponent } from '../biz-app/biz-form.component';
 
 //export { BizPageModule } from './biz-page.module';
-export { HttpService } from '../base/services/http.service';
+export { BaseHttpService } from '../base/base-http.service';
+export { HttpClientService } from '../base/services/httpclient.service';
+export { ValueListDataService } from '../base/services/valuelist.service';

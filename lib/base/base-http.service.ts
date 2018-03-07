@@ -11,7 +11,7 @@ import * as moment from 'moment';
  * + 统一实现 loading
  * + 统一处理时间格式问题
  */
-export class HttpService {
+export class BaseHttpService {
 
     protected _httpClient: HttpClient;
     protected _loading = false;

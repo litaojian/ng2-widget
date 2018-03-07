@@ -160,14 +160,14 @@ export class BaseDataService extends BaseService {
 	create(newRow: Object): Observable<Object> {
 		//debugger;
 		const url = `${this.apiUrl}`;
-		const headers = this.getHttpHeader();
+		const headers = this.httpService.getHttpHeader();
 		return this.httpService.post(url, newRow, { "headers": headers })
 			.do(response => response as Object)
 			.catch(error => this.handleError(url,error));
 	}
 
 	update(updatedRow: Object): Observable<Object> {
-		const headers = this.getHttpHeader();
+		const headers = this.httpService.getHttpHeader();
 		let rowId = this.getValue(updatedRow, this.idField);
 		const url = `${this.apiUrl}/${rowId}`;
 		//debugger;
@@ -178,7 +178,7 @@ export class BaseDataService extends BaseService {
 	}
 
 	delete(id: number): Observable<Object> {
-		const headers = this.getHttpHeader();
+		const headers = this.httpService.getHttpHeader();
 		const url = `${this.apiUrl}/${id}`;
 		return this.httpService.delete(url, { "headers": headers })
 			.do(response => response as Object)
@@ -188,7 +188,7 @@ export class BaseDataService extends BaseService {
 	getDetail(id: number | string): Observable<Object> {
 		//debugger;
 		if (id >= 0) {
-			let headers = this.getHttpHeader();			
+			let headers = this.httpService.getHttpHeader();			
 			let url = `${this.apiUrl}/${id}`;
 			// if (this.getIdField() != "id"){
 			// 	url = `${this.apiUrl}?${this.getIdField().toLowerCase()}=${id}`;
@@ -210,7 +210,7 @@ export class BaseDataService extends BaseService {
 	}
 
 	executeCmd(command:string, params:Object): Observable<Object> {
-		let headers = this.getHttpHeader();		
+		let headers = this.httpService.getHttpHeader();		
 		const url = `${this.apiUrl}/${command}`;
 		//debugger;
 		return this.httpService
@@ -258,7 +258,7 @@ export class BaseDataService extends BaseService {
 			params["command"]  = "search";
 		}
 		// debugger;
-		let headers = this.getHttpHeader();	
+		let headers = this.httpService.getHttpHeader();	
 		//调用后台数据接口的时候使用的发送请求的方式
 		return this.httpService.post(url, params, { "headers": headers })
 			.do(response => response as Object)
@@ -296,7 +296,7 @@ export class BaseDataService extends BaseService {
 			url = typeName;
 		}
 		
-		let headers = this.getHttpHeader();
+		let headers = this.httpService.getHttpHeader();
 		let options = { "headers": headers };
 		let customUrl:string;
 		let tableColumns:string;
@@ -371,7 +371,7 @@ export class BaseDataService extends BaseService {
 	getTreeData(dataUrl: string): Observable<Object> {
 		//debugger;
 		let url = `${dataUrl}`;
-		let headers = this.getHttpHeader();
+		let headers = this.httpService.getHttpHeader();
 		let options = { "headers": headers };
 		let customUrl:string;
 		let tableColumns:string;

@@ -1,25 +1,20 @@
 import { Injectable,Injector } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { ArrayObservable } from 'rxjs/observable/ArrayObservable';
-import { BaseService } from '../../base/base-all.service';
+import { HttpClientService } from './httpclient.service';
 
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
-export class ValueListDataService extends BaseService {
+export class ValueListDataService extends HttpClientService {
 
 	private headers = new Headers({ 'Content-Type': 'application/json' });
 	protected apiUrl = '/api/data/valuelist';  // URL to web API
 
 	protected static CachedDataMap:Map<string, any> = new Map();
 
-	constructor(injector: Injector) {
-		super(injector);
-		//
-		//console.log("ValueListDataService constructor");
-	}
 
 	getValueList2(typeName: string): Observable<Object[]> {
 		//this.http.get('https://jsonplaceholder.typicode.com/posts/1')
@@ -115,7 +110,7 @@ export class ValueListDataService extends BaseService {
 		}
 	
 		// invoke http request
-		return this.httpService.get(url, options).toPromise()
+		return this._httpClient.get(url, options).toPromise()
 			.then((result:any) => { 
 				//debugger;
 				if (tableColumns != null && result != null){
