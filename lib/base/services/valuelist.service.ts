@@ -1,6 +1,7 @@
 import { Injectable,Injector } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { ArrayObservable } from 'rxjs/observable/ArrayObservable';
+import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { HttpClientService } from './httpclient.service';
 
 import 'rxjs/add/operator/catch';
@@ -56,22 +57,13 @@ export class ValueListDataService extends HttpClientService {
 		// invoke http request
 		return this.ajaxGet(url, options)
 			.map((result:any) => { 
-				debugger;
-				if (tableColumns != null && result != null){
-					let columns = tableColumns.split(",");
-					let data = result["data"];
-					for(let i = 0;i < data.length;i++){
-						data[i]["keyname"] = data[i][columns[0]];
-						data[i]["valuetext"] = data[i][columns[1]];
-						data[i]["value"] = data[i][columns[0]];
-						data[i]["label"] = data[i][columns[1]];						
-					}
-				}
+				//debugger;
+				result = this.buildResultData(result, tableColumns);
 				// cache the valuelist
 				ValueListDataService.CachedDataMap.set(typeName, result);			
 				return result;
 			})
-			.catch(this.handleError);
+			.catch(error => this.handleError(url,error));
 
 	}
 
@@ -113,26 +105,42 @@ export class ValueListDataService extends HttpClientService {
 		return this._httpClient.get(url, options).toPromise()
 			.then((result:any) => { 
 				//debugger;
-				if (tableColumns != null && result != null){
-					let columns = tableColumns.split(",");
-					let data = result["data"];
-					for(let i = 0;i < data.length;i++){
-						data[i]["keyname"] = data[i][columns[0]];
-						data[i]["valuetext"] = data[i][columns[1]];
-					}
-				}
+				result = this.buildResultData(result, tableColumns);
 				// cache the valuelist
 				ValueListDataService.CachedDataMap.set(typeName, result);			
 				return result;
 			})
-			.catch(this.handleError);
+			.catch(error => this.handleError(url,error));
 
 	}
 
-
-	handleError(error: any): Promise<any> {
-		//console.error('An error occurred', error); // for demo purposes only
-		return Promise.reject(error.message || error);
+	buildResultData(result:any, tableColumns:string){
+		let data;
+		if (!result){
+			return result;
+		}
+		if (result instanceof Array){
+			data = result;
+		}else{
+			data = result["data"];
+		}
+		if (tableColumns != null && result != null){
+			let columns = tableColumns.split(",");
+			for(let i = 0;i < data.length;i++){
+				data[i]["keyname"] = data[i][columns[0]];
+				data[i]["valuetext"] = data[i][columns[1]];
+				data[i]["value"] = data[i][columns[0]];
+				data[i]["label"] = data[i][columns[1]];						
+			}
+		}else{
+			for(let i = 0;i < data.length;i++){
+				if (!data[i]["value"] && data[i]["keyname"]){
+					data[i]["value"] = data[i]["keyname"];
+					data[i]["label"] = data[i]["valuetext"];							
+				}
+			}
+		}
+		return result;
 	}
 
 

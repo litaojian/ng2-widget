@@ -56,7 +56,7 @@ export class MyLabelComponent  implements OnInit, AfterViewInit {
 
 	}
 
-	getLabelData(dataSource):Promise<Object[]>{
+	getLabelData(dataSource:string):Promise<Object[]>{
 		if (this.labelDataCache != null){
 			//console.log("label data load from cache ....")			
 			return Promise.resolve(this.labelDataCache);
@@ -72,7 +72,7 @@ export class MyLabelComponent  implements OnInit, AfterViewInit {
 		//debugger;
 		//console.log("valuelist json:" + JSON.stringify(resultArray));
 		
-		let rows:Object[];
+		let rows:any;
 		if (resultArray["data"] != null){
 			rows = resultArray["data"]["options"];
 			if (rows == null){
@@ -85,7 +85,7 @@ export class MyLabelComponent  implements OnInit, AfterViewInit {
 		if (rows != null) {
 			//debugger;
             let value, label;
-			for (var item in rows) { // for acts as a foreach	
+			for (let item in rows) { // for acts as a foreach	
 				//console.log(rows[item]["keyname"]);
                 let key = rows[item]["keyname"];
 				if (rows[item]["keyname"]){

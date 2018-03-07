@@ -60,11 +60,10 @@
         }
     },
     "dataTable": {
-        "dataUrl": "demo/api/rest/testRec",
         "extraParams": {},
         "showTotal": true,
-        "pageSize":15,
-        "resReName": { "list": "rows", "total":"total" },
+        "pageSize": 15,
+        "resReName": { "list": "rows", "total": "total" },
         "columns": [
             { "index": "testrecid", "title": "编号", "type": "string" },
             { "index": "testname", "title": "名称", "type": "string" },
@@ -82,7 +81,7 @@
 
             },
             { "index": "description", "title": "描述", "type": "string" },
-            { "index": "testdate", "title": "日期", "type": "date", "dateFormat":"YYYY-MM-DD" },
+            { "index": "testdate", "title": "日期", "type": "date", "dateFormat": "YYYY-MM-DD" },
             {
                 "index": "teststatus",
                 "title": "类型",
@@ -110,7 +109,7 @@
                     },
                     {
                         "text": "编辑",
-                        "click":"edit"
+                        "click": "edit"
                     },
                     {
                         "text": "更多",
@@ -148,14 +147,14 @@
             "testage": {
                 "type": "number",
                 "title": "年龄",
-                "default":10
+                "default": 10
             },
             "testdate": {
                 "type": "number",
                 "title": "日期",
                 "widget": {
                     "id": "date",
-                    "format":"YYYY-MM-DD",
+                    "format": "YYYY-MM-DD",
                     "placeholder": "请输入日期"
                 }
             },
@@ -164,10 +163,10 @@
                 "title": "类型",
                 "widget": {
                     "id": "select2",
-                    "url":"demo/api/data/valuelist/dataType",
+                    "url": "docType",
                     "placeholder": "请选择类型"
                 }
-            }            
+            }
         },
         "required": ["name"],
         "button": {

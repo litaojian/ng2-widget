@@ -32,6 +32,7 @@ export class BizFormComponent implements OnInit {
     isNew: boolean = true;
     isReadOnly: boolean = false;
     pagePath:string;
+    rowId:any;
 
     actions:any = {
         backto: (form: any) => {
@@ -133,13 +134,13 @@ export class BizFormComponent implements OnInit {
         //this.valuelist = this.service.loadValueListData();
     
         // 根据参数读取指定记录
-        let rowId = this.activatedRoute.snapshot.params['id'];
+        this.rowId = this.activatedRoute.snapshot.params['id'];
         let queryParams = this.activatedRoute.snapshot.queryParams;    
-        if (!rowId){
-          rowId = queryParams['id'];
+        if (!this.rowId){
+          this.rowId = queryParams['id'];
         }
-        if (rowId){
-            this.bizService.getDetail(rowId).subscribe( (resultData:any) =>{
+        if (this.rowId){
+            this.bizService.getDetail(this.rowId).subscribe( (resultData:any) =>{
     
                 let tmpData = resultData["data"];
                 if (tmpData == null) {
@@ -192,6 +193,9 @@ export class BizFormComponent implements OnInit {
         });
 
     } else {
+      //
+      formData[this.bizService.getIdField()] = this.rowId;
+      
       this.bizService.update(formData)
         .subscribe((result:any) => {
           console.log(JSON.stringify(result));

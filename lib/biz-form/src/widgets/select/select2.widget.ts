@@ -4,7 +4,7 @@ import { ControlWidget } from '../../widget';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { SchemaFormOptions, NZ_SF_OPTIONS_TOKEN } from '../../../schema-form.options';
-import { HttpClientService } from '../../../../base/services/httpclient.service';
+import { ValueListDataService } from '../../../../base/services/valuelist.service';
 
 @Component({
     selector: 'nz-sf-select2-widget',
@@ -95,13 +95,13 @@ export class Select2Widget extends ControlWidget implements OnInit, OnDestroy {
     data: any[] = [];
     private sc$: Subscription;
     private needSearch = false;
-    private httpClient:HttpClientService;
+    private valuelistService:ValueListDataService;
 
-    constructor(injector: Injector,private http: HttpClient, @Inject(NZ_SF_OPTIONS_TOKEN) protected options: SchemaFormOptions) {
+    constructor(injector: Injector, @Inject(NZ_SF_OPTIONS_TOKEN) protected options: SchemaFormOptions) {
         super(options);
-        this.httpClient = new HttpClientService(http);
+        this.valuelistService = new ValueListDataService(injector.get(HttpClient));
         //
-        console.log("Select2Widget init ..............");		
+        //console.log("Select2Widget init ..............");		
     }
 
     ngOnInit(): void {
@@ -125,8 +125,8 @@ export class Select2Widget extends ControlWidget implements OnInit, OnDestroy {
         this.data = this.schema.enum || this.widgetData.data || [];
         this.needSearch = !!this.widgetData.searchChange;
         if (this.widgetData.url){
-            console.log("widgetData.url = " + this.widgetData.url);
-            this.http.get(this.widgetData.url, {})
+            //console.log("widgetData.url = " + this.widgetData.url);
+            this.valuelistService.getValueList2(this.widgetData.url)
                 .subscribe((response:any[]) => this.data = response);
         }
         // 

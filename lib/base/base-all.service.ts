@@ -148,7 +148,7 @@ export class BaseService {
 		//debugger;
 		return this.httpService.get(dataUrl, options)
 			.do(response => response as Object)
-			.catch(error => this.handleError(dataUrl,error));
+			.catch(error => this.httpService.handleError(dataUrl,error));
 	}
 
 	getDataByProxy(dataUrl: string): Observable<Object> {
@@ -164,7 +164,7 @@ export class BaseService {
 
 		return this.httpService.post(url, options)
 			.do(response => response as Object)
-			.catch(error => this.handleError(url,error));
+			.catch(error => this.httpService.handleError(url,error));
 	}
 
 	bulidSearchString(action: string, params: any) {
@@ -188,65 +188,9 @@ export class BaseService {
 	}
 
 	formatUrl(ajaxUrl: string): string {
-		//debugger;
-		let url = ajaxUrl;
-		let apiServerUrl = "remote/api/";
-		if (this.appConfig.SERVER_URL){
-			apiServerUrl = this.appConfig.SERVER_URL;			
-		}
-		if (!ajaxUrl.startsWith("http://") && ajaxUrl.startsWith("/api/")) {
-			url = ajaxUrl.replace("/api/", apiServerUrl);			
-			if (this.isTest){
-				//url = ajaxUrl.replace("remote/api/", "remote/mock/api/");				
-			}
-			let api_context_path = this.apiContextPath;
-			if (api_context_path != null && api_context_path != "/") {
-				url = ajaxUrl.replace("/api/", api_context_path + "/api/");
-			}
-		}
-		return url;
+		return this.httpService.formatUrl(ajaxUrl);
 	}
 
-	handleErrorForObservable(error: any): Observable<any> {
-		//console.error('An error occurred', error); // for demo purposes only
-		//return Observable.of(error.message || error);
-		return ErrorObservable.create(error.message || error);
-	}
-
-	handleErrorForPromise(error: any): Promise<any> {
-		//console.error('An error occurred', error); // for demo purposes only
-		return Promise.reject(error.message || error);
-	}
-
-
-	handleError(url:string, error: any): Promise<any> {
-		let result:any = {};
-		let _body = error["_body"];
-		if (_body){
-			console.log(error["status"] + ":" + _body);		
-		}else{
-			console.log("error url:" + url);			
-			console.log(error);
-		}
-		try {
-			let jsonResult = JSON.parse(_body);
-			result["resultCode"] = jsonResult["resultCode"];
-			result["resultMsg"] = jsonResult["resultMsg"];
-			result["description"] = jsonResult["未获得有效授权"];
-		} catch (error) {
-			result["resultCode"] = error["status"];
-			result["resultMsg"] = error["statusText"];
-			result["description"] = _body;
-		}
-
-		if (result["resultCode"] == null) {
-			result["resultCode"] = error["status"];
-			result["resultMsg"] = error["statusText"];
-			result["description"] = _body;
-		}
-		//console.error('An error occurred', error); // for demo purposes only
-		return Promise.reject(result);
-	}
 	/**
 	 * 
 	 * @param dataObject 

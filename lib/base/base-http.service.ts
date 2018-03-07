@@ -293,12 +293,20 @@ export class BaseHttpService {
      * @param {string} url URL地址
      * @param {*} [body] 请求参数
      */
-    put(url: string, body?: any, params?: any): Observable<any> {
+    put(url: string, body?: any, params?: any, options?: {
+        headers?: HttpHeaders | {[header: string]: string | string[]},
+        observe?: 'body' | 'events' | 'response',
+        reportProgress?: boolean,
+        responseType?: 'arraybuffer' | 'blob' | 'json' | 'text',
+        withCredentials?: boolean,
+    }): Observable<any> {     
         return this.request('PUT', url, Object.assign({
             params,
             body: body || null
-        }));
+        },options));
     }
+
+
 
     /**
      * `request` 请求

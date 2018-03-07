@@ -127,6 +127,12 @@ export class BizQueryComponent implements OnInit, OnDestroy {
         Object.keys(resultData["dataTable"]).forEach((propKey:string) => {
              this.dataTable[propKey] = resultData["dataTable"][propKey];
         });
+        
+        if (this.dataTable.dataUrl){
+            this.dataTable.dataUrl = this.bizService.formatUrl(this.dataTable.dataUrl);
+        }else{
+            this.dataTable.dataUrl = this.bizService.formatUrl(resultData.restAPI);
+        }
         this.dataTable.columns.forEach((column:any) =>{
             if (column["buttons"]){
                 column["buttons"].forEach((button:any) => {

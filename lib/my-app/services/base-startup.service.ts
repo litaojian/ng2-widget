@@ -3,7 +3,7 @@ import { Injectable, Injector } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { zip } from 'rxjs/observable/zip';
 import { AppConfigService } from '../../bizapp.config';
-import { BaseService } from '../../base/base-all.service';
+import { LocalStorageService } from '../../base/services/local-storage.service';
 
 /**
  * 用于应用启动时
@@ -14,11 +14,12 @@ export class BaseStartupService {
 
     protected appConfig:AppConfigService;
     protected httpClient:HttpClient;
+    protected localStorageService:LocalStorageService = new LocalStorageService();
 
     constructor(protected injector: Injector) { 
         //super(injector);
         this.appConfig = injector.get(AppConfigService);
-        this.httpClient = injector.get(HttpClient);
+        this.httpClient = injector.get(HttpClient);        
     }
     load(): Promise<any> {
         // only works with promises

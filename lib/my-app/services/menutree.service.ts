@@ -1,8 +1,9 @@
 import { Injectable, Injector, Optional } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { HttpClient } from '@angular/common/http';
+import { HttpClientService } from '../../base/services/httpclient.service';
 
 import { Observable } from 'rxjs/Observable';
-import { BaseService } from '../../base/base-all.service';
 
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/delay';
@@ -31,7 +32,7 @@ export class MenuInfo {
 }
 
 @Injectable()
-export class MenuTreeService extends BaseService {
+export class MenuTreeService {
 
     nodeId:number;
     parentId:string;
@@ -41,9 +42,13 @@ export class MenuTreeService extends BaseService {
     nodeHtml:string;
     nodeUrl:string;
     children:Object[] = [];
+    httpClient:HttpClientService;
 
     constructor(injector: Injector, private sanitizer: DomSanitizer) {
-        super(injector);
+
+        this.httpClient = new HttpClientService(injector.get(HttpClient));
+
+        //super(injector);
         //console.log("PortalService init.......");
     }
 
@@ -164,7 +169,7 @@ export class MenuTreeService extends BaseService {
             url = "assets/menu.json";
         }
 
-        return this.ajaxGet(url, {})
+        return this.httpClient.ajaxGet(url, {})
             .do((result:any) => {
                 //debugger;
                 //console.log("debug1:" + JSON.stringify(result));

@@ -37,5 +37,9 @@ export class StartupService extends BaseStartupService {
         // 应用信息：包括站点名、描述、年份
         this.appConfig.setApp(res.app);
         this.appConfig.SERVER_URL = res.SERVER_URL;
+        //
+        this.localStorageService.set("apiServerUrl","local/api/");
+        //this.localStorageService.set("apiServerUrl","demo/api/");
+        
     }
 }

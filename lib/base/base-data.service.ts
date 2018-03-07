@@ -163,18 +163,19 @@ export class BaseDataService extends BaseService {
 		const headers = this.httpService.getHttpHeader();
 		return this.httpService.post(url, newRow, { "headers": headers })
 			.do(response => response as Object)
-			.catch(error => this.handleError(url,error));
+			.catch(error => this.httpService.handleError(url,error));
 	}
 
 	update(updatedRow: Object): Observable<Object> {
 		const headers = this.httpService.getHttpHeader();
+		const queryParams = {};
 		let rowId = this.getValue(updatedRow, this.idField);
 		const url = `${this.apiUrl}/${rowId}`;
 		//debugger;
 		return this.httpService
-			.put(url, JSON.stringify(updatedRow), { "headers": headers })
+			.put(url, updatedRow, queryParams)
 			.do(response => response as Object)
-			.catch(error => this.handleError(url,error));
+			.catch(error => this.httpService.handleError(url,error));
 	}
 
 	delete(id: number): Observable<Object> {
@@ -182,18 +183,19 @@ export class BaseDataService extends BaseService {
 		const url = `${this.apiUrl}/${id}`;
 		return this.httpService.delete(url, { "headers": headers })
 			.do(response => response as Object)
-			.catch(error => this.handleError(url,error));
+			.catch(error => this.httpService.handleError(url,error));
 	}
 
 	getDetail(id: number | string): Observable<Object> {
 		//debugger;
 		if (id >= 0) {
 			let headers = this.httpService.getHttpHeader();			
+			let params = {};
 			let url = `${this.apiUrl}/${id}`;
 			// if (this.getIdField() != "id"){
 			// 	url = `${this.apiUrl}?${this.getIdField().toLowerCase()}=${id}`;
 			// }
-			return this.httpService.get(url, { "headers": headers })
+			return this.httpService.get(url, params, { "headers": headers })
 				.do(response => {
 					let result:any = response;
 					//debugger;
@@ -202,7 +204,7 @@ export class BaseDataService extends BaseService {
 		            }
 					return result;
 				})
-				.catch(error => this.handleError(url,error));
+				.catch(error => this.httpService.handleError(url,error));
 		} else {
 			return Observable.create(new Object());
 		}
@@ -216,7 +218,7 @@ export class BaseDataService extends BaseService {
 		return this.httpService
 			.post(url, JSON.stringify(params), { "headers": headers })
 			.map(response => response as Object)
-			.catch(error => this.handleError(url,error));
+			.catch(error => this.httpService.handleError(url,error));
 	}
 
 
@@ -262,7 +264,7 @@ export class BaseDataService extends BaseService {
 		//调用后台数据接口的时候使用的发送请求的方式
 		return this.httpService.post(url, params, { "headers": headers })
 			.do(response => response as Object)
-			.catch(error => this.handleError(url,error));
+			.catch(error => this.httpService.handleError(url,error));
 	}
 
 	callServiceAPI(apiUrl: string, params: any): Observable<Object> {
@@ -363,7 +365,7 @@ export class BaseDataService extends BaseService {
 				BaseDataService.CachedDataMap.set(typeName, options);
 				return options;
 			})
-			.catch(this.handleError);
+			.catch(error => this.httpService.handleError(url,error));
 
 	}
 
@@ -406,7 +408,7 @@ export class BaseDataService extends BaseService {
 				//debugger;
 				return treeData;
 			})
-			.catch(this.handleErrorForObservable);
+			.catch(error => this.httpService.handleError(url,error));
 
 	}
 
