@@ -38,8 +38,8 @@ export class StartupService extends BaseStartupService {
         this.appConfig.setApp(res.app);
         this.appConfig.SERVER_URL = res.SERVER_URL;
         //
-        this.localStorageService.set("apiServerUrl","local/api/");
-        //this.localStorageService.set("apiServerUrl","demo/api/");
+        //this.localStorageService.set("apiServerUrl","local/api/");
+        this.localStorageService.set("apiServerUrl","demo/api/");
         
     }
 }

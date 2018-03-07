@@ -49,7 +49,7 @@ export class BizQueryComponent implements OnInit, OnDestroy {
         add: (form: any) => {
             this.onAddNew(form.value);
         },
-        delte: (row: any) => {
+        delete: (row: any) => {
             this.onDeleteRow(row);
         },
         edit: (row: any) => {
@@ -187,15 +187,15 @@ export class BizQueryComponent implements OnInit, OnDestroy {
     onDeleteRow(row: any): void {
         if (confirm("是否要删除此条数据?")) {
           //debugger;
-        //   this.bizService.delete(row[this.idField])
-        //     .then(result => {
-        //       console.log("debug:" + JSON.stringify(result));
-        //       if (result == null || result["resultCode"] == 0) {
-        //         this.tableData = this.tableData.filter(r => r !== row);
-        //       } else {
-        //         alert(result["resultMsg"]);
-        //       }
-        //     });
+          this.bizService.delete(row[this.bizService.getIdField()])
+            .subscribe((result:any) => {
+              console.log("debug:" + JSON.stringify(result));
+              if (result == null || result["resultCode"] == 0) {
+                this.myDataTable.load();
+              } else {
+                alert(result["resultMsg"]);
+              }
+            });
         }
       }
     
