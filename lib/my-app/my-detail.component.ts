@@ -67,6 +67,8 @@ export class BaseDetailComponent implements OnInit {
     // 设置页标题
     if (this.reuseTabService && queryParams['title']){
       this.reuseTabService.title = queryParams['title'] + "-详情";
+    }else{
+      this.reuseTabService.title = "未设置-详情";
     }
 
     if (rowId){

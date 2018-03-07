@@ -254,7 +254,7 @@ export class BaseListComponent implements OnInit, AfterViewInit {
     }
 
     params["backtoUrl"] = this.service.base64Encode(this.router.url);
-    params["title"] = this.reuseTabService.title;
+    params["title"] = this.reuseTabService.getTitle(this.router.url);
     
     let url = this.getUrl(this.service.getContextPath(this.router.url) + this.service.getFormViewUrl());
     this.router.navigate([url, 'create'], { queryParams: params });
@@ -265,7 +265,7 @@ export class BaseListComponent implements OnInit, AfterViewInit {
     this.selectedRow = row;
     let url = this.getUrl(this.service.getContextPath(this.router.url) + this.service.getFormViewUrl());
     let rowId = this.getValue(row, this.service.getIdField());
-    let title = this.reuseTabService.title;
+    let title = this.reuseTabService.getTitle(this.router.url);
     this.router.navigate([url, 'edit'], { queryParams: {'id':rowId,'title':title} });
     //console.log("edit the row:" + row);
   }
@@ -275,7 +275,7 @@ export class BaseListComponent implements OnInit, AfterViewInit {
     this.selectedRow = row;
     let url = this.getUrl(this.service.getContextPath(this.router.url) + this.service.getFormViewUrl());
     let rowId = this.getValue(row, this.service.getIdField());
-    let title = this.reuseTabService.title;    
+    let title = this.reuseTabService.getTitle(this.router.url);  
     this.router.navigate([url, 'view'], { queryParams: {'id':rowId,'title':title} });
     //console.log(" show the row:" + row);
   }
