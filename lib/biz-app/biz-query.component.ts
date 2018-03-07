@@ -90,6 +90,11 @@ export class BizQueryComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {           
+        
+        if (this.activatedRoute.snapshot.queryParams["backto"] == "yes") {
+            this.restoreCurrentState();
+        }
+        
         //     
         this.pagePath = "#" + this.router.url;
 		
@@ -116,6 +121,8 @@ export class BizQueryComponent implements OnInit, OnDestroy {
         this.bizService.ajaxGet(`assets/pages/${dir}/${pageName}.json`, {}).subscribe(
             resultData => this.processLoadPageDef(resultData)        
         );	
+
+        
     }
     //     
     processLoadPageDef(resultData:any){
@@ -140,7 +147,6 @@ export class BizQueryComponent implements OnInit, OnDestroy {
                 });
             }
         });
-
         
         if (resultData["queryForm"]){
             this.queryForm.schema = {};
