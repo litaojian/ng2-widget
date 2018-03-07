@@ -1,6 +1,6 @@
 export { MyAppModule } from './my-app.module';
-export { BaseListComponent } from './my-list.component';
 export { QueryForm } from './my-list.component';
+export { BaseListComponent } from './my-list.component';
 export { BaseDetailComponent } from './my-detail.component';
 export { BaseService } from '../base/base-all.service';
 export { BaseStartupService } from '../base/base-startup.service';

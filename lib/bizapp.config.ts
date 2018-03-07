@@ -23,9 +23,11 @@ export class AppConfigService {
 
     protected localStorageService:LocalStorageService = new LocalStorageService();
 
-    constructor() {
+    constructor(serverUrl?:string) {
         console.log("AppConfigService init ................................");
-        this.setServerURL("remote/api/");
+        if (serverUrl){
+            this.setServerURL(serverUrl);
+        }        
     }    
     // 服务器地址
     SERVER_URL:string;
@@ -53,7 +55,13 @@ export class AppConfigService {
 
     setServerURL(url:string){
         this.SERVER_URL = url;
-        this.localStorageService.set("apiServerUrl",url || "remote/api/");
+        this.localStorageService.set("apiServerUrl", url);
     }
 
+    getApiServerUrl(){
+        if (!this.SERVER_URL){
+            this.SERVER_URL = this.localStorageService.get("apiServerUrl");
+        }
+        return this.SERVER_URL;
+    }
 }

@@ -14,6 +14,8 @@ export * from './my-app';
 export * from './biz-table';
 export * from './yg-select';
 export * from './yg-loading';
+export { AppConfigService } from './bizapp.config';
+
 // export * from './yg-treeselect';
 
 
