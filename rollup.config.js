@@ -35,6 +35,9 @@ const globals = {
     'moment': 'moment',
     'file-saver': 'file-saver',
     'z-schema': 'z-schema',
+    'jquery': 'jquery',
+    'jquery-sparkline': 'jquery-sparkline',
+    'angular-tree-component': 'angular-tree-component',
 
     '@delon/theme': '@delon/theme',
     '@delon/abc': '@delon/abc',

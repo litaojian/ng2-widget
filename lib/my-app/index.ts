@@ -3,6 +3,8 @@ export { BaseListComponent } from './my-list.component';
 export { QueryForm } from './my-list.component';
 export { BaseDetailComponent } from './my-detail.component';
 export { BaseService } from '../base/base-all.service';
+export { BaseStartupService } from '../base/base-startup.service';
+
 export { BaseDataService } from '../base/base-data.service';
 export { MenuTreeService } from './services/menutree.service';
 export { BizQueryService } from '../biz-app/biz-query.service';

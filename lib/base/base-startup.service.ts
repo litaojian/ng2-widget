@@ -2,8 +2,8 @@ import { Router } from '@angular/router';
 import { Injectable, Injector } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { zip } from 'rxjs/observable/zip';
-import { AppConfigService } from '../../bizapp.config';
-import { LocalStorageService } from '../../base/services/local-storage.service';
+import { AppConfigService } from '../bizapp.config';
+
 
 /**
  * 用于应用启动时
@@ -13,12 +13,12 @@ import { LocalStorageService } from '../../base/services/local-storage.service';
 export class BaseStartupService {
 
     protected httpClient:HttpClient;
-    protected localStorageService:LocalStorageService = new LocalStorageService();
+    
     protected appConfig:AppConfigService = new AppConfigService();
 
     constructor(protected injector: Injector) { 
         //super(injector);
-        this.httpClient = injector.get(HttpClient);        
+        this.httpClient = injector.get(HttpClient);
     }
     load(): Promise<any> {
         // only works with promises
@@ -41,6 +41,7 @@ export class BaseStartupService {
         const res: any = configData;
         // 应用信息：包括站点名、描述、年份
         this.appConfig.setApp(res.app);
-        this.appConfig.SERVER_URL = res.SERVER_URL;
+        this.appConfig.setServerURL(res.SERVER_URL);
+
     }
 }

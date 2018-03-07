@@ -78,5 +78,5 @@ export class MyAppModule {
 			{ provide: ALAIN_THEME_OPTIONS, useValue: {} }
 		]
 	};
-}  
+  }  
 }

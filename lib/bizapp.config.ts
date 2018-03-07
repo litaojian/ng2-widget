@@ -1,4 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
+import { LocalStorageService } from './base/services/local-storage.service';
+
 
 export interface BizAppConfig {
     [key: string]: any;
@@ -19,8 +21,11 @@ export interface App {
 @Injectable()
 export class AppConfigService {
 
+    protected localStorageService:LocalStorageService = new LocalStorageService();
+
     constructor() {
-        console.log("AppConfigService init ................................")
+        console.log("AppConfigService init ................................");
+        this.setServerURL("remote/api/");
     }    
     // 服务器地址
     SERVER_URL:string;
@@ -48,6 +53,7 @@ export class AppConfigService {
 
     setServerURL(url:string){
         this.SERVER_URL = url;
+        this.localStorageService.set("apiServerUrl",url || "remote/api/");
     }
 
 }

@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 import { Injectable, Injector } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { zip } from 'rxjs/observable/zip';
-import { BaseStartupService } from '@yg-widget/my-app/services/base-startup.service';
+import { BaseStartupService } from '@yg-widget/base/base-startup.service';
 
 /**
  * 用于应用启动时
@@ -35,10 +35,8 @@ export class StartupService extends BaseStartupService {
         const res: any = configData;
         // 应用信息：包括站点名、描述、年份
         this.appConfig.setApp(res.app);
-        this.appConfig.SERVER_URL = res.SERVER_URL;
-        //
-        //this.localStorageService.set("apiServerUrl","local/api/");
-        this.localStorageService.set("apiServerUrl","demo/api/");
+        this.appConfig.setServerURL(res.SERVER_URL);
+
         
     }
 }
