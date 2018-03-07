@@ -3,7 +3,6 @@ import { Injectable, Injector } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { zip } from 'rxjs/observable/zip';
 import { BaseStartupService } from '@yg-widget/my-app/services/base-startup.service';
-import { AppConfigService } from '../../lib/bizapp.config';
 
 /**
  * 用于应用启动时

@@ -12,13 +12,12 @@ import { LocalStorageService } from '../../base/services/local-storage.service';
 @Injectable()
 export class BaseStartupService {
 
-    protected appConfig:AppConfigService;
     protected httpClient:HttpClient;
     protected localStorageService:LocalStorageService = new LocalStorageService();
+    protected appConfig:AppConfigService = new AppConfigService();
 
     constructor(protected injector: Injector) { 
         //super(injector);
-        this.appConfig = injector.get(AppConfigService);
         this.httpClient = injector.get(HttpClient);        
     }
     load(): Promise<any> {

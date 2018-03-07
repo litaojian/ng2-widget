@@ -21,7 +21,6 @@ import { ZxFormInputDirective }  from './directives/zx.forminput.directive';
 import { MenuTreeService } from './services/menutree.service';
 import { HttpClientService } from '../base/services/httpclient.service';
 
-//import { AppConfigService } from '../bizapp.config';
 
 import { _HttpClient, ModalHelper } from '@delon/theme';
 import { AlainThemeOptions, ALAIN_THEME_OPTIONS } from '@delon/theme';

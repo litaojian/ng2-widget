@@ -17,7 +17,7 @@ export class BaseService {
 
 	protected httpService: HttpClientService;
 
-	protected appConfig:AppConfigService;
+	protected appConfig:AppConfigService = new AppConfigService();
 	
 	protected injector: Injector;
 
@@ -31,7 +31,7 @@ export class BaseService {
 
 	
 	constructor(injector: Injector) {
-		this.appConfig = injector.get(AppConfigService);
+		
 		let http = injector.get(HttpClient);
 		this.httpService = new HttpClientService(http);
 

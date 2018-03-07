@@ -34,6 +34,7 @@ const globals = {
     'crypto-js': 'crypto-js',
     'moment': 'moment',
     'file-saver': 'file-saver',
+    'z-schema': 'z-schema',
 
     '@delon/theme': '@delon/theme',
     '@delon/abc': '@delon/abc',

@@ -260,9 +260,10 @@ export class BaseDataService extends BaseService {
 			params["command"]  = "search";
 		}
 		// debugger;
-		let headers = this.httpService.getHttpHeader();	
+		let headers = this.httpService.getHttpHeader();
+		let body = {};	
 		//调用后台数据接口的时候使用的发送请求的方式
-		return this.httpService.post(url, params, { "headers": headers })
+		return this.httpService.post(url, body, params, { "headers": headers })
 			.do(response => response as Object)
 			.catch(error => this.httpService.handleError(url,error));
 	}

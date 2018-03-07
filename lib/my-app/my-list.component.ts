@@ -1,6 +1,7 @@
 import { Component, ViewChild, ContentChildren, OnInit, AfterViewInit, Injector } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { BaseDataService } from '../base/base-data.service';
+import { ReuseTabService } from '@delon/abc';
 
 export class QueryForm {
   command: string = "search";
@@ -35,6 +36,7 @@ export class BaseListComponent implements OnInit, AfterViewInit {
   valuelist:Object = {};
 
   service: BaseDataService;
+  reuseTabService:ReuseTabService;
 
   activatedRoute: ActivatedRoute;
   router: Router;
@@ -45,6 +47,7 @@ export class BaseListComponent implements OnInit, AfterViewInit {
     this.activatedRoute = injector.get(ActivatedRoute);
     this.router = injector.get(Router);
     this.idField = this.service.getIdField();
+    this.reuseTabService = injector.get(ReuseTabService);
 
     //this.messageService = injector.get(NzMessageService);
     //this.modalService = injector.get(NzModalService);
@@ -251,6 +254,8 @@ export class BaseListComponent implements OnInit, AfterViewInit {
     }
 
     params["backtoUrl"] = this.service.base64Encode(this.router.url);
+    params["title"] = this.reuseTabService.title;
+    
     let url = this.getUrl(this.service.getContextPath(this.router.url) + this.service.getFormViewUrl());
     this.router.navigate([url, 'create'], { queryParams: params });
   }
@@ -260,7 +265,8 @@ export class BaseListComponent implements OnInit, AfterViewInit {
     this.selectedRow = row;
     let url = this.getUrl(this.service.getContextPath(this.router.url) + this.service.getFormViewUrl());
     let rowId = this.getValue(row, this.service.getIdField());
-    this.router.navigate([url, 'edit'], { queryParams: {'id':rowId} });
+    let title = this.reuseTabService.title;
+    this.router.navigate([url, 'edit'], { queryParams: {'id':rowId,'title':title} });
     //console.log("edit the row:" + row);
   }
 
@@ -269,7 +275,8 @@ export class BaseListComponent implements OnInit, AfterViewInit {
     this.selectedRow = row;
     let url = this.getUrl(this.service.getContextPath(this.router.url) + this.service.getFormViewUrl());
     let rowId = this.getValue(row, this.service.getIdField());
-    this.router.navigate([url, 'view'], { queryParams: {'id':rowId} });
+    let title = this.reuseTabService.title;    
+    this.router.navigate([url, 'view'], { queryParams: {'id':rowId,'title':title} });
     //console.log(" show the row:" + row);
   }
 

@@ -3,8 +3,9 @@ import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl } from
 import { Location } from '@angular/common';
 
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { DataObject, BaseDataService } from '../base/base-data.service';
+import { ReuseTabService } from '@delon/abc';
 
+import { DataObject, BaseDataService } from '../base/base-data.service';
 
 export class BaseDetailComponent implements OnInit {
 
@@ -16,6 +17,7 @@ export class BaseDetailComponent implements OnInit {
   isReadOnly: boolean = false;
   isDialog: boolean = false;
 
+  reuseTabService:ReuseTabService;
   service: BaseDataService;
   activatedRoute: ActivatedRoute;
   router: Router;
@@ -32,8 +34,10 @@ export class BaseDetailComponent implements OnInit {
     this.activatedRoute = injector.get(ActivatedRoute);
     this.router = injector.get(Router);
     this.location = injector.get(Location);
-    this.formBuilder = injector.get(FormBuilder);
 
+    this.reuseTabService = injector.get(ReuseTabService);
+
+    this.formBuilder = injector.get(FormBuilder);    
     this.formGroup = this.formBuilder.group({});
     
     //set the view url
@@ -59,8 +63,13 @@ export class BaseDetailComponent implements OnInit {
     if (!rowId){
       rowId = queryParams['id'];
     }
+    // 设置页标题
+    if (this.reuseTabService && queryParams['title']){
+      this.reuseTabService.title = queryParams['title'] + "-详情";
+    }
 
-    this.service.getDetail(rowId).subscribe( (resultData:any) =>{
+    if (rowId){
+      this.service.getDetail(rowId).subscribe( (resultData:any) =>{
 
         let tmpData = resultData["data"];
         if (tmpData == null) {
@@ -85,8 +94,8 @@ export class BaseDetailComponent implements OnInit {
           //console.log(this.formData);
           
         }
-    });
-
+      });
+    }
     // this.activatedRoute.params
     //   // (+) converts string 'id' to a number
     //   .switchMap((params: Params) => this.service.getDetail(+params['id']))

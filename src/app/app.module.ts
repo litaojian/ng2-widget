@@ -7,8 +7,6 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 
-//import { SharedModule } from './shared/shared.module';
-import { AppConfigService } from '../../lib/bizapp.config';
 import { StartupService } from './startup.service';
 
 import { AppComponent } from './app.component';
@@ -45,7 +43,6 @@ export function StartupServiceFactory(startupService: StartupService): Function 
     
   ],
   providers: [
-    AppConfigService,
     StartupService,
     //{ provide: LOCALE_ID, useValue: 'zh-Hans' },
     {
