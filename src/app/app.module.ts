@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
-
+import { ReuseTabService } from '@delon/abc';
 import { StartupService } from './startup.service';
 
 import { AppComponent } from './app.component';
@@ -50,7 +50,8 @@ export function StartupServiceFactory(startupService: StartupService): Function 
       useFactory: StartupServiceFactory,
       deps: [StartupService],
       multi: true
-    }
+    },
+    ReuseTabService
 
   ],
   bootstrap: [AppComponent]

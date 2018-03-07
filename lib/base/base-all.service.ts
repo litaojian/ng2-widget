@@ -5,7 +5,6 @@ import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { enc } from 'crypto-js';
 import { ExtCookieService } from './services/cookies.service';
 import { HttpClientService } from './services/httpclient.service';
-import { AppConfigService } from '../bizapp.config';
 
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
@@ -16,8 +15,6 @@ import 'rxjs/add/operator/delay';
 export class BaseService {
 
 	protected httpService: HttpClientService;
-
-	protected appConfig:AppConfigService = new AppConfigService();
 	
 	protected injector: Injector;
 
@@ -28,7 +25,6 @@ export class BaseService {
 	protected clientId:string;
 
 	protected apiContextPath:string;
-
 	
 	constructor(injector: Injector) {
 		
