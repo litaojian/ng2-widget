@@ -43,7 +43,8 @@ export class BaseDetailComponent implements OnInit {
     //set the view url
     let url = this.router.url;
     this.service.setPageViewUrl(url, "form");
-
+    //
+    console.log("BaseDetailComponent init .....................");
   }
 
   ngOnInit() {

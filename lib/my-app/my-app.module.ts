@@ -20,8 +20,6 @@ import { ZxFormInputDirective }  from './directives/zx.forminput.directive';
 
 import { MenuTreeService } from './services/menutree.service';
 
-import { ReuseTabService } from '@delon/abc';
-
 import { _HttpClient, ModalHelper } from '@delon/theme';
 import { AlainThemeOptions, ALAIN_THEME_OPTIONS } from '@delon/theme';
 
@@ -45,8 +43,7 @@ const DIRECTIVES = [
 const SERVICES = [		
 	_HttpClient,
 	MenuTreeService,
-	ModalHelper,
-	ReuseTabService
+	ModalHelper
 ];
 
 

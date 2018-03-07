@@ -55,12 +55,12 @@ export class BaseListComponent implements OnInit, AfterViewInit {
     //set the view url
     let url = this.router.url;
     this.service.setPageViewUrl(url, "list");
-    //this.slimLoader = injector.get(SlimLoadingBarService);
-
+    //
+    console.log("BaseListComponent init .....................");
   }
 
   ngOnInit() {
-    console.log("base-list onInit..........");
+    //console.log("base-list onInit..........");
     // load the all valuelist
     this.valuelist = this.service.loadValueListData();
 
