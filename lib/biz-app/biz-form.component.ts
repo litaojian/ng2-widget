@@ -139,6 +139,7 @@ export class BizFormComponent implements OnInit {
         if (!this.rowId){
           this.rowId = queryParams['id'];
         }
+        
         if (this.rowId){
             this.bizService.getDetail(this.rowId).subscribe( (resultData:any) =>{
     
