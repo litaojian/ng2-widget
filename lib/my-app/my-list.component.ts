@@ -100,7 +100,7 @@ export class BaseListComponent implements OnInit, AfterViewInit {
     this.router.navigate([path]);
   }
 
-  onPageLinkClick(pageParam: Object) {
+  onPageLinkClick(pageParam: any) {
     // 获取最新页码
     if (pageParam["pageSize"]){
       this.pageSize = pageParam["pageSize"];
@@ -111,7 +111,7 @@ export class BaseListComponent implements OnInit, AfterViewInit {
       this.pageIndex = <number>pageParam;
     }
 
-    let queryParams = {};
+    let queryParams:any = {};
     let keys = this.getKeys(this.queryForm)
     for (let i = 0; i < keys.length; i++) {
       queryParams[keys[i]] = this.queryForm[keys[i]];
@@ -128,7 +128,7 @@ export class BaseListComponent implements OnInit, AfterViewInit {
     //console.log("MyListComponent goPage:" + cmd);
   }
 
-  goPageUrl(url): void {
+  goPageUrl(url:string): void {
     this.router.navigateByUrl(url);
   }
 

@@ -30,11 +30,14 @@ export class BaseDetailComponent implements OnInit {
     injector: Injector,
     service: BaseDataService
   ) {
+    //
+    console.log("BaseDetailComponent init .....................");
+
     this.service = service;
     this.activatedRoute = injector.get(ActivatedRoute);
     this.router = injector.get(Router);
     this.location = injector.get(Location);
-
+    //
     this.reuseTabService = injector.get(ReuseTabService);
 
     this.formBuilder = injector.get(FormBuilder);    
@@ -43,8 +46,14 @@ export class BaseDetailComponent implements OnInit {
     //set the view url
     let url = this.router.url;
     this.service.setPageViewUrl(url, "form");
-    //
-    console.log("BaseDetailComponent init .....................");
+
+    // 设置页标题
+    let queryParams = this.activatedRoute.snapshot.queryParams;  
+    if (this.reuseTabService && queryParams['title']){
+      this.activatedRoute.snapshot.data.reuseTitle = queryParams['title'] + "-详情";      
+    }else{
+      this.reuseTabService.title = "未设置-详情";
+    }
   }
 
   ngOnInit() {
@@ -64,13 +73,7 @@ export class BaseDetailComponent implements OnInit {
     if (!rowId){
       rowId = queryParams['id'];
     }
-    // 设置页标题
-    if (this.reuseTabService && queryParams['title']){
-      this.reuseTabService.title = queryParams['title'] + "-详情";
-    }else{
-      this.reuseTabService.title = "未设置-详情";
-    }
-
+    
     if (rowId){
       this.service.getDetail(rowId).subscribe( (resultData:any) =>{
 
@@ -201,8 +204,7 @@ export class BaseDetailComponent implements OnInit {
     }else{
       _queryParams["backto"] = "yes";
     }
-    
-    console.log("backto url:" + url);
+    //console.log("backto url:" + url);
     this.router.navigate([url],{queryParams:_queryParams});
   }
 
