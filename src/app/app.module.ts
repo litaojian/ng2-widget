@@ -31,6 +31,7 @@ export function StartupServiceFactory(startupService: StartupService): Function 
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot([
+        { path: 'admin/org',  loadChildren: './demo/biz-org/biz-org.module#BizOrganiztionModule'},
         { path: 'testRec',  loadChildren: './demo/test-rec/testRec.module#TestRecModule'},
         { path: 'testRec2', loadChildren: './demo/test-rec2/testRec2.module#TestRec2Module'},
         { path: 'testRec3', loadChildren: './demo/test-rec3/testRec3.module#TestRec3Module'},
@@ -38,7 +39,7 @@ export function StartupServiceFactory(startupService: StartupService): Function 
         { path: 'page',     loadChildren: './my-bizpage.module#MyBizPageModule'},        
         { path: 'home', component: HomeComponent },
         { path: 'other', component: OtherComponent },
-        { path: '', redirectTo: 'page/demo/testRec', pathMatch: 'full'}
+        { path: '', redirectTo: 'admin/org/index', pathMatch: 'full'}
     ], { useHash: true })
     
   ],

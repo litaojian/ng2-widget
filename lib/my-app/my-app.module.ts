@@ -5,6 +5,9 @@ import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform
 import { FormsModule,ReactiveFormsModule}    from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
+//import { NzTreeModule } from 'ng-tree-antd';
+import { TreeModule } from 'angular-tree-component';
+
 import { MySelectComponent }  from './components/myselect.component';
 import { MyUploaderComponent }  from './components/myuploader.component';
 import { MyLookupComponent }  from './components/mylookup.component';
@@ -54,10 +57,12 @@ const SERVICES = [
 		ReactiveFormsModule,
 		RouterModule,
 		HttpClientModule,
-		NgZorroAntdModule
+		NgZorroAntdModule,
+		TreeModule
   ],
   exports:[		
 		HttpClientModule,
+		TreeModule,
 		...COMPONENTS,
 		...DIRECTIVES		
   ],

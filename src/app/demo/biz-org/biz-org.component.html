@@ -1,0 +1,20 @@
+<div>
+    <tree-root [nodes]="nodes" [options]="options" (activate)="getKKou($event)"></tree-root>
+</div>
+<div class="mb-md">
+    <nz-input [(ngModel)]="queryParams.testname" name="name" nzPlaceHolder="请输入姓名" style="width: 100px"></nz-input>
+    <button nz-button (click)="st.load(1)" [nzType]="'primary'">搜索</button>
+    <button nz-button (click)="params = {}; st.reset()">重置</button>
+    <!--  -->
+    <button nz-button (click)="st.export()">Export</button>
+</div>
+<div nz-row [nzGutter]="16">
+    <div nz-col nzMd="4" nzSm="12" nzXs="24">
+        <tree-root [treeNodes]="nodes" [options]="treeOptions"></tree-root>
+    </div>
+    <div nz-col nzMd="12" nzSm="12" nzXs="24">
+        <simple-table #st [data]="dataTable.dataUrl" [extraParams]="params" [total]="10" [columns]="dataTable.columns" [resReName]="dataTable.resReName" showTotal="dataTable.showTotal">
+        </simple-table>
+    </div>
+
+</div>
