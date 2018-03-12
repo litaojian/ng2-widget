@@ -5,7 +5,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { SharedModule } from '../../shared/shared.module';
 
-
 import { BizOrganizationComponent } from './biz-org.component';
 import { TestRecService } from '../test-rec/testRec.service';
 
@@ -13,7 +12,7 @@ import { TestRecService } from '../test-rec/testRec.service';
 const routes: Routes = [
   { path: 'index', component: BizOrganizationComponent},
   { path: '/', redirectTo: '', pathMatch: 'full' },
-  { path: '', redirectTo: '32', pathMatch: 'full' }  
+  { path: '', redirectTo: 'index', pathMatch: 'full' }  
 ];
 
 @NgModule({
