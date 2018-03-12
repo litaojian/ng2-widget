@@ -10,8 +10,7 @@ import { BizTreeTableComponent } from '@yg-widget/biz-app';
     templateUrl: './biz-org.component.html'
 })
 export class BizOrganizationComponent extends BizTreeTableComponent implements OnInit, OnDestroy {
- 
-    
+     
     constructor(injector: Injector, private service: TestRecService) {
         super(injector);
         this.bizService = service;

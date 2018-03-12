@@ -15,7 +15,7 @@ import { BizQueryComponent, BizQueryService,BizFormComponent, BizFormService } f
 const routes: Routes = [{
   path: '',
   //component: PageContainerComponent,
-  children: [
+  children: [    
     { path: 'test/dialog/:id', component: BizQueryComponent },        
     { path: ':dir/:pageName/list', component: BizQueryComponent },    
     { path: ':dir/:pageName/list/:pid', component: BizQueryComponent },        

@@ -3,6 +3,8 @@ import { CommonModule }   from '@angular/common';
 import { FormsModule,ReactiveFormsModule}    from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
+import { TreeModule } from 'angular-tree-component';
+
 import { BizSimpleTableModule } from '../biz-table';
 import { BizSchemaFormModule } from '../biz-form';
 
@@ -32,6 +34,7 @@ const SERVICES = [
 		ReactiveFormsModule,
 		RouterModule,
 		NgZorroAntdModule,
+		TreeModule,
 		BizSimpleTableModule.forRoot(),
 		BizSchemaFormModule.forRoot(),
   ],

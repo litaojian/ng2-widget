@@ -35,8 +35,8 @@ export class BizTreeTableComponent extends BizQueryComponent implements OnInit, 
         displayField: '',
         childrenField: 'children'
     };
-
-    treeNodes: any[] = [];//保存树的数据
+    //保存树的数据
+    _treeNodes: any[] = []; 
 
     constructor(injector: Injector) {
         super(injector);
@@ -44,4 +44,10 @@ export class BizTreeTableComponent extends BizQueryComponent implements OnInit, 
         console.log("BizTreeTableComponent init ..............");
     }
 
+    get treeNodes(){
+        return this._treeNodes;
+    }
+    set treeNodes(treeNodes:any[]){
+        this._treeNodes = treeNodes;
+    }
 }
