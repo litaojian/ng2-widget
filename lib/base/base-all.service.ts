@@ -18,7 +18,7 @@ export class BaseService {
 	
 	protected injector: Injector;
 
-	protected isTest: boolean = true;
+	protected isTest: boolean = false;
 
 	protected isHashMode = true;
 
@@ -37,6 +37,12 @@ export class BaseService {
 		//this.clientId = environment['clientId'];
 	}
 
+	get production(){
+		return !this.isTest;
+	}
+	set production(val:boolean){
+		this.isTest = !val;
+	}
 	
 	public getLoginId():Object {
 		let loginId = ExtCookieService.load(this.clientId + "-loginId");		
