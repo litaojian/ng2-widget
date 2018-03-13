@@ -1,0 +1,34 @@
+// Compatibility for browsers.
+
+// rotate for ie8 and blow
+.ie-rotate(@rotation) {
+  // -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=@{rotation})";
+}
+
+// rotate for ie8 and blow
+// degrees unit
+.ie-rotate-via-degrees(@degrees) {
+}
+
+// support rotate for all browsers
+.cross-rotate(@degrees) {
+  .rotate(@degrees);
+  .ie-rotate-via-degrees(@degrees);
+}
+
+// Placeholder text
+.placeholder(@color: @input-placeholder-color) {
+  // Firefox
+  &::-moz-placeholder {
+    color: @color;
+    opacity: 1; // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526
+  }
+  // Internet Explorer 10+
+  &:-ms-input-placeholder {
+    color: @color;
+  }
+  // Safari and Chrome
+  &::-webkit-input-placeholder {
+    color: @color;
+  }
+}

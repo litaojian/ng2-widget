@@ -371,7 +371,7 @@ export class BaseDataService extends BaseService {
 	}
 
 
-	getTreeData(dataUrl: string): Observable<Object> {
+	getTreeData(dataUrl: string): Observable<Object[]> {
 		//debugger;
 		let url = `${dataUrl}`;
 		let headers = this.httpService.getHttpHeader();
@@ -392,6 +392,7 @@ export class BaseDataService extends BaseService {
 		}
 
 		// invoke http request
+		url = this.formatUrl(url);
 		return this.httpService.get(url, options)
 			.do((result:any) => {
 				//debugger;
