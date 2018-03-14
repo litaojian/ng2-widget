@@ -373,6 +373,8 @@ export class BaseDataService extends BaseService {
 
 	getTreeData(dataUrl: string): Observable<Object[]> {
 		//debugger;
+		//console.debug("getTreeData begin ..............");
+
 		let url = `${dataUrl}`;
 		let headers = this.httpService.getHttpHeader();
 		let options = { "headers": headers };
@@ -393,16 +395,19 @@ export class BaseDataService extends BaseService {
 
 		// invoke http request
 		url = this.formatUrl(url);
-		return this.httpService.get(url, options)
+		let params = {};
+		return this.httpService.get(url, params, options)
 			.do((result:any) => {
 				//debugger;
 				let treeData :Object[] = [];
 				if (tableColumns != null && result != null){
 					let columns = tableColumns.split(",");
-					let idColumn = columns[0];
-					let parentColumn = columns[1];
-					let textColumn = columns[2];
-					result = this.buildTree(result, idColumn, parentColumn, textColumn);
+					if (columns.length == 3){
+						let idColumn = columns[0];
+						let parentColumn = columns[1];
+						let textColumn = columns[2];
+						result = this.buildTree(result, idColumn, parentColumn, textColumn);	
+					}
 				}
 				if (result["rows"] != null && result["children"] == null && result["resultCode"] == 0){
 					result = result["rows"];

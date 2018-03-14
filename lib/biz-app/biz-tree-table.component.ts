@@ -5,7 +5,7 @@ import { NzMessageService } from 'ng-zorro-antd';
 import { SFSchema, FormProperty } from '../biz-form';
 import { SimpleTableColumn, SimpleTableButton, SimpleTableFilter, SimpleTableComponent } from '../biz-table';
 import { BizQueryService } from './biz-query.service';
-import { BizQueryComponent } from '@yg-widget';
+import { BizQueryComponent } from './biz-query.component';
 
 import { ITreeOptions } from 'angular-tree-component';
 
@@ -13,18 +13,21 @@ import { ITreeOptions } from 'angular-tree-component';
     selector: 'biz-tree-table',
     template: `
     <div class="mb-md">
-        <p>tree panel</p>
+        <nz-input [(ngModel)]="queryParams.testname" name="name" nzPlaceHolder="请输入姓名" style="width: 100px"></nz-input>
+        <button nz-button (click)="st.load(1)" [nzType]="'primary'">搜索</button>
+        <button nz-button (click)="params = {}; st.reset()">重置</button>
+        <!--  -->
+        <button nz-button (click)="st.export()">Export</button>
     </div>
-    <div class="mb-md">
-        <my-simple-form #myQueryForm [layout]="queryForm.layout"
-                [schema]="queryForm.schema"
-                [model]="queryForm.model"
-                [actions]="actions">
-        </my-simple-form>
+    <div nz-row [nzGutter]="24">
+        <div nz-col nzMd="4" nzSm="12" nzXs="24">
+            <zx-tree tree-id="menuTree2" data-source="/api/data/tree/orgTree?url=void(0)" (nodeClick)="onTreeNodeClick($event)" has-checkbox="false" key-title="name" key-id="nodeId" key-pid="parentId" class="tree"></zx-tree>
+        </div>
+        <div nz-col nzMd="16" nzSm="16" nzXs="24">
+            <simple-table #st [data]="dataTable.dataUrl" [extraParams]="params" [total]="10" [columns]="dataTable.columns" [resReName]="dataTable.resReName" showTotal="dataTable.showTotal">
+            </simple-table>
+        </div>
     </div>
-    <my-simple-table #myDataTable [data]="dataTable.dataUrl" [extraParams]="queryParams" [columns]="dataTable.columns"
-        [resReName]="dataTable.resReName" showTotal="dataTable.showTotal" [ps]="dataTable.pageSize" >
-    </my-simple-table>
     `,
     providers: []
 })
@@ -50,4 +53,6 @@ export class BizTreeTableComponent extends BizQueryComponent implements OnInit, 
     set treeNodes(treeNodes:any[]){
         this._treeNodes = treeNodes;
     }
+
+
 }

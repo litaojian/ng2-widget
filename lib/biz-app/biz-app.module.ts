@@ -3,8 +3,8 @@ import { CommonModule }   from '@angular/common';
 import { FormsModule,ReactiveFormsModule}    from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
-import { TreeModule } from 'angular-tree-component';
 
+import { MyTreeModule } from '../my-tree';
 import { BizSimpleTableModule } from '../biz-table';
 import { BizSchemaFormModule } from '../biz-form';
 
@@ -12,9 +12,14 @@ import { BizFormService } from './biz-form.service';
 import { BizQueryService } from './biz-query.service';
 import { BizQueryComponent } from './biz-query.component';
 import { BizFormComponent } from './biz-form.component';
+import { BizPageComponent } from './biz-page.component';
+import { BizPageService } from './biz-page.service';
+import { BizTreeTableComponent } from './biz-tree-table.component';
 
 
 const COMPONENTS = [
+	BizPageComponent,
+	BizTreeTableComponent,
 	BizQueryComponent,
 	BizFormComponent
 ];
@@ -22,6 +27,7 @@ const DIRECTIVES = [
 ];
 
 const SERVICES = [	
+	BizPageService,
 	BizFormService,
 	BizQueryService
 ];
@@ -34,7 +40,7 @@ const SERVICES = [
 		ReactiveFormsModule,
 		RouterModule,
 		NgZorroAntdModule,
-		TreeModule,
+		MyTreeModule,
 		BizSimpleTableModule.forRoot(),
 		BizSchemaFormModule.forRoot(),
   ],

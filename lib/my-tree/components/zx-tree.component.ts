@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output, OnInit, AfterViewInit, AfterViewChecked, ViewChild, ElementRef, Renderer } from '@angular/core';
 import { Router, NavigationExtras, ActivatedRoute, Params } from '@angular/router';
-import { ZxTreeService } from './zxtree.service';
+import { ZxTreeService } from './zx-tree.service';
 declare const $: any;
 
 @Component({
@@ -18,7 +18,7 @@ export class ZxTreeComponent implements OnInit, AfterViewInit, AfterViewChecked 
 
 	@Input('tree-id')
 	public treeId: string;
-
+	
 	@Input('key-id')
 	public idKey: string = "nid";
 

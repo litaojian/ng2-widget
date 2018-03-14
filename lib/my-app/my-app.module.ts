@@ -11,8 +11,6 @@ import { MySelectComponent }  from './components/myselect.component';
 import { MyUploaderComponent }  from './components/myuploader.component';
 import { MyLookupComponent }  from './components/mylookup.component';
 import { MyInputComponent }  from './components/myinput.component';
-import { ZxTreeComponent }  from './components/zxtree.component';
-import { MyTreeSelectComponent }  from './components/mytreeselect.component';
 import { MyLabelComponent }  from './components/mylabel.component';
 import { MyTableComponent }  from './components/mytable.component';
 
@@ -31,9 +29,7 @@ const COMPONENTS = [
 	MyLabelComponent,
 	MyLookupComponent,
 	MyUploaderComponent,
-	MyInputComponent,
-	ZxTreeComponent,
-	MyTreeSelectComponent
+	MyInputComponent
 ];
 const DIRECTIVES = [		
 	ZxFormInputDirective,

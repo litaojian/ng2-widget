@@ -39,7 +39,7 @@ export function StartupServiceFactory(startupService: StartupService): Function 
         { path: 'page',     loadChildren: './my-bizpage.module#MyBizPageModule'},        
         { path: 'home', component: HomeComponent },
         { path: 'other', component: OtherComponent },
-        { path: '', redirectTo: 'admin/org/index', pathMatch: 'full'}
+        { path: '', redirectTo: 'page/demo/organization/tree', pathMatch: 'full'}
     ], { useHash: true })
     
   ],

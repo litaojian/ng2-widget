@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 
 import { SharedModule } from './shared/shared.module';
-import { BizQueryComponent, BizQueryService,BizFormComponent, BizFormService } from '@yg-widget/biz-app';
+import { BizPageComponent, BizQueryComponent, BizQueryService,BizFormComponent, BizFormService, BizTreeTableComponent } from '@yg-widget/biz-app';
 
 //import { BizQueryComponent, BizQueryService } from '@yg-widget/my-app';
 //import { BizFormComponent, BizFormService } from '@yg-widget/my-app';
@@ -16,14 +16,17 @@ const routes: Routes = [{
   path: '',
   //component: PageContainerComponent,
   children: [    
-    { path: 'test/dialog/:id', component: BizQueryComponent },        
+    { path: ':type/:dir/:pageName/list', component: BizPageComponent },
+    { path: ':dir/:pageName/tree', component: BizTreeTableComponent },    
     { path: ':dir/:pageName/list', component: BizQueryComponent },    
     { path: ':dir/:pageName/list/:pid', component: BizQueryComponent },        
     { path: ':dir/:pageName/create', component: BizFormComponent },     
     { path: ':dir/:pageName/edit', component: BizFormComponent },     
     { path: ':dir/:pageName/view', component: BizFormComponent }, 
+
     { path: ':dir/:pageName', redirectTo: ':dir/:pageName/list', pathMatch: 'full' },  
-    { path: '', redirectTo: 'bizquery/index', pathMatch: 'full' }
+    { path: 'test/dialog/:id', component: BizQueryComponent },        
+    { path: '', redirectTo: 'tree/demo/organization/list', pathMatch: 'full' }
   ]
 }];
 

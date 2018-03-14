@@ -5,7 +5,7 @@ import { NzMessageService } from 'ng-zorro-antd';
 import { SFSchema, FormProperty } from '../biz-form';
 import { SimpleTableColumn, SimpleTableButton, SimpleTableFilter, SimpleTableComponent } from '../biz-table';
 import { BizQueryService } from './biz-query.service';
-import { ReuseTabService } from '@delon/abc';
+import { BizPageComponent } from './biz-page.component';
 
 @Component({
     selector: 'app-biz-query',
@@ -23,16 +23,11 @@ import { ReuseTabService } from '@delon/abc';
     `,
     providers: []
 })
-export class BizQueryComponent implements OnInit, OnDestroy {
+export class BizQueryComponent extends BizPageComponent implements OnInit, OnDestroy {
 
     @ViewChild('myDataTable')
     myDataTable: SimpleTableComponent;
 
-    activatedRoute: ActivatedRoute;
-    router: Router;
-    bizService: BizQueryService;
-    msgService: NzMessageService;
-    reuseTabService: ReuseTabService;
     pagePath: string;
     selectedRow: Object;
     pageIndex: number = 1;
@@ -80,12 +75,7 @@ export class BizQueryComponent implements OnInit, OnDestroy {
 
 
     constructor(injector: Injector) {
-        this.msgService = injector.get(NzMessageService);
-        this.bizService = injector.get(BizQueryService);
-        this.reuseTabService = injector.get(ReuseTabService);
-        this.activatedRoute = injector.get(ActivatedRoute);
-        this.router = injector.get(Router);
-
+        super(injector);
         console.log("BizQueryComponent init ..............");
     }
 

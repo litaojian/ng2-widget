@@ -1,9 +1,12 @@
 {
-    "title": "TestRec",
-    "pageType": "TableView",
-    "restAPI": "/api/rest/testRec",
-    "idField": "testrecid",
+    "title": "组织机构管理",
+    "pageType": "TreeView",
+    "restAPI": "/api/rest/organization",
+    "idField": "orgid",
     "actions": {},
+    "navTree": {
+        "dataUrl": "/api/data/tree/orgTree"
+    },
     "queryParams": { "filter": "all" },
     "queryForm": {
         "debug": false,

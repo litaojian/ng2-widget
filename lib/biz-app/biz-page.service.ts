@@ -1,9 +1,9 @@
 import { Injectable,Injector } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { BizPageService }  from './biz-page.service';
+import { BaseDataService }  from '../base/base-data.service';
 
 @Injectable()
-export class BizQueryService extends BizPageService {
+export class BizPageService extends BaseDataService {
 
     constructor(injector: Injector) {
         super(injector);

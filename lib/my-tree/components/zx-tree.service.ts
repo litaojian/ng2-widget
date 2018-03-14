@@ -2,6 +2,7 @@ import { Injectable, Injector, EventEmitter} from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
 import { ArrayObservable } from 'rxjs/observable/ArrayObservable';
+
 import { BaseDataService } from '../../base/base-data.service';
 declare const $: any;
 
@@ -25,6 +26,7 @@ export class ZxTreeService extends BaseDataService {
 	
     constructor(injector: Injector) {
 		super(injector);
+		console.log("ZxTreeService init ..................");
 	}
 
 	/**

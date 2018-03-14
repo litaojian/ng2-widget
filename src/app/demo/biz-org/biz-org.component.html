@@ -7,7 +7,7 @@
 </div>
 <div nz-row [nzGutter]="24">
     <div nz-col nzMd="4" nzSm="12" nzXs="24">
-        <zx-tree tree-id="menuTree2" data-source="/api/data/tree/menuTree?url=void(0)" (nodeClick)="onTreeNodeClick($event)" has-checkbox="false" key-title="name" key-id="nodeId" key-pid="parentId" class="tree"></zx-tree>
+        <zx-tree tree-id="menuTree2" data-source="/api/data/tree/orgTree?url=void(0)" (nodeClick)="onTreeNodeClick($event)" has-checkbox="false" key-title="name" key-id="nodeId" key-pid="parentId" class="tree"></zx-tree>
     </div>
     <div nz-col nzMd="16" nzSm="16" nzXs="24">
         <simple-table #st [data]="dataTable.dataUrl" [extraParams]="params" [total]="10" [columns]="dataTable.columns" [resReName]="dataTable.resReName" showTotal="dataTable.showTotal">
