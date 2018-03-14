@@ -336,6 +336,7 @@ export class BaseListComponent implements OnInit, AfterViewInit {
     //console.log("rawValue:" + rawValue);
 
   }
+  
   onFormFieldInput(): void {
     let fieldNames = this.getKeys(this.queryForm);
     for (var i = 0; i < fieldNames.length; i++) {

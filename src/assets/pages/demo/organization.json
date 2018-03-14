@@ -11,41 +11,11 @@
     "queryForm": {
         "debug": false,
         "properties": {
-            "testdate": {
+            "orgname": {
                 "type": "string",
-                "title": "日期",
-                "placeholder": "请选择日期范围",
+                "title": "部门名称",
                 "widget": {
-                    "id": "date-range",
-                    "format": "yyyy-mm-dd",
-                    "start": "开始日期",
-                    "end": "结束日期",
-                    "style": {
-                        "width": "180px"
-                    }
-                }
-            },
-            "testname": {
-                "type": "string",
-                "title": "名称",
-                "widget": {
-                    "placeholder": "请输入名称"
-                }
-            },
-            "testtype": {
-                "type": "string",
-                "title": "分类",
-                "widget": {
-                    "id": "select",
-                    "data": [
-                        { "value": "DRAFT", "label": "DRAFT" },
-                        { "value": "2", "label": "分类2" },
-                        { "value": "3", "label": "分类3" }
-                    ],
-                    "placeholder": "请选择分类",
-                    "style": {
-                        "width": "120px"
-                    }
+                    "placeholder": "请输部门入名称"
                 }
             }
         },
@@ -69,25 +39,10 @@
         "pageSize": 15,
         "resReName": { "list": "rows", "total": "total" },
         "columns": [
-            { "index": "testrecid", "title": "编号", "type": "string" },
-            { "index": "testname", "title": "名称", "type": "string" },
+            { "index": "orgcode", "title": "机构代码", "type": "string" },
+            { "index": "orgname", "title": "机构名称", "type": "string" },
             {
-                "index": "testage",
-                "title": "年龄",
-                "sorter": "(a, b) => a.testage - b.testage",
-                "filters": [
-                    { "text": "20岁以下", "value": [0, 20] },
-                    { "text": "20-25岁", "value": [20, 25] },
-                    { "text": "25岁以上", "value": [25, 100] }
-                ],
-                "filterMultiple": false,
-                "filter": "(filter: SimpleTableFilter, record: any) => record.testage >= filter.value[0] && record.testage <= filter.value[1]"
-
-            },
-            { "index": "description", "title": "描述", "type": "string" },
-            { "index": "testdate", "title": "日期", "type": "date", "dateFormat": "YYYY-MM-DD" },
-            {
-                "index": "teststatus",
+                "index": "orgtype",
                 "title": "类型",
                 "type": "string",
                 "filters": [{ "text": "male", "value": "male" }, { "text": "female", "value": "female" }],
@@ -114,18 +69,6 @@
                     {
                         "text": "编辑",
                         "click": "edit"
-                    },
-                    {
-                        "text": "更多",
-                        "children": [{
-                                "text": "过期",
-                                "click": "(record: any) => this.message.error(`过期【${record.name}】`)"
-                            },
-                            {
-                                "text": "重新开始",
-                                "click": "(record: any) => this.message.success(`重新开始【${record.name}】`)"
-                            }
-                        ]
                     }
                 ]
             }

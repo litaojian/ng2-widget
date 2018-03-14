@@ -6,6 +6,7 @@ import { SFSchema } from '..//biz-form';
 import { BizFormService } from './biz-form.service';
 import { FormComponent } from '../biz-form';
 import { ReuseTabService } from '@delon/abc';
+import { BizPageComponent } from './biz-page.component';
 
 @Component({
     selector: 'app-biz-form',
@@ -18,16 +19,10 @@ import { ReuseTabService } from '@delon/abc';
     `,
     providers:[BizFormService]
 })
-export class BizFormComponent implements OnInit {
+export class BizFormComponent extends BizPageComponent implements OnInit {
 
     @ViewChild('myMainForm')
     myMainForm:FormComponent;
-
-    activatedRoute: ActivatedRoute;
-    router: Router;
-    bizService:BizFormService;
-    msgService: NzMessageService;
-    reuseTabService:ReuseTabService;
 
     isNew: boolean = true;
     isReadOnly: boolean = false;
@@ -53,50 +48,12 @@ export class BizFormComponent implements OnInit {
 
 
     constructor(injector: Injector) {
-        this.msgService = injector.get(NzMessageService);
-        this.bizService = injector.get(BizFormService);
-        this.reuseTabService = injector.get(ReuseTabService);
-
-        this.activatedRoute = injector.get(ActivatedRoute);
-        this.router = injector.get(Router);
+        super(injector);
         //
         console.log("BizFormComponent init ..............");
     }
-
-    ngOnInit() {           
-        //     
-        this.pagePath = "#" + this.router.url;
-		
-        let len = this.activatedRoute.snapshot.url.length;
-        let dir, pageName="nosetting", cmd;
-
-        dir = this.activatedRoute.snapshot.url[0].path;		
-		if (len > 1){
-            pageName = this.activatedRoute.snapshot.url[1].path;
-        }
-        if (len > 2){
-            cmd = this.activatedRoute.snapshot.url[2].path;		
-        }
-			
-		if (len >= 4){
-			//this.parentId = +this.activatedRoute.snapshot.url[3].path;			
-		}		
-        if (dir){
-            dir = "demo";
-        }        
-        if (pageName){
-            pageName = "testRec";
-        }
-        this.bizService.ajaxGet(`assets/pages/${dir}/${pageName}.json`, {}).subscribe(
-            resultData => {
-                this.processLoadPageDef(resultData);
-                this.processLoadFormData();
-            } 
-            
-        );	
-    }
     //     
-    processLoadPageDef(resultData:any){
+    onPageInit(resultData:any){
         
         if (this.reuseTabService){
             this.reuseTabService.title = resultData["title"];
@@ -120,6 +77,8 @@ export class BizFormComponent implements OnInit {
         this.bizService.setPageViewUrl(this.router.url, "form");
 
         //console.log("page def:" , this.queryForm);
+
+        this.processLoadFormData();
     }
     
     processLoadFormData() {

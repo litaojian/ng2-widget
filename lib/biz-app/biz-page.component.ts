@@ -52,25 +52,25 @@ export class BizPageComponent implements OnInit {
         if (len >= 4) {
             //this.parentId = +this.activatedRoute.snapshot.url[3].path;			
         }
-        if (dir) {
+        if (!dir) {
             dir = "demo";
         }
-        if (pageName) {
+        if (!pageName) {
             pageName = "testRec";
         }
+
         this.bizService.ajaxGet(`assets/pages/${dir}/${pageName}.json`, {}).subscribe(
-            resultData => this.processLoadPageDef(resultData)
+            resultData => this.onPageInit(resultData)
         );
 
 
     }
     //     
-    processLoadPageDef(resultData: any) {
+    onPageInit(resultData: any) {
 
         if (this.reuseTabService) {
             this.reuseTabService.title = resultData["title"];
         }
-
         //console.log("page def:" , this.queryForm);
     }
 

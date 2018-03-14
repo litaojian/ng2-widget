@@ -79,42 +79,8 @@ export class BizQueryComponent extends BizPageComponent implements OnInit, OnDes
         console.log("BizQueryComponent init ..............");
     }
 
-    ngOnInit() {
-
-        if (this.activatedRoute.snapshot.queryParams["backto"] == "yes") {
-            this.restoreCurrentState();
-        }
-        //     
-        this.pagePath = "#" + this.router.url;
-
-        let len = this.activatedRoute.snapshot.url.length;
-        let dir, pageName = "nosetting", cmd;
-
-        dir = this.activatedRoute.snapshot.url[0].path;
-        if (len > 1) {
-            pageName = this.activatedRoute.snapshot.url[1].path;
-        }
-        if (len > 2) {
-            cmd = this.activatedRoute.snapshot.url[2].path;
-        }
-
-        if (len >= 4) {
-            //this.parentId = +this.activatedRoute.snapshot.url[3].path;			
-        }
-        if (dir) {
-            dir = "demo";
-        }
-        if (pageName) {
-            pageName = "testRec";
-        }
-        this.bizService.ajaxGet(`assets/pages/${dir}/${pageName}.json`, {}).subscribe(
-            resultData => this.processLoadPageDef(resultData)
-        );
-
-
-    }
     //     
-    processLoadPageDef(resultData: any) {
+    onPageInit(resultData: any) {
 
         if (this.reuseTabService) {
             this.reuseTabService.title = resultData["title"];

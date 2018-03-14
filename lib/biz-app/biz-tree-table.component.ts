@@ -41,6 +41,12 @@ export class BizTreeTableComponent extends BizQueryComponent implements OnInit, 
     //保存树的数据
     _treeNodes: any[] = []; 
 
+    _treeDataUrl:string;
+
+    navTree: any = {
+        dataUrl: ''
+    }
+    
     constructor(injector: Injector) {
         super(injector);
         //
@@ -54,5 +60,26 @@ export class BizTreeTableComponent extends BizQueryComponent implements OnInit, 
         this._treeNodes = treeNodes;
     }
 
+    //     
+    onPageInit(resultData: any) {
+        //
+        super.onPageInit(resultData);
 
+        if (resultData["navTree"]){
+            Object.keys(resultData["navTree"]).forEach((propKey: string) => {
+                this.navTree[propKey] = resultData["navTree"][propKey];
+            });
+    
+            if (this.navTree.dataUrl) {
+                this.navTree.dataUrl = this.bizService.formatUrl(this.navTree.dataUrl);
+            }    
+        }
+        
+    }
+
+    onTreeNodeClick(nodeId:string) {
+        //console.log("selected node :" + nodeId);
+        this.activatedRoute.snapshot.data['parentId'] = nodeId;
+        this.myDataTable.load(1);
+    }
 }
