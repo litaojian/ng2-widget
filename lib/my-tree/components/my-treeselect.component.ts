@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, ViewChild, ElementRef, HostListener, EventEmitter, Renderer2, Optional} from '@angular/core';
 import { Router, NavigationExtras, ActivatedRoute, Params } from '@angular/router';
 import { ControlValueAccessor, DefaultValueAccessor, NgControl, NgModel} from '@angular/forms';
-import { ZxTreeService, TreeNodeClickEventCallback } from './zxtree.service';
+import { ZxTreeService, TreeNodeClickEventCallback } from './zx-tree.service';
 
 declare const $: any;
 

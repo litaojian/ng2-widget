@@ -2,7 +2,7 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule }   from '@angular/common';
 import { FormsModule,ReactiveFormsModule}    from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-import { NgZorroAntdModule } from 'ng-zorro-antd';
+import { NgZorroAntdModule, NzMessageService } from 'ng-zorro-antd';
 
 import { MyTreeModule } from '../my-tree';
 import { BizSimpleTableModule } from '../biz-table';
@@ -26,7 +26,8 @@ const COMPONENTS = [
 const DIRECTIVES = [		
 ];
 
-const SERVICES = [	
+const SERVICES = [
+	NzMessageService,	
 	BizPageService,
 	BizFormService,
 	BizQueryService
