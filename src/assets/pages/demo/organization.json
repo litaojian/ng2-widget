@@ -5,7 +5,7 @@
     "idField": "orgid",
     "actions": {},
     "navTree": {
-        "dataUrl": "/api/data/tree/orgTree"
+        "dataUrl": "/api/data/tree/orgTree?url=ab&debug=1"
     },
     "queryParams": { "filter": "all" },
     "queryForm": {

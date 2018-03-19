@@ -6,6 +6,7 @@ import { SFSchema, FormProperty } from '../biz-form';
 import { SimpleTableColumn, SimpleTableButton, SimpleTableFilter, SimpleTableComponent } from '../biz-table';
 import { BizQueryService } from './biz-query.service';
 import { BizQueryComponent } from './biz-query.component';
+import { ZxTreeComponent } from '../my-tree';
 
 import { ITreeOptions } from 'angular-tree-component';
 
@@ -21,7 +22,7 @@ import { ITreeOptions } from 'angular-tree-component';
     </div>
     <div nz-row [nzGutter]="24">
         <div nz-col nzMd="4" nzSm="12" nzXs="24">
-            <zx-tree tree-id="menuTree2" data-source="/api/data/tree/orgTree?url=void(0)" (nodeClick)="onTreeNodeClick($event)" has-checkbox="false" key-title="name" key-id="nodeId" key-pid="parentId" class="tree"></zx-tree>
+            <zx-tree #myNavTree tree-id="menuTree2" (nodeClick)="onTreeNodeClick($event)" has-checkbox="false" key-title="name" key-id="nodeId" key-pid="parentId" class="tree"></zx-tree>
         </div>
         <div nz-col nzMd="16" nzSm="16" nzXs="24">
             <simple-table #st [data]="dataTable.dataUrl" [extraParams]="params" [total]="10" [columns]="dataTable.columns" [resReName]="dataTable.resReName" showTotal="dataTable.showTotal">
@@ -33,6 +34,9 @@ import { ITreeOptions } from 'angular-tree-component';
 })
 export class BizTreeTableComponent extends BizQueryComponent implements OnInit, OnDestroy {
 
+    @ViewChild('myNavTree')
+    myNavTree: ZxTreeComponent;
+
     treeOptions: ITreeOptions = {
         idField: '',
         displayField: '',
@@ -40,9 +44,7 @@ export class BizTreeTableComponent extends BizQueryComponent implements OnInit, 
     };
     //保存树的数据
     _treeNodes: any[] = []; 
-
-    _treeDataUrl:string;
-
+    
     navTree: any = {
         dataUrl: ''
     }
@@ -73,13 +75,16 @@ export class BizTreeTableComponent extends BizQueryComponent implements OnInit, 
             if (this.navTree.dataUrl) {
                 this.navTree.dataUrl = this.bizService.formatUrl(this.navTree.dataUrl);
             }    
+            // 重新载入树的节点数据
+            this.myNavTree.loadTree(this.navTree.dataUrl);
         }
         
     }
 
     onTreeNodeClick(nodeId:string) {
-        //console.log("selected node :" + nodeId);
+        console.log("selected node :" + nodeId);
         this.activatedRoute.snapshot.data['parentId'] = nodeId;
-        this.myDataTable.load(1);
+        //this.myDataTable.load(1);
+        return false;
     }
 }

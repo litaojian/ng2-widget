@@ -15,8 +15,6 @@ export interface TreeNodeClickEventCallback {
  */
 @Injectable()
 export class ZxTreeService extends BaseDataService {
-
-	nodeClickEvent = new EventEmitter<any>();
 	
 	nodeCheckEventCallback:TreeNodeClickEventCallback;
 
@@ -107,7 +105,7 @@ export class ZxTreeService extends BaseDataService {
 	}
 
 
-    initZtree(treeSettings:Object, selectNodeId:string){
+    initZtree(treeSettings:any, selectNodeId:string){
 		let _parent = this;	
 		let idKey = treeSettings["data"]["simpleData"]["idKey"]; 
 		//debugger;
@@ -116,10 +114,10 @@ export class ZxTreeService extends BaseDataService {
 			event.stopPropagation();
 			//console.log("treeNode click event: nodeId=" + treeNode[idKey]);
 			//debugger;
-			if (_parent.nodeClickEvent){
-				_parent.nodeClickEvent.emit(treeNode[idKey]);				
-			}
 			let result = false;
+			if (treeSettings.nodeClickEvent){
+				treeSettings.nodeClickEvent.emit(treeNode[idKey]);				
+			}
 			if (_parent.nodeClickEventCallback){
 				result = _parent.nodeClickEventCallback.onNodeEvent(event, treeId, treeNode);
 			}

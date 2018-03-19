@@ -52,20 +52,7 @@ export class ZxTreeComponent implements OnInit, AfterViewInit, AfterViewChecked 
 		$("<script>").attr({ src: "assets/jquery/ztree/js/jquery.ztree.excheck.js" }).appendTo("head");
 		//console.log("name=" + this.name + ", dataSource=" + this.optionDataSource);
 
-		let settings = this.ztreeService.getDefaultOptions();
-		if ("true" == this.hasCheckbox) {
-		  settings["check"]["enable"] = true;
-		}  
-		settings["treeId"] = this.treeId;
-		settings["treeDataSource"] = this.treeDataSource;
-		settings["data"]["key"]["name"] = this.titleKey;
-		settings["data"]["simpleData"]["pidKey"] = this.pidKey;
-		settings["data"]["simpleData"]["idKey"] = this.idKey;
-	
-		this.ztreeService.nodeClickEvent = this.nodeClickEvent;
-		//
-		let selectNodeId = this.activatedRoute.snapshot.queryParams["parentId"];      
-		this.ztreeService.initZtree(settings, selectNodeId);  	
+		this.loadTree(this.treeDataSource);			
 
 	}
 	
@@ -83,5 +70,28 @@ export class ZxTreeComponent implements OnInit, AfterViewInit, AfterViewChecked 
 	fireMyEvent(evt: any) {
 		//this.submitEvent.next(['abc','def']);
 	}
+
+	loadTree(dataUrl:string){
+		let settings:any = this.ztreeService.getDefaultOptions();
+		if ("true" == this.hasCheckbox) {
+		  settings["check"]["enable"] = true;		  
+		}  
+		if (this.nodeClickEvent){
+			settings["nodeClickEvent"] = this.nodeClickEvent;
+		}
+		//debugger;
+		settings["treeId"] = this.treeId;
+		
+		if (dataUrl){
+			settings["treeDataSource"] = dataUrl;
+			this.treeDataSource = dataUrl;
+		}
+		settings["data"]["key"]["name"] = this.titleKey;
+		settings["data"]["simpleData"]["pidKey"] = this.pidKey;
+		settings["data"]["simpleData"]["idKey"] = this.idKey;
+		let selectNodeId = this.activatedRoute.snapshot.queryParams["parentId"];      
+		this.ztreeService.initZtree(settings, selectNodeId);  
+	}
+
 }
 
