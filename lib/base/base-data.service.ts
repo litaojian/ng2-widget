@@ -521,6 +521,8 @@ export class BaseDataService extends BaseService {
             url = url.substring(0, url.length - 5);
         }else if ( url.endsWith("/view")){
             url = url.substring(0, url.length -5);
+        }else if ( url.endsWith("/tree")){
+            url = url.substring(0, url.length -5);
         }
         return url;
     }
