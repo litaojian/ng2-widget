@@ -34,21 +34,6 @@ import { ITreeOptions } from 'angular-tree-component';
     providers: []
 })
 export class BizTreeTableComponent extends BizQueryComponent implements OnInit, OnDestroy {
-
-    @ViewChild('myNavTree')
-    myNavTree: ZxTreeComponent;
-    
-    treeOptions: ITreeOptions = {
-        idField: '',
-        displayField: '',
-        childrenField: 'children'
-    };
-    //保存树的数据
-    _treeNodes: any[] = []; 
-    
-    navTree: any = {
-        dataUrl: ''
-    }
     
     constructor(injector: Injector) {
         super(injector);
@@ -56,40 +41,14 @@ export class BizTreeTableComponent extends BizQueryComponent implements OnInit, 
         console.log("BizTreeTableComponent init ..............");
     }
 
-    get treeNodes(){
-        return this._treeNodes;
-    }
-    set treeNodes(treeNodes:any[]){
-        this._treeNodes = treeNodes;
-    }
 
     //     
     onPageInit(resultData: any) {
         //
         super.onPageInit(resultData);
 
-        if (resultData["navTree"]){
-            Object.keys(resultData["navTree"]).forEach((propKey: string) => {
-                this.navTree[propKey] = resultData["navTree"][propKey];
-            });
-    
-            if (this.navTree.dataUrl) {
-                this.navTree.dataUrl = this.bizService.formatUrl(this.navTree.dataUrl);
-            }    
-            // 重新载入树的节点数据
-            this.myNavTree.loadTree(this.navTree.dataUrl);
-        }
+
         
     }
 
-    onTreeNodeClick(nodeId:string) {
-        console.log("selected node :" + nodeId);
-        this.activatedRoute.snapshot.data['parentId'] = nodeId;
-        this.queryParams['parentId'] = nodeId;        
-
-        console.log("queryParams", this.queryParams);
-        // 表格依据查询参数重新载入数据
-        this.myDataTable.load(1);
-        return false;
-    }
 }

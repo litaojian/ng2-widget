@@ -6,6 +6,7 @@ import { SFSchema, FormProperty } from '../biz-form';
 import { SimpleTableColumn, SimpleTableButton, SimpleTableFilter, SimpleTableComponent } from '../biz-table';
 import { BizQueryService } from './biz-query.service';
 import { BizPageComponent } from './biz-page.component';
+import { ZxTreeComponent } from '../my-tree';
 
 @Component({
     selector: 'app-biz-query',
@@ -17,9 +18,16 @@ import { BizPageComponent } from './biz-page.component';
                 [actions]="actions">
         </my-simple-form>
     </div>
-    <my-simple-table #myDataTable [data]="dataTable.dataUrl" [extraParams]="queryParams" [columns]="dataTable.columns"
-        [resReName]="dataTable.resReName" showTotal="dataTable.showTotal" [ps]="dataTable.pageSize" >
-    </my-simple-table>
+    <div nz-row [nzGutter]="24">
+        <div nz-col nzMd="4" nzSm="12" nzXs="24">
+            <zx-tree #myNavTree tree-id="menuTree2" (nodeClick)="onTreeNodeClick($event)" has-checkbox="false" key-title="name" key-id="nodeId" key-pid="parentId" class="tree"></zx-tree>
+        </div>
+        <div nz-col nzMd="16" nzSm="16" nzXs="24">
+            <my-simple-table #myDataTable [data]="dataTable.dataUrl" [extraParams]="queryParams" [columns]="dataTable.columns"
+                [resReName]="dataTable.resReName" showTotal="dataTable.showTotal" [ps]="dataTable.pageSize" >
+            </my-simple-table>
+        </div>
+    </div>
     `,
     providers: []
 })
@@ -28,6 +36,9 @@ export class BizQueryComponent extends BizPageComponent implements OnInit, OnDes
     @ViewChild('myDataTable')
     myDataTable: SimpleTableComponent;
 
+    @ViewChild('myNavTree')
+    myNavTree: ZxTreeComponent;
+    
     pagePath: string;
     selectedRow: Object;
     pageIndex: number = 1;
@@ -73,7 +84,10 @@ export class BizQueryComponent extends BizPageComponent implements OnInit, OnDes
         ]
     }
 
-
+    navTree: any = {
+        dataUrl: ''
+    }
+    
     constructor(injector: Injector) {
         super(injector);
         console.log("BizQueryComponent init ..............");
@@ -119,6 +133,19 @@ export class BizQueryComponent extends BizPageComponent implements OnInit, OnDes
             this.queryParams[propKey] = resultData["queryParams"][propKey];
         });
         this.queryForm.modal = this.queryParams;
+
+
+        if (resultData["navTree"]){
+            Object.keys(resultData["navTree"]).forEach((propKey: string) => {
+                this.navTree[propKey] = resultData["navTree"][propKey];
+            });
+    
+            if (this.navTree.dataUrl) {
+                this.navTree.dataUrl = this.bizService.formatUrl(this.navTree.dataUrl);
+            }    
+            // 重新载入树的节点数据
+            this.myNavTree.loadTree(this.navTree.dataUrl);
+        }
 
         this.bizService.setApiUrl(resultData.restAPI);
         this.bizService.setIdField(resultData.idField);
@@ -232,6 +259,15 @@ export class BizQueryComponent extends BizPageComponent implements OnInit, OnDes
 
 
 
+    onTreeNodeClick(nodeId:string) {
+        console.log("selected node :" + nodeId);
+        this.activatedRoute.snapshot.data['parentId'] = nodeId;
+        this.queryParams['parentId'] = nodeId;        
 
+        console.log("queryParams", this.queryParams);
+        // 表格依据查询参数重新载入数据
+        this.myDataTable.load(1);
+        return false;
+    }
 
 }
