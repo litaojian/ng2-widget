@@ -237,17 +237,4 @@ export class BizQueryComponent extends BizPageComponent implements OnInit, OnDes
         }
     }
 
-
-
-    onTreeNodeClick(nodeId:string) {
-        console.log("selected node :" + nodeId);
-        this.activatedRoute.snapshot.data['parentId'] = nodeId;
-        this.queryParams['parentId'] = nodeId;        
-
-        console.log("queryParams", this.queryParams);
-        // 表格依据查询参数重新载入数据
-        this.myDataTable.load(1);
-        return false;
-    }
-
 }
