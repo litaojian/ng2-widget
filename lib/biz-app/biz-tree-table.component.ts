@@ -40,7 +40,9 @@ export class BizTreeTableComponent extends BizQueryComponent implements OnInit, 
 
     navTree: any = {
         dataUrl: ''
-    }
+    };
+
+    selectNodeId:string = "0";
 
     constructor(injector: Injector) {
         super(injector);
@@ -71,7 +73,8 @@ export class BizTreeTableComponent extends BizQueryComponent implements OnInit, 
     onTreeNodeClick(nodeId:string) {
         console.log("selected node :" + nodeId);
         this.activatedRoute.snapshot.data['parentId'] = nodeId;
-        this.queryParams['parentId'] = nodeId;        
+        this.queryParams['parentId'] = nodeId;
+        this.selectNodeId = nodeId;        
 
         console.log("queryParams", this.queryParams);
         // 表格依据查询参数重新载入数据
@@ -79,4 +82,11 @@ export class BizTreeTableComponent extends BizQueryComponent implements OnInit, 
         return false;
     }
 
+    onAddNew(params?: any): void {
+        if (!params){
+            params = {};
+        }
+        params.parentid =  this.selectNodeId;
+        return super.onAddNew(params);
+    }    
 }

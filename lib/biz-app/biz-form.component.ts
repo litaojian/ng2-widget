@@ -126,6 +126,12 @@ export class BizFormComponent extends BizPageComponent implements OnInit {
                   
                 }
             });    
+        }else{
+          // 添加新记录
+          let keys = Object.keys(queryParams);
+          for(let i = 0; i < keys.length;i++){
+            this.mainForm.model[keys[i]] = queryParams[keys[i]];
+          }    
         }
       }
 
