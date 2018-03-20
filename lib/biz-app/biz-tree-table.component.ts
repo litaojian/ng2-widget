@@ -35,6 +35,13 @@ import { ITreeOptions } from 'angular-tree-component';
 })
 export class BizTreeTableComponent extends BizQueryComponent implements OnInit, OnDestroy {
     
+    @ViewChild('myNavTree')
+    myNavTree: ZxTreeComponent;
+
+    navTree: any = {
+        dataUrl: ''
+    }
+
     constructor(injector: Injector) {
         super(injector);
         //
@@ -47,8 +54,18 @@ export class BizTreeTableComponent extends BizQueryComponent implements OnInit, 
         //
         super.onPageInit(resultData);
 
-
-        
+        if (resultData["navTree"]){
+            
+            Object.keys(resultData["navTree"]).forEach((propKey: string) => {
+                this.navTree[propKey] = resultData["navTree"][propKey];
+            });
+            
+            if (this.navTree.dataUrl) {
+                this.navTree.dataUrl = this.bizService.formatUrl(this.navTree.dataUrl);
+            }    
+            // 重新载入树的节点数据
+            this.myNavTree.loadTree(this.navTree.dataUrl);
+        }
     }
 
 }

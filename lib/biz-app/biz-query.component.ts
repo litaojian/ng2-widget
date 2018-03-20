@@ -19,10 +19,7 @@ import { ZxTreeComponent } from '../my-tree';
         </my-simple-form>
     </div>
     <div nz-row [nzGutter]="24">
-        <div nz-col nzMd="4" nzSm="12" nzXs="24">
-            <zx-tree #myNavTree tree-id="menuTree2" (nodeClick)="onTreeNodeClick($event)" has-checkbox="false" key-title="name" key-id="nodeId" key-pid="parentId" class="tree"></zx-tree>
-        </div>
-        <div nz-col nzMd="16" nzSm="16" nzXs="24">
+        <div nz-col nzMd="24" nzSm="24" nzXs="24">
             <my-simple-table #myDataTable [data]="dataTable.dataUrl" [extraParams]="queryParams" [columns]="dataTable.columns"
                 [resReName]="dataTable.resReName" showTotal="dataTable.showTotal" [ps]="dataTable.pageSize" >
             </my-simple-table>
@@ -36,13 +33,11 @@ export class BizQueryComponent extends BizPageComponent implements OnInit, OnDes
     @ViewChild('myDataTable')
     myDataTable: SimpleTableComponent;
 
-    @ViewChild('myNavTree')
-    myNavTree: ZxTreeComponent;
-    
     pagePath: string;
     selectedRow: Object;
     pageIndex: number = 1;
     //pageSize: number = 10;
+
 
     actions: any = {
         reset: (form: any) => {
@@ -84,9 +79,7 @@ export class BizQueryComponent extends BizPageComponent implements OnInit, OnDes
         ]
     }
 
-    navTree: any = {
-        dataUrl: ''
-    }
+
     
     constructor(injector: Injector) {
         super(injector);
@@ -133,19 +126,6 @@ export class BizQueryComponent extends BizPageComponent implements OnInit, OnDes
             this.queryParams[propKey] = resultData["queryParams"][propKey];
         });
         this.queryForm.modal = this.queryParams;
-
-
-        if (resultData["navTree"]){
-            Object.keys(resultData["navTree"]).forEach((propKey: string) => {
-                this.navTree[propKey] = resultData["navTree"][propKey];
-            });
-    
-            if (this.navTree.dataUrl) {
-                this.navTree.dataUrl = this.bizService.formatUrl(this.navTree.dataUrl);
-            }    
-            // 重新载入树的节点数据
-            this.myNavTree.loadTree(this.navTree.dataUrl);
-        }
 
         this.bizService.setApiUrl(resultData.restAPI);
         this.bizService.setIdField(resultData.idField);

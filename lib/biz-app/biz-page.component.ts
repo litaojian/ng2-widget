@@ -60,7 +60,15 @@ export class BizPageComponent implements OnInit {
         }
 
         this.bizService.ajaxGet(`assets/pages/${dir}/${pageName}.json`, {}).subscribe(
-            resultData => this.onPageInit(resultData)
+            (resultData:any) => {
+                let url = this.router.url;
+                if (resultData["navTree"] && url.endsWith("/list")){
+                    url = url.replace("/list", "/tree");            
+                    this.router.navigateByUrl(url);
+                }else{
+                    this.onPageInit(resultData);
+                }
+            }
         );
 
 
