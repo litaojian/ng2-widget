@@ -4,7 +4,7 @@ import { SFSchema } from './schema';
 import { WidgetFactory } from './widget.factory';
 import { SchemaValidatorFactory } from './schema.validator.factory';
 import { TerminatorService } from './terminator.service';
-import { SchemaFormOptions, NZ_SF_OPTIONS_TOKEN } from '../schema-form.options';
+import { SchemaFormOptions, NZ_SF_OPTIONS_TOKEN } from './schema-form.options';
 import { FormComponent } from './form.component';
 
 

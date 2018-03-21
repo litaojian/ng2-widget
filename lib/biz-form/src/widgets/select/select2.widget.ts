@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ControlWidget } from '../../widget';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
-import { SchemaFormOptions, NZ_SF_OPTIONS_TOKEN } from '../../../schema-form.options';
+import { SchemaFormOptions, NZ_SF_OPTIONS_TOKEN } from '../../schema-form.options';
 import { ValueListDataService } from '../../../../base/services/valuelist.service';
 
 @Component({

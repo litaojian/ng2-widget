@@ -7,7 +7,7 @@ import { ObjectProperty } from './objectproperty';
 import { ArrayProperty } from './arrayproperty';
 import { SchemaValidatorFactory } from '../schema.validator.factory';
 import { ValidatorRegistry } from './validatorregistry';
-import { SchemaFormOptions } from '../../schema-form.options';
+import { SchemaFormOptions } from '../schema-form.options';
 
 export class FormPropertyFactory {
     constructor(
@@ -29,7 +29,7 @@ export class FormPropertyFactory {
             } else if (parent.type === 'array') {
                 path += '*';
             } else {
-                throw 'Instanciation of a FormProperty with an unknown parent type: ' + parent.type;
+                throw new Error('Instanciation of a FormProperty with an unknown parent type: ' + parent.type);
             }
         } else {
             path = '/';

@@ -1,6 +1,6 @@
 import { InjectionToken } from '@angular/core';
 import * as ZSchema from 'z-schema';
-import { ERROR, ERRORSDEFAULT } from './src/schema/errors';
+import { ERROR, ERRORSDEFAULT } from './schema/errors';
 
 export const NZ_SF_OPTIONS_TOKEN = new InjectionToken<SchemaFormOptions>('NZ_SF_OPTIONS_TOKEN');
 export const NZ_SF_USER_OPTIONS_TOKEN = new InjectionToken<SchemaFormOptions>('NZ_SF_USER_OPTIONS_TOKEN');
@@ -30,7 +30,7 @@ export interface SchemaFormOptions {
     /**
      * 自定义通用错误信息
      */
-    errors?: { [ key: string ]: string }
+    errors?: { [ key: string ]: string };
     /**
      * 日期小部件配置
      */
@@ -39,7 +39,7 @@ export interface SchemaFormOptions {
     /**
      * 时间小部件配置
      */
-    time?:any
+    time?: any;
 }
 
 export const DEFAULT: SchemaFormOptions = {

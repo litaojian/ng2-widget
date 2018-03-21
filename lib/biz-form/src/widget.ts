@@ -2,15 +2,15 @@ import { AfterViewInit, HostBinding, Inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ArrayProperty, FormProperty, ObjectProperty } from './model';
 import { SFSchema, WidgetData } from './schema';
-import { SchemaFormOptions, NZ_SF_OPTIONS_TOKEN } from '../schema-form.options';
+import { SchemaFormOptions, NZ_SF_OPTIONS_TOKEN } from './schema-form.options';
 
 export abstract class Widget<T extends FormProperty> {
     formProperty: T;
     control: FormControl;
     errorMessages: string[];
 
-    id: string = '';
-    name: string = '';
+    id = '';
+    name = '';
     schema: SFSchema = {};
 
     /** 获取 `widget` 数据 */
@@ -59,6 +59,8 @@ export class BaseWidget extends Widget<FormProperty> {
     }
 
     required: boolean;
+
+    disabled: boolean = this.widgetData.disabled || null;
 }
 
 /**

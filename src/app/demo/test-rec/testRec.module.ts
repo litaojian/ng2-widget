@@ -7,9 +7,11 @@ import { SharedModule } from '../../shared/shared.module';
 
 import { TestRecService } from './testRec.service';
 import { TestRecListComponent, TestRecDetailComponent } from './testRec.component';
+import { BasicFormComponent } from '../basic/basic.component';
 
 
 const routes: Routes = [
+  { path: 'form', component: BasicFormComponent},
   { path: 'index', component: TestRecListComponent},
   { path: 'create', component: TestRecDetailComponent},
   { path: 'edit', component: TestRecDetailComponent},
@@ -27,6 +29,7 @@ const routes: Routes = [
     SharedModule
   ],
   declarations: [
+    BasicFormComponent,
     TestRecListComponent,
     TestRecDetailComponent
   ],

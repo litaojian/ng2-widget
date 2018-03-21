@@ -6,7 +6,7 @@ import { SFSchema } from '../../../../lib/biz-form';
     selector: 'app-example-basic',
     templateUrl: './basic.component.html'
 })
-export class ExampleBasicComponent {
+export class BasicFormComponent {
     actions = {
         send: (form: any) => {
             this.msg.success(JSON.stringify(form.value));

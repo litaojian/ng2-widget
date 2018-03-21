@@ -4,7 +4,7 @@ import { SFSchema } from './schema';
 import { WidgetFactory } from './widget.factory';
 import { SchemaValidatorFactory } from './schema.validator.factory';
 import { TerminatorService } from './terminator.service';
-import { SchemaFormOptions, NZ_SF_OPTIONS_TOKEN } from '../schema-form.options';
+import { SchemaFormOptions, NZ_SF_OPTIONS_TOKEN } from './schema-form.options';
 
 export function useFactory(schemaValidatorFactory: any, validatorRegistry: any, options: SchemaFormOptions) {
     return new FormPropertyFactory(schemaValidatorFactory, validatorRegistry, options);
@@ -45,11 +45,11 @@ export class FormComponent implements OnChanges {
 
     @Input() validators: { [path: string]: Validator } = {};
 
-    @Output() onChange = new EventEmitter<{ value: any }>();
+    @Output() change = new EventEmitter<{ value: any }>();
 
     @Output() isValid = new EventEmitter<boolean>();
 
-    @Output() onErrorChange = new EventEmitter<{ value: any[] }>();
+    @Output() errorChange = new EventEmitter<{ value: any[] }>();
 
     _valid = true;
 
@@ -89,6 +89,9 @@ export class FormComponent implements OnChanges {
             if (p.items && p.type === 'array') {
                 this.coverProperty(p.items);
             }
+
+            if (p.properties && Object.keys(p.properties).length)
+                this.coverProperty(p);
         });
     }
 
@@ -153,10 +156,10 @@ export class FormComponent implements OnChanges {
                     }
                     this.modelChange.emit(this.model);
                 }
-                this.onChange.emit({ value: value });
+                this.change.emit({ value: value });
             });
             this.rootProperty.errorsChanges.subscribe(value => {
-                this.onErrorChange.emit({ value: value });
+                this.errorChange.emit({ value: value });
                 this._valid = !(value && value.length);
                 this.isValid.emit(this._valid);
             });
@@ -171,7 +174,7 @@ export class FormComponent implements OnChanges {
     private setValidators() {
         this.validatorRegistry.clear();
         if (this.validators) {
-            for (let validatorId in this.validators) {
+            for (const validatorId in this.validators) {
                 if (this.validators.hasOwnProperty(validatorId)) {
                     this.validatorRegistry.register(validatorId, this.validators[validatorId]);
                 }
@@ -182,7 +185,7 @@ export class FormComponent implements OnChanges {
     private setActions() {
         this.actionRegistry.clear();
         if (this.actions) {
-            for (let actionId in this.actions) {
+            for (const actionId in this.actions) {
                 if (this.actions.hasOwnProperty(actionId)) {
                     this.actionRegistry.register(actionId, this.actions[actionId]);
                 }

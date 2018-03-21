@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ControlWidget } from '../../widget';
 import * as moment from 'moment';
-import { SchemaFormOptions } from '../../../schema-form.options';
+import { ControlWidget } from '../../widget';
+import { SchemaFormOptions } from '../../schema-form.options';
 
 @Component({
     selector: 'nz-sf-time-widget',
@@ -81,7 +81,7 @@ export class TimeWidget extends ControlWidget implements OnInit {
             return value.toISOString();
 
         } else {
-            return value
+            return value;
         }
     }
 
