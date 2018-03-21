@@ -26,7 +26,7 @@ const routes: Routes = [{
 
     { path: ':dir/:pageName', redirectTo: ':dir/:pageName/list', pathMatch: 'full' },  
     { path: 'test/dialog/:id', component: BizQueryComponent },        
-    { path: '', redirectTo: 'tree/demo/organization/list', pathMatch: 'full' }
+    { path: '', redirectTo: 'admin/organization/tree', pathMatch: 'full' }
   ]
 }];
 

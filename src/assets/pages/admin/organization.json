@@ -1,0 +1,134 @@
+{
+    "title": "组织机构管理",
+    "pageType": "TreeView",
+    "restAPI": "/api/rest/org",
+    "idField": "orgid",
+    "actions": {},
+    "navTree": {
+        "dataUrl": "/api/data/tree/orgTree?url=ab&debug=1"
+    },
+    "queryParams": { "filter": "all" },
+    "queryForm": {
+        "debug": false,
+        "properties": {
+            "orgname": {
+                "type": "string",
+                "title": "部门名称",
+                "widget": {
+                    "placeholder": "请输入部门名称"
+                }
+            }
+        },
+        "required": ["name"],
+        "button": {
+            "items": [{
+                    "label": "查询",
+                    "id": "query",
+                    "submit": true
+                },
+                {
+                    "label": "新增",
+                    "id": "add"
+                }
+            ]
+        }
+    },
+    "dataTable": {
+        "extraParams": {},
+        "showTotal": true,
+        "pageSize": 15,
+        "resReName": { "list": "rows", "total": "total" },
+        "columns": [
+            { "index": "orgcode", "title": "机构代码", "type": "string" },
+            { "index": "orgname", "title": "机构名称", "type": "string" },
+            {
+                "index": "orgtype",
+                "title": "类型",
+                "type": "string",
+                "filters": [{ "text": "male", "value": "male" }, { "text": "female", "value": "female" }],
+                "filterMultiple": false,
+                "filter": "() => true",
+                "sorter": "(a, b) => true"
+            },
+            {
+                "index": "created",
+                "title": "输入时间",
+                "type": "date",
+                "filters": [{ "text": "昨天", "value": "male" }, { "text": "本周", "value": "2" }, { "text": "当月", "value": "3" }],
+                "filterMultiple": true,
+                "filter": "() => true",
+                "sorter": "(a, b) => true"
+
+            },
+            {
+                "title": "操作区",
+                "buttons": [{
+                        "text": "删除",
+                        "click": "delete"
+                    },
+                    {
+                        "text": "编辑",
+                        "click": "edit"
+                    }
+                ]
+            }
+
+        ]
+    },
+    "mainForm": {
+        "properties": {
+            "orgname": {
+                "type": "string",
+                "title": "部门名称",
+                "widget": {
+                    "placeholder": "请输入名称"
+                }
+            },
+            "orgcode": {
+                "type": "string",
+                "title": "机构代码",
+                "widget": {
+                    "placeholder": "请输入代码"
+                }
+            },
+            "orgdesc": {
+                "type": "string",
+                "title": "部门描述",
+                "widget": {
+                    "id":"textarea",
+                    "autosize": { "minRows": 2, "maxRows": 6 },
+                    "placeholder": "请输入关于部门的职责描述"
+                }
+            },
+            "parentid": {
+                "type": "string",
+                "title": "上级机构",
+                "widget": {
+                    "type": "hidden"
+                }
+            },         
+            "orgtype": {
+                "type": "string",
+                "title": "类型",
+                "widget": {
+                    "id": "select2",
+                    "url": "orgType",
+                    "placeholder": "请选择类型"
+                }
+            }
+        },
+        "required": ["name"],
+        "button": {
+            "items": [{
+                    "label": "保存",
+                    "id": "save",
+                    "submit": true
+                },
+                {
+                    "label": "返回",
+                    "id": "backto"
+                }
+            ]
+        }
+    }
+}

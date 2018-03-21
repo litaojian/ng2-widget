@@ -1,5 +1,5 @@
 {
-    "SERVER_URL": "demo/api/",
+    "SERVER_URL": "local/api/",
     "app": {
         "name": "SaaS门户",
         "description": "新版应用框架"

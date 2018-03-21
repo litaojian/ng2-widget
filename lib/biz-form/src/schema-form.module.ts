@@ -50,6 +50,7 @@ import {
     TagWidget,
     RateWidget,
     SelectWidget,
+    Select2Widget,
     DateRangeWidget,
 } from './widgets';
 
@@ -73,6 +74,7 @@ const WIDGETS: any[] = [
     TagWidget,
     RateWidget,
     SelectWidget,
+    Select2Widget,
     DateRangeWidget,
 ];
 

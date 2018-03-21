@@ -5,7 +5,7 @@
         "secure": false
     },
     "/local/api": {
-        "target": "http://localhost:8080/work",
+        "target": "http://localhost:8080/demo",
         "pathRewrite": { "^/local": "/mock" },
         "secure": false
     },

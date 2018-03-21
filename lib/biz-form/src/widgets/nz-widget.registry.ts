@@ -19,6 +19,7 @@ import { RadioWidget } from './radio/radio.widget';
 import { TagWidget } from './tag/tag.widget';
 import { RateWidget } from './rate/rate.widget';
 import { SelectWidget } from './select/select.widget';
+import { Select2Widget } from './select/select2.widget';
 import { DateRangeWidget } from './date-range/date-range.widget';
 
 export class NzWidgetRegistry extends WidgetRegistry {
@@ -44,6 +45,7 @@ export class NzWidgetRegistry extends WidgetRegistry {
         this.register('tag', TagWidget);
         this.register('rate', RateWidget);
         this.register('select', SelectWidget);
+        this.register('select2', Select2Widget);        
         this.register('date-range', DateRangeWidget);
 
         this.register('custom', CustomWidget);

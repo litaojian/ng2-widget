@@ -1,25 +1,25 @@
 {
-    "title": "组织机构管理",
+    "title": "菜单管理",
     "pageType": "TreeView",
-    "restAPI": "/api/rest/org",
-    "idField": "orgid",
+    "restAPI": "/api/rest/menu",
+    "idField": "menuid",
     "actions": {},
     "navTree": {
-        "dataUrl": "/api/data/tree/orgTree?url=ab&debug=1"
+        "dataUrl": "/api/data/tree/menuTree"
     },
     "queryParams": { "filter": "all" },
     "queryForm": {
         "debug": false,
         "properties": {
-            "orgname": {
+            "menuname": {
                 "type": "string",
-                "title": "部门名称",
+                "title": "菜单名称",
                 "widget": {
-                    "placeholder": "请输部门入名称"
+                    "placeholder": "请输入菜单名称"
                 }
             }
         },
-        "required": ["name"],
+        "required": [""],
         "button": {
             "items": [{
                     "label": "查询",
@@ -39,8 +39,7 @@
         "pageSize": 15,
         "resReName": { "list": "rows", "total": "total" },
         "columns": [
-            { "index": "orgcode", "title": "机构代码", "type": "string" },
-            { "index": "orgname", "title": "机构名称", "type": "string" },
+            { "index": "menuname", "title": "菜单名称", "type": "string" },
             {
                 "index": "orgtype",
                 "title": "类型",
@@ -77,23 +76,23 @@
     },
     "mainForm": {
         "properties": {
-            "orgname": {
+            "menuname": {
                 "type": "string",
-                "title": "部门名称",
+                "title": "菜单名称",
                 "widget": {
                     "placeholder": "请输入名称"
                 }
             },
-            "orgcode": {
+            "menuurl": {
                 "type": "string",
-                "title": "机构代码",
+                "title": "菜单URL",
                 "widget": {
-                    "placeholder": "请输入代码"
+                    "placeholder": "请输入菜单URL"
                 }
             },
-            "orgdesc": {
+            "menudesc": {
                 "type": "string",
-                "title": "部门描述",
+                "title": "菜单功能描述",
                 "widget": {
                     "id":"textarea",
                     "autosize": { "minRows": 2, "maxRows": 6 },
@@ -102,22 +101,22 @@
             },
             "parentid": {
                 "type": "string",
-                "title": "上级机构",
+                "title": "上级目录",
                 "widget": {
                     "type": "hidden"
                 }
             },         
-            "orgtype": {
+            "menutype": {
                 "type": "string",
                 "title": "类型",
                 "widget": {
                     "id": "select2",
-                    "url": "orgType",
+                    "url": "menuType",
                     "placeholder": "请选择类型"
                 }
             }
         },
-        "required": ["name"],
+        "required": ["menuname","menuurl"],
         "button": {
             "items": [{
                     "label": "保存",
