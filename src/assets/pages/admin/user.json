@@ -1,0 +1,126 @@
+{
+    "title": "用户管理",
+    "pageType": "TreeView",
+    "restAPI": "/api/rest/sysUser",
+    "idField": "userid",
+    "actions": {},
+    "navTree": {
+        "dataUrl": "/api/data/tree/orgTree"
+    },
+    "queryParams": { "filter": "all" },
+    "queryForm": {
+        "debug": false,
+        "properties": {
+            "username": {
+                "type": "string",
+                "title": "用户名称",
+                "widget": {
+                    "placeholder": "请输入用户名称"
+                }
+            }
+        },
+        "required": [""],
+        "button": {
+            "items": [{
+                    "label": "查询",
+                    "id": "query",
+                    "submit": true
+                },
+                {
+                    "label": "新增",
+                    "id": "add"
+                }
+            ]
+        }
+    },
+    "dataTable": {
+        "extraParams": {},
+        "showTotal": true,
+        "pageSize": 15,
+        "resReName": { "list": "rows", "total": "total" },
+        "columns": [
+            { "index": "username", "title": "用户名称", "type": "string" },
+            { "index": "loginid", "title": "登录帐号", "type": "string" },
+            { "index": "email", "title": "电邮", "type": "string" },
+            {
+                "index": "created",
+                "title": "输入时间",
+                "type": "date",
+                "filters": [{ "text": "昨天", "value": "male" }, { "text": "本周", "value": "2" }, { "text": "当月", "value": "3" }],
+                "filterMultiple": true,
+                "filter": "() => true",
+                "sorter": "(a, b) => true"
+
+            },
+            {
+                "title": "操作区",
+                "buttons": [{
+                        "text": "删除",
+                        "click": "delete"
+                    },
+                    {
+                        "text": "编辑",
+                        "click": "edit"
+                    }
+                ]
+            }
+
+        ]
+    },
+    "mainForm": {
+        "properties": {
+            "username": {
+                "type": "string",
+                "title": "用户名称",
+                "widget": {
+                    "placeholder": "请输入名称"
+                }
+            },
+            "menuurl": {
+                "type": "string",
+                "title": "菜单URL",
+                "widget": {
+                    "placeholder": "请输入菜单URL"
+                }
+            },
+            "menudesc": {
+                "type": "string",
+                "title": "菜单功能描述",
+                "widget": {
+                    "id":"textarea",
+                    "autosize": { "minRows": 2, "maxRows": 6 },
+                    "placeholder": "请输入关于部门的职责描述"
+                }
+            },
+            "parentid": {
+                "type": "string",
+                "title": "上级目录",
+                "widget": {
+                    "type": "hidden"
+                }
+            },         
+            "menutype": {
+                "type": "string",
+                "title": "类型",
+                "widget": {
+                    "id": "select2",
+                    "url": "menuType",
+                    "placeholder": "请选择类型"
+                }
+            }
+        },
+        "required": ["username","menuurl"],
+        "button": {
+            "items": [{
+                    "label": "保存",
+                    "id": "save",
+                    "submit": true
+                },
+                {
+                    "label": "返回",
+                    "id": "backto"
+                }
+            ]
+        }
+    }
+}
