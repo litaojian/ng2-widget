@@ -1,13 +1,13 @@
 {
     "title": "菜单管理",
     "pageType": "TreeView",
-    "restAPI": "/api/rest/menu",
+    "restAPI": "/api/rest/sysMenu",
     "idField": "menuid",
     "actions": {},
     "navTree": {
-        "dataUrl": "/api/data/tree/menuTree"
+        "dataUrl": "/api/data/tree/menuTree?url=void(0)"
     },
-    "queryParams": { "filter": "all" },
+    "queryParams": { "filter": "queryMenusByParentId", "parentId":0  },
     "queryForm": {
         "debug": false,
         "properties": {
@@ -36,19 +36,13 @@
     "dataTable": {
         "extraParams": {},
         "showTotal": true,
-        "pageSize": 15,
+        "pageSize": 10,
         "resReName": { "list": "rows", "total": "total" },
         "columns": [
             { "index": "menuname", "title": "菜单名称", "type": "string" },
-            {
-                "index": "orgtype",
-                "title": "类型",
-                "type": "string",
-                "filters": [{ "text": "male", "value": "male" }, { "text": "female", "value": "female" }],
-                "filterMultiple": false,
-                "filter": "() => true",
-                "sorter": "(a, b) => true"
-            },
+            { "index": "seqno", "title": "排序号", "type": "number","className":"text-center" },
+            { "index": "menuurl",  "title": "菜单URL", "type": "string" ,"className":"text-left"},
+            { "index": "menutype", "title": "菜单类型", "type": "string" },            
             {
                 "index": "created",
                 "title": "输入时间",

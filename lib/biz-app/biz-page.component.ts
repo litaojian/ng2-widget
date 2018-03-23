@@ -23,8 +23,6 @@ export class BizPageComponent {
     router: Router;
     pagePath: string;
 
-    queryParams: any = {};
-
     constructor(injector: Injector) {
 
         this.activatedRoute = injector.get(ActivatedRoute);

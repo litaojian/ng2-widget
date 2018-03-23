@@ -1,13 +1,14 @@
 {
     "title": "组织机构管理",
     "pageType": "TreeView",
-    "restAPI": "/api/rest/org",
+    "restAPI": "/api/rest/sysOrganization",
     "idField": "orgid",
     "actions": {},
     "navTree": {
-        "dataUrl": "/api/data/tree/orgTree?url=ab&debug=1"
+        "leftColumns":6,
+        "dataUrl": "/api/data/tree/orgTree?url=javascript:void(0);"
     },
-    "queryParams": { "filter": "all" },
+    "queryParams": { "filter": "queryChildren","parentId":0 },
     "queryForm": {
         "debug": false,
         "properties": {

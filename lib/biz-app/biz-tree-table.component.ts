@@ -23,10 +23,10 @@ import { ITreeOptions } from 'angular-tree-component';
         </my-simple-form>
     </div>
     <div nz-row [nzGutter]="24">
-        <div nz-col nzMd="4" nzSm="12" nzXs="24">
+        <div nz-col [nzXl]="navTree.nzXl" [nzLg]="navTree.nzLg" [nzMd]="navTree.nzMd" [nzSm]="navTree.nzSm" [nzXs]="navTree.nzXs">
             <zx-tree #myNavTree tree-id="menuTree2" (nodeClick)="onTreeNodeClick($event)" has-checkbox="false" key-title="name" key-id="nodeId" key-pid="parentId" class="tree"></zx-tree>
         </div>
-        <div nz-col nzMd="16" nzSm="16" nzXs="24">
+        <div nz-col [nzXl]="24 - navTree.nzXl" [nzLg]="24 - navTree.nzLg" [nzMd]="24 - navTree.nzMd" [nzSm]="16" [nzXs]="24">
             <my-simple-table #myDataTable [data]="dataTable.dataUrl" [extraParams]="queryParams" [columns]="dataTable.columns"
                 [resReName]="dataTable.resReName" showTotal="dataTable.showTotal" [ps]="dataTable.pageSize" >
             </my-simple-table>
@@ -41,6 +41,11 @@ export class BizTreeTableComponent extends BizQueryComponent implements OnInit, 
     myNavTree: ZxTreeComponent;
 
     navTree: any = {
+        nzXs:18,
+        nzSm:12,
+        nzMd:6,
+        nzLg:5,
+        nzXl:4,
         dataUrl: ''
     };
 
@@ -73,12 +78,12 @@ export class BizTreeTableComponent extends BizQueryComponent implements OnInit, 
     }
 
     onTreeNodeClick(nodeId:string) {
-        console.log("selected node :" + nodeId);
+        //console.log("selected node :" + nodeId);
         this.activatedRoute.snapshot.data['parentId'] = nodeId;
         this.queryParams['parentId'] = nodeId;
         this.selectNodeId = nodeId;        
 
-        console.log("queryParams", this.queryParams);
+        //console.log("queryParams", this.queryParams);
         // 表格依据查询参数重新载入数据
         this.myDataTable.load(1);
         return false;

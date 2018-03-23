@@ -70,6 +70,11 @@ export class BizQueryComponent extends BizPageComponent implements OnInit, DoChe
     };
 
     dataTable: any = {
+        nzXs:18,
+        nzSm:12,
+        nzMd:6,
+        nzLg:6,
+        nzXl:4,
         dataUrl: '',
         reqMehtod: "GET",
         showTotal: true,
@@ -209,7 +214,7 @@ export class BizQueryComponent extends BizPageComponent implements OnInit, DoChe
         let currentStateParams: any = {};
         currentStateParams["parentId"] = this.activatedRoute.snapshot.data['parentId'];
         currentStateParams["pageIndex"] = this.pageIndex;
-        currentStateParams["queryForm"] = this.queryForm;
+        currentStateParams["queryParams"] = this.queryParams;
 
         let path = this.router.url.replace(/\//gi, "_");
         let pos = path.indexOf("?");
@@ -233,7 +238,7 @@ export class BizQueryComponent extends BizPageComponent implements OnInit, DoChe
             let currentStateParams = JSON.parse(value);
             this.activatedRoute.snapshot.data['parentId'] = currentStateParams["parentId"];
             this.dataTable.pageSize = currentStateParams["pageSize"];
-            this.queryForm = currentStateParams["queryForm"];
+            this.queryParams = currentStateParams["queryParams"];
         }
     }
 
