@@ -1,4 +1,4 @@
-import { Component, ViewContainerRef, ChangeDetectorRef, ComponentRef, SimpleChanges, ViewChild, OnInit, HostBinding, AfterViewInit, Injector, OnDestroy } from '@angular/core';
+import { Component, ViewContainerRef, ChangeDetectorRef, ComponentRef, SimpleChanges, ViewChild, HostBinding, Injector } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { NzMessageService } from 'ng-zorro-antd';
@@ -6,7 +6,6 @@ import { SimpleTableColumn, SimpleTableButton, SimpleTableFilter, SimpleTableCom
 import { BizPageService } from './biz-page.service';
 import { ReuseTabService } from '@delon/abc';
 
-import { ITreeOptions } from 'angular-tree-component';
 
 @Component({
     selector: 'biz-page',
@@ -14,7 +13,7 @@ import { ITreeOptions } from 'angular-tree-component';
     `,
     providers: []
 })
-export class BizPageComponent implements OnInit {
+export class BizPageComponent {
 
     bizService: BizPageService;
     msgService: NzMessageService;
@@ -36,43 +35,51 @@ export class BizPageComponent implements OnInit {
         console.log("BizPageComponent init ..............");
     }
 
-    ngOnInit() {
-
-        let len = this.activatedRoute.snapshot.url.length;
-        let dir, pageName = "nosetting", cmd;
-
-        dir = this.activatedRoute.snapshot.url[0].path;
-        if (len > 1) {
-            pageName = this.activatedRoute.snapshot.url[1].path;
-        }
-        if (len > 2) {
-            cmd = this.activatedRoute.snapshot.url[2].path;
-        }
-
-        if (len >= 4) {
-            //this.parentId = +this.activatedRoute.snapshot.url[3].path;			
-        }
-        if (!dir) {
-            dir = "demo";
-        }
-        if (!pageName) {
-            pageName = "testRec";
-        }
-
-        this.bizService.ajaxGet(`assets/pages/${dir}/${pageName}.json`, {}).subscribe(
-            (resultData:any) => {
-                let url = this.router.url;
-                if (resultData["navTree"] && url.endsWith("/list")){
-                    url = url.replace("/list", "/tree");            
-                    this.router.navigateByUrl(url);
-                }else{
-                    this.onPageInit(resultData);
-                }
-            }
-        );
-
-
+    ngOnInit() {     
+        //console.log("BizPageComponent ngOnInit ..............");
     }
+
+    ngDoCheck() {
+        if (this.router.url != this.pagePath){
+            this.pagePath = this.router.url;
+            console.log("BizPageComponent ngDoCheck .............." + this.router.url );                
+            
+            let len = this.activatedRoute.snapshot.url.length;
+            let dir, pageName = "nosetting", cmd;
+
+            dir = this.activatedRoute.snapshot.url[0].path;
+            if (len > 1) {
+                pageName = this.activatedRoute.snapshot.url[1].path;
+            }
+            if (len > 2) {
+                cmd = this.activatedRoute.snapshot.url[2].path;
+            }
+
+            if (len >= 4) {
+                //this.parentId = +this.activatedRoute.snapshot.url[3].path;			
+            }
+            if (!dir) {
+                dir = "demo";
+            }
+            if (!pageName) {
+                pageName = "testRec";
+            }
+
+            this.bizService.ajaxGet(`assets/pages/${dir}/${pageName}.json`, {}).subscribe(
+                (resultData:any) => {
+                    let url = this.router.url;
+                    if (resultData["navTree"] && url.endsWith("/list")){
+                        url = url.replace("/list", "/tree");            
+                        this.router.navigateByUrl(url);
+                    }else{
+                        this.onPageInit(resultData);
+                    }
+                }
+            );
+
+        }    
+    }
+    
     //     
     onPageInit(resultData: any) {
 

@@ -1,5 +1,5 @@
-import { Component, ViewContainerRef, ChangeDetectorRef, ComponentRef, SimpleChanges, ViewChild, OnInit, HostBinding, AfterViewInit, Injector, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Component, ViewContainerRef, ChangeDetectorRef, ComponentRef, ViewChild, HostBinding, Injector } from '@angular/core';
+import { SimpleChanges, OnDestroy, OnInit, DoCheck } from '@angular/core';
 
 import { NzMessageService } from 'ng-zorro-antd';
 import { SFSchema, FormProperty } from '../biz-form';
@@ -28,7 +28,7 @@ import { ZxTreeComponent } from '../my-tree';
     `,
     providers: []
 })
-export class BizQueryComponent extends BizPageComponent implements OnInit, OnDestroy {
+export class BizQueryComponent extends BizPageComponent implements OnInit, DoCheck, OnDestroy {
 
     @ViewChild('myDataTable')
     myDataTable: SimpleTableComponent;

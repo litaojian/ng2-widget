@@ -1,0 +1,172 @@
+{
+    "title": "权限管理",
+    "pageType": "TableView",
+    "restAPI": "/api/rest/role",
+    "idField": "roleid",
+    "actions": {},
+    "queryParams": { "filter": "all" },
+    "queryForm": {
+        "debug": false,
+        "properties": {
+            "rolename": {
+                "type": "string",
+                "title": "名称",
+                "widget": {
+                    "placeholder": "请输入名称"
+                }
+            },
+            "roletype": {
+                "type": "string",
+                "title": "分类",
+                "widget": {
+                    "id": "select",
+                    "data": [
+                        { "value": "1", "label": "分类1" },
+                        { "value": "2", "label": "分类2" },
+                        { "value": "3", "label": "分类3" }
+                    ],
+                    "placeholder": "请选择分类",
+                    "style": {
+                        "width": "120px"
+                    }
+                }
+            }
+        },
+        "required": ["name"],
+        "button": {
+            "items": [{
+                    "label": "查询",
+                    "id": "query",
+                    "submit": true
+                },
+                {
+                    "label": "新增",
+                    "id": "add"
+                }
+            ]
+        }
+    },
+    "dataTable": {
+        "extraParams": {},
+        "showTotal": true,
+        "pageSize": 15,
+        "resReName": { "list": "rows", "total": "total" },
+        "columns": [
+            { "index": "testrecid", "title": "编号", "type": "string" },
+            { "index": "testname", "title": "名称", "type": "string" },
+            {
+                "index": "testage",
+                "title": "年龄",
+                "sorter": "(a, b) => a.testage - b.testage",
+                "filters": [
+                    { "text": "20岁以下", "value": [0, 20] },
+                    { "text": "20-25岁", "value": [20, 25] },
+                    { "text": "25岁以上", "value": [25, 100] }
+                ],
+                "filterMultiple": false,
+                "filter": "(filter: SimpleTableFilter, record: any) => record.testage >= filter.value[0] && record.testage <= filter.value[1]"
+
+            },
+            { "index": "description", "title": "描述", "type": "string" },
+            { "index": "testdate", "title": "日期", "type": "date", "dateFormat": "YYYY-MM-DD" },
+            {
+                "index": "teststatus",
+                "title": "类型",
+                "type": "string",
+                "filters": [{ "text": "male", "value": "male" }, { "text": "female", "value": "female" }],
+                "filterMultiple": false,
+                "filter": "() => true",
+                "sorter": "(a, b) => true"
+            },
+            {
+                "index": "created",
+                "title": "输入时间",
+                "type": "date",
+                "filters": [{ "text": "昨天", "value": "male" }, { "text": "本周", "value": "2" }, { "text": "当月", "value": "3" }],
+                "filterMultiple": true,
+                "filter": "() => true",
+                "sorter": "(a, b) => true"
+
+            },
+            {
+                "title": "操作区",
+                "buttons": [{
+                        "text": "删除",
+                        "click": "delete"
+                    },
+                    {
+                        "text": "编辑",
+                        "click": "edit"
+                    },
+                    {
+                        "text": "更多",
+                        "children": [{
+                                "text": "过期",
+                                "click": "(record: any) => this.message.error(`过期【${record.name}】`)"
+                            },
+                            {
+                                "text": "重新开始",
+                                "click": "(record: any) => this.message.success(`重新开始【${record.name}】`)"
+                            }
+                        ]
+                    }
+                ]
+            }
+
+        ]
+    },
+    "mainForm": {
+        "properties": {
+            "testname": {
+                "type": "string",
+                "title": "名称",
+                "widget": {
+                    "placeholder": "请输入名称"
+                }
+            },
+            "testdesc": {
+                "type": "string",
+                "title": "描述",
+                "widget": {
+                    "placeholder": "请输入描述"
+                }
+            },
+            "testage": {
+                "type": "number",
+                "title": "年龄",
+                "default": 10
+            },
+            "testdate": {
+                "type": "number",
+                "title": "日期",
+                "widget": {
+                    "id": "date",
+                    "format": "YYYY-MM-DD",
+                    "placeholder": "请输入日期"
+                }
+            },
+            "testype": {
+                "type": "string",
+                "title": "类型",
+                "widget": {
+                    "id": "select2",
+                    "url": "docType",
+                    "placeholder": "请选择类型"
+                }
+            }
+        },
+        "required": ["name"],
+        "button": {
+            "items": [{
+                    "label": "保存",
+                    "id": "save",
+                    "submit": true
+                },
+                {
+                    "label": "返回",
+                    "id": "backto"
+                }
+            ]
+        }
+    }
+}

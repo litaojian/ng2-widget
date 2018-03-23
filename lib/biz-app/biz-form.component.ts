@@ -1,5 +1,5 @@
-import { Component, ViewContainerRef, ChangeDetectorRef, ComponentRef, SimpleChanges, ViewChild, OnInit, HostBinding, AfterViewInit, Injector, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Component, ViewContainerRef, ChangeDetectorRef, ComponentRef, ViewChild, HostBinding, Injector } from '@angular/core';
+import { SimpleChanges, OnDestroy, OnInit, DoCheck } from '@angular/core';
 
 import { NzMessageService } from 'ng-zorro-antd';
 import { SFSchema } from '..//biz-form';
@@ -19,7 +19,7 @@ import { BizPageComponent } from './biz-page.component';
     `,
     providers:[BizFormService]
 })
-export class BizFormComponent extends BizPageComponent implements OnInit {
+export class BizFormComponent extends BizPageComponent implements OnInit, DoCheck {
 
     @ViewChild('myMainForm')
     myMainForm:FormComponent;

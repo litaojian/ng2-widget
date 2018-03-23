@@ -13,22 +13,22 @@ import { Component, ViewEncapsulation } from '@angular/core';
                     <a class="nav-link" routerLink="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/testRec">TestRec</a>
+                    <a class="nav-link" routerLink="/page/admin/organization/tree">部门</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/testRec2">TestRec2</a>
+                    <a class="nav-link" routerLink="/page/admin/menu/tree">菜单</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/testRec3">TestRec3</a>
+                    <a class="nav-link" routerLink="/page/admin/user/tree">用户</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/testRec4">TestRec4</a>
+                    <a class="nav-link" routerLink="/page/admin/role/list">角色</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/page/demo/testRec">Page/TestRec</a>
+                    <a class="nav-link" routerLink="/page/admin/permission/list">权限</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/other">Other</a>
+                    <a class="nav-link" routerLink="/page/demo/testRec">Other</a>
                 </li>
                 
             </ul>

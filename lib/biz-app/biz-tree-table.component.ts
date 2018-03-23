@@ -1,4 +1,6 @@
-import { Component, ViewContainerRef, ChangeDetectorRef, ComponentRef, SimpleChanges, ViewChild, OnInit, HostBinding, AfterViewInit, Injector, OnDestroy } from '@angular/core';
+import { Component, ViewContainerRef, ChangeDetectorRef, ComponentRef, ViewChild, HostBinding, Injector } from '@angular/core';
+import { SimpleChanges, OnDestroy, OnInit, DoCheck } from '@angular/core';
+
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { NzMessageService } from 'ng-zorro-antd';
@@ -33,7 +35,7 @@ import { ITreeOptions } from 'angular-tree-component';
     `,
     providers: []
 })
-export class BizTreeTableComponent extends BizQueryComponent implements OnInit, OnDestroy {
+export class BizTreeTableComponent extends BizQueryComponent implements OnInit, DoCheck , OnDestroy {
     
     @ViewChild('myNavTree')
     myNavTree: ZxTreeComponent;
