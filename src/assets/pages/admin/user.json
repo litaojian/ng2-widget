@@ -5,7 +5,7 @@
     "idField": "userid",
     "actions": {},
     "navTree": {
-        "dataUrl": "/api/data/tree/orgTree"
+        "dataUrl": "/api/data/tree/orgTree?url=void(0)"
     },
     "queryParams": { "filter": "all" },
     "queryForm": {

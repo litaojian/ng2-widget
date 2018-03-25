@@ -102,7 +102,7 @@ export class BizQueryComponent extends BizPageComponent implements OnInit, DoChe
             this.dataTable[propKey] = resultData["dataTable"][propKey];
         });
 
-        if (this.dataTable.dataUrl) {
+        if (resultData["dataTable"]["dataUrl"]) {
             this.dataTable.dataUrl = this.bizService.formatUrl(this.dataTable.dataUrl);
         } else {
             this.dataTable.dataUrl = this.bizService.formatUrl(resultData.restAPI);
@@ -137,7 +137,7 @@ export class BizQueryComponent extends BizPageComponent implements OnInit, DoChe
         //set the view url
         this.bizService.setPageViewUrl(this.router.url, "list");
 
-        //console.log("page def:" , this.queryForm);
+        
     }
     //
     onQuery(form: any): void {
@@ -150,7 +150,9 @@ export class BizQueryComponent extends BizPageComponent implements OnInit, DoChe
     }
 
     ngOnDestroy() {
-        //console.log(" bizQuery ngOnDestory......");				
+        //debugger;
+        //console.log(" bizQuery ngOnDestory......");	
+        this.myDataTable = null;			
     }
 
 

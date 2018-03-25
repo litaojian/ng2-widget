@@ -15,7 +15,7 @@ import { BizFormComponent } from './biz-form.component';
 import { BizPageComponent } from './biz-page.component';
 import { BizPageService } from './biz-page.service';
 import { BizTreeTableComponent } from './biz-tree-table.component';
-
+import { BizPageGuardService } from './biz-page-guard.service';
 
 const COMPONENTS = [
 	BizPageComponent,
@@ -30,7 +30,8 @@ const SERVICES = [
 	NzMessageService,	
 	BizPageService,
 	BizFormService,
-	BizQueryService
+	BizQueryService,
+	BizPageGuardService
 ];
 
 

@@ -1,5 +1,5 @@
 import { Component, ViewContainerRef, ChangeDetectorRef, ComponentRef, SimpleChanges, ViewChild, HostBinding, Injector } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute, ActivatedRouteSnapshot, Params } from '@angular/router';
 
 import { NzMessageService } from 'ng-zorro-antd';
 import { SimpleTableColumn, SimpleTableButton, SimpleTableFilter, SimpleTableComponent } from '../biz-table';
@@ -35,12 +35,50 @@ export class BizPageComponent {
 
     ngOnInit() {     
         //console.log("BizPageComponent ngOnInit ..............");
+        this.loadPageDef();
+    }
+    
+    ngOnDestroy() {
+        //console.log(" bizQuery ngOnDestory......");				
+    }
+
+    // ngAfterViewInit(){
+    // }
+
+    // ngAfterContentInit(){
+    // }
+
+    // ngOnChanges(){
+    // }
+
+    getTruthRoute(route: ActivatedRouteSnapshot) {
+        let next = route;
+        while (next.firstChild) next = next.firstChild;
+        return next;
+    }
+
+    getUrl(route: ActivatedRouteSnapshot): string {
+        let next = this.getTruthRoute(route);
+        const segments = [];
+        while (next) {
+            segments.push(next.url.join('/'));
+            next = next.parent;
+        }
+        const url = '/' + segments.filter(i => i).reverse().join('/');
+        return url;
     }
 
     ngDoCheck() {
-        if (this.router.url != this.pagePath){
-            this.pagePath = this.router.url;
-            console.log("BizPageComponent ngDoCheck .............." + this.router.url );                
+        //console.log("ngDoCheck ......");
+        this.loadPageDef();
+    }
+
+    loadPageDef(){
+        let _url = this.getUrl(this.activatedRoute.snapshot);
+        if (_url != this.pagePath){
+            this.pagePath = _url;
+            //
+            //console.log("BizPageComponent loadPageDef .............." + this.router.url );                
             
             let len = this.activatedRoute.snapshot.url.length;
             let dir, pageName = "nosetting", cmd;
@@ -75,9 +113,8 @@ export class BizPageComponent {
                 }
             );
 
-        }    
+        }   
     }
-    
     //     
     onPageInit(resultData: any) {
 
@@ -87,7 +124,5 @@ export class BizPageComponent {
         //console.log("page def:" , this.queryForm);
     }
 
-    ngOnDestroy() {
-        //console.log(" bizQuery ngOnDestory......");				
-    }
+
 }
