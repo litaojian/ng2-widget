@@ -62,6 +62,7 @@ export class BizQueryComponent extends BizPageComponent implements OnInit, DoChe
     };
 
     queryParams: any = {};
+    _queryParams:any = [];
 
     queryForm: any = {
         layout: "inline",
@@ -127,11 +128,13 @@ export class BizQueryComponent extends BizPageComponent implements OnInit, DoChe
             this.actions[propKey] = resultData["actions"][propKey];
         });
 
+        this.queryParams = {};
         Object.keys(resultData["queryParams"]).forEach((propKey: string) => {
             this.queryParams[propKey] = resultData["queryParams"][propKey];
         });
         this.queryForm.modal = this.queryParams;
-
+        Object.assign(this._queryParams, this.queryParams);
+        
         this.bizService.setApiUrl(resultData.restAPI);
         this.bizService.setIdField(resultData.idField);
         //set the view url
@@ -141,6 +144,13 @@ export class BizQueryComponent extends BizPageComponent implements OnInit, DoChe
     }
     //
     onQuery(form: any): void {
+        Object.keys(this.queryParams).forEach((prop: string) => {
+            if (this._queryParams[prop] != null){
+                this.queryParams[prop] = this._queryParams[prop];
+            }else{
+                delete this.queryParams[prop];
+            }            
+        });
         Object.keys(form).forEach((formField: string) => {
             this.queryParams[formField] = form[formField];
         });

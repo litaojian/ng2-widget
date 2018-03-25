@@ -7,7 +7,7 @@
     "navTree": {
         "dataUrl": "/api/data/tree/orgTree?url=void(0)"
     },
-    "queryParams": { "filter": "all" },
+    "queryParams": { "filter": "queryUsersByParentId","parentId":0 },
     "queryForm": {
         "debug": false,
         "properties": {
@@ -75,17 +75,17 @@
                 "widget": {
                     "placeholder": "请输入名称"
                 }
-            },
-            "menuurl": {
+            },           
+            "loginid": {
                 "type": "string",
-                "title": "菜单URL",
+                "title": "登录帐号",
                 "widget": {
-                    "placeholder": "请输入菜单URL"
+                    "placeholder": "请输入登录帐号"
                 }
             },
-            "menudesc": {
+            "remarks": {
                 "type": "string",
-                "title": "菜单功能描述",
+                "title": "用户描述",
                 "widget": {
                     "id":"textarea",
                     "autosize": { "minRows": 2, "maxRows": 6 },
@@ -94,22 +94,22 @@
             },
             "parentid": {
                 "type": "string",
-                "title": "上级目录",
+                "title": "所属部门",
                 "widget": {
                     "type": "hidden"
                 }
             },         
-            "menutype": {
+            "status": {
                 "type": "string",
                 "title": "类型",
                 "widget": {
                     "id": "select2",
-                    "url": "menuType",
-                    "placeholder": "请选择类型"
+                    "url": "userStatus",
+                    "placeholder": "请选择状态"
                 }
             }
         },
-        "required": ["username","menuurl"],
+        "required": ["username","loginid"],
         "button": {
             "items": [{
                     "label": "保存",
