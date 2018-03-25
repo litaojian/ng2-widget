@@ -68,6 +68,10 @@
         ]
     },
     "mainForm": {
+        "model":{
+            "status":"Enabled",
+            "sex":"M"
+        },
         "properties": {
             "username": {
                 "type": "string",
@@ -106,7 +110,16 @@
                 "widget": {
                     "type": "hidden"
                 }
-            },         
+            },     
+            "sex": {
+                "type": "string",
+                "title": "性别",
+                "widget": {
+                    "id": "select2",
+                    "url": "sexType",                    
+                    "placeholder": "请选择性别"
+                }
+            },    
             "status": {
                 "type": "string",
                 "title": "类型",

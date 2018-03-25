@@ -51,14 +51,12 @@ export class BizPageComponent {
     // ngOnChanges(){
     // }
 
-    getTruthRoute(route: ActivatedRouteSnapshot) {
-        let next = route;
-        while (next.firstChild) next = next.firstChild;
-        return next;
-    }
-
     getUrl(route: ActivatedRouteSnapshot): string {
-        let next = this.getTruthRoute(route);
+        let next = route;
+        while (next.firstChild){
+            next = next.firstChild;
+        } 
+
         const segments = [];
         while (next) {
             segments.push(next.url.join('/'));

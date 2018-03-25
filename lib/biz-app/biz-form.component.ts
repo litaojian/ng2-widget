@@ -64,7 +64,11 @@ export class BizFormComponent extends BizPageComponent implements OnInit, DoChec
             this.mainForm.layout = resultData["mainForm"].layout || "horizontal";
             Object.keys(resultData["mainForm"]).forEach((propKey:string) => {
                 this.mainForm.schema[propKey] = resultData["mainForm"][propKey];                
-            });    
+            });
+            if (resultData["mainForm"]["model"] != null){
+              this.mainForm.model = resultData["mainForm"]["model"];
+              delete this.mainForm.schema.model;
+            }    
         }
 
         Object.keys(resultData["actions"]).forEach((propKey:string) => {
@@ -109,10 +113,17 @@ export class BizFormComponent extends BizPageComponent implements OnInit, DoChec
                 //debugger;
                 if (tmpData != null) {
                    if (tmpData instanceof Array){
-                    this.mainForm.model = tmpData[0];
+                    //this.mainForm.model = tmpData[0];
+                    Object.keys(tmpData[0]).forEach((propKey:string) => {
+                      this.mainForm.model[propKey] = tmpData[0][propKey];                
+                    });
                    }else{
-                    this.mainForm.model  = tmpData;
+                    //this.mainForm.model  = tmpData;
+                    Object.keys(tmpData).forEach((propKey:string) => {
+                      this.mainForm.model[propKey] = tmpData[propKey];                
+                    });
                    }
+                   // 标志为编辑状态
                    this.isNew = false;          
                 } else {
                   
