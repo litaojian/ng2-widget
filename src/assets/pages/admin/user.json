@@ -114,6 +114,7 @@
             "sex": {
                 "type": "string",
                 "title": "性别",
+                "default":"M",
                 "widget": {
                     "id": "select2",
                     "url": "sexType",                    
