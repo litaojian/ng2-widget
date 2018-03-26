@@ -1,10 +1,11 @@
 import { Injectable,Injector } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { BaseDataService }  from '../../../../lib/my-app';
+import { BaseDataService }  from '@yg-widget';
+import { BizPageService }  from '@yg-widget';
 
 @Injectable()
-export class TestRecService extends BaseDataService {
+export class TestRecService extends BizPageService {
 
     constructor(injector: Injector) {
         super(injector);

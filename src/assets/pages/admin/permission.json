@@ -77,12 +77,12 @@
                     },
                     {
                         "text": "关联用户",
-                        "click": "showDialog",
+                        "click": "showQueryDialog",
                         "dialogUrl": "/page/dialog/roleUsers"
                     },
                     {
                         "text": "设置菜单",
-                        "click": "showDialog",
+                        "click": "showQueryDialog",
                         "dialogUrl": "/page/dialog/roleMenus"
                     }
                 ]

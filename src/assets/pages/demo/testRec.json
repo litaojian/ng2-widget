@@ -63,7 +63,7 @@
     "dataTable": {
         "extraParams": {},
         "showTotal": true,
-        "pageSize": 15,
+        "pageSize": 10,
         "resReName": { "list": "rows", "total": "total" },
         "columns": [
             { "index": "testrecid", "title": "编号", "type": "string" },

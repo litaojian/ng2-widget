@@ -13,7 +13,8 @@ import { BizQueryService } from './biz-query.service';
 import { BizQueryComponent } from './biz-query.component';
 import { BizFormComponent } from './biz-form.component';
 import { BizPageComponent } from './biz-page.component';
-import { BizQueryDialogComponent, BizFormDialogComponent } from './biz-dialog.component';
+import { BizQueryDialogComponent } from './biz-dialog-query.component';
+import { BizFormDialogComponent } from './biz-dialog-form.component';
 
 import { BizPageService } from './biz-page.service';
 import { BizTreeTableComponent } from './biz-tree-table.component';

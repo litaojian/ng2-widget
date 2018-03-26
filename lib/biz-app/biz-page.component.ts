@@ -83,18 +83,21 @@ export class BizPageComponent {
             //console.log("BizPageComponent loadPageDef .............." + this.router.url );                
             
             let len = this.activatedRoute.snapshot.url.length;
-            let dir, pageName = "nosetting", cmd;
+            let dir, pageName, cmd;
+            if (len == 0){
 
-            dir = this.activatedRoute.snapshot.url[0].path;
-            if (len > 1) {
-                pageName = this.activatedRoute.snapshot.url[1].path;
-            }
-            if (len > 2) {
-                cmd = this.activatedRoute.snapshot.url[2].path;
-            }
-
-            if (len >= 4) {
-                //this.parentId = +this.activatedRoute.snapshot.url[3].path;			
+            }else{
+                dir = this.activatedRoute.snapshot.url[0].path;
+                if (len > 1) {
+                    pageName = this.activatedRoute.snapshot.url[1].path;
+                }
+                if (len > 2) {
+                    cmd = this.activatedRoute.snapshot.url[2].path;
+                }
+    
+                if (len >= 4) {
+                    //this.parentId = +this.activatedRoute.snapshot.url[3].path;			
+                }    
             }
             if (!dir) {
                 dir = "demo";

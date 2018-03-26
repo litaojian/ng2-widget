@@ -6,7 +6,7 @@ import { SFSchema, FormProperty } from '../biz-form';
 import { SimpleTableColumn, SimpleTableButton, SimpleTableFilter, SimpleTableComponent } from '../biz-table';
 import { BizQueryService } from './biz-query.service';
 import { BizPageComponent } from './biz-page.component';
-import { BizQueryDialogComponent } from './biz-dialog.component';
+import { BizQueryDialogComponent } from './biz-dialog-query.component';
 
 @Component({
     selector: 'app-biz-query',
@@ -59,8 +59,8 @@ export class BizQueryComponent extends BizPageComponent implements OnInit, DoChe
         view: (row: any) => {
             this.onViewRow(row);
         },
-        showDialog: (row: any) => {
-            this.onShowDialog(row);
+        showQueryDialog: (row: any) => {
+            this.onShowQueryDialog(row);
         }
     };
 
@@ -228,7 +228,7 @@ export class BizQueryComponent extends BizPageComponent implements OnInit, DoChe
      * 
      * @param row 
      */
-    onShowDialog(row: Object): void {
+    onShowQueryDialog(row: Object): void {
         //alert('aaa');
         let size: '' | 'lg' | 'sm' = '';
         let options = {
@@ -236,6 +236,7 @@ export class BizQueryComponent extends BizPageComponent implements OnInit, DoChe
             content: BizQueryDialogComponent,
             footer: false,
             componentParams: {
+                dialogUrl:'/demo/testRec',
                 name: 'From Parent Data'
             }
         };

@@ -11,6 +11,7 @@ import { MyLoadingModule } from './yg-loading/myloading.module';
 export * from './yg-icon';
 export * from './yg-tinymce';
 export * from './my-app';
+export * from './biz-app';
 export * from './biz-table';
 export * from './yg-select';
 export * from './yg-loading';
