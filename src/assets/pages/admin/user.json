@@ -7,7 +7,7 @@
     "navTree": {
         "dataUrl": "/api/data/tree/orgTree?url=void(0)"
     },
-    "queryParams": { "filter": "queryUsersByParentId","parentId":0 },
+    "queryParams": { "filter": "queryUsersByParentId", "parentId": 0 },
     "queryForm": {
         "debug": false,
         "properties": {
@@ -61,6 +61,10 @@
                     {
                         "text": "编辑",
                         "click": "edit"
+                    },
+                    {
+                        "text": "分配角色",
+                        "click": "assignRoles"
                     }
                 ]
             }
@@ -68,9 +72,9 @@
         ]
     },
     "mainForm": {
-        "model":{
-            "status":"Enabled",
-            "sex":"M"
+        "model": {
+            "status": "Enabled",
+            "sex": "M"
         },
         "properties": {
             "username": {
@@ -79,7 +83,7 @@
                 "widget": {
                     "placeholder": "请输入名称"
                 }
-            },           
+            },
             "loginid": {
                 "type": "string",
                 "title": "登录帐号",
@@ -91,7 +95,7 @@
                 "type": "string",
                 "title": "登录密码",
                 "widget": {
-                    "type":"password",
+                    "type": "password",
                     "placeholder": "请输入登录密码"
                 }
             },
@@ -99,7 +103,7 @@
                 "type": "string",
                 "title": "用户描述",
                 "widget": {
-                    "id":"textarea",
+                    "id": "textarea",
                     "autosize": { "minRows": 2, "maxRows": 6 },
                     "placeholder": "请输入关于部门的职责描述"
                 }
@@ -110,17 +114,38 @@
                 "widget": {
                     "type": "hidden"
                 }
-            },     
+            },
             "sex": {
                 "type": "string",
                 "title": "性别",
-                "default":"M",
+                "default": "M",
                 "widget": {
                     "id": "select2",
-                    "url": "sexType",                    
+                    "url": "sexType",
                     "placeholder": "请选择性别"
                 }
-            },    
+            },
+            "photo": {
+                "type": "string",
+                "title": "头像",
+                "widget": {
+                    "id": "file",
+                    "size": 1024,
+                    "buttonText": "点击上传"
+                }
+            },
+            "roles": {
+                "type": "number",
+                "title": "角色",
+                "widget": {
+                    "id": "tag",
+                    "tags": [
+                        { "id": 1, "title": "管理员", "checked": true },
+                        { "id": 2, "title": "采购员" },
+                        { "id": 3, "title": "产品经理" }
+                    ]
+                }
+            },
             "status": {
                 "type": "string",
                 "title": "类型",
@@ -131,7 +156,7 @@
                 }
             }
         },
-        "required": ["username","loginid"],
+        "required": ["username", "loginid"],
         "button": {
             "items": [{
                     "label": "保存",

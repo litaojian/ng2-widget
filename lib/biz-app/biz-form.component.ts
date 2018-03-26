@@ -125,24 +125,24 @@ export class BizFormComponent extends BizPageComponent implements OnInit, DoChec
                    }
                    // 标志为编辑状态
                    this.isNew = false;          
-                } else {
-                  
+                } else {                  
                   let keys = Object.keys(queryParams);
                   for(let i = 0; i < keys.length;i++){
                     //let paramVal:string = queryParams[keys[i]];
                     //console.log("debug:" + keys[i] + "=" + queryParams[keys[i]]);
                     this.mainForm.model[keys[i]] = queryParams[keys[i]];
-                  }          
-                  //console.log(this.formData);
-                  
+                  }
                 }
+                // 刷新表单数据
+                this.myMainForm.refreshSchema();
             });    
         }else{
           // 添加新记录
           let keys = Object.keys(queryParams);
           for(let i = 0; i < keys.length;i++){
             this.mainForm.model[keys[i]] = queryParams[keys[i]];
-          }    
+          }
+          this.myMainForm.refreshSchema();    
         }
       }
 

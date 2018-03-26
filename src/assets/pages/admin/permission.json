@@ -1,7 +1,7 @@
 {
-    "title": "权限管理",
+    "title": "角色权限",
     "pageType": "TableView",
-    "restAPI": "/api/rest/role",
+    "restAPI": "/mock/api/rest/role",
     "idField": "roleid",
     "actions": {},
     "queryParams": { "filter": "all" },
@@ -10,14 +10,14 @@
         "properties": {
             "rolename": {
                 "type": "string",
-                "title": "名称",
+                "title": "角色名称",
                 "widget": {
-                    "placeholder": "请输入名称"
+                    "placeholder": "请输入角色名称"
                 }
             },
             "roletype": {
                 "type": "string",
-                "title": "分类",
+                "title": "角色类别",
                 "widget": {
                     "id": "select",
                     "data": [
@@ -52,32 +52,9 @@
         "pageSize": 15,
         "resReName": { "list": "rows", "total": "total" },
         "columns": [
-            { "index": "testrecid", "title": "编号", "type": "string" },
-            { "index": "testname", "title": "名称", "type": "string" },
-            {
-                "index": "testage",
-                "title": "年龄",
-                "sorter": "(a, b) => a.testage - b.testage",
-                "filters": [
-                    { "text": "20岁以下", "value": [0, 20] },
-                    { "text": "20-25岁", "value": [20, 25] },
-                    { "text": "25岁以上", "value": [25, 100] }
-                ],
-                "filterMultiple": false,
-                "filter": "(filter: SimpleTableFilter, record: any) => record.testage >= filter.value[0] && record.testage <= filter.value[1]"
-
-            },
-            { "index": "description", "title": "描述", "type": "string" },
-            { "index": "testdate", "title": "日期", "type": "date", "dateFormat": "YYYY-MM-DD" },
-            {
-                "index": "teststatus",
-                "title": "类型",
-                "type": "string",
-                "filters": [{ "text": "male", "value": "male" }, { "text": "female", "value": "female" }],
-                "filterMultiple": false,
-                "filter": "() => true",
-                "sorter": "(a, b) => true"
-            },
+            { "index": "role", "title": "编号", "type": "string" },
+            { "index": "rolename", "title": "角色名称", "type": "string" },
+            { "index": "roletype", "title": "类别", "type": "string" },
             {
                 "index": "created",
                 "title": "输入时间",
@@ -99,16 +76,14 @@
                         "click": "edit"
                     },
                     {
-                        "text": "更多",
-                        "children": [{
-                                "text": "过期",
-                                "click": "(record: any) => this.message.error(`过期【${record.name}】`)"
-                            },
-                            {
-                                "text": "重新开始",
-                                "click": "(record: any) => this.message.success(`重新开始【${record.name}】`)"
-                            }
-                        ]
+                        "text": "关联用户",
+                        "click": "showDialog",
+                        "dialogUrl": "/page/dialog/roleUsers"
+                    },
+                    {
+                        "text": "设置菜单",
+                        "click": "showDialog",
+                        "dialogUrl": "/page/dialog/roleMenus"
                     }
                 ]
             }
@@ -117,45 +92,32 @@
     },
     "mainForm": {
         "properties": {
-            "testname": {
+            "rolename": {
                 "type": "string",
-                "title": "名称",
+                "title": "角色名称",
                 "widget": {
-                    "placeholder": "请输入名称"
+                    "placeholder": "请输入角色名称"
                 }
             },
-            "testdesc": {
+            "role": {
                 "type": "string",
-                "title": "描述",
+                "title": "角色编号",
                 "widget": {
-                    "placeholder": "请输入描述"
+                    "title": "角色编号",
+                    "placeholder": "请输入角色编号"
                 }
             },
-            "testage": {
-                "type": "number",
-                "title": "年龄",
-                "default": 10
-            },
-            "testdate": {
-                "type": "number",
-                "title": "日期",
-                "widget": {
-                    "id": "date",
-                    "format": "YYYY-MM-DD",
-                    "placeholder": "请输入日期"
-                }
-            },
-            "testype": {
+            "roletype": {
                 "type": "string",
                 "title": "类型",
                 "widget": {
                     "id": "select2",
-                    "url": "docType",
+                    "url": "roleType",
                     "placeholder": "请选择类型"
                 }
             }
         },
-        "required": ["name"],
+        "required": ["rolename"],
         "button": {
             "items": [{
                     "label": "保存",

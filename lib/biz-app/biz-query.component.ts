@@ -6,7 +6,7 @@ import { SFSchema, FormProperty } from '../biz-form';
 import { SimpleTableColumn, SimpleTableButton, SimpleTableFilter, SimpleTableComponent } from '../biz-table';
 import { BizQueryService } from './biz-query.service';
 import { BizPageComponent } from './biz-page.component';
-import { ZxTreeComponent } from '../my-tree';
+import { BizQueryDialogComponent } from './biz-dialog.component';
 
 @Component({
     selector: 'app-biz-query',
@@ -58,6 +58,9 @@ export class BizQueryComponent extends BizPageComponent implements OnInit, DoChe
         },
         view: (row: any) => {
             this.onViewRow(row);
+        },
+        showDialog: (row: any) => {
+            this.onShowDialog(row);
         }
     };
 
@@ -220,6 +223,25 @@ export class BizQueryComponent extends BizPageComponent implements OnInit, DoChe
         let rowId = this.bizService.getValue(row, this.bizService.getIdField());
         this.router.navigate([url, 'view'], { queryParams: { 'id': rowId } });
         //console.log(" show the row:" + row);
+    }
+    /**
+     * 
+     * @param row 
+     */
+    onShowDialog(row: Object): void {
+        //alert('aaa');
+        let size: '' | 'lg' | 'sm' = '';
+        let options = {
+            wrapClassName: size ? 'modal-' + size : '',
+            content: BizQueryDialogComponent,
+            footer: false,
+            componentParams: {
+                name: 'From Parent Data'
+            }
+        };
+        this.modalService.open(options).subscribe(result => {
+            //this.msg.info(`subscribe status: ${JSON.stringify(result)}`);
+        });
     }
 
     saveCurrentState() {

@@ -1,7 +1,7 @@
 import { Component, ViewContainerRef, ChangeDetectorRef, ComponentRef, SimpleChanges, ViewChild, HostBinding, Injector } from '@angular/core';
 import { Router, ActivatedRoute, ActivatedRouteSnapshot, Params } from '@angular/router';
 
-import { NzMessageService } from 'ng-zorro-antd';
+import { NzMessageService, NzModalService } from 'ng-zorro-antd';
 import { SimpleTableColumn, SimpleTableButton, SimpleTableFilter, SimpleTableComponent } from '../biz-table';
 import { BizPageService } from './biz-page.service';
 import { ReuseTabService } from '@delon/abc';
@@ -17,8 +17,10 @@ export class BizPageComponent {
 
     bizService: BizPageService;
     msgService: NzMessageService;
+    modalService: NzModalService;
+    
     reuseTabService: ReuseTabService;
-
+    
     activatedRoute: ActivatedRoute;
     router: Router;
     pagePath: string;
@@ -28,7 +30,9 @@ export class BizPageComponent {
         this.activatedRoute = injector.get(ActivatedRoute);
         this.router = injector.get(Router);
         this.bizService = injector.get(BizPageService);
-  
+        this.msgService = injector.get(NzMessageService);
+        this.modalService = injector.get(NzModalService);
+        
         //
         console.log("BizPageComponent init ..............");
     }
