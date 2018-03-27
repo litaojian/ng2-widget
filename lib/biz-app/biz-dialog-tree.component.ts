@@ -25,6 +25,8 @@ export class BizDialogTreeComponent extends BizPageComponent {
         super(injector);
         //
         this.bizService = injector.get(BizTreeService);
+        //
+        console.log("BizDialogTreeComponent init .......");
     }
 
     @Input()

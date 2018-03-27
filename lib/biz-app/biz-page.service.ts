@@ -9,14 +9,8 @@ export class BizPageService extends BaseDataService {
 	reuseTabService: ReuseTabService;
 
 	_pageUrl: string;
-
-	// actions: any = {
-    //     reset: (form: any) => {
-    //         form.reset({});
-	// 	}
-	// };
 	
-	get pageUrl(){
+	get pageUrl():string{
 		return this._pageUrl;
 	}
 	set pageUrl(url:string){
@@ -30,6 +24,6 @@ export class BizPageService extends BaseDataService {
 	}
 
 	onPageInit(resultData: any, url:string, actions:Object[]) {
-		
+		console.log("BizPageService.onPageInit ........")
 	}	
 }

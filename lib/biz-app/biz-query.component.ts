@@ -213,8 +213,7 @@ export class BizQueryComponent extends BizPageComponent implements OnInit, DoChe
             content: BizDialogTreeComponent,
             footer: false,
             componentParams: {
-                pageUrl:'/demo/testRec',
-                name: 'From Parent Data'
+                pageUrl:'/admin/userTree'
             }
         };
         this.modalService.open(options).subscribe(result => {

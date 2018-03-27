@@ -91,8 +91,20 @@ export class BizPageComponent {
             let len = this.activatedRoute.snapshot.url.length;
             let dir, pageName, cmd;
             if (len == 0){
-                console.log("debug:--------------" + this.bizService.pageUrl);
-
+                //console.log("debug:--------------" + this.bizService.pageUrl);
+                let urls = this.bizService.pageUrl.split("/");
+                if (urls.length > 0){
+                    if (urls[0] == ""){
+                        urls.shift();   
+                    }
+                    dir = urls[0];
+                    if (urls.length > 1) {
+                        pageName = urls[1];
+                    }        
+                    if (urls.length > 2) {
+                        cmd = urls[2];
+                    }
+                }
             }else{
                 dir = this.activatedRoute.snapshot.url[0].path;
                 if (len > 1) {

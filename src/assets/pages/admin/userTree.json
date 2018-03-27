@@ -1,0 +1,8 @@
+{
+    "title": "用户选择",
+    "pageType": "TreeView",
+    "actions": {},
+    "navTree": {
+        "dataUrl": "/api/data/tree/menuTree?url=void(0)"
+    }
+}
