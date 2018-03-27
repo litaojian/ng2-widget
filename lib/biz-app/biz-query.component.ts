@@ -39,6 +39,41 @@ export class BizQueryComponent extends BizPageComponent implements OnInit, DoChe
     pageIndex: number = 1;
     //pageSize: number = 10;
 
+    actions: any = {
+        reset: (form: any) => {
+            form.reset({});
+        },
+        query: (form: any) => {
+            //this.msg.success(JSON.stringify(form.value));
+            this.onQuery(form.value);
+        },
+        add: (form: any) => {
+            this.onAddNew(form.value);
+        },
+        delete: (row: any) => {
+            this.onDeleteRow(row);
+        },
+        edit: (row: any) => {
+            this.onEditRow(row);
+        },
+        view: (row: any) => {
+            this.onViewRow(row);
+        },
+        showQueryDialog: (row: any) => {
+            this.onShowQueryDialog(row);
+        },
+        showTreeDialog: (row: any) => {
+            this.onShowTreeDialog(row);
+        }
+    };
+
+    
+    constructor(injector: Injector) {
+        super(injector);
+        //
+        this.bizService = injector.get(BizQueryService);
+        console.log("BizQueryComponent init ..............");
+    }
 
     get dataTable(){
         return (<BizQueryService>this.bizService).dataTable;
@@ -63,14 +98,7 @@ export class BizQueryComponent extends BizPageComponent implements OnInit, DoChe
     set defaultQueryParams(params){
         (<BizQueryService>this.bizService).defaultQueryParams = params;
     }
-
-    constructor(injector: Injector) {
-        super(injector);
-        //
-        this.bizService = injector.get(BizQueryService);
-        console.log("BizQueryComponent init ..............");
-    }
-
+    
     //     
     onPageInit(resultData: any, url:string) {
         this.bizService.onPageInit(resultData, url, this.actions);
