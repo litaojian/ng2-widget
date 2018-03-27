@@ -53,7 +53,7 @@ export class BizFormComponent extends BizPageComponent implements OnInit, DoChec
         console.log("BizFormComponent init ..............");
     }
     //     
-    onPageInit(resultData:any){
+    onPageInit(resultData:any, url:string){
         
         if (this.reuseTabService){
             this.reuseTabService.title = resultData["title"];

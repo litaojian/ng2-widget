@@ -77,7 +77,7 @@
                     },
                     {
                         "text": "关联用户",
-                        "click": "showQueryDialog",
+                        "click": "showTreeDialog",
                         "dialogUrl": "/page/dialog/roleUsers"
                     },
                     {

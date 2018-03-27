@@ -11,7 +11,7 @@ export class BizQueryService extends BizPageService {
     //pageSize: number = 10;
 
     queryParams: any = {};
-    _queryParams:any = [];
+	defaultQueryParams:any = {};
 
     queryForm: any = {
         layout: "inline",
@@ -34,21 +34,12 @@ export class BizQueryService extends BizPageService {
         ]
     }
 	
-	actions: any = {
-        reset: (form: any) => {
-            form.reset({});
-		}
-	};
-	
 	constructor(injector: Injector) {
 		super(injector);
-
-		//this.setApiUrl(apiUrl);
-		//this.setIdField(idField);
 	}
-
+	
 	//     
-	onPageInit(resultData: any, pageUrl:string) {
+	onPageInit(resultData: any, url:string, actions:Object[]) {
 
 		if (this.reuseTabService) {
 			this.reuseTabService.title = resultData["title"];
@@ -66,7 +57,7 @@ export class BizQueryService extends BizPageService {
 		this.dataTable.columns.forEach((column: any) => {
 			if (column["buttons"]) {
 				column["buttons"].forEach((button: any) => {
-					button["click"] = this.actions[button["click"]];
+					button["click"] = actions[button["click"]];
 				});
 			}
 		});
@@ -80,7 +71,7 @@ export class BizQueryService extends BizPageService {
 		}
 
 		Object.keys(resultData["actions"]).forEach((propKey: string) => {
-			this.actions[propKey] = resultData["actions"][propKey];
+			actions[propKey] = resultData["actions"][propKey];
 		});
 
 		this.queryParams = {};
@@ -88,12 +79,12 @@ export class BizQueryService extends BizPageService {
 			this.queryParams[propKey] = resultData["queryParams"][propKey];
 		});
 		this.queryForm.modal = this.queryParams;
-		Object.assign(this._queryParams, this.queryParams);
+		Object.assign(this.defaultQueryParams, this.queryParams);
 
 		this.setApiUrl(resultData.restAPI);
 		this.setIdField(resultData.idField);
 		//set the view url
-		this.setPageViewUrl(pageUrl, "list");
+		this.setPageViewUrl(url, "list");
 
 	}
 }

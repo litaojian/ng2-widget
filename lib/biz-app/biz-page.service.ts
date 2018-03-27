@@ -8,13 +8,28 @@ export class BizPageService extends BaseDataService {
 
 	reuseTabService: ReuseTabService;
 
+	_pageUrl: string;
+
+	// actions: any = {
+    //     reset: (form: any) => {
+    //         form.reset({});
+	// 	}
+	// };
+	
+	get pageUrl(){
+		return this._pageUrl;
+	}
+	set pageUrl(url:string){
+		this._pageUrl = url;
+	}
+	
     constructor(injector: Injector) {
         super(injector);
 		//
 		this.reuseTabService = injector.get(ReuseTabService);
 	}
 
-	onPageInit(resultData: any, pageUrl:string) {
+	onPageInit(resultData: any, url:string, actions:Object[]) {
 		
 	}	
 }

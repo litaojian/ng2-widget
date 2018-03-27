@@ -6,7 +6,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { SFSchema, FormProperty } from '../biz-form';
 import { SimpleTableColumn, SimpleTableButton, SimpleTableFilter, SimpleTableComponent } from '../biz-table';
-import { BizQueryService } from './biz-query.service';
+import { BizTreeService } from './biz-tree.service';
 import { BizQueryComponent } from './biz-query.component';
 import { ZxTreeComponent } from '../my-tree';
 
@@ -40,41 +40,33 @@ export class BizTreeTableComponent extends BizQueryComponent implements OnInit, 
     @ViewChild('myNavTree')
     myNavTree: ZxTreeComponent;
 
-    navTree: any = {
-        nzXs:18,
-        nzSm:12,
-        nzMd:6,
-        nzLg:5,
-        nzXl:4,
-        dataUrl: ''
-    };
-
-    selectNodeId:string = "0";
 
     constructor(injector: Injector) {
         super(injector);
+
+        this.bizService = injector.get(BizTreeService);
         //
         console.log("BizTreeTableComponent init ..............");
     }
 
+    get navTree(){
+        return (<BizTreeService>this.bizService).navTree;
+    }
 
+    get selectNodeId(){
+        return (<BizTreeService>this.bizService).selectNodeId;
+    }
+    
+    set selectNodeId(nodeId){
+        (<BizTreeService>this.bizService).selectNodeId = nodeId;
+    }
     //     
-    onPageInit(resultData: any) {
-        //
-        super.onPageInit(resultData);
+    onPageInit(resultData: any, url:string) {
+         //初始化配置数据
+         this.bizService.onPageInit(resultData, url, this.actions);
 
-        if (resultData["navTree"]){
-            
-            Object.keys(resultData["navTree"]).forEach((propKey: string) => {
-                this.navTree[propKey] = resultData["navTree"][propKey];
-            });
-            
-            if (this.navTree.dataUrl) {
-                this.navTree.dataUrl = this.bizService.formatUrl(this.navTree.dataUrl);
-            }    
-            // 重新载入树的节点数据
-            this.myNavTree.loadTree(this.navTree.dataUrl);
-        }
+         // 重新载入树的节点数据
+         this.myNavTree.loadTree(this.navTree.dataUrl);        
     }
 
     onTreeNodeClick(nodeId:string) {

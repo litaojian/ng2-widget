@@ -13,11 +13,13 @@ import { BizQueryService } from './biz-query.service';
 import { BizQueryComponent } from './biz-query.component';
 import { BizFormComponent } from './biz-form.component';
 import { BizPageComponent } from './biz-page.component';
-import { BizQueryDialogComponent } from './biz-dialog-query.component';
-import { BizFormDialogComponent } from './biz-dialog-form.component';
+import { BizDialogQueryComponent } from './biz-dialog-query.component';
+import { BizDialogFormComponent } from './biz-dialog-form.component';
+import { BizDialogTreeComponent } from './biz-dialog-tree.component';
+import { BizTreeTableComponent } from './biz-tree-table.component';
 
 import { BizPageService } from './biz-page.service';
-import { BizTreeTableComponent } from './biz-tree-table.component';
+import { BizTreeService } from './biz-tree.service';
 import { BizPageGuardService } from './biz-page-guard.service';
 
 
@@ -26,7 +28,8 @@ const COMPONENTS = [
 	BizPageComponent,
 	BizTreeTableComponent,
 	BizQueryComponent,
-	BizFormComponent
+	BizFormComponent,
+	BizDialogTreeComponent
 ];
 const DIRECTIVES = [		
 ];
@@ -37,6 +40,7 @@ const SERVICES = [
 	BizPageService,
 	BizFormService,
 	BizQueryService,
+	BizTreeService,
 	BizPageGuardService
 ];
 
@@ -57,8 +61,8 @@ const SERVICES = [
 		...DIRECTIVES		
   ],
   declarations: [
-		BizQueryDialogComponent,
-		BizFormDialogComponent,
+		BizDialogQueryComponent,
+		BizDialogFormComponent,
 		...COMPONENTS,
 		...DIRECTIVES	
 	],
@@ -66,8 +70,9 @@ const SERVICES = [
 	...SERVICES
   ],
   entryComponents:[
-	BizQueryDialogComponent,
-	BizFormDialogComponent
+	BizDialogQueryComponent,
+	BizDialogFormComponent,
+	BizDialogTreeComponent
   ]
 })
 export class BizAppModule {

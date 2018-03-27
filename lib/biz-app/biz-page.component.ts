@@ -25,6 +25,12 @@ export class BizPageComponent {
     router: Router;
     pagePath: string;
 
+    actions: any = {
+        reset: (form: any) => {
+            form.reset({});
+		}
+    };
+    
     constructor(injector: Injector) {
 
         this.activatedRoute = injector.get(ActivatedRoute);
@@ -85,6 +91,7 @@ export class BizPageComponent {
             let len = this.activatedRoute.snapshot.url.length;
             let dir, pageName, cmd;
             if (len == 0){
+                console.log("debug:--------------" + this.bizService.pageUrl);
 
             }else{
                 dir = this.activatedRoute.snapshot.url[0].path;
@@ -113,7 +120,7 @@ export class BizPageComponent {
                         url = url.replace("/list", "/tree");            
                         this.router.navigateByUrl(url);
                     }else{
-                        this.onPageInit(resultData);
+                        this.onPageInit(resultData, url);
                     }
                 }
             );
@@ -121,7 +128,7 @@ export class BizPageComponent {
         }   
     }
     //     
-    onPageInit(resultData: any) {
+    onPageInit(resultData: any, url:string) {
 
         if (this.reuseTabService) {
             this.reuseTabService.title = resultData["title"];

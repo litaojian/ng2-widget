@@ -1,4 +1,4 @@
-import { Component, ViewContainerRef, ChangeDetectorRef, ComponentRef, SimpleChanges, ViewChild, OnInit, HostBinding, AfterViewInit, Injector, OnDestroy } from '@angular/core';
+import { Component, ViewContainerRef, ChangeDetectorRef, ComponentRef, SimpleChanges, ViewChild, OnInit, HostBinding, Input, AfterViewInit, Injector, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { NzMessageService } from 'ng-zorro-antd';
@@ -10,7 +10,7 @@ import { BizPageComponent } from './biz-page.component';
 
 
 @Component({
-    selector: 'bizquery-dialog',
+    selector: 'bizdialog-query',
     template: `
     <div class="mb-md">
         <my-simple-form #myQueryForm [layout]="queryForm.layout"
@@ -28,32 +28,33 @@ import { BizPageComponent } from './biz-page.component';
     </div>
     `,
 })
-export class BizQueryDialogComponent extends BizPageComponent {
+export class BizDialogQueryComponent extends BizPageComponent {
 
     @ViewChild('myDataTable')
     myDataTable: SimpleTableComponent;
 
-    bizQueryService: BizQueryService;
-
+    @Input()
+    set pageUrl(url: string) {
+      this.bizService.pageUrl = url;
+    }
+    
 
     constructor(injector: Injector) {
         super(injector);
         //
-        this.bizQueryService = injector.get(BizQueryService);
+        this.bizService = injector.get(BizQueryService);
     }
 
     get dataTable(){
-        return this.bizQueryService.dataTable;
+        return (<BizQueryService>this.bizService).dataTable;
     }
 
     get queryForm(){
-        return this.bizQueryService.queryForm;
+        return (<BizQueryService>this.bizService).queryForm;
     }
-    get actions(){
-        return this.bizQueryService.actions;
-    }
-    onPageInit(resultData: any) {
-        this.bizQueryService.onPageInit(resultData, this.router.url);
+        
+    onPageInit(resultData: any, url:string) {
+        this.bizService.onPageInit(resultData, url, this.actions);
     }    
 
 }

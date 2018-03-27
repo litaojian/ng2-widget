@@ -6,7 +6,9 @@ import { SFSchema, FormProperty } from '../biz-form';
 import { SimpleTableColumn, SimpleTableButton, SimpleTableFilter, SimpleTableComponent } from '../biz-table';
 import { BizQueryService } from './biz-query.service';
 import { BizPageComponent } from './biz-page.component';
-import { BizQueryDialogComponent } from './biz-dialog-query.component';
+import { BizDialogQueryComponent } from './biz-dialog-query.component';
+import { BizDialogFormComponent } from './biz-dialog-form.component';
+import { BizDialogTreeComponent } from './biz-dialog-tree.component';
 
 @Component({
     selector: 'app-biz-query',
@@ -33,123 +35,51 @@ export class BizQueryComponent extends BizPageComponent implements OnInit, DoChe
     @ViewChild('myDataTable')
     myDataTable: SimpleTableComponent;
 
-    pagePath: string;
     selectedRow: Object;
     pageIndex: number = 1;
     //pageSize: number = 10;
 
 
-    actions: any = {
-        reset: (form: any) => {
-            form.reset({});
-        },
-        query: (form: any) => {
-            //this.msg.success(JSON.stringify(form.value));
-            this.onQuery(form.value);
-        },
-        add: (form: any) => {
-            this.onAddNew(form.value);
-        },
-        delete: (row: any) => {
-            this.onDeleteRow(row);
-        },
-        edit: (row: any) => {
-            this.onEditRow(row);
-        },
-        view: (row: any) => {
-            this.onViewRow(row);
-        },
-        showQueryDialog: (row: any) => {
-            this.onShowQueryDialog(row);
-        }
-    };
-
-    queryParams: any = {};
-    _queryParams:any = [];
-
-    queryForm: any = {
-        layout: "inline",
-        schema: null,
-        model: {}
-    };
-
-    dataTable: any = {
-        nzXs:18,
-        nzSm:12,
-        nzMd:6,
-        nzLg:6,
-        nzXl:4,
-        dataUrl: '',
-        reqMehtod: "GET",
-        showTotal: true,
-        resReName: { list: 'rows', total: 'total' },
-        columns: [
-            { title: "ID" }
-        ]
+    get dataTable(){
+        return (<BizQueryService>this.bizService).dataTable;
     }
 
+    get queryForm(){
+        return (<BizQueryService>this.bizService).queryForm;
+    }
 
-    
+    get queryParams(){
+        return (<BizQueryService>this.bizService).queryParams;
+    }    
+
+    set queryParams(params){
+        (<BizQueryService>this.bizService).queryParams = params;
+    }
+
+    get defaultQueryParams(){
+        return (<BizQueryService>this.bizService).defaultQueryParams;
+    }    
+
+    set defaultQueryParams(params){
+        (<BizQueryService>this.bizService).defaultQueryParams = params;
+    }
+
     constructor(injector: Injector) {
         super(injector);
+        //
+        this.bizService = injector.get(BizQueryService);
         console.log("BizQueryComponent init ..............");
     }
 
     //     
-    onPageInit(resultData: any) {
-
-        if (this.reuseTabService) {
-            this.reuseTabService.title = resultData["title"];
-        }
-
-        Object.keys(resultData["dataTable"]).forEach((propKey: string) => {
-            this.dataTable[propKey] = resultData["dataTable"][propKey];
-        });
-
-        if (resultData["dataTable"]["dataUrl"]) {
-            this.dataTable.dataUrl = this.bizService.formatUrl(this.dataTable.dataUrl);
-        } else {
-            this.dataTable.dataUrl = this.bizService.formatUrl(resultData.restAPI);
-        }
-        this.dataTable.columns.forEach((column: any) => {
-            if (column["buttons"]) {
-                column["buttons"].forEach((button: any) => {
-                    button["click"] = this.actions[button["click"]];
-                });
-            }
-        });
-
-        if (resultData["queryForm"]) {
-            this.queryForm.schema = {};
-            this.queryForm.layout = resultData["queryForm"].layout || "inline";
-            Object.keys(resultData["queryForm"]).forEach((propKey: string) => {
-                this.queryForm.schema[propKey] = resultData["queryForm"][propKey];
-            });
-        }
-
-        Object.keys(resultData["actions"]).forEach((propKey: string) => {
-            this.actions[propKey] = resultData["actions"][propKey];
-        });
-
-        this.queryParams = {};
-        Object.keys(resultData["queryParams"]).forEach((propKey: string) => {
-            this.queryParams[propKey] = resultData["queryParams"][propKey];
-        });
-        this.queryForm.modal = this.queryParams;
-        Object.assign(this._queryParams, this.queryParams);
-        
-        this.bizService.setApiUrl(resultData.restAPI);
-        this.bizService.setIdField(resultData.idField);
-        //set the view url
-        this.bizService.setPageViewUrl(this.router.url, "list");
-
-        
+    onPageInit(resultData: any, url:string) {
+        this.bizService.onPageInit(resultData, url, this.actions);
     }
     //
     onQuery(form: any): void {
         Object.keys(this.queryParams).forEach((prop: string) => {
-            if (this._queryParams[prop] != null){
-                this.queryParams[prop] = this._queryParams[prop];
+            if (this.defaultQueryParams[prop] != null){
+                this.queryParams[prop] = this.defaultQueryParams[prop];
             }else{
                 delete this.queryParams[prop];
             }            
@@ -231,12 +161,31 @@ export class BizQueryComponent extends BizPageComponent implements OnInit, DoChe
     onShowQueryDialog(row: Object): void {
         //alert('aaa');
         let size: '' | 'lg' | 'sm' = '';
+        size = 'lg';
         let options = {
             wrapClassName: size ? 'modal-' + size : '',
-            content: BizQueryDialogComponent,
+            content: BizDialogQueryComponent,
             footer: false,
             componentParams: {
-                dialogUrl:'/demo/testRec',
+                pageUrl:'/demo/testRec',
+                name: 'From Parent Data'
+            }
+        };
+        this.modalService.open(options).subscribe(result => {
+            //this.msg.info(`subscribe status: ${JSON.stringify(result)}`);
+        });
+    }
+
+    onShowTreeDialog(row: Object): void {
+        //alert('aaa');
+        let size: '' | 'lg' | 'sm' = '';
+        size = 'lg';
+        let options = {
+            wrapClassName: size ? 'modal-' + size : '',
+            content: BizDialogTreeComponent,
+            footer: false,
+            componentParams: {
+                pageUrl:'/demo/testRec',
                 name: 'From Parent Data'
             }
         };
