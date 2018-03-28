@@ -169,7 +169,7 @@ export class ZxTreeService extends BaseDataService {
 	saveTreeStatus(treeId:string, restUrl:string){
 		var treeObj = $.fn.zTree.getZTreeObj(treeId);
 		var nodes = treeObj.getCheckedNodes(true);
-		let result = this.ajaxPut(restUrl, nodes).subscribe(result =>{
+		let result = this.ajaxPut(restUrl, {"treeNodes":nodes}).subscribe(result =>{
 			console.log("ajaxPost:" + JSON.stringify(result));
 		});
 	}
