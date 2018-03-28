@@ -28,22 +28,6 @@
                 "widget": {
                     "placeholder": "请输入名称"
                 }
-            },
-            "testtype": {
-                "type": "string",
-                "title": "分类",
-                "widget": {
-                    "id": "select",
-                    "data": [
-                        { "value": "DRAFT", "label": "DRAFT" },
-                        { "value": "2", "label": "分类2" },
-                        { "value": "3", "label": "分类3" }
-                    ],
-                    "placeholder": "请选择分类",
-                    "style": {
-                        "width": "120px"
-                    }
-                }
             }
         },
         "required": ["name"],
@@ -54,8 +38,8 @@
                     "submit": true
                 },
                 {
-                    "label": "新增",
-                    "id": "add"
+                    "label": "确定",
+                    "id": "confirmSelect"
                 }
             ]
         }
@@ -81,7 +65,6 @@
                 "filter": "(filter: SimpleTableFilter, record: any) => record.testage >= filter.value[0] && record.testage <= filter.value[1]"
 
             },
-            { "index": "description", "title": "描述", "type": "string" },
             { "index": "testdate", "title": "日期", "type": "date", "dateFormat": "YYYY-MM-DD" },
             {
                 "index": "teststatus",
@@ -91,16 +74,6 @@
                 "filterMultiple": false,
                 "filter": "() => true",
                 "sorter": "(a, b) => true"
-            },
-            {
-                "index": "created",
-                "title": "输入时间",
-                "type": "date",
-                "filters": [{ "text": "昨天", "value": "male" }, { "text": "本周", "value": "2" }, { "text": "当月", "value": "3" }],
-                "filterMultiple": true,
-                "filter": "() => true",
-                "sorter": "(a, b) => true"
-
             },
             {
                 "title": "操作区",
