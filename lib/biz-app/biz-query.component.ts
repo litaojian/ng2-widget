@@ -68,6 +68,12 @@ export class BizQueryComponent extends BizPageComponent implements OnInit, DoChe
         },
         dialogConfirm: (row: any, modal: any) => {
             console.log("debugger dialogConfirm..........." + modal);
+            let roleId = row.roleid;
+            let nodes = [];
+            let restUrl = "";
+            let result = this.bizService.ajaxPut(restUrl, {"roleId":roleId,"data":nodes}).subscribe(result =>{
+                console.log("ajaxPost:" + JSON.stringify(result));
+            });
         }
     };
 

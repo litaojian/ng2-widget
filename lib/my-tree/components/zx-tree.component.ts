@@ -98,14 +98,6 @@ export class ZxTreeComponent implements OnInit, AfterViewInit, AfterViewChecked 
 		let nodeData = this.ztreeService.getSelectedNodes(this.treeId);
 		return nodeData;
 	}
-
-	saveSelectNodes(config:any){
-		if (config && config.dataUrl){
-			this.ztreeService.saveTreeStatus(this.treeId, config.dataUrl);
-			return "ok";
-		}
-		return "-";
-	}
 	
 }
 

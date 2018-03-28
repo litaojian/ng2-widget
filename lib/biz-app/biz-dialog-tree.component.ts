@@ -76,12 +76,12 @@ export class BizDialogTreeComponent extends BizDialogComponent {
     onTreeNodeClick(nodeId:string) {
     }
 
-    handleOk() {
-        let data:any = [];
+    handleOk(event:any) {
+        let nodes:any = [];
         if (this.myNavTree){
-            data = this.myNavTree.saveSelectNodes(this.navTree);
+            nodes = this.myNavTree.getSelectedNodes();
         }
-        this.subject.destroy('onOk');
+        this.subject.destroy('onOk', {"treeNodes":nodes});
     }
     
     handleCancel(event:any) {

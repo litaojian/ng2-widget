@@ -92,8 +92,8 @@
                         "text": "菜单授权",
                         "type": "modal",
                         "component": "BizDialogTreeComponent",
-                        "modalOptions": {
-                            "size": "lg",
+                        "size": "lg",
+                        "modalOptions": {                            
                             "footer": false,
                             "title": "菜单授权",
                             "componentParams": {
