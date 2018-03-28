@@ -1,11 +1,9 @@
 import { Component, ViewContainerRef, ChangeDetectorRef, ComponentRef, SimpleChanges, ViewChild, HostBinding, Injector } from '@angular/core';
 import { Router, ActivatedRoute, ActivatedRouteSnapshot, Params } from '@angular/router';
 
-import { NzMessageService, NzModalService } from 'ng-zorro-antd';
+import { NzMessageService, NzModalService, NzModalSubject } from 'ng-zorro-antd';
 import { SimpleTableColumn, SimpleTableButton, SimpleTableFilter, SimpleTableComponent } from '../biz-table';
 import { BizPageService } from './biz-page.service';
-import { ReuseTabService } from '@delon/abc';
-
 
 @Component({
     selector: 'biz-dialog',
@@ -18,12 +16,12 @@ export class BizDialogComponent {
     bizService: BizPageService;
     msgService: NzMessageService;
     modalService: NzModalService;
-    
-    reuseTabService: ReuseTabService;
+    subject:NzModalSubject;
     
     activatedRoute: ActivatedRoute;
     router: Router;
     pagePath: string;
+    pageTitle:string = "<标题>";
 
     actions: any = {
         reset: (form: any) => {
@@ -38,7 +36,7 @@ export class BizDialogComponent {
         this.bizService = injector.get(BizPageService);
         this.msgService = injector.get(NzMessageService);
         this.modalService = injector.get(NzModalService);
-        
+        this.subject = injector.get(NzModalSubject);
         //
         console.log("BizDialogComponent init ..............");
     }
@@ -114,10 +112,6 @@ export class BizDialogComponent {
     }
     //     
     onPageInit(resultData: any, url:string) {
-
-        if (this.reuseTabService) {
-            this.reuseTabService.title = resultData["title"];
-        }
         //console.log("page def:" , this.queryForm);
     }
 

@@ -81,10 +81,12 @@
                         "component": "BizDialogTreeComponent",
                         "modalOptions": {
                             "size": "lg",
+                            "footer": false,
                             "componentParams": {
                                 "pageUrl": "/admin/userTree"
                             }
-                        }
+                        },
+                        "click": "dialogConfirm"
                     },
                     {
                         "text": "菜单授权",
@@ -92,11 +94,13 @@
                         "component": "BizDialogTreeComponent",
                         "modalOptions": {
                             "size": "lg",
-                            "footer": true,
+                            "footer": false,
+                            "title": "菜单授权",
                             "componentParams": {
                                 "pageUrl": "/admin/menuTree"
                             }
-                        }
+                        },
+                        "click": "dialogConfirm"
                     }
                 ]
             }

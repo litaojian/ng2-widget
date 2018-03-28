@@ -66,11 +66,8 @@ export class BizQueryComponent extends BizPageComponent implements OnInit, DoChe
         view: (row: any) => {
             this.onViewRow(row);
         },
-        showQueryDialog: (row: any) => {
-            this.onShowQueryDialog(row);
-        },
-        showTreeDialog: (row: any) => {
-            this.onShowTreeDialog(row);
+        dialogConfirm: (row: any, modal: any) => {
+            console.log("debugger dialogConfirm..........." + modal);
         }
     };
 

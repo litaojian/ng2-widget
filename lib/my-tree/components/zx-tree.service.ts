@@ -160,4 +160,17 @@ export class ZxTreeService extends BaseDataService {
 		}
     }
 
+	getSelectedNodes(treeId:string){
+		var treeObj = $.fn.zTree.getZTreeObj(treeId);
+		var nodes = treeObj.getCheckedNodes(true);
+		return nodes;
+	}
+	
+	saveTreeStatus(treeId:string, restUrl:string){
+		var treeObj = $.fn.zTree.getZTreeObj(treeId);
+		var nodes = treeObj.getCheckedNodes(true);
+		let result = this.ajaxPut(restUrl, nodes).subscribe(result =>{
+			console.log("ajaxPost:" + JSON.stringify(result));
+		});
+	}
 }    

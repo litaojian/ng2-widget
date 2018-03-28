@@ -46,6 +46,30 @@ export class HttpClientService extends BaseHttpService {
 		return headers;
     }
 	
+	ajaxDelete(ajaxUrl: string): Observable<Object> {
+		let options = {
+			headers: this.getHttpHeader()
+		};
+		
+		let url = this.formatUrl(ajaxUrl);
+		//调用后台数据接口的时候使用的发送请求的方式
+		return this._httpClient.delete(url, options)
+			.do(response => response as Object)
+			.catch(error => this.handleError(url,error));
+	}
+
+	ajaxPut(ajaxUrl: string, params: any): Observable<Object> {
+		let options = {
+			headers: this.getHttpHeader(params["debug"])
+		};
+		const queryParams = {};
+		let url = this.formatUrl(ajaxUrl);
+		//调用后台数据接口的时候使用的发送请求的方式
+		return this._httpClient.put(url, params, options)
+			.do(response => response as Object)
+			.catch(error => this.handleError(url,error));
+	}
+
 	ajaxPost(ajaxUrl: string, params: any): Observable<Object> {
 		let options = {
 			headers: this.getHttpHeader(params["debug"])

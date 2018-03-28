@@ -55,7 +55,6 @@ export class ZxTreeComponent implements OnInit, AfterViewInit, AfterViewChecked 
 		//console.log("name=" + this.name + ", dataSource=" + this.optionDataSource);
 
 		this.loadTree(this.treeDataSource);			
-
 	}
 	
 	ngAfterViewChecked() {
@@ -75,7 +74,7 @@ export class ZxTreeComponent implements OnInit, AfterViewInit, AfterViewChecked 
 
 	loadTree(config:any){
 		let settings:any = this.ztreeService.getDefaultOptions();
-		if ("true" == config.checkbox || config.checkbox == true) {
+		if (config && ("true" == config.checkbox || config.checkbox == true)) {
 		  settings["check"]["enable"] = true;		  
 		}  
 		if (this.nodeClickEvent){
@@ -84,7 +83,7 @@ export class ZxTreeComponent implements OnInit, AfterViewInit, AfterViewChecked 
 		//debugger;
 		settings["treeId"] = this.treeId;
 		
-		if (config.dataUrl){
+		if (config && config.dataUrl){
 			settings["treeDataSource"] = config.dataUrl;
 			this.treeDataSource = config.dataUrl;
 		}
@@ -95,5 +94,18 @@ export class ZxTreeComponent implements OnInit, AfterViewInit, AfterViewChecked 
 		this.ztreeService.initZtree(settings, selectNodeId);  
 	}
 
+	getSelectedNodes(){
+		let nodeData = this.ztreeService.getSelectedNodes(this.treeId);
+		return nodeData;
+	}
+
+	saveSelectNodes(config:any){
+		if (config && config.dataUrl){
+			this.ztreeService.saveTreeStatus(this.treeId, config.dataUrl);
+			return "ok";
+		}
+		return "-";
+	}
+	
 }
 

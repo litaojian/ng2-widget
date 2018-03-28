@@ -134,6 +134,14 @@ export class BaseService {
 		return path;
 	}
 
+	ajaxDelete(ajaxUrl: string): Observable<Object> {
+		return this.httpService.ajaxDelete(ajaxUrl);
+	}
+
+	ajaxPut(ajaxUrl: string, params: any): Observable<Object> {
+		return this.httpService.ajaxPut(ajaxUrl, params);
+	}
+
 	ajaxPost(ajaxUrl: string, params: any): Observable<Object> {
 		return this.httpService.ajaxPost(ajaxUrl, params);
 	}

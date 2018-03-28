@@ -66,7 +66,9 @@ export class BizTreeTableComponent extends BizQueryComponent implements OnInit, 
          this.bizService.onPageInit(resultData, url, this.actions);
 
          // 重新载入树的节点数据
-         this.myNavTree.loadTree(this.navTree);        
+         if (this.navTree){
+            this.myNavTree.loadTree(this.navTree);        
+         }
     }
 
     onTreeNodeClick(nodeId:string) {
