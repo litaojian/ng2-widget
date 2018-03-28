@@ -11,6 +11,7 @@ export class BizTreeService extends BizQueryService {
         nzMd:6,
         nzLg:5,
         nzXl:4,
+        checkbox:false,
         dataUrl: ''
     };
 

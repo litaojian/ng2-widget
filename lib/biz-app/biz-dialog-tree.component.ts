@@ -11,8 +11,10 @@ import { ZxTreeComponent } from '../my-tree';
 @Component({
     selector: 'bizdialog-tree',
     template: `
-    <div nz-col [nzXl]="navTree.nzXl" [nzLg]="navTree.nzLg" [nzMd]="navTree.nzMd" [nzSm]="navTree.nzSm" [nzXs]="navTree.nzXs">
-        <zx-tree #myNavTree tree-id="nTree1" (nodeClick)="onTreeNodeClick($event)" has-checkbox="false" key-title="name" key-id="nodeId" key-pid="parentId" class="tree"></zx-tree>
+    <div nz-row [nzGutter]="24">
+        <div nz-col [nzXl]="navTree.nzXl" [nzLg]="navTree.nzLg" [nzMd]="navTree.nzMd" [nzSm]="navTree.nzSm" [nzXs]="navTree.nzXs">
+            <zx-tree #myNavTree tree-id="nTree1" (nodeClick)="onTreeNodeClick($event)" [has-checkbox]="navTree.checkbox" key-title="name" key-id="nodeId" key-pid="parentId" class="tree"></zx-tree>
+        </div>
     </div>
     `,
     providers: [BizTreeService]
@@ -46,7 +48,7 @@ export class BizDialogTreeComponent extends BizDialogComponent {
         this.bizService.onPageInit(resultData, url, this.actions);
 
         // 重新载入树的节点数据
-        this.myNavTree.loadTree(this.navTree.dataUrl);
+        this.myNavTree.loadTree(this.navTree);
     }    
 
 }

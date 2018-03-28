@@ -3,6 +3,7 @@
     "pageType": "TreeView",
     "actions": {},
     "navTree": {
+        "checkbox": true,
         "dataUrl": "/api/data/tree/menuTree?url=void(0)"
     }
 }

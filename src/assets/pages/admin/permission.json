@@ -1,7 +1,7 @@
 {
     "title": "角色权限",
     "pageType": "TableView",
-    "restAPI": "/mock/api/rest/role",
+    "restAPI": "/api/rest/sysRole",
     "idField": "roleid",
     "actions": {},
     "queryParams": { "filter": "all" },
@@ -78,18 +78,21 @@
                     {
                         "text": "关联用户",
                         "type": "modal",
-                        "component": "BizDialogQueryComponent",
+                        "component": "BizDialogTreeComponent",
                         "modalOptions": {
+                            "size": "lg",
                             "componentParams": {
                                 "pageUrl": "/admin/userTree"
                             }
                         }
                     },
                     {
-                        "text": "设置菜单",
+                        "text": "菜单授权",
                         "type": "modal",
                         "component": "BizDialogTreeComponent",
                         "modalOptions": {
+                            "size": "lg",
+                            "footer": true,
                             "componentParams": {
                                 "pageUrl": "/admin/menuTree"
                             }
