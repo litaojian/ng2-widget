@@ -3,8 +3,8 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { NzMessageService } from 'ng-zorro-antd';
 import { SFSchema } from '../biz-form';
-import { BizDialogService } from './biz-dialog.service';
-import { BizPageComponent } from './biz-page.component';
+import { BizFormService } from './biz-form.service';
+import { BizDialogComponent } from './biz-dialog.component';
 
 @Component({
     selector: 'bizdialog-form',
@@ -16,9 +16,10 @@ import { BizPageComponent } from './biz-page.component';
                     [actions]="actions">
             </my-simple-form>
         </div>
-    `
+    `,
+    providers: [BizFormService]
 })
-export class BizDialogFormComponent extends BizPageComponent {
+export class BizDialogFormComponent extends BizDialogComponent {
 
     constructor(injector: Injector) {
         super(injector);    
@@ -28,7 +29,6 @@ export class BizDialogFormComponent extends BizPageComponent {
     set pageUrl(url: string) {
       this.bizService.pageUrl = url;
     }
-    
     
 
 }

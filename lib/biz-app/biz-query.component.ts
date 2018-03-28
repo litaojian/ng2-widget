@@ -28,7 +28,7 @@ import { BizDialogTreeComponent } from './biz-dialog-tree.component';
         </div>
     </div>
     `,
-    providers: []
+    providers: [BizQueryService]
 })
 export class BizQueryComponent extends BizPageComponent implements OnInit, DoCheck, OnDestroy {
 
@@ -195,7 +195,7 @@ export class BizQueryComponent extends BizPageComponent implements OnInit, DoChe
             content: BizDialogQueryComponent,
             footer: false,
             componentParams: {
-                pageUrl:'/demo/testRec',
+                pageUrl:'/demo/testDialog',
                 name: 'From Parent Data'
             }
         };

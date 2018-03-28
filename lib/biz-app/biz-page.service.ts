@@ -8,14 +8,14 @@ export class BizPageService extends BaseDataService {
 
 	reuseTabService: ReuseTabService;
 
-	_pageUrl: string;
+	pageUrl: string;
 	
-	get pageUrl():string{
-		return this._pageUrl;
-	}
-	set pageUrl(url:string){
-		this._pageUrl = url;
-	}
+	// get pageUrl():string{
+	// 	return this._pageUrl;
+	// }
+	// set pageUrl(url:string){
+	// 	this._pageUrl = url;
+	// }
 	
     constructor(injector: Injector) {
         super(injector);

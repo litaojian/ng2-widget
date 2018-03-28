@@ -38,9 +38,6 @@ const SERVICES = [
 	NzMessageService,	
 	NzModalService,
 	BizPageService,
-	BizFormService,
-	BizQueryService,
-	BizTreeService,
 	BizPageGuardService
 ];
 

@@ -33,7 +33,7 @@ import { ITreeOptions } from 'angular-tree-component';
         </div>
     </div>
     `,
-    providers: []
+    providers: [BizTreeService]
 })
 export class BizTreeTableComponent extends BizQueryComponent implements OnInit, DoCheck , OnDestroy {
     

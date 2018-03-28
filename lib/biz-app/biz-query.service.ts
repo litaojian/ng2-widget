@@ -40,14 +40,15 @@ export class BizQueryService extends BizPageService {
 	
 	//     
 	onPageInit(resultData: any, url:string, actions:Object[]) {
-
+		
 		if (this.reuseTabService) {
 			this.reuseTabService.title = resultData["title"];
 		}
-
-		Object.keys(resultData["dataTable"]).forEach((propKey: string) => {
-			this.dataTable[propKey] = resultData["dataTable"][propKey];
-		});
+		if (resultData["dataTable"]){
+			Object.keys(resultData["dataTable"]).forEach((propKey: string) => {
+				this.dataTable[propKey] = resultData["dataTable"][propKey];
+			});	
+		}
 
 		if (resultData["dataTable"]["dataUrl"]) {
 			this.dataTable.dataUrl = this.formatUrl(this.dataTable.dataUrl);
@@ -84,7 +85,9 @@ export class BizQueryService extends BizPageService {
 		this.setApiUrl(resultData.restAPI);
 		this.setIdField(resultData.idField);
 		//set the view url
-		this.setPageViewUrl(url, "list");
+		if (url != null){
+			this.setPageViewUrl(url, "list");
+		}
 
 	}
 }

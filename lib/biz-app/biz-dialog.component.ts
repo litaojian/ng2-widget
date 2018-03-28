@@ -8,12 +8,12 @@ import { ReuseTabService } from '@delon/abc';
 
 
 @Component({
-    selector: 'biz-page',
+    selector: 'biz-dialog',
     template: `
     `,
     providers: []
 })
-export class BizPageComponent {
+export class BizDialogComponent {
 
     bizService: BizPageService;
     msgService: NzMessageService;
@@ -40,7 +40,7 @@ export class BizPageComponent {
         this.modalService = injector.get(NzModalService);
         
         //
-        console.log("BizPageComponent init ..............");
+        console.log("BizDialogComponent init ..............");
     }
 
     ngOnInit() {     
@@ -51,15 +51,6 @@ export class BizPageComponent {
     ngOnDestroy() {
         //console.log(" bizQuery ngOnDestory......");				
     }
-
-    // ngAfterViewInit(){
-    // }
-
-    // ngAfterContentInit(){
-    // }
-
-    // ngOnChanges(){
-    // }
 
     getUrl(route: ActivatedRouteSnapshot): string {
         let next = route;
@@ -82,45 +73,40 @@ export class BizPageComponent {
     }
 
     loadPageDef(){
-        let _url = this.getUrl(this.activatedRoute.snapshot);
+        
+        let _url = this.bizService.pageUrl;
+
         if (_url != this.pagePath){
             this.pagePath = _url;
             //
             //console.log("BizPageComponent loadPageDef .............." + this.router.url );                
-            
-            let len = this.activatedRoute.snapshot.url.length;
-            let dir, pageName, cmd;
-            if (len == 0){
-                //console.log("debug:--------------" + this.bizService.pageUrl);                
-            }else{
-                dir = this.activatedRoute.snapshot.url[0].path;
-                if (len > 1) {
-                    pageName = this.activatedRoute.snapshot.url[1].path;
+            let urls = this.bizService.pageUrl.split("/");
+            let len = urls.length;
+            let dir, pageName, cmd;            
+            if (urls.length > 0){
+                if (urls[0] == ""){
+                    urls.shift();   
                 }
-                if (len > 2) {
-                    cmd = this.activatedRoute.snapshot.url[2].path;
+                dir = urls[0];
+                if (urls.length > 1) {
+                    pageName = urls[1];
+                }        
+                if (urls.length > 2) {
+                    cmd = urls[2];
                 }
-    
-                if (len >= 4) {
-                    //this.parentId = +this.activatedRoute.snapshot.url[3].path;			
-                }    
             }
+
             if (!dir) {
                 dir = "demo";
             }
             if (!pageName) {
-                pageName = "testRec";
+                pageName = "testDialog";
             }
 
             this.bizService.ajaxGet(`assets/pages/${dir}/${pageName}.json`, {}).subscribe(
                 (resultData:any) => {
-                    let url = this.router.url;
-                    if (resultData["navTree"] && url.endsWith("/list")){
-                        url = url.replace("/list", "/tree");            
-                        this.router.navigateByUrl(url);
-                    }else{
-                        this.onPageInit(resultData, url);
-                    }
+
+                    this.onPageInit(resultData, this.bizService.pageUrl);                    
                 }
             );
 

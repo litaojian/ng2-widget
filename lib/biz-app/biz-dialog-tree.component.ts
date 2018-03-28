@@ -5,7 +5,7 @@ import { NzMessageService } from 'ng-zorro-antd';
 import { SFSchema } from '../biz-form';
 import { SimpleTableColumn, SimpleTableButton, SimpleTableFilter, SimpleTableComponent } from '../biz-table';
 import { BizTreeService } from './biz-tree.service';
-import { BizPageComponent } from './biz-page.component';
+import { BizDialogComponent } from './biz-dialog.component';
 import { ZxTreeComponent } from '../my-tree';
 
 @Component({
@@ -15,8 +15,9 @@ import { ZxTreeComponent } from '../my-tree';
         <zx-tree #myNavTree tree-id="nTree1" (nodeClick)="onTreeNodeClick($event)" has-checkbox="false" key-title="name" key-id="nodeId" key-pid="parentId" class="tree"></zx-tree>
     </div>
     `,
+    providers: [BizTreeService]
 })
-export class BizDialogTreeComponent extends BizPageComponent {
+export class BizDialogTreeComponent extends BizDialogComponent {
 
     @ViewChild('myNavTree')
     myNavTree: ZxTreeComponent;

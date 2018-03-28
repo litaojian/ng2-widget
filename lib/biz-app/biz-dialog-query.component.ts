@@ -6,7 +6,7 @@ import { SFSchema } from '../biz-form';
 import { SimpleTableColumn, SimpleTableButton, SimpleTableFilter, SimpleTableComponent } from '../biz-table';
 import { BizDialogService } from './biz-dialog.service';
 import { BizQueryService } from './biz-query.service';
-import { BizPageComponent } from './biz-page.component';
+import { BizDialogComponent } from './biz-dialog.component';
 
 
 @Component({
@@ -27,8 +27,9 @@ import { BizPageComponent } from './biz-page.component';
         </div>
     </div>
     `,
+    providers: [BizQueryService]
 })
-export class BizDialogQueryComponent extends BizPageComponent {
+export class BizDialogQueryComponent extends BizDialogComponent {
 
     @ViewChild('myDataTable')
     myDataTable: SimpleTableComponent;
@@ -54,7 +55,7 @@ export class BizDialogQueryComponent extends BizPageComponent {
     }
         
     onPageInit(resultData: any, url:string) {
-        this.bizService.onPageInit(resultData, url, this.actions);
+        this.bizService.onPageInit(resultData, this.pageUrl, this.actions);
     }    
 
 }
