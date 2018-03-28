@@ -10,6 +10,13 @@ import { BizDialogQueryComponent } from './biz-dialog-query.component';
 import { BizDialogFormComponent } from './biz-dialog-form.component';
 import { BizDialogTreeComponent } from './biz-dialog-tree.component';
 
+export const DIALOGTYPES = [
+    BizDialogQueryComponent,
+    BizDialogFormComponent,
+	BizDialogTreeComponent
+];
+
+
 @Component({
     selector: 'app-biz-query',
     template: `
@@ -102,6 +109,20 @@ export class BizQueryComponent extends BizPageComponent implements OnInit, DoChe
     //     
     onPageInit(resultData: any, url:string) {
         this.bizService.onPageInit(resultData, url, this.actions);
+        // 设置弹窗组件
+        this.dataTable.columns.forEach((column: any) => {
+			if (column.buttons){
+                column.buttons.forEach((button: any) => {
+                    if (button.component == 'BizDialogQueryComponent'){
+                        button.component = DIALOGTYPES[0];
+                    }else if (button.component == 'BizDialogFormComponent'){
+                        button.component = DIALOGTYPES[1];
+                    }else if (button.component == 'BizDialogTreeComponent'){
+                        button.component = DIALOGTYPES[2];
+                    }                    
+                });				
+			}
+        });        
     }
     //
     onQuery(form: any): void {

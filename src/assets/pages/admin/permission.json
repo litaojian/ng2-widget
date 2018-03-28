@@ -77,13 +77,23 @@
                     },
                     {
                         "text": "关联用户",
-                        "click": "showTreeDialog",
-                        "dialogUrl": "/page/dialog/roleUsers"
+                        "type": "modal",
+                        "component": "BizDialogQueryComponent",
+                        "modalOptions": {
+                            "componentParams": {
+                                "pageUrl": "/admin/userTree"
+                            }
+                        }
                     },
                     {
                         "text": "设置菜单",
-                        "click": "showQueryDialog",
-                        "dialogUrl": "/page/dialog/roleMenus"
+                        "type": "modal",
+                        "component": "BizDialogTreeComponent",
+                        "modalOptions": {
+                            "componentParams": {
+                                "pageUrl": "/admin/menuTree"
+                            }
+                        }
                     }
                 ]
             }

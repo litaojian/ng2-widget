@@ -2,6 +2,7 @@ import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { BizPageService } from './biz-page.service';
 
+
 @Injectable()
 export class BizQueryService extends BizPageService {
 
@@ -39,7 +40,7 @@ export class BizQueryService extends BizPageService {
 	}
 	
 	//     
-	onPageInit(resultData: any, url:string, actions:Object[]) {
+	onPageInit(resultData: any, url:string, actions:any) {
 		
 		if (this.reuseTabService) {
 			this.reuseTabService.title = resultData["title"];
