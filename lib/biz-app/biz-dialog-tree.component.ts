@@ -38,6 +38,8 @@ export class BizDialogTreeComponent extends BizDialogComponent {
 
     @ViewChild('myNavTree')
     myNavTree: ZxTreeComponent;
+
+    _record:any;
     
     constructor(injector: Injector) {
         super(injector);
@@ -48,16 +50,23 @@ export class BizDialogTreeComponent extends BizDialogComponent {
     }
 
     @Input()
+    set title(title: string) {
+      //debugger;
+      this.pageTitle = title;
+    }
+
+    @Input()
     set pageUrl(url: string) {
       //debugger;
       this.bizService.pageUrl = url;
     }
 
     @Input()
-    set title(title: string) {
+    set record(val: string) {
       //debugger;
-      this.pageTitle = title;
+      this._record = val;
     }
+
 
     get navTree(){
         return (<BizTreeService>this.bizService).navTree;
@@ -69,6 +78,9 @@ export class BizDialogTreeComponent extends BizDialogComponent {
 
         // 重新载入树的节点数据
         if (this.navTree){
+            if (this._record){
+                this.navTree.roleId = this._record.roleid;
+            }
             this.myNavTree.loadTree(this.navTree);        
          }
     }    
@@ -81,7 +93,9 @@ export class BizDialogTreeComponent extends BizDialogComponent {
         if (this.myNavTree){
             nodes = this.myNavTree.getSelectedNodes();
         }
-        this.subject.destroy('onOk', {"treeNodes":nodes});
+        //
+        this.subject.next({"data":nodes,"restUrl":this.navTree.dataUrl});
+        this.subject.destroy('onOk');
     }
     
     handleCancel(event:any) {

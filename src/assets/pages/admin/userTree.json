@@ -4,6 +4,6 @@
     "actions": {},
     "navTree": {
         "checkbox": true,
-        "dataUrl": "/api/data/tree/userTree?url=void(0)&checkbox=yes&roleId=1"
+        "dataUrl": "/api/data/tree/userTree?url=void(0)"
     }
 }

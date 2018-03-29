@@ -84,6 +84,9 @@ export class ZxTreeComponent implements OnInit, AfterViewInit, AfterViewChecked 
 		settings["treeId"] = this.treeId;
 		
 		if (config && config.dataUrl){
+			if (config && ("true" == config.checkbox || config.checkbox == true)) {
+				config.dataUrl = config.dataUrl + "&checkbox=yes&roleId=" + config.roleId;		  
+			} 
 			settings["treeDataSource"] = config.dataUrl;
 			this.treeDataSource = config.dataUrl;
 		}

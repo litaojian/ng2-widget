@@ -68,12 +68,15 @@ export class BizQueryComponent extends BizPageComponent implements OnInit, DoChe
         },
         dialogConfirm: (row: any, modal: any) => {
             console.log("debugger dialogConfirm..........." + modal);
+
             let roleId = row.roleid;
-            let nodes = [];
-            let restUrl = "";
-            let result = this.bizService.ajaxPut(restUrl, {"roleId":roleId,"data":nodes}).subscribe(result =>{
-                console.log("ajaxPost:" + JSON.stringify(result));
-            });
+            if (modal != null && modal.restUrl){
+                let nodes:any = modal.data;
+                let restUrl = modal.restUrl;
+                let result = this.bizService.ajaxPut(restUrl, {"roleId":roleId,"data":nodes}).subscribe(result =>{
+                    console.log("ajaxPost:" + JSON.stringify(result));
+                });    
+            }
         }
     };
 
@@ -108,7 +111,7 @@ export class BizQueryComponent extends BizPageComponent implements OnInit, DoChe
     set defaultQueryParams(params){
         (<BizQueryService>this.bizService).defaultQueryParams = params;
     }
-    
+
     //     
     onPageInit(resultData: any, url:string) {
         this.bizService.onPageInit(resultData, url, this.actions);
@@ -118,10 +121,17 @@ export class BizQueryComponent extends BizPageComponent implements OnInit, DoChe
                 column.buttons.forEach((button: any) => {
                     if (button.component == 'BizDialogQueryComponent'){
                         button.component = DIALOGTYPES[0];
+                        button.params = (record:any) =>{ debugger; return record;};
                     }else if (button.component == 'BizDialogFormComponent'){
                         button.component = DIALOGTYPES[1];
+                        button.params = (record:any) =>{return record;};
                     }else if (button.component == 'BizDialogTreeComponent'){
                         button.component = DIALOGTYPES[2];
+                        button.params = (record:any) =>{ 
+                            record.pageUrl = button['dialogUrl']; 
+                            record.title = button['text'];                             
+                            return record;
+                        };
                     }                    
                 });				
 			}
