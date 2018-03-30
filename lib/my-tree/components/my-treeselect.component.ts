@@ -117,7 +117,7 @@ export class MyTreeSelectComponent extends DefaultValueAccessor implements OnIni
       settings["data"]["simpleData"]["pidKey"] = this.pidKey;
       settings["data"]["simpleData"]["idKey"] = this.idKey;      
       
-      this.ztreeService.nodeClickEvent = this.nodeClickEvent;
+      //this.ztreeService.nodeClickEvent = this.nodeClickEvent;
       this.ztreeService.setNodeCheckEventCallback(this);
       //
       let selectNodeId = this.activatedRoute.snapshot.queryParams["parentId"];      

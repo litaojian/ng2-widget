@@ -50,7 +50,7 @@ export class ZxTreeService extends BaseDataService {
 		return null;
 	}
 
-	loadTreeData(treeDataSource):Observable<Object[]>{
+	loadTreeData(treeDataSource:string):Observable<Object[]>{
 		if (this.treeDataCache != null){
 			return ArrayObservable.of(this.treeDataCache);
 		}		

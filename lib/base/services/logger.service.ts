@@ -5,8 +5,8 @@ export class LoggerService {
     }
 
     log(message: string) {
-        if (this.enable) {
-            console.log(`LoggerService: ${message}`);
-        }
+        // if (this.enable) {
+        //     console.log(`LoggerService: ${message}`);
+        // }
     }
 }
