@@ -53,7 +53,7 @@ function copyResources() {
             `./LICENSE`,
             `./README.md`,
             `./rollup.config.js`,
-            `./package.json`,
+            `./lib/package.json`,
             `${paths.build}/**/*.html`,
             `${paths.build}/**/*.css`,
             `${paths.build}/**/*.less`

@@ -1,3 +1,13 @@
 {
-    "name": "yg-widget"
+    "name": "ngx-widget",
+    "version": "0.1.6",
+    "main": "./bundles/ngx-widget.umd.js",
+    "module": "./esm5/ngx-widget.js",
+    "es2015": "./esm2015/ngx-widget.js",
+    "typings": "./ngx-widget.d.ts",
+    "author": "litaojian<litaojian88@gmail.com>",
+    "license": "MIT",
+    "keywords": ["angular", "ng-zorro-antd", "litaojian"],
+    "peerDependencies": {}
+
 }

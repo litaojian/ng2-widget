@@ -10,7 +10,7 @@ const globals = {
     '@angular/forms': 'ng.forms',
     '@angular/cdk/esm5': 'ng.cdk.esm5',
     '@angular/cdk/coercion': 'ng.cdk.coercion',
-
+    'rxjs': 'rx',
     'rxjs/BehaviorSubject': 'Rx',
     'rxjs/Observable': 'Rx',
     'rxjs/Subject': 'Rx',
