@@ -13,6 +13,7 @@ import { BizQueryService } from './biz-query.service';
 import { BizQueryComponent } from './biz-query.component';
 import { BizFormComponent } from './biz-form.component';
 import { BizPageComponent } from './biz-page.component';
+import { BizDialogComponent } from './biz-dialog.component';
 import { BizDialogQueryComponent } from './biz-dialog-query.component';
 import { BizDialogFormComponent } from './biz-dialog-form.component';
 import { BizDialogTreeComponent } from './biz-dialog-tree.component';
@@ -26,6 +27,7 @@ import { BizPageGuardService } from './biz-page-guard.service';
 
 const COMPONENTS = [
 	BizPageComponent,
+	BizDialogComponent,
 	BizTreeTableComponent,
 	BizQueryComponent,
 	BizFormComponent,
