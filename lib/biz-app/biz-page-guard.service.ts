@@ -5,7 +5,7 @@ import { BizQueryComponent } from './biz-query.component';
 
 @Injectable()
 
-export class BizPageGuardService implements CanActivate, CanDeactivate<BizQueryComponent> {
+export class BizPageGuardService implements CanActivate {
 
     constructor(private router: Router) {
         //console.log("BizPageGuardService ....");

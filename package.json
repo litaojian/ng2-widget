@@ -1,6 +1,6 @@
 {
     "name": "yg-widget",
-    "version": "0.1.3",
+    "version": "0.1.5",
     "license": "MIT",
     "description": "Angular widget for ygnet",
     "main": "./bundles/yg-widget.umd.js",
