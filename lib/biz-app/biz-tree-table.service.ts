@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { BizQueryService }  from './biz-query.service';
 
 @Injectable()
-export class BizTreeService extends BizQueryService {
+export class BizTreeTableService extends BizQueryService {
 
     navTree: any = {
         nzXs:18,

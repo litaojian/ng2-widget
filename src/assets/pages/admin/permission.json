@@ -79,7 +79,7 @@
                         "text": "关联用户",
                         "type": "modal",
                         "component": "BizDialogTreeComponent",
-                        "dialogUrl": "/admin/userTree",
+                        "dialogUrl": "/admin/userTreeDialog",
                         "size": "lg",
                         "modalOptions": {
                             "footer": false
@@ -90,7 +90,7 @@
                         "text": "菜单授权",
                         "type": "modal",
                         "component": "BizDialogTreeComponent",
-                        "dialogUrl": "/admin/menuTree",
+                        "dialogUrl": "/admin/menuTreeDialog",
                         "size": "lg",
                         "modalOptions": {
                             "footer": false

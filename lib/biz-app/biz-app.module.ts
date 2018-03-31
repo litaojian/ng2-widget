@@ -20,7 +20,7 @@ import { BizDialogTreeComponent } from './biz-dialog-tree.component';
 import { BizTreeTableComponent } from './biz-tree-table.component';
 
 import { BizPageService } from './biz-page.service';
-import { BizTreeService } from './biz-tree.service';
+import { BizTreeTableService } from './biz-tree-table.service';
 import { BizPageGuardService } from './biz-page-guard.service';
 
 
@@ -33,7 +33,7 @@ const COMPONENTS = [
 	BizFormComponent,
 	BizDialogTreeComponent
 ];
-const DIRECTIVES = [		
+const DIRECTIVES:any = [		
 ];
 
 const SERVICES = [

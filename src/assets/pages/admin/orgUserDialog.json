@@ -1,0 +1,36 @@
+{
+    "title": "用户选择",
+    "pageType": "TreeView",
+    "actions": {},
+    "navTree": {
+        "checkbox": true,
+        "dataUrl": "/api/data/tree/userTree?url=void(0)"
+    },
+    "dataTable": {
+        "extraParams": {},
+        "showTotal": true,
+        "pageSize": 15,
+        "resReName": { "list": "rows", "total": "total" },
+        "columns": [
+            { "index": "username", "title": "用户名称", "type": "string" },
+            { "index": "loginid", "title": "登录帐号", "type": "string" },
+            { "index": "email", "title": "电邮", "type": "string" },
+            {
+                "index": "created",
+                "title": "输入时间",
+                "type": "date",
+                "filters": [{ "text": "昨天", "value": "male" }, { "text": "本周", "value": "2" }, { "text": "当月", "value": "3" }],
+                "filterMultiple": true,
+                "filter": "() => true",
+                "sorter": "(a, b) => true"
+
+            },
+            {
+                "title": "操作区",
+                "buttons": [
+                ]
+            }
+
+        ]
+    }
+}

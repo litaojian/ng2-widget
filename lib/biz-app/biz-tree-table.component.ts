@@ -6,11 +6,9 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { SFSchema, FormProperty } from '../biz-form';
 import { SimpleTableColumn, SimpleTableButton, SimpleTableFilter, SimpleTableComponent } from '../biz-table';
-import { BizTreeService } from './biz-tree.service';
+import { BizTreeTableService } from './biz-tree-table.service';
 import { BizQueryComponent } from './biz-query.component';
 import { ZxTreeComponent } from '../my-tree';
-
-import { ITreeOptions } from 'angular-tree-component';
 
 @Component({
     selector: 'biz-tree-table',
@@ -33,7 +31,7 @@ import { ITreeOptions } from 'angular-tree-component';
         </div>
     </div>
     `,
-    providers: [BizTreeService]
+    providers: [BizTreeTableService]
 })
 export class BizTreeTableComponent extends BizQueryComponent implements OnInit, DoCheck , OnDestroy {
     
@@ -44,21 +42,21 @@ export class BizTreeTableComponent extends BizQueryComponent implements OnInit, 
     constructor(injector: Injector) {
         super(injector);
 
-        this.bizService = injector.get(BizTreeService);
+        this.bizService = injector.get(BizTreeTableService);
         //
         console.log("BizTreeTableComponent init ..............");
     }
 
     get navTree(){
-        return (<BizTreeService>this.bizService).navTree;
+        return (<BizTreeTableService>this.bizService).navTree;
     }
 
     get selectNodeId(){
-        return (<BizTreeService>this.bizService).selectNodeId;
+        return (<BizTreeTableService>this.bizService).selectNodeId;
     }
     
     set selectNodeId(nodeId){
-        (<BizTreeService>this.bizService).selectNodeId = nodeId;
+        (<BizTreeTableService>this.bizService).selectNodeId = nodeId;
     }
     //     
     onPageInit(resultData: any, url:string) {
