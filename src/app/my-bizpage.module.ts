@@ -16,7 +16,6 @@ const routes: Routes = [{
   path: '',
   //component: PageContainerComponent,
   children: [    
-    { path: ':type/:dir/:pageName/list', component: BizPageComponent, canActivate:[BizPageGuardService]},
     { path: ':dir/:pageName/tree', component: BizTreeTableComponent, canActivate:[BizPageGuardService] },    
     { path: ':dir/:pageName/list', component: BizQueryComponent, canActivate:[BizPageGuardService] },    
     { path: ':dir/:pageName/list/:pid', component: BizQueryComponent, canActivate:[BizPageGuardService] },        
