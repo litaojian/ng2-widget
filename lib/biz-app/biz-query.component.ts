@@ -121,16 +121,18 @@ export class BizQueryComponent extends BizPageComponent implements OnInit, DoChe
                 column.buttons.forEach((button: any) => {
                     if (button.component == 'BizDialogQueryComponent'){
                         button.component = DIALOGTYPES[0];
-                        button.params = (record:any) =>{ debugger; return record;};
+                        button.params = (record:any) =>{ 
+                            return record;
+                        };
                     }else if (button.component == 'BizDialogFormComponent'){
                         button.component = DIALOGTYPES[1];
                         button.params = (record:any) =>{return record;};
                     }else if (button.component == 'BizDialogTreeComponent'){
                         button.component = DIALOGTYPES[2];
-                        button.modalOptions.onOk = ()=>{
-                            console.log("onOk button click..................");
-                            debugger;
-                        };
+                        // button.modalOptions.onOk = ()=>{
+                        //     console.log("onOk button click..................");
+                        //     debugger;
+                        // };
                         button.params = (record:any) =>{ 
                             record.pageUrl = button['dialogUrl']; 
                             record.title = button['text'];                             
