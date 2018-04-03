@@ -11,6 +11,11 @@ import { ReuseTabService } from '@delon/abc';
 @Component({
     selector: 'app-biz-form',
     template: `
+    <div class="content__title" style="display: none;">
+      <h1>
+        {{pageTitle}}
+      </h1>
+    </div>
     <nz-card [nzBordered]="false" [nzNoHovering]="true">
       <ng-template #body>
         <my-simple-form #myMainForm [layout]="mainForm.layout"
@@ -54,13 +59,14 @@ export class BizFormComponent extends BizPageComponent implements OnInit, DoChec
     constructor(injector: Injector) {
         super(injector);
         //
-        console.log("BizFormComponent init ..............");
+        //console.log("BizFormComponent init ..............");
     }
     //     
     onPageInit(resultData:any, url:string){
         
         if (this.reuseTabService){
-            this.reuseTabService.title = resultData["title"] + "-详情";
+          this.pageTitle  =  resultData["title"] + "-详情";
+          this.reuseTabService.title = this.pageTitle;
         }
 
         if (resultData["mainForm"]){

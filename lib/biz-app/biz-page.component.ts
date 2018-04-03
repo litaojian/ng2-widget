@@ -24,6 +24,7 @@ export class BizPageComponent {
     activatedRoute: ActivatedRoute;
     router: Router;
     pagePath: string;
+    pageTitle:string;
 
     actions: any = {
         reset: (form: any) => {
@@ -40,7 +41,7 @@ export class BizPageComponent {
         this.modalService = injector.get(NzModalService);
         this.reuseTabService = injector.get(ReuseTabService);
         //
-        console.log("BizPageComponent init ..............");
+        //console.log("BizPageComponent init ..............");
     }
 
     ngOnInit() {     
@@ -85,6 +86,7 @@ export class BizPageComponent {
         let _url = this.getUrl(this.activatedRoute.snapshot);
         if (_url != this.pagePath){
             this.pagePath = _url;
+            this.pageTitle = "<No title>";
             //
             //console.log("BizPageComponent loadPageDef .............." + this.router.url );                
             
@@ -120,6 +122,7 @@ export class BizPageComponent {
                         this.pagePath = null;            
                         this.router.navigateByUrl(url);
                     }else{
+                        this.pageTitle = resultData['title'];
                         this.onPageInit(resultData, url);
                     }
                 }
