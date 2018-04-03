@@ -7,6 +7,7 @@ import { NzMessageService } from 'ng-zorro-antd';
 import { SFSchema, FormProperty } from '../biz-form';
 import { SimpleTableColumn, SimpleTableButton, SimpleTableFilter, SimpleTableComponent } from '../biz-table';
 import { BizTreeTableService } from './biz-tree-table.service';
+import { BizQueryService } from './biz-query.service';
 import { BizQueryComponent } from './biz-query.component';
 import { ZxTreeComponent } from '../my-tree';
 
@@ -31,7 +32,7 @@ import { ZxTreeComponent } from '../my-tree';
         </div>
     </div>
     `,
-    providers: [BizTreeTableService]
+    providers: [BizQueryService, BizTreeTableService]
 })
 export class BizTreeTableComponent extends BizQueryComponent implements OnInit, DoCheck , OnDestroy {
     

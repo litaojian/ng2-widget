@@ -1,6 +1,6 @@
 {
     "name": "ngx-widget",
-    "version": "0.1.6",
+    "version": "0.1.8",
     "main": "./bundles/ngx-widget.umd.js",
     "module": "./esm5/ngx-widget.js",
     "es2015": "./esm2015/ngx-widget.js",

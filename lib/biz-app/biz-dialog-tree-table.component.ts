@@ -2,7 +2,7 @@ import { Component, ViewContainerRef, ChangeDetectorRef, ComponentRef, SimpleCha
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { NzMessageService, NzModalSubject } from 'ng-zorro-antd';
-
+import { BizQueryService } from './biz-query.service';
 import { BizTreeTableService } from './biz-tree-table.service';
 import { BizDialogComponent } from './biz-dialog.component';
 import { ZxTreeComponent } from '../my-tree';
@@ -37,7 +37,7 @@ import { ZxTreeComponent } from '../my-tree';
       </div>
     </div>
     `,
-    providers: [BizTreeTableService]
+    providers: [BizQueryService, BizTreeTableService]
 })
 export class BizDialogTreeTableComponent extends BizDialogComponent {
 
