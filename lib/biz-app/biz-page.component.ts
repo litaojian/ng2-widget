@@ -38,7 +38,7 @@ export class BizPageComponent {
         this.bizService = injector.get(BizPageService);
         this.msgService = injector.get(NzMessageService);
         this.modalService = injector.get(NzModalService);
-        
+        this.reuseTabService = injector.get(ReuseTabService);
         //
         console.log("BizPageComponent init ..............");
     }
@@ -114,9 +114,10 @@ export class BizPageComponent {
 
             this.bizService.ajaxGet(`assets/pages/${dir}/${pageName}.json`, {}).subscribe(
                 (resultData:any) => {
-                    let url = this.router.url;
+                    let url = this.pagePath;                    
                     if (resultData["navTree"] && url.endsWith("/list")){
-                        url = url.replace("/list", "/tree");            
+                        url = url.replace("/list", "/tree");
+                        this.pagePath = null;            
                         this.router.navigateByUrl(url);
                     }else{
                         this.onPageInit(resultData, url);

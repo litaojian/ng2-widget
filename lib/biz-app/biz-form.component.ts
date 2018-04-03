@@ -4,18 +4,22 @@ import { SimpleChanges, OnDestroy, OnInit, DoCheck } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd';
 import { SFSchema } from '..//biz-form';
 import { BizFormService } from './biz-form.service';
+import { BizPageComponent } from './biz-page.component';
 import { FormComponent } from '../biz-form';
 import { ReuseTabService } from '@delon/abc';
-import { BizPageComponent } from './biz-page.component';
 
 @Component({
     selector: 'app-biz-form',
     template: `
+    <nz-card [nzBordered]="false" [nzNoHovering]="true">
+      <ng-template #body>
         <my-simple-form #myMainForm [layout]="mainForm.layout"
             [schema]="mainForm.schema"
             [model]="mainForm.model"
             [actions]="actions">
         </my-simple-form>
+      </ng-template>
+    </nz-card>    
     `,
     providers:[BizFormService]
 })
@@ -56,7 +60,7 @@ export class BizFormComponent extends BizPageComponent implements OnInit, DoChec
     onPageInit(resultData:any, url:string){
         
         if (this.reuseTabService){
-            this.reuseTabService.title = resultData["title"];
+            this.reuseTabService.title = resultData["title"] + "-详情";
         }
 
         if (resultData["mainForm"]){

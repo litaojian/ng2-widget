@@ -127,6 +127,10 @@ export class BizQueryComponent extends BizPageComponent implements OnInit, DoChe
                         button.params = (record:any) =>{return record;};
                     }else if (button.component == 'BizDialogTreeComponent'){
                         button.component = DIALOGTYPES[2];
+                        button.modalOptions.onOk = ()=>{
+                            console.log("onOk button click..................");
+                            debugger;
+                        };
                         button.params = (record:any) =>{ 
                             record.pageUrl = button['dialogUrl']; 
                             record.title = button['text'];                             
@@ -135,7 +139,9 @@ export class BizQueryComponent extends BizPageComponent implements OnInit, DoChe
                     }                    
                 });				
 			}
-        });        
+        });  
+        //
+        console.log("BizQueryComponent onPageInit ..............");
     }
     //
     onQuery(form: any): void {
