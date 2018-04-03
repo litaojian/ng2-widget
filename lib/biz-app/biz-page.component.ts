@@ -24,6 +24,7 @@ export class BizPageComponent {
     activatedRoute: ActivatedRoute;
     router: Router;
     pagePath: string;
+    pageTitle:string;
 
     actions: any = {
         reset: (form: any) => {
@@ -38,9 +39,9 @@ export class BizPageComponent {
         this.bizService = injector.get(BizPageService);
         this.msgService = injector.get(NzMessageService);
         this.modalService = injector.get(NzModalService);
-        
+        this.reuseTabService = injector.get(ReuseTabService);
         //
-        console.log("BizPageComponent init ..............");
+        //console.log("BizPageComponent init ..............");
     }
 
     ngOnInit() {     
@@ -85,6 +86,7 @@ export class BizPageComponent {
         let _url = this.getUrl(this.activatedRoute.snapshot);
         if (_url != this.pagePath){
             this.pagePath = _url;
+            this.pageTitle = "<No title>";
             //
             //console.log("BizPageComponent loadPageDef .............." + this.router.url );                
             
@@ -114,11 +116,13 @@ export class BizPageComponent {
 
             this.bizService.ajaxGet(`assets/pages/${dir}/${pageName}.json`, {}).subscribe(
                 (resultData:any) => {
-                    let url = this.router.url;
+                    let url = this.pagePath;                    
                     if (resultData["navTree"] && url.endsWith("/list")){
-                        url = url.replace("/list", "/tree");            
+                        url = url.replace("/list", "/tree");
+                        this.pagePath = null;            
                         this.router.navigateByUrl(url);
                     }else{
+                        this.pageTitle = resultData['title'];
                         this.onPageInit(resultData, url);
                     }
                 }

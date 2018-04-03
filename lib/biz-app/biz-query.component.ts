@@ -20,20 +20,30 @@ export const DIALOGTYPES = [
 @Component({
     selector: 'app-biz-query',
     template: `
-    <div class="mb-md">
-        <my-simple-form #myQueryForm [layout]="queryForm.layout"
-                [schema]="queryForm.schema"
-                [model]="queryForm.model"
-                [actions]="actions">
-        </my-simple-form>
-    </div>
-    <div nz-row [nzGutter]="24">
-        <div nz-col nzMd="24" nzSm="24" nzXs="24">
-            <my-simple-table #myDataTable [data]="dataTable.dataUrl" [extraParams]="queryParams" [columns]="dataTable.columns"
-                [resReName]="dataTable.resReName" showTotal="dataTable.showTotal" [ps]="dataTable.pageSize" >
-            </my-simple-table>
+    <div class="content__title" style="display: none;">
+      <h1>
+        {{pageTitle}}
+      </h1>
+    </div>    
+    <nz-card [nzBordered]="false" [nzNoHovering]="true">
+      <ng-template #body>
+        <div class="mb-md">
+            <my-simple-form #myQueryForm [layout]="queryForm.layout"
+                    [schema]="queryForm.schema"
+                    [model]="queryForm.model"
+                    [actions]="actions">
+            </my-simple-form>
         </div>
-    </div>
+        <div nz-row [nzGutter]="24">
+            <div nz-col nzMd="24" nzSm="24" nzXs="24">
+                <my-simple-table #myDataTable [data]="dataTable.dataUrl" [extraParams]="queryParams" [columns]="dataTable.columns"
+                    [resReName]="dataTable.resReName" showTotal="dataTable.showTotal" [ps]="dataTable.pageSize" >
+                </my-simple-table>
+            </div>
+        </div>
+      </ng-template>
+    </nz-card> 
+
     `,
     providers: [BizQueryService]
 })
@@ -121,12 +131,18 @@ export class BizQueryComponent extends BizPageComponent implements OnInit, DoChe
                 column.buttons.forEach((button: any) => {
                     if (button.component == 'BizDialogQueryComponent'){
                         button.component = DIALOGTYPES[0];
-                        button.params = (record:any) =>{ debugger; return record;};
+                        button.params = (record:any) =>{ 
+                            return record;
+                        };
                     }else if (button.component == 'BizDialogFormComponent'){
                         button.component = DIALOGTYPES[1];
                         button.params = (record:any) =>{return record;};
                     }else if (button.component == 'BizDialogTreeComponent'){
                         button.component = DIALOGTYPES[2];
+                        // button.modalOptions.onOk = ()=>{
+                        //     console.log("onOk button click..................");
+                        //     debugger;
+                        // };
                         button.params = (record:any) =>{ 
                             record.pageUrl = button['dialogUrl']; 
                             record.title = button['text'];                             
@@ -135,7 +151,9 @@ export class BizQueryComponent extends BizPageComponent implements OnInit, DoChe
                     }                    
                 });				
 			}
-        });        
+        });  
+        //
+        console.log("BizQueryComponent onPageInit ..............");
     }
     //
     onQuery(form: any): void {

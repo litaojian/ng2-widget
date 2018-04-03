@@ -2,7 +2,7 @@ import { Component, ViewContainerRef, ChangeDetectorRef, ComponentRef, SimpleCha
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { NzMessageService, NzModalSubject } from 'ng-zorro-antd';
-
+import { BizQueryService } from './biz-query.service';
 import { BizTreeTableService } from './biz-tree-table.service';
 import { BizDialogComponent } from './biz-dialog.component';
 import { ZxTreeComponent } from '../my-tree';
@@ -10,9 +10,12 @@ import { ZxTreeComponent } from '../my-tree';
 @Component({
     selector: 'bizdialog-tree',
     styles:[`
-        .pull-right {
+        .pull-right-custom {
             padding: 10px 16px 10px 10px;
             text-align: right;
+        }
+        .pull-right-custom button{
+            margin-right:5px;
         }
     `],
     template: `
@@ -22,7 +25,7 @@ import { ZxTreeComponent } from '../my-tree';
             <zx-tree #myNavTree tree-id="nTree1" (nodeClick)="onTreeNodeClick($event)" [has-checkbox]="navTree.checkbox" key-title="name" key-id="nodeId" key-pid="parentId" class="tree"></zx-tree>
         </div>
       </div>
-      <div class="customize-footer pull-right">
+      <div class="customize-footer pull-right-custom">
         <button nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="handleOk($event)">
           确定
         </button>
@@ -32,7 +35,7 @@ import { ZxTreeComponent } from '../my-tree';
       </div>
     </div>
     `,
-    providers: [BizTreeTableService]
+    providers: [BizQueryService, BizTreeTableService]
 })
 export class BizDialogTreeComponent extends BizDialogComponent {
 
